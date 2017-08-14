@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #define allitems 4
 #define alldefenseitems 2
@@ -128,9 +129,19 @@ int main(int argc, char *argv[])
 	#define aicharacters 4
 	#define playermagiclist 5
 	#define aimagiclist 5
+	#define rounds 50
+	
+	int roundssofar = 1;
+
+	int ch;
+
+	ch = 'n';
 
 	srand(time(NULL));
+beginning:
 
+	while(roundssofar <= rounds && ch != 'y')
+	{
 	struct player myplayer[maxplayers];
 	struct aicharacter myai[maxenemies];
 
@@ -595,8 +606,8 @@ int main(int argc, char *argv[])
 		}
 	}
 	
-	int ch;
-	
+	//int ch;
+
 	char* winner = "ai";
 	
 	int replayer = 0;
@@ -657,7 +668,8 @@ int main(int argc, char *argv[])
 			mvprintw(9, 0, "The O is a player orc and the o is a ai orc");
 			mvprintw(10, 0, "The E is a player elf and the e is a ai elf");
 			mvprintw(11, 0, "The D is a player dwarf and the d is a ai elf");
-			mvprintw(12, 0, "Press key to quit help");
+			mvprintw(12, 0, "Press q from battle screen to quit game");
+			mvprintw(13, 0, "Press key to quit help");
 
 			refresh();
 
@@ -1006,18 +1018,87 @@ int main(int argc, char *argv[])
 		
 		refresh();
 	}
+
 ended:
 	clear();
 	
-	mvprintw(0, 0, "The game is over and the winner is %s.  Press q to end the game.\n", winner); 
+	if(ch == 'q')
+	{
+		goto endmenow;
+	}
+	
+	if(strcmp(winner, "ai") == 0)
+	{
+		mvprintw(0, 0, "You lose the ai won the game is over.");
+		mvprintw(1, 0, "Press y to end");
+
+		refresh();
+
+		ch = getch();
+
+		if(ch != 'y')
+		{
+			roundssofar = 1;
+
+			clear();
+
+			refresh();
+
+			goto beginning;
+		}
+		
+		endwin();
+
+		return 0;
+	}
+
+	if(roundssofar == rounds)
+	{
+		mvprintw(0, 0, "You have beat the game. Congratulations.");
+		mvprintw(1, 0, "Press y to end");
+
+		refresh();
+
+		ch = getch();
+
+		if(ch != 'y')
+		{
+			roundssofar = 1;
+
+			clear();
+
+			refresh();
+
+			goto beginning;
+		}
+
+		endwin();
+
+		return 0;
+	}
+
+	mvprintw(0, 0, "The winner of the %d battle is %s.", roundssofar, winner);
+	mvprintw(1, 0, "You have %d battle to go", rounds - roundssofar);
+	mvprintw(2, 0, "Press y to end"); 
 	
 	refresh();
 	
-	while((ch = getch()) != 'q')
+	ch = getch();
+
+	if(ch != 'y')
 	{
+		roundssofar++;
+
+		clear();
+
+		refresh();
+
+		goto beginning;
 	}
-	
+
+endmenow:
 	endwin();
 	
 	return 0;
+}
 }
