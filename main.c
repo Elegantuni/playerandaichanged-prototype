@@ -2,9 +2,24 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <errno.h>
+#include <ctype.h>
 
 #define allitems 4
 #define alldefenseitems 2
+
+ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
+
+typedef enum {
+    STR2INT_SUCCESS,
+    STR2INT_OVERFLOW,
+    STR2INT_UNDERFLOW,
+    STR2INT_INCONVERTIBLE
+} str2int_errno;
+
+str2int_errno str2int(int *out, char *s, int base);
 
 struct magic
 {
@@ -130,7 +145,18 @@ int main(int argc, char *argv[])
 	#define playermagiclist 5
 	#define aimagiclist 5
 	#define rounds 50
-	
+	#define lineamount 128
+
+	FILE *fp1;
+
+	char lineBuffer[lineamount];
+	ssize_t len = 0;
+
+	for(int j = 0; j < lineamount; j++)
+	{
+		lineBuffer[j] = '\0';
+	}
+
 	int roundssofar = 1;
 
 	int ch;
@@ -455,6 +481,320 @@ beginning:
 					break;
 				}
 			}
+		}
+
+		int w = 0;
+		
+		if(access("SaveFile.txt", F_OK ) != -1)
+		{
+			int c;
+			int j = 0;
+		
+			fp1 = fopen("SaveFile.txt", "r");
+			
+			for(int i = 0; i < maxplayers; i++)
+			{
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].randomitem), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+		
+					j++;
+				}
+
+				str2int(&(myplayer[i].shieldsrandomitem), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+		
+					j++;
+				}
+
+				str2int(&(myplayer[i].character1.randomcharacter), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.randommagic), lineBuffer, 10);
+
+// Left editing here
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+		
+					j++;
+				}
+		
+				str2int(&(myplayer[i].y), lineBuffer, 10);
+		
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+		
+				j = 0;
+		
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+		
+					j++;
+				}
+		
+				str2int(&(myplayer[i].x), lineBuffer, 10);
+		
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+		
+				j = 0;
+		
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+		
+					j++;
+				}
+		
+				str2int(&(myplayer[i].hitpoints), lineBuffer, 10);
+		
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+		
+				j = 0;
+		
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+		
+					j++;
+				}
+		
+				str2int(&(myplayer[i].magicpoints), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].defensepoints), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				myplayer[i].weapon = lineBuffer;
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				myplayer[i].shield = lineBuffer;
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				myplayer[i].charactersign = lineBuffer;
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].prevy), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].prevx), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].magicattack), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].count), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].replayer), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].playerturn), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				myplayer[i].weapontype.equiped = lineBuffer;
+			}
+		
+			fclose(fp1);
 		}
 
 		for(int i = 0; i < maxenemies; i++)
@@ -1098,4 +1438,21 @@ beginning:
 	
 		return 0;
 	}
+}
+
+str2int_errno str2int(int *out, char *s, int base) {
+    char *end;
+    if (s[0] == '\0' || isspace((unsigned char) s[0]))
+        return STR2INT_INCONVERTIBLE;
+    errno = 0;
+    long l = strtol(s, &end, base);
+    /* Both checks are needed because INT_MAX == LONG_MAX is possible. */
+    if (l > INT_MAX || (errno == ERANGE && l == LONG_MAX))
+        return STR2INT_OVERFLOW;
+    if (l < INT_MIN || (errno == ERANGE && l == LONG_MIN))
+        return STR2INT_UNDERFLOW;
+    if (*end != '\0')
+        return STR2INT_INCONVERTIBLE;
+    *out = l;
+    return STR2INT_SUCCESS;
 }
