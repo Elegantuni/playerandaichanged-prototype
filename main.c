@@ -1299,169 +1299,169 @@ beginning:
 	
 						j++;
 					}
-
+					
 					str2int(&(myplayer[i].shieldsdamage1.damage[q]), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myplayer[i].magic1.equiped = lineBuffer;
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].magic1.rangey), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].magic1.rangex), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].magic1.damage), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].magicattack), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].character1.magicresist), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].magicpoints), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].magic1.cost), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].weapontype.numberitems), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myplayer[i].weapontype.equiped = lineBuffer;
 				}
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				myplayer[i].magic1.equiped = lineBuffer;
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.rangey), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.rangex), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.damage), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].magicattack), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].character1.magicresist), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].magicpoints), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.cost), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myplayer[i].weapontype.numberitems), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				myplayer[i].weapontype.equiped = lineBuffer;
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
@@ -2152,170 +2152,186 @@ beginning:
 	
 						j++;
 					}
-
+				
 					str2int(&(myai[i].shieldsdamage1.damage[q]), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myai[i].magic1.equiped = lineBuffer;
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].magic1.rangey), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].magic1.rangex), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].magic1.damage), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].magicattack), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].character1.magicresist), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].magicpoints), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].magic1.cost), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].weapontype.numberitems), lineBuffer, 10);
-
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n')
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myai[i].weapontype.equiped = lineBuffer;
 				}
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				myai[i].magic1.equiped = lineBuffer;
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].magic1.rangey), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].magic1.rangex), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].magic1.damage), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].magicattack), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].character1.magicresist), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].magicpoints), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].magic1.cost), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				str2int(&(myai[i].weapontype.numberitems), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+	
+				j = 0;
+	
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+	
+					j++;
+				}
+
+				myai[i].weapontype.equiped = lineBuffer;
 			}
+
+			for(int k = 0; k < lineamount; k++)
+			{
+				lineBuffer[k] = '\0';
+			}
+
+			j = 0;
+
+			while((c = fgetc(fp1)) != '\n')
+			{
+				lineBuffer[j] = c;
+
+				j++;
+			}
+
+			str2int(&(roundssofar), lineBuffer, 10);
 
 			fclose(fp1);
 		}
