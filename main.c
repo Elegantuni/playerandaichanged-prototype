@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <ctype.h>
+#include <limits.h>
 
 #define allitems 5
 #define allitemsenemies 6
