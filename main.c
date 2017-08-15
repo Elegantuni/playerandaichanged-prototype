@@ -172,15 +172,17 @@ struct aicharacter
 
 int main(int argc, char *argv[])
 {
-	#define maxenemies 5
-	#define maxplayers 3
+	#define maxenemies 10
+	#define maxplayers 8
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist 5
 	#define aimagiclist 5
 	#define rounds 50
 	#define lineamount 128
-
+	int hitpointsy = 50;
+	int hitpointsx = 150;
+	
 	FILE *fp1;
 
 	char lineBuffer[lineamount];
@@ -510,8 +512,8 @@ beginning:
 			{
 				if(i != j && myplayer[i].y == myplayer[j].y && myplayer[i].x == myplayer[j].x)
 				{
-					myplayer[j].y = rand() % (24 - (maxplayers + maxenemies));
-					myplayer[j].x = rand() % 80;
+					myplayer[j].y = rand() % (hitpointsy - (maxplayers + maxenemies));
+					myplayer[j].x = rand() % hitpointsx;
 
 					myplayer[j].prevy = myplayer[j].y;
 					myplayer[j].prevx = myplayer[j].x;
@@ -611,8 +613,8 @@ beginning:
 			{
 				if(i != j && myai[i].y == myai[j].y && myai[i].x == myai[j].x)
 				{
-					myai[j].y = rand() % (24 - (maxplayers + maxenemies));
-					myai[j].x = rand() % 80;
+					myai[j].y = rand() % (hitpointsy - (maxplayers + maxenemies));
+					myai[j].x = rand() % hitpointsx;
 				
 					myai[j].prevy = myai[j].y;
 					myai[j].prevx = myai[j].x;
@@ -2361,7 +2363,7 @@ beginning:
 	
 		for(int i = 0; i < maxplayers; i++)
 		{
-			if(myplayer[i].y >= (24 - (maxplayers + maxenemies)))
+			if(myplayer[i].y >= (hitpointsy - (maxplayers + maxenemies)))
 			{
 				printf("The player initialization code isn't correct.\n");
 
@@ -2371,7 +2373,7 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if(myai[i].y >= (24 - (maxplayers + maxenemies)))
+			if(myai[i].y >= (hitpointsy - (maxplayers + maxenemies)))
 			{
 				printf("The ai initialization code isn't correct.\n");
 
@@ -2387,10 +2389,12 @@ beginning:
 	
 		int positionydiff;
 	
-		struct hitpointspos hitpointspos1 = { 24 - (maxplayers + maxenemies), 0, 24 - (maxenemies), 0 };
+		struct hitpointspos hitpointspos1 = { hitpointsy - (maxplayers + maxenemies), 0, hitpointsx - (maxenemies), 0 };
 	
 		initscr();
-	
+		
+		resize_term(hitpointsy, hitpointsx);
+
 		noecho();
 	
 		cbreak();
