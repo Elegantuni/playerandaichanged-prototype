@@ -2318,6 +2318,8 @@ beginning:
 			str2int(&(roundssofar), lineBuffer, 10);
 
 			fclose(fp1);
+
+			remove("SaveFile.txt");
 		}
 	
 		for(int i = 0; i < maxplayers; i++)
