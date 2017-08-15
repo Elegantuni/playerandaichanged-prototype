@@ -7,8 +7,11 @@
 #include <errno.h>
 #include <ctype.h>
 
-#define allitems 4
+#define allitems 5
+#define allitemsenemies 6
+
 #define alldefenseitems 2
+#define alldefenseitemsenemies 2
 
 ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
 
@@ -44,14 +47,28 @@ struct character
 
 struct shieldsdamage
 {
-	char *item;
+	char* item;
 	int damage[alldefenseitems];
+};
+
+struct shieldsdamageenemies
+{
+	char* item;
+	int damage[alldefenseitemsenemies];
 };
 
 struct shields
 {
 	char* equiped;
 	char* item[alldefenseitems];
+	int damage;
+	int numberitems;
+};
+
+struct shieldsenemies
+{
+	char* equiped;
+	char* item[alldefenseitemsenemies];
 	int damage;
 	int numberitems;
 };
@@ -64,10 +81,28 @@ struct weaponsdamage
 	int rangex[allitems];
 };
 
+struct weaponsdamageenemies
+{
+	char* item;
+	int damage[allitemsenemies];
+	int rangey[allitemsenemies];
+	int rangex[allitemsenemies];
+};
+
 struct weapons
 {
 	char* equiped;
 	char* item[allitems];
+	int damage;
+	int rangey;
+	int rangex;
+	int numberitems;
+};
+
+struct weaponsenemies
+{
+	char* equiped;
+	char* item[allitemsenemies];
 	int damage;
 	int rangey;
 	int rangex;
@@ -124,11 +159,11 @@ struct aicharacter
 	int count;
 	int replayer;
 	int playerturn;
-	struct weapons weapontype;
-	struct weaponsdamage weaponsdamage1;
+	struct weaponsenemies weapontype;
+	struct weaponsdamageenemies weaponsdamage1;
 	int randomitem;
-	struct shields shieldstype;
-	struct shieldsdamage shieldsdamage1;
+	struct shieldsenemies shieldstype;
+	struct shieldsdamageenemies shieldsdamage1;
 	int shieldsrandomitem;
 	struct character character1;
 	struct magic magic1;
@@ -138,8 +173,6 @@ int main(int argc, char *argv[])
 {
 	#define maxenemies 5
 	#define maxplayers 3
-	#define allitemsenemies 4
-	#define alldefenseitemsenemies 2
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist 5
@@ -177,6 +210,7 @@ beginning:
 		item[1] = "Gun";
 		item[2] = "Pistol";
 		item[3] = "Shotgun";
+		item[4] = "Machine Gun";
 
 		char* itemdamage[alldefenseitems];
 		itemdamage[0] = "Short_Shield";
@@ -187,18 +221,20 @@ beginning:
 		itemenemies[1] = "Gun";
 		itemenemies[2] = "Pistol";
 		itemenemies[3] = "Shotgun";
+		itemenemies[4] = "Machine Gun";
+		itemenemies[5] = "Weak Hammer";
 
 		char* itemdamageenemies[alldefenseitemsenemies];
 		itemdamageenemies[0] = "Short_Shield";
 		itemdamageenemies[1] = "Long_Shield";
 
-		int damage[allitems] = { 40, 60, 50, 80 };
-		int rangey[allitems] = { 1, 2, 3, 4 };
-		int rangex[allitems] = { 1, 2, 3, 4 };
+		int damage[allitems] = { 40, 60, 50, 80, 120 };
+		int rangey[allitems] = { 1, 2, 3, 4, 2 };
+		int rangex[allitems] = { 1, 2, 3, 4, 2 };
 
-		int damageenemies[allitemsenemies] = { 40, 60, 50, 80 };
-		int rangeyenemies[allitemsenemies] = { 1, 2, 3, 4 };
-		int rangexenemies[allitemsenemies] = { 1, 2, 3, 4 };
+		int damageenemies[allitemsenemies] = { 40, 60, 50, 80, 120, 20 };
+		int rangeyenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
+		int rangexenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
 
 		int shielddamage[alldefenseitems] = { 2, 4 };
 
@@ -352,7 +388,7 @@ beginning:
 	
 		for(int i = 0; i < maxenemies; i++)
 		{
-			myai[i].randomitem = rand() % allitems;
+			myai[i].randomitem = rand() % allitemsenemies;
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -362,7 +398,7 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
-			myai[i].shieldsrandomitem = rand() % alldefenseitems;
+			myai[i].shieldsrandomitem = rand() % alldefenseitemsenemies;
 		}
 
 		for(int i = 0; i < maxplayers; i++)
