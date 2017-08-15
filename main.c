@@ -4463,66 +4463,105 @@ beginning:
 					myplayer[i].y = (hitpointspos1.y - 1);
 				}
 			}
-		
-			for(int p = 0; p < maxenemies; p++)
+
+			if(ch == 'm')
 			{
-				for(int j = 0; j < maxplayers; j++)
+				int t = -1;
+				
+				for(int j = 0; j < maxenemies; j++)
 				{
-					if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
 					{
-						myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist;
-
-						myai[p].magicpoints = myai[p].magicpoints - myai[p].magic1.cost;
-
-						for(int k = 0; k < maxplayers; k++)
+						t = j;
+						break;
+					}
+				
+				}
+				for(int p = 0; p < maxenemies; p++)
+				{
+					for(int j = 0; j < maxplayers; j++)
+					{
+						if(t != -1 )
 						{
-							if(myplayer[k].hitpoints > 0)
-							{
-								break;
-							}
+							p = t;
 
-							if(k == maxplayers - 1)
+							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 							{
-								winner = "ai";
+								myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist;
 
-								goto ended;
+								if(i == j)
+								{
+									myai[p].magicpoints = myai[p].magicpoints - myai[p].magic1.cost;
+								}
+
+								for(int k = 0; k < maxplayers; k++)
+								{
+									if(myplayer[k].hitpoints > 0)
+									{
+										break;
+									}
+
+									if(k == maxplayers - 1)
+									{
+										winner = "ai";
+
+										goto ended;
+									}
+								}
 							}
 						}
 					}
-				}
-			}
 
-			for(int p = 0; p < maxenemies; p++)
-			{ 
-				for(int j = 0; j < maxplayers; j++)
-				{
-					if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+					if(t != -1)
 					{
-						if(j == i)
-						{
-							myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
-						
-							myplayer[j].magicpoints = myplayer[j].magicpoints - myplayer[j].magic1.cost;
-						}
+						break;
+					}
+				}
+
+
+				for(int p = 0; p < maxenemies; p++)
+				{
 					
-						for(int k = 0; k < maxenemies; k++)
+					if(t != -1)
+					{
+						p = t;
+					}
+
+					for(int j = 0; j < maxplayers; j++)
+					{
+						if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 						{
-							if(myai[k].hitpoints > 0)
+							if(j == i)
 							{
-								break;
+								myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
+						
+								myplayer[j].magicpoints = myplayer[j].magicpoints - myplayer[j].magic1.cost;
 							}
-						
-							if(k == maxenemies - 1)
+					
+							for(int k = 0; k < maxenemies; k++)
 							{
-								winner = "player";
+								if(myai[k].hitpoints > 0)
+								{
+									break;
+								}
 						
-								goto ended;
+								if(k == maxenemies - 1)
+								{
+									winner = "player";
+						
+									goto ended;
+								}
 							}
 						}
 					}
+
+					if(t != -1)
+					{
+						break;
+					}
 				}
 			}
-		
+
 			for(int p = 0; p < maxenemies; p++)
 			{
 				for(int j = 0; j < maxplayers; j++)
