@@ -172,8 +172,8 @@ struct aicharacter
 
 int main(int argc, char *argv[])
 {
-	#define maxenemies 10
-	#define maxplayers 8
+	#define maxenemies 12
+	#define maxplayers 10
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist 5
@@ -2389,7 +2389,7 @@ beginning:
 	
 		int positionydiff;
 	
-		struct hitpointspos hitpointspos1 = { hitpointsy - (maxplayers + maxenemies), 0, hitpointsx - (maxenemies), 0 };
+		struct hitpointspos hitpointspos1 = { hitpointsy - (maxplayers + maxenemies), 0, hitpointsy - (maxenemies), 0 };
 	
 		initscr();
 		
