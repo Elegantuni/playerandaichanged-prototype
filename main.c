@@ -2427,12 +2427,7 @@ beginning:
 	
 		for(int i = 0; i < maxplayers; i++)
 		{
-			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend + 1) && (myplayer[i].y / 24 * 24) == positiony)
-			{
-				mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
-			}
-
-			if((positiony > 0) && ((myplayer[i].y / 24 * 24) + 1) == positiony)
+			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy))
 			{
 				mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 			}
@@ -2440,14 +2435,9 @@ beginning:
 	
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend + 1) && (myai[i].y / 24 * 24) == positiony)
+			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy))
 			{
 				   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
-			}
-
-			if((positiony > 0) && ((myai[i].y / 24 * 24) + 1) == positiony)
-			{
-				mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
 			}
 		}
 	
@@ -4835,12 +4825,7 @@ beginning:
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
-				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend + 1) && (myplayer[i].y / 24 * 24) == positiony)
-				{
-					mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
-				}
-	
-				if((positiony > 0) && ((myplayer[i].y / 24 * 24) + 1) == positiony)
+				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy))
 				{
 					mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 				}
@@ -4848,14 +4833,9 @@ beginning:
 		
 			for(int i = 0; i < maxenemies; i++)
 			{
-				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend + 1) && (myai[i].y / 24 * 24) == positiony)
+				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy))
 				{
 					   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
-				}
-	
-				if((positiony > 0) && ((myai[i].y / 24 * 24) + 1) == positiony)
-				{
-					mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
 				}
 			}
 		
