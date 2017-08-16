@@ -172,16 +172,19 @@ struct aicharacter
 
 int main(int argc, char *argv[])
 {
-	#define maxenemies 12
-	#define maxplayers 10
+	#define maxenemies 30
+	#define maxplayers 30
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist 5
 	#define aimagiclist 5
 	#define rounds 50
 	#define lineamount 128
-	int hitpointsy = 50;
-	int hitpointsx = 150;
+	int terminalend = maxenemies + maxplayers + 50;
+
+	int hitpointsy = 24;
+	int hitpointsx = 80;
+	int positiony = 0;
 	
 	FILE *fp1;
 
@@ -197,7 +200,7 @@ int main(int argc, char *argv[])
 
 	int ch;
 
-	ch = 'n';
+	ch = 'l';
 
 	srand(time(NULL));
 
@@ -512,7 +515,7 @@ beginning:
 			{
 				if(i != j && myplayer[i].y == myplayer[j].y && myplayer[i].x == myplayer[j].x)
 				{
-					myplayer[j].y = rand() % (hitpointsy - (maxplayers + maxenemies));
+					myplayer[j].y = rand() % (terminalend - (maxplayers + maxenemies));
 					myplayer[j].x = rand() % hitpointsx;
 
 					myplayer[j].prevy = myplayer[j].y;
@@ -613,7 +616,7 @@ beginning:
 			{
 				if(i != j && myai[i].y == myai[j].y && myai[i].x == myai[j].x)
 				{
-					myai[j].y = rand() % (hitpointsy - (maxplayers + maxenemies));
+					myai[j].y = rand() % (terminalend - (maxplayers + maxenemies));
 					myai[j].x = rand() % hitpointsx;
 				
 					myai[j].prevy = myai[j].y;
@@ -630,8 +633,8 @@ beginning:
 			{
 				if(myai[i].y == myplayer[j].y && myai[i].x == myplayer[j].x)
 				{
-					myai[i].y = rand() % (24 - (maxplayers + maxenemies));
-					myai[i].x = rand() % 80;
+					myai[i].y = rand() % (terminalend - (maxplayers + maxenemies));
+					myai[i].x = rand() % hitpointsx;
 
 					myai[i].prevy = myai[i].y;
 					myai[i].prevx = myai[i].x;
@@ -2356,6 +2359,22 @@ beginning:
 
 			str2int(&(roundssofar), lineBuffer, 10);
 
+			for(int k = 0; k < lineamount; k++)
+			{
+				lineBuffer[k] = '\0';
+			}
+
+			j = 0;
+
+			while((c = fgetc(fp1)) != '\n')
+			{
+				lineBuffer[j] = c;
+
+				j++;
+			}
+
+			str2int(&(positiony), lineBuffer, 10);
+
 			fclose(fp1);
 
 			remove("SaveFile.txt");
@@ -2363,7 +2382,7 @@ beginning:
 	
 		for(int i = 0; i < maxplayers; i++)
 		{
-			if(myplayer[i].y >= (hitpointsy - (maxplayers + maxenemies)))
+			if(myplayer[i].y >= (terminalend - (maxplayers + maxenemies)))
 			{
 				printf("The player initialization code isn't correct.\n");
 
@@ -2373,7 +2392,7 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if(myai[i].y >= (hitpointsy - (maxplayers + maxenemies)))
+			if(myai[i].y >= (terminalend - (maxplayers + maxenemies)))
 			{
 				printf("The ai initialization code isn't correct.\n");
 
@@ -2389,7 +2408,7 @@ beginning:
 	
 		int positionydiff;
 	
-		struct hitpointspos hitpointspos1 = { hitpointsy - (maxplayers + maxenemies), 0, hitpointsy - (maxenemies), 0 };
+		struct hitpointspos hitpointspos1 = { terminalend - (maxplayers + maxenemies), 0, terminalend - (maxenemies), 0 };
 	
 		initscr();
 		
@@ -2398,28 +2417,59 @@ beginning:
 		noecho();
 	
 		cbreak();
-	
-		for(int i = 0; i < maxplayers; i++)
+
+		positiony = (myplayer[0].y / 24) * 24;
+
+		if(positiony > 0)
 		{
-			mvprintw(myplayer[i].y, myplayer[i].x, myplayer[i].charactersign);
-		}
-	
-		for(int i = 0; i < maxenemies; i++)
-		{
-			mvprintw(myai[i].y, myai[i].x, myai[i].charactersign);
+			positiony++;
 		}
 	
 		for(int i = 0; i < maxplayers; i++)
 		{
-			mvprintw(hitpointspos1.y + i, hitpointspos1.x, "Player %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend) && (myplayer[i].y / 24 * 24) == positiony)
+			{
+				mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+			}
+
+			if((positiony > 0) && ((myplayer[i].y / 24 * 24) + 1) == positiony)
+			{
+				mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+			}
 		}
 	
 		for(int i = 0; i < maxenemies; i++)
 		{
-	   		mvprintw(hitpointspos1.ay + i, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
+			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend) && (myai[i].y / 24 * 24) == positiony)
+			{
+				   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+			}
+
+			if((positiony > 0) && ((myai[i].y / 24 * 24) + 1) == positiony)
+			{
+				mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+			}
 		}
 	
-		move(myplayer[0].y, myplayer[0].x);
+		for(int i = 0; i < maxplayers; i++)
+		{
+			if((hitpointspos1.y + i) > positiony)
+			{
+				mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+		
+			}
+		}
+
+		for(int i = 0; i < maxenemies; i++)
+		{
+			if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies + 1)))
+			{
+				mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
+		
+			}
+		}
+	
+		move(myplayer[0].y - positiony, myplayer[0].x);
 
 		refresh();
 	
@@ -4333,7 +4383,25 @@ beginning:
 
 				lineBuffer[k] = '\n';
 
-				fwrite(lineBuffer, 1, k+1, fp1);		
+				fwrite(lineBuffer, 1, k+1, fp1);
+				
+				for(int j = 0; j < lineamount; j++)
+				{
+					lineBuffer[j] = '\0';
+				}
+
+				snprintf(lineBuffer, lineamount, "%d", positiony);
+
+				k = 0;
+
+				while(lineBuffer[k] != '\0')
+				{
+					k++;
+				}
+
+				lineBuffer[k] = '\n';
+
+				fwrite(lineBuffer, 1, k+1, fp1);
 
 				fclose(fp1);
 
@@ -4360,7 +4428,9 @@ beginning:
 				mvprintw(11, 0, "The D is a player dwarf and the d is a ai elf");
 				mvprintw(12, 0, "Press q from battle screen to quit game");
 				mvprintw(13, 0, "Press S to save and quit");
-				mvprintw(14, 0, "Press key to quit help");
+				mvprintw(14, 0, "Press u to scroll up");
+				mvprintw(15, 0, "Press j to scroll down");
+				mvprintw(16, 0, "Press key to quit help");
 
 				refresh();
 
@@ -4404,6 +4474,8 @@ beginning:
 
 					if(myplayer[i].hitpoints > 0)
 					{
+						positiony = (myplayer[i].y / 24) * 24;
+
 						break;
 					}
 				
@@ -4422,7 +4494,7 @@ beginning:
 			if(ch == 'n')
 			{
 				i++;
-			
+				
 				if(i >= maxplayers)
 				{
 					i = 0;
@@ -4450,6 +4522,14 @@ beginning:
 
 					if(myplayer[i].hitpoints > 0)
 					{
+						positiony = ((myplayer[i].y) / 24) * 24;
+
+						/*if(positiony > 0)
+						{
+							positiony++;
+						}
+						*/
+
 						break;
 					}
 				
@@ -4479,9 +4559,9 @@ beginning:
 			{
 				myplayer[i].x = myplayer[i].x + 1;
 			
-				if(myplayer[i].x > 79)
+				if(myplayer[i].x > hitpointsx - 1)
 				{
-					myplayer[i].x = 79;
+					myplayer[i].x = hitpointsx - 1;
 				}
 			}
 		
@@ -4493,6 +4573,40 @@ beginning:
 				{
 					myplayer[i].y = 0;
 				}
+
+				positiony = ((myplayer[i].y) / 24) * 24;
+			}
+
+			if(ch == 'u')
+			{
+				clear();
+
+				positiony--;
+				
+				if(positiony < 0)
+				{
+					positiony = 0;
+				}
+
+				move(positiony, 0);
+
+				refresh();
+			}
+
+			if(ch == 'j')
+			{
+				clear();
+
+				positiony++;
+				
+				if(positiony > (terminalend - 24))
+				{
+					positiony = (terminalend - 24);
+				}
+
+				move(positiony, 0);
+
+				refresh();
 			}
 		
 			if(ch == 's')
@@ -4503,6 +4617,8 @@ beginning:
 				{
 					myplayer[i].y = (hitpointspos1.y - 1);
 				}
+
+				positiony = ((myplayer[i].y) / 24) * 24;
 			}
 
 			if(ch == 'm')
@@ -4673,6 +4789,13 @@ beginning:
 				{
 					myplayer[i].y = myplayer[i].prevy;
 					myplayer[i].x = myplayer[i].prevx;
+
+					positiony = (myplayer[i].y / 24) * 24;
+					
+					if(positiony > 0)
+					{
+						positiony++;
+					}
 			
 					myplayer[i].replayer = 1;
 				}
@@ -4685,6 +4808,13 @@ beginning:
 						{
 							myplayer[i].y = myplayer[i].prevy;
 							myplayer[i].x = myplayer[i].prevx;
+
+							positiony = (myplayer[i].y / 24) * 24;
+							
+							if(positiony > 0)
+							{
+								positiony++;
+							}
 							
 							myplayer[i].replayer = 1;
 						}
@@ -4705,28 +4835,46 @@ beginning:
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
-				if(myplayer[i].hitpoints > 0)
+				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend) && (myplayer[i].y / 24 * 24) == positiony)
 				{
-					mvprintw(myplayer[i].y, myplayer[i].x, myplayer[i].charactersign);
+					mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+				}
+	
+				if((positiony > 0) && ((myplayer[i].y / 24 * 24) + 1) == positiony)
+				{
+					mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 				}
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
 			{
-				if(myai[i].hitpoints > 0)
+				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend) && (myai[i].y / 24 * 24) == positiony)
 				{
-		   			mvprintw(myai[i].y, myai[i].x, myai[i].charactersign);
-		   		}
+					   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+				}
+	
+				if((positiony > 0) && ((myai[i].y / 24 * 24) + 1) == positiony)
+				{
+					mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+				}
 			}
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
-		   		mvprintw(hitpointspos1.y + i, hitpointspos1.x, "Player %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+				if((hitpointspos1.y + i) > positiony)
+				{
+					mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+			
+				}
 			}
-		
+
 			for(int i = 0; i < maxenemies; i++)
 			{
-				mvprintw(hitpointspos1.ay + i, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
+				if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies + 1)))
+				{
+					mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
+			
+				}
 			}
 
 			for(int i = 0; i < maxplayers; i++)
@@ -4742,8 +4890,8 @@ beginning:
 				}
 			}
 
-			move(myplayer[i].y, myplayer[i].x);
-		
+			move(myplayer[i].y - positiony, myplayer[i].x);
+
 			refresh();
 		}
 
