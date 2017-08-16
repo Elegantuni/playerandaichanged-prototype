@@ -173,7 +173,7 @@ struct aicharacter
 int main(int argc, char *argv[])
 {
 	#define maxenemies 10
-	#define maxplayers 10
+	#define maxplayers 8
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist 5
