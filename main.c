@@ -172,8 +172,8 @@ struct aicharacter
 
 int main(int argc, char *argv[])
 {
-	#define maxenemies 30
-	#define maxplayers 30
+	#define maxenemies 10
+	#define maxplayers 10
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist 5
@@ -516,7 +516,7 @@ beginning:
 				if(i != j && myplayer[i].y == myplayer[j].y && myplayer[i].x == myplayer[j].x)
 				{
 					myplayer[j].y = rand() % (terminalend - (maxplayers + maxenemies));
-					myplayer[j].x = rand() % hitpointsx;
+					myplayer[j].x = rand() % (hitpointsx - 1);
 
 					myplayer[j].prevy = myplayer[j].y;
 					myplayer[j].prevx = myplayer[j].x;
@@ -617,7 +617,7 @@ beginning:
 				if(i != j && myai[i].y == myai[j].y && myai[i].x == myai[j].x)
 				{
 					myai[j].y = rand() % (terminalend - (maxplayers + maxenemies));
-					myai[j].x = rand() % hitpointsx;
+					myai[j].x = rand() % (hitpointsx - 1);
 				
 					myai[j].prevy = myai[j].y;
 					myai[j].prevx = myai[j].x;
@@ -634,7 +634,7 @@ beginning:
 				if(myai[i].y == myplayer[j].y && myai[i].x == myplayer[j].x)
 				{
 					myai[i].y = rand() % (terminalend - (maxplayers + maxenemies));
-					myai[i].x = rand() % hitpointsx;
+					myai[i].x = rand() % (hitpointsx - 1);
 
 					myai[i].prevy = myai[i].y;
 					myai[i].prevx = myai[i].x;
@@ -2427,7 +2427,7 @@ beginning:
 	
 		for(int i = 0; i < maxplayers; i++)
 		{
-			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend) && (myplayer[i].y / 24 * 24) == positiony)
+			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend + 1) && (myplayer[i].y / 24 * 24) == positiony)
 			{
 				mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 			}
@@ -2440,7 +2440,7 @@ beginning:
 	
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend) && (myai[i].y / 24 * 24) == positiony)
+			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend + 1) && (myai[i].y / 24 * 24) == positiony)
 			{
 				   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
 			}
@@ -2462,7 +2462,7 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies + 1)))
+			if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
 			{
 				mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
 		
@@ -4599,9 +4599,9 @@ beginning:
 
 				positiony++;
 				
-				if(positiony > (terminalend - 24))
+				if(positiony > (terminalend + 3 - 24))
 				{
-					positiony = (terminalend - 24);
+					positiony = (terminalend + 3 - 24);
 				}
 
 				move(positiony, 0);
@@ -4835,7 +4835,7 @@ beginning:
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
-				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend) && (myplayer[i].y / 24 * 24) == positiony)
+				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony) && (positiony < terminalend + 1) && (myplayer[i].y / 24 * 24) == positiony)
 				{
 					mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 				}
@@ -4848,7 +4848,7 @@ beginning:
 		
 			for(int i = 0; i < maxenemies; i++)
 			{
-				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend) && (myai[i].y / 24 * 24) == positiony)
+				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony) && (positiony < terminalend + 1) && (myai[i].y / 24 * 24) == positiony)
 				{
 					   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
 				}
@@ -4870,7 +4870,7 @@ beginning:
 
 			for(int i = 0; i < maxenemies; i++)
 			{
-				if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies + 1)))
+				if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
 				{
 					mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
 			
