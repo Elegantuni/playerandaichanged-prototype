@@ -1,6 +1,0 @@
-playerandai1:
-	x86_64-w64-mingw32-gcc -static -std=c99 -o playerandai1 main.c `pkg-config --static --cflags --libs ncurses`
-	
-clean:
-	rm -f playerandai1.exe
-
