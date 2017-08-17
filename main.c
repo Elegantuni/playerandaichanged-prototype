@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
 	int terminalend = maxenemies + maxplayers + 50;
 
 	int hitpointsy = 24;
-	int hitpointsx = 80;
+	int hitpointsx = 140;
 	int positiony = 0;
 	
 	FILE *fp1;
@@ -4589,9 +4589,9 @@ beginning:
 
 				positiony++;
 				
-				if(positiony > (terminalend + 3 - 24))
+				if(positiony > (terminalend + 1 - hitpointsy))
 				{
-					positiony = (terminalend + 3 - 24);
+					positiony = (terminalend + 1 - hitpointsy);
 				}
 
 				move(positiony, 0);
