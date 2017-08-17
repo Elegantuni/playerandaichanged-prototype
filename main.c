@@ -4514,12 +4514,6 @@ beginning:
 					{
 						positiony = ((myplayer[i].y) / 24) * 24;
 
-						/*if(positiony > 0)
-						{
-							positiony++;
-						}
-						*/
-
 						break;
 					}
 				
