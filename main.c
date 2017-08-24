@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
 	int terminalend = maxenemies + maxplayers + 50;
 
 	int hitpointsy = 24;
-	int hitpointsx = 140;
+	int hitpointsx = 95;
 	int positiony = 0;
 	
 	FILE *fp1;
@@ -2445,7 +2445,7 @@ beginning:
 		{
 			if((hitpointspos1.y + i) > positiony)
 			{
-				mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+				mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
 		
 			}
 		}
@@ -2454,7 +2454,7 @@ beginning:
 		{
 			if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
 			{
-				mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
+				mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
 		
 			}
 		}
@@ -4837,7 +4837,7 @@ beginning:
 			{
 				if((hitpointspos1.y + i) > positiony)
 				{
-					mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+					mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
 			
 				}
 			}
@@ -4846,7 +4846,7 @@ beginning:
 			{
 				if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
 				{
-					mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hitpoints: %d mp: %d attack: %d magic: %s %d defense: %d weapon: %s shield: %s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
+					mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped);
 			
 				}
 			}
