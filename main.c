@@ -185,7 +185,13 @@ int main(int argc, char *argv[])
 	int hitpointsy = 24;
 	int hitpointsx = 95;
 	int positiony = 0;
-	
+	int aiopponent = 0;
+
+	if(strcmp(argv[1], "ai") == 0)
+	{
+		aiopponent = 1;
+	}
+
 	FILE *fp1;
 
 	char lineBuffer[lineamount];
@@ -2375,6 +2381,22 @@ beginning:
 
 			str2int(&(positiony), lineBuffer, 10);
 
+			for(int k = 0; k < lineamount; k++)
+			{
+				lineBuffer[k] = '\0';
+			}
+
+			j = 0;
+
+			while((c = fgetc(fp1)) != '\n')
+			{
+				lineBuffer[j] = c;
+			
+				j++;
+			}
+	
+			str2int(&(aiopponent), lineBuffer, 10);
+
 			fclose(fp1);
 
 			remove("SaveFile.txt");
@@ -4381,6 +4403,24 @@ beginning:
 				}
 
 				snprintf(lineBuffer, lineamount, "%d", positiony);
+
+				k = 0;
+
+				while(lineBuffer[k] != '\0')
+				{
+					k++;
+				}
+
+				lineBuffer[k] = '\n';
+
+				fwrite(lineBuffer, 1, k+1, fp1);
+
+				for(int j = 0; j < lineamount; j++)
+				{
+					lineBuffer[j] = '\0';
+				}
+
+				snprintf(lineBuffer, lineamount, "%d", aiopponent);
 
 				k = 0;
 
