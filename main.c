@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
 	int positiony = 0;
 	int aiopponent = 0;
 
-	if(strcmp(argv[1], "ai") == 0)
+	if((argc == 2) && strcmp(argv[1], "ai") == 0)
 	{
 		aiopponent = 1;
 	}
@@ -4804,6 +4804,22 @@ beginning:
 				if(myplayer[i].hitpoints > 0)
 				{
 					break;
+				}
+			}
+
+			if(aiopponent == 1 && (ch != 'u' || ch != 'j' || ch != 'h'))
+			{
+				for(int j = 0; j < maxenemies; j++)
+				{
+					if(myplayer[i].y < myai[j].y)
+					{
+						myai[j].y = myai[j].y - 1;
+					}
+
+					if(myplayer[i].y > myai[j].y)
+					{
+						myai[j].y = myai[j].y + 1;
+					}
 				}
 			}
 		
