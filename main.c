@@ -4860,6 +4860,20 @@ beginning:
 						}
 					}
 				}
+
+				for(int l = 0; l < maxenemies; l++)
+				{
+					if(j != l)
+					{
+						if(myai[j].y == myai[l].y && myai[j].x == myai[l].x && myai[j].hitpoints > 0 && myai[l].hitpoints > 0)
+						{
+							myai[j].y = myai[j].prevy;
+							myai[j].x = myai[j].prevx;
+
+							myai[j].replayer = 1;
+						}
+					}
+				}
 			}
 		
 			if(myplayer[i].replayer == 0)
@@ -4867,10 +4881,24 @@ beginning:
 				myplayer[i].prevy = myplayer[i].y;
 				myplayer[i].prevx = myplayer[i].x;
 			}
+
+			for(int j = 0; j < maxenemies; j++)
+			{
+				if(myai[j].replayer == 0)
+				{
+					myai[j].prevy = myai[j].y;
+					myai[j].prevx = myai[j].x;
+				}
+			}
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
 				myplayer[i].replayer = 0;
+			}
+
+			for(int i = 0; i < maxenemies; i++)
+			{
+				myai[i].replayer = 0;
 			}
 		
 			for(int i = 0; i < maxplayers; i++)
