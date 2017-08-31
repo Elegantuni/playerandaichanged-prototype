@@ -8,6 +8,10 @@
 #include <ctype.h>
 #include <limits.h>
 
+#ifdef OPENBSD
+#define rand() arc4random()
+#endif
+
 #define allitems 5
 #define allitemsenemies 6
 
@@ -208,7 +212,9 @@ int main(int argc, char *argv[])
 
 	ch = 'l';
 
+#ifndef OPENBSD
 	srand(time(NULL));
+#endif
 
 beginning:
 
