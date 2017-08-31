@@ -8,6 +8,10 @@
 #include <ctype.h>
 #include <limits.h>
 
+#ifdef OPENBSD
+#define rand() arc4random()
+#endif
+
 #define allitems 5
 #define allitemsenemies 6
 
@@ -185,7 +189,13 @@ int main(int argc, char *argv[])
 	int hitpointsy = 24;
 	int hitpointsx = 95;
 	int positiony = 0;
-	
+	int aiopponent = 0;
+
+	if((argc == 2) && strcmp(argv[1], "ai") == 0)
+	{
+		aiopponent = 1;
+	}
+
 	FILE *fp1;
 
 	char lineBuffer[lineamount];
@@ -202,7 +212,9 @@ int main(int argc, char *argv[])
 
 	ch = 'l';
 
+#ifndef OPENBSD
 	srand(time(NULL));
+#endif
 
 beginning:
 
@@ -2375,6 +2387,22 @@ beginning:
 
 			str2int(&(positiony), lineBuffer, 10);
 
+			for(int k = 0; k < lineamount; k++)
+			{
+				lineBuffer[k] = '\0';
+			}
+
+			j = 0;
+
+			while((c = fgetc(fp1)) != '\n')
+			{
+				lineBuffer[j] = c;
+			
+				j++;
+			}
+	
+			str2int(&(aiopponent), lineBuffer, 10);
+
 			fclose(fp1);
 
 			remove("SaveFile.txt");
@@ -4393,6 +4421,24 @@ beginning:
 
 				fwrite(lineBuffer, 1, k+1, fp1);
 
+				for(int j = 0; j < lineamount; j++)
+				{
+					lineBuffer[j] = '\0';
+				}
+
+				snprintf(lineBuffer, lineamount, "%d", aiopponent);
+
+				k = 0;
+
+				while(lineBuffer[k] != '\0')
+				{
+					k++;
+				}
+
+				lineBuffer[k] = '\n';
+
+				fwrite(lineBuffer, 1, k+1, fp1);
+
 				fclose(fp1);
 
 				endwin();
@@ -4766,6 +4812,22 @@ beginning:
 					break;
 				}
 			}
+
+			if(aiopponent == 1 && (ch != 'u' || ch != 'j' || ch != 'h'))
+			{
+				for(int j = 0; j < maxenemies; j++)
+				{
+					if(myplayer[i].y < myai[j].y)
+					{
+						myai[j].y = myai[j].y - 1;
+					}
+
+					if(myplayer[i].y > myai[j].y)
+					{
+						myai[j].y = myai[j].y + 1;
+					}
+				}
+			}
 		
 			for(int j = 0; j < maxenemies; j++)
 			{
@@ -4804,6 +4866,20 @@ beginning:
 						}
 					}
 				}
+
+				for(int l = 0; l < maxenemies; l++)
+				{
+					if(j != l)
+					{
+						if(myai[j].y == myai[l].y && myai[j].x == myai[l].x && myai[j].hitpoints > 0 && myai[l].hitpoints > 0)
+						{
+							myai[j].y = myai[j].prevy;
+							myai[j].x = myai[j].prevx;
+
+							myai[j].replayer = 1;
+						}
+					}
+				}
 			}
 		
 			if(myplayer[i].replayer == 0)
@@ -4811,10 +4887,24 @@ beginning:
 				myplayer[i].prevy = myplayer[i].y;
 				myplayer[i].prevx = myplayer[i].x;
 			}
+
+			for(int j = 0; j < maxenemies; j++)
+			{
+				if(myai[j].replayer == 0)
+				{
+					myai[j].prevy = myai[j].y;
+					myai[j].prevx = myai[j].x;
+				}
+			}
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
 				myplayer[i].replayer = 0;
+			}
+
+			for(int i = 0; i < maxenemies; i++)
+			{
+				myai[i].replayer = 0;
 			}
 		
 			for(int i = 0; i < maxplayers; i++)
