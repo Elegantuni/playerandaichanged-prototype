@@ -4722,8 +4722,7 @@ beginning:
 							{
 								myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
 						
-								myplayer[j].magicpoints = myplayer[j].magicpoints - myplayer[j].magic1.cost;
-							}
+							}	myplayer[j].magicpoints = myplayer[j].magicpoints - myplayer[j].magic1.cost;
 					
 							for(int k = 0; k < maxenemies; k++)
 							{
@@ -4753,7 +4752,7 @@ beginning:
 			{
 				for(int j = 0; j < maxplayers; j++)
 				{
-					if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && j == i && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+					if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
 					{	
 						myai[p].hitpoints = myai[p].hitpoints - myplayer[j].weapontype.damage - myplayer[j].character1.attack + myai[p].shieldstype.damage + myai[p].defensepoints;
 					
@@ -4773,7 +4772,7 @@ beginning:
 						}
 					}
 
-					if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && j == i && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+					if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
 					{	
 						myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].weapontype.damage - myai[p].character1.attack + myplayer[j].shieldstype.damage + myplayer[j].defensepoints;
 
@@ -4878,6 +4877,17 @@ beginning:
 
 							myai[j].replayer = 1;
 						}
+					}
+				}
+
+				for(int k = 0; k < maxplayers; k++)
+				{
+					if(myplayer[k].y == myai[j].y && myplayer[k].x == myai[j].x && myplayer[k].hitpoints > 0 && myai[j].hitpoints > 0)
+					{
+						myai[j].y = myai[j].prevy;
+						myai[j].x = myai[j].prevx;
+
+						myai[j].replayer = 1;
 					}
 				}
 			}
