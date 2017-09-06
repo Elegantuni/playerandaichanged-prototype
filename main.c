@@ -18,6 +18,9 @@
 #define alldefenseitems 2
 #define alldefenseitemsenemies 2
 
+#define allmagics 10
+#define allmagicsenemies 10
+
 ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
 
 typedef enum {
@@ -37,6 +40,18 @@ struct magic
 	int rangey;
 	int rangex;
 	int cost;
+	char* magicitems[allmagics];
+};
+
+struct magicenemies
+{
+	char* equiped;
+	int damage;
+	int randommagic;
+	int rangey;
+	int rangex;
+	int cost;
+	char* magicitems[allmagicsenemies];
 };
 
 struct character
@@ -171,7 +186,7 @@ struct aicharacter
 	struct shieldsdamageenemies shieldsdamage1;
 	int shieldsrandomitem;
 	struct character character1;
-	struct magic magic1;
+	struct magicenemies magic1;
 };
 
 int main(int argc, char *argv[])
@@ -4891,7 +4906,31 @@ beginning:
 					}
 				}
 			}
-		
+
+			if(myplayer[i].replayer == 1)
+			{
+				for(int j = 0; j < maxenemies; j++)
+				{
+					if(myai[j].y == myai[j].prevy && myplayer[i].x != myai[j].x && myplayer[i].y == (myai[j].y - 1))
+					{
+						myai[j].y = myai[j].y - 1;
+					}
+
+					if(myai[j].y == myai[j].prevy && myplayer[i].x != myai[j].x && myplayer[i].y == (myai[j].y + 1))
+					{
+						myai[j].y = myai[j].y + 1;
+					}
+
+					if(!(abs(myplayer[i].y - myai[j].y) < 1 && myplayer[i].x != myai[j].x))
+					{
+						if(myplayer[i].y == myai[j].prevy && myplayer[i].x != myai[j].x && myplayer[i].y != myai[j].y)
+						{
+							myai[j].y = myai[j].prevy;
+						}
+					}
+				}
+			}
+
 			if(myplayer[i].replayer == 0)
 			{
 				myplayer[i].prevy = myplayer[i].y;
