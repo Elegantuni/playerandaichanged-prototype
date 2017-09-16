@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <ctype.h>
 #include <limits.h>
+#include <sys/ioctl.h>
 
 #ifdef OPENBSD
 #define rand() arc4random()
@@ -206,6 +207,23 @@ int main(int argc, char *argv[])
 	int positiony = 0;
 	int aiopponent = 0;
 
+	struct winsize w;
+	ioctl(0, TIOCGWINSZ, &w);
+
+	if(w.ws_row < hitpointsy)
+	{
+		printf("Change your terminal row to %d or greater", hitpointsy);
+
+		return 1;
+	}
+
+	if(w.ws_col < hitpointsx)
+	{
+		printf("Change your terminal col to %d or greater", hitpointsx);
+
+		return 1;
+	}
+	
 	if((argc == 2) && strcmp(argv[1], "ai") == 0)
 	{
 		aiopponent = 1;
