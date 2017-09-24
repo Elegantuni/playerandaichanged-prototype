@@ -19,8 +19,8 @@
 #define alldefenseitems 2
 #define alldefenseitemsenemies 2
 
-#define allmagics 10
-#define allmagicsenemies 10
+#define allmagics 5
+#define allmagicsenemies 5
 
 ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
 
@@ -200,8 +200,8 @@ int main(int argc, char *argv[])
 	#define maxplayers 8
 	#define playercharacters 4
 	#define aicharacters 4
-	#define playermagiclist 5
-	#define aimagiclist 5
+	#define playermagiclist allmagics
+	#define aimagiclist allmagicsenemies
 	#define rounds 50
 	#define lineamount 128
 	int terminalend = maxenemies + maxplayers + 50;
@@ -478,6 +478,11 @@ beginning:
 
 		for(int i = 0; i < maxplayers; i++)
 		{
+			for(int j = 0; j < allmagics; j++)
+			{
+				myplayer[i].magic1.magicitems[j] = "Empty";
+			}
+
 			myplayer[i].y = 10;
 			myplayer[i].x = 12;
 			myplayer[i].hitpoints = 1000;
@@ -1567,6 +1572,57 @@ beginning:
 				}
 
 				myplayer[i].weapontype.equiped = strdup(lineBuffer);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.magiccount), lineBuffer, 10);
+			
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.nextrandommagic), lineBuffer, 10);
+
+				for(int l = 0; l < allmagics; l++)
+				{
+					for(int k = 0; k < lineamount; k++)
+					{
+						lineBuffer[k] = '\0';
+					}
+
+					j = 0;
+
+					while((c = fgetc(fp1)) != '\n')
+					{
+						lineBuffer[j] = c;
+
+						j++;
+					}
+
+					myplayer[i].magic1.magicitems[l] = strdup(lineBuffer);
+				}
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
@@ -3494,7 +3550,63 @@ beginning:
 					lineBuffer[k] = '\n';
 
 					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.magiccount);
+
+					k = 0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
 				
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+	
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.nextrandommagic);
+	
+					k = 0;
+	
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+	
+					lineBuffer[k] = '\n';
+	
+					fwrite(lineBuffer, 1, k+1, fp1);
+					
+					for(int q = 0; q < allmagics; q++)
+					{
+						for(int j = 0; j < lineamount; j++)
+						{
+							lineBuffer[j] = '\0';
+						}
+	
+						strcpy(lineBuffer, myplayer[i].magic1.magicitems[q]);
+	
+						k = 0;
+	
+						while(lineBuffer[k] != '\0')
+						{
+							k++;
+						}
+	
+						lineBuffer[k] = '\n';
+	
+						fwrite(lineBuffer, 1, k+1, fp1);
+					}
 				}
 
 				for(int i = 0; i < maxenemies; i++)
@@ -4507,19 +4619,20 @@ beginning:
 				mvprintw(2, 0, "Press w to move up");
 				mvprintw(3, 0, "Press s to move down");
 				mvprintw(4, 0, "Press m to use magic");
-				mvprintw(5, 0, "Press n to cycle through player characters forward");
-				mvprintw(6, 0, "Press p to cycle through player characters backward");
-				mvprintw(7, 0, "Press c to see what magic you have");
-				mvprintw(8, 0, "Press h to display this during game to see this screen");
-				mvprintw(9, 0, "The H is a player human and the h is a ai human");
-				mvprintw(10, 0, "The O is a player orc and the o is a ai orc");
-				mvprintw(11, 0, "The E is a player elf and the e is a ai elf");
-				mvprintw(12, 0, "The D is a player dwarf and the d is a ai elf");
-				mvprintw(13, 0, "Press q from battle screen to quit game");
-				mvprintw(14, 0, "Press S to save and quit");
-				mvprintw(15, 0, "Press u to scroll up");
-				mvprintw(16, 0, "Press j to scroll down");
-				mvprintw(17, 0, "Press key to quit help");
+				mvprintw(5, 0, "Press M to equip different magic");
+				mvprintw(6, 0, "Press n to cycle through player characters forward");
+				mvprintw(7, 0, "Press p to cycle through player characters backward");
+				mvprintw(8, 0, "Press c to see what magic you have");
+				mvprintw(9, 0, "Press h to display this during game to see this screen");
+				mvprintw(10, 0, "The H is a player human and the h is a ai human");
+				mvprintw(11, 0, "The O is a player orc and the o is a ai orc");
+				mvprintw(12, 0, "The E is a player elf and the e is a ai elf");
+				mvprintw(13, 0, "The D is a player dwarf and the d is a ai elf");
+				mvprintw(14, 0, "Press q from battle screen to quit game");
+				mvprintw(15, 0, "Press S to save and quit");
+				mvprintw(16, 0, "Press u to scroll up");
+				mvprintw(17, 0, "Press j to scroll down");
+				mvprintw(18, 0, "Press key to quit help");
 
 				refresh();
 
@@ -4710,7 +4823,7 @@ beginning:
 
 				int l = 0;
 
-				while(myplayer[i].magic1.magicitems[l] != NULL)
+				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
 				{
 					mvprintw(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
 					l++;
@@ -4728,6 +4841,62 @@ beginning:
 
 				clear();
 
+				refresh();
+			}
+
+			if(ch == 'M')
+			{
+				int gotcharacter;
+				int keypressed;
+
+				clear();
+				
+				int l = 0;
+				
+				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+				{
+					mvprintw(l, 0, "Magic item %d is %s.  Press %d for it\n", l + 1, myplayer[i].magic1.magicitems[l], l+1);
+					l++;
+				}
+				
+				refresh();
+				
+				int u = 0;
+
+				gotcharacter = getch();
+
+				char thekey = gotcharacter;
+
+				keypressed = atoi(&thekey);
+
+				while(keypressed < 1 && keypressed > (myplayer[i].magic1.magiccount + 1))
+				{
+					clear();
+
+					while(u < l)
+					{
+						mvprintw(u, 0, "Magic item %d is %s.  Press %d for it\n", u + 1, myplayer[i].magic1.magicitems[u], u+1);
+						u++;
+					}
+
+					gotcharacter = getch();
+
+					thekey = gotcharacter;
+
+					keypressed = atoi(&thekey);
+
+					refresh();
+				}
+
+				myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[keypressed-1];
+
+				l = 0;
+				u = 0;
+
+				move(myplayer[i].y, myplayer[i].x);
+				
+				clear();
+				
 				refresh();
 			}
 
