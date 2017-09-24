@@ -42,6 +42,8 @@ struct magic
 	int rangex;
 	int cost;
 	char* magicitems[allmagics];
+	int nextrandommagic;
+	int magiccount;
 };
 
 struct magicenemies
@@ -53,6 +55,8 @@ struct magicenemies
 	int rangex;
 	int cost;
 	char* magicitems[allmagicsenemies];
+	int nextrandommagic;
+	int magiccount;
 };
 
 struct character
@@ -502,6 +506,8 @@ beginning:
 			myplayer[i].defensepoints = myplayer[i].character1.defense;
 			myplayer[i].hitpoints = myplayer[i].character1.hitpoints;
 
+			myplayer[i].magic1.magiccount = 0;
+
 			for(int j = 0; j < allitems; j++)
 			{
 				myplayer[i].weapontype.item[j] = item[j];
@@ -552,6 +558,19 @@ beginning:
 			myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
 
 			myplayer[i].weapontype.numberitems = allitems;
+
+			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.randommagic];
+			
+			myplayer[i].magic1.magiccount++;
+
+			myplayer[i].magic1.nextrandommagic = myplayer[i].magic1.randommagic;
+
+			while(myplayer[i].magic1.nextrandommagic == myplayer[i].magic1.randommagic)
+			{
+				myplayer[i].magic1.nextrandommagic = rand() % playermagiclist;
+			}
+
+			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.nextrandommagic];
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -4490,16 +4509,17 @@ beginning:
 				mvprintw(4, 0, "Press m to use magic");
 				mvprintw(5, 0, "Press n to cycle through player characters forward");
 				mvprintw(6, 0, "Press p to cycle through player characters backward");
-				mvprintw(7, 0, "Press h to display this during game to see this screen");
-				mvprintw(8, 0, "The H is a player human and the h is a ai human");
-				mvprintw(9, 0, "The O is a player orc and the o is a ai orc");
-				mvprintw(10, 0, "The E is a player elf and the e is a ai elf");
-				mvprintw(11, 0, "The D is a player dwarf and the d is a ai elf");
-				mvprintw(12, 0, "Press q from battle screen to quit game");
-				mvprintw(13, 0, "Press S to save and quit");
-				mvprintw(14, 0, "Press u to scroll up");
-				mvprintw(15, 0, "Press j to scroll down");
-				mvprintw(16, 0, "Press key to quit help");
+				mvprintw(7, 0, "Press c to see what magic you have");
+				mvprintw(8, 0, "Press h to display this during game to see this screen");
+				mvprintw(9, 0, "The H is a player human and the h is a ai human");
+				mvprintw(10, 0, "The O is a player orc and the o is a ai orc");
+				mvprintw(11, 0, "The E is a player elf and the e is a ai elf");
+				mvprintw(12, 0, "The D is a player dwarf and the d is a ai elf");
+				mvprintw(13, 0, "Press q from battle screen to quit game");
+				mvprintw(14, 0, "Press S to save and quit");
+				mvprintw(15, 0, "Press u to scroll up");
+				mvprintw(16, 0, "Press j to scroll down");
+				mvprintw(17, 0, "Press key to quit help");
 
 				refresh();
 
@@ -4682,6 +4702,33 @@ beginning:
 				}
 
 				positiony = ((myplayer[i].y) / 24) * 24;
+			}
+
+			if(ch == 'c')
+			{
+				clear();
+
+				int l = 0;
+
+				while(myplayer[i].magic1.magicitems[l] != NULL)
+				{
+					mvprintw(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
+					l++;
+				}
+
+				mvprintw(l, 0, "Press a key to exit");
+
+				refresh();
+				
+				getch();
+
+				l = 0;
+				
+				move(myplayer[i].y, myplayer[i].x);
+
+				clear();
+
+				refresh();
 			}
 
 			if(ch == 'm')
