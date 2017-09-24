@@ -212,14 +212,14 @@ int main(int argc, char *argv[])
 
 	if(w.ws_row < hitpointsy)
 	{
-		printf("Change your terminal row to %d or greater", hitpointsy);
+		printf("Change your terminal row to %d or greater\n", hitpointsy);
 
 		return 1;
 	}
 
 	if(w.ws_col < hitpointsx)
 	{
-		printf("Change your terminal col to %d or greater", hitpointsx);
+		printf("Change your terminal col to %d or greater\n", hitpointsx);
 
 		return 1;
 	}
