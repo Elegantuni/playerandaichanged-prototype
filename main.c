@@ -42,6 +42,8 @@ struct magic
 	int rangex;
 	int cost;
 	char* magicitems[allmagics];
+	int nextrandommagic;
+	int magiccount;
 };
 
 struct magicenemies
@@ -53,6 +55,8 @@ struct magicenemies
 	int rangex;
 	int cost;
 	char* magicitems[allmagicsenemies];
+	int nextrandommagic;
+	int magiccount;
 };
 
 struct character
@@ -502,6 +506,8 @@ beginning:
 			myplayer[i].defensepoints = myplayer[i].character1.defense;
 			myplayer[i].hitpoints = myplayer[i].character1.hitpoints;
 
+			myplayer[i].magic1.magiccount = 0;
+
 			for(int j = 0; j < allitems; j++)
 			{
 				myplayer[i].weapontype.item[j] = item[j];
@@ -552,6 +558,19 @@ beginning:
 			myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
 
 			myplayer[i].weapontype.numberitems = allitems;
+
+			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.randommagic];
+			
+			myplayer[i].magic1.magiccount++;
+
+			myplayer[i].magic1.nextrandommagic = myplayer[i].magic1.randommagic;
+
+			while(myplayer[i].magic1.nextrandommagic == myplayer[i].magic1.randommagic)
+			{
+				myplayer[i].magic1.nextrandommagic = rand() % playermagiclist;
+			}
+
+			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.nextrandommagic];
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -4682,6 +4701,33 @@ beginning:
 				}
 
 				positiony = ((myplayer[i].y) / 24) * 24;
+			}
+
+			if(ch == 'c')
+			{
+				clear();
+
+				int l = 0;
+
+				while(myplayer[i].magic1.magicitems[l] != NULL)
+				{
+					mvprintw(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
+					l++;
+				}
+
+				mvprintw(l, 0, "Press a key to exit");
+
+				refresh();
+				
+				getch();
+
+				l = 0;
+				
+				move(myplayer[i].y, myplayer[i].x);
+
+				clear();
+
+				refresh();
 			}
 
 			if(ch == 'm')
