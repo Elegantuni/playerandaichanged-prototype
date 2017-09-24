@@ -576,6 +576,8 @@ beginning:
 			}
 
 			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.nextrandommagic];
+
+			myplayer[i].magic1.magiccount++;
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -4869,7 +4871,7 @@ beginning:
 
 				keypressed = atoi(&thekey);
 
-				while(keypressed < 1 && keypressed > (myplayer[i].magic1.magiccount + 1))
+				while(keypressed < 1 || keypressed > myplayer[i].magic1.magiccount)
 				{
 					clear();
 
@@ -4879,13 +4881,19 @@ beginning:
 						u++;
 					}
 
+					refresh();
+
 					gotcharacter = getch();
 
 					thekey = gotcharacter;
 
 					keypressed = atoi(&thekey);
 
+					clear();
+
 					refresh();
+
+					u = 0;
 				}
 
 				myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[keypressed-1];
