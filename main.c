@@ -4857,46 +4857,50 @@ beginning:
 				
 				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
 				{
-					mvprintw(l, 0, "Magic item %d is %s.  Press %d for it\n", l + 1, myplayer[i].magic1.magicitems[l], l+1);
+					mvprintw(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l], l+1);
 					l++;
 				}
-				
-				refresh();
+
+				mvprintw(l, 0, "press w to move up\n");
+				l++;
+				mvprintw(l, 0, "press s to move down\n");
+				l++;
+				mvprintw(l, 0, "press e to select\n");
 				
 				int u = 0;
 
-				gotcharacter = getch();
+				move(u, 0);
 
-				char thekey = gotcharacter;
+				refresh();
 
-				keypressed = atoi(&thekey);
-
-				while(keypressed < 1 || keypressed > myplayer[i].magic1.magiccount)
+				while((gotcharacter = getch()) != 'e')
 				{
-					clear();
-
-					while(u < l)
+					if(gotcharacter == 'w')
 					{
-						mvprintw(u, 0, "Magic item %d is %s.  Press %d for it\n", u + 1, myplayer[i].magic1.magicitems[u], u+1);
-						u++;
+						u--;
+
+						if(u < 0)
+						{
+							u = 0;
+						}
 					}
 
+					if(gotcharacter == 's')
+					{
+						u++;
+
+						if(u > (myplayer[i].magic1.magiccount - 1))
+						{
+							u = myplayer[i].magic1.magiccount - 1;
+						}
+					}
+
+					move(u, 0);
+
 					refresh();
-
-					gotcharacter = getch();
-
-					thekey = gotcharacter;
-
-					keypressed = atoi(&thekey);
-
-					clear();
-
-					refresh();
-
-					u = 0;
 				}
 
-				myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[keypressed-1];
+				myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u];
 
 				l = 0;
 				u = 0;
