@@ -4509,16 +4509,17 @@ beginning:
 				mvprintw(4, 0, "Press m to use magic");
 				mvprintw(5, 0, "Press n to cycle through player characters forward");
 				mvprintw(6, 0, "Press p to cycle through player characters backward");
-				mvprintw(7, 0, "Press h to display this during game to see this screen");
-				mvprintw(8, 0, "The H is a player human and the h is a ai human");
-				mvprintw(9, 0, "The O is a player orc and the o is a ai orc");
-				mvprintw(10, 0, "The E is a player elf and the e is a ai elf");
-				mvprintw(11, 0, "The D is a player dwarf and the d is a ai elf");
-				mvprintw(12, 0, "Press q from battle screen to quit game");
-				mvprintw(13, 0, "Press S to save and quit");
-				mvprintw(14, 0, "Press u to scroll up");
-				mvprintw(15, 0, "Press j to scroll down");
-				mvprintw(16, 0, "Press key to quit help");
+				mvprintw(7, 0, "Press c to see what magic you have");
+				mvprintw(8, 0, "Press h to display this during game to see this screen");
+				mvprintw(9, 0, "The H is a player human and the h is a ai human");
+				mvprintw(10, 0, "The O is a player orc and the o is a ai orc");
+				mvprintw(11, 0, "The E is a player elf and the e is a ai elf");
+				mvprintw(12, 0, "The D is a player dwarf and the d is a ai elf");
+				mvprintw(13, 0, "Press q from battle screen to quit game");
+				mvprintw(14, 0, "Press S to save and quit");
+				mvprintw(15, 0, "Press u to scroll up");
+				mvprintw(16, 0, "Press j to scroll down");
+				mvprintw(17, 0, "Press key to quit help");
 
 				refresh();
 
