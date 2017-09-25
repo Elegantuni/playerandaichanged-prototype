@@ -43,6 +43,7 @@ struct magic
 	int cost;
 	char* magicitems[allmagics];
 	int nextrandommagic;
+	int nextrandommagic2;
 	int magiccount;
 };
 
@@ -56,6 +57,7 @@ struct magicenemies
 	int cost;
 	char* magicitems[allmagicsenemies];
 	int nextrandommagic;
+	int nextrandommagic2;
 	int magiccount;
 };
 
@@ -372,10 +374,10 @@ beginning:
 
 		int playermagicdamage[playermagiclist];
 		playermagicdamage[0] = 80;
-		playermagicdamage[1] = 80;
-		playermagicdamage[2] = 80;
-		playermagicdamage[3] = 80;
-		playermagicdamage[4] = 80;
+		playermagicdamage[1] = 70;
+		playermagicdamage[2] = 60;
+		playermagicdamage[3] = 50;
+		playermagicdamage[4] = 40;
 
 		int aimagicdamage[aimagiclist];
 		aimagicdamage[0] = 40;
@@ -423,11 +425,11 @@ beginning:
 		aimagicpoints[3] = 100;
 
 		int playermagiccost[playermagiclist];
-		playermagiccost[0] = 40;
+		playermagiccost[0] = 50;
 		playermagiccost[1] = 40;
-		playermagiccost[2] = 40;
-		playermagiccost[3] = 40;
-		playermagiccost[4] = 40;
+		playermagiccost[2] = 30;
+		playermagiccost[3] = 20;
+		playermagiccost[4] = 10;
 
 		int aimagiccost[aimagiclist];
 		aimagiccost[0] = 40;
@@ -576,6 +578,17 @@ beginning:
 			}
 
 			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.nextrandommagic];
+
+			myplayer[i].magic1.magiccount++;
+
+			myplayer[i].magic1.nextrandommagic2 = myplayer[i].magic1.randommagic;
+
+			while(myplayer[i].magic1.nextrandommagic2 == myplayer[i].magic1.randommagic || myplayer[i].magic1.nextrandommagic2 == myplayer[i].magic1.nextrandommagic)
+			{
+				myplayer[i].magic1.nextrandommagic2 = rand() % playermagiclist;
+			}
+
+			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.nextrandommagic2];
 
 			myplayer[i].magic1.magiccount++;
 		}
@@ -4901,6 +4914,32 @@ beginning:
 				}
 
 				myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u];
+
+				if(u == 0)
+				{
+					myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.randommagic];
+					myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.randommagic];
+					myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.randommagic];
+					myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
+				}
+
+				if(u == 1)
+				{
+					myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic];
+					myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic];
+					myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic];
+					myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic];
+				}
+
+				if(u == 2)
+				{
+					myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
+					myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
+					myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic2];
+					myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic2];
+				}
+
+				myplayer[i].magicattack = myplayer[i].magic1.damage;
 
 				l = 0;
 				u = 0;
