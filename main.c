@@ -124,6 +124,10 @@ struct weapons
 	int rangey;
 	int rangex;
 	int numberitems;
+	int randomweapon;
+	int nextrandomweapon;
+	int nextrandomweapon2;
+	int weaponcount;
 };
 
 struct weaponsenemies
@@ -134,6 +138,10 @@ struct weaponsenemies
 	int rangey;
 	int rangex;
 	int numberitems;
+	int randomweapon;
+	int nextrandomweapon;
+	int nextrandomweapon2;
+	int weaponcount;
 };
 
 struct hitpointspos
@@ -485,6 +493,11 @@ beginning:
 				myplayer[i].magic1.magicitems[j] = "Empty";
 			}
 
+			for(int j = 0; j < allitems; j++)
+			{
+				myplayer[i].weapontype.item[j] = "Empty";
+			}
+
 			myplayer[i].y = 10;
 			myplayer[i].x = 12;
 			myplayer[i].hitpoints = 1000;
@@ -514,11 +527,6 @@ beginning:
 			myplayer[i].hitpoints = myplayer[i].character1.hitpoints;
 
 			myplayer[i].magic1.magiccount = 0;
-
-			for(int j = 0; j < allitems; j++)
-			{
-				myplayer[i].weapontype.item[j] = item[j];
-			}
 
 			myplayer[i].weapontype.damage = damage[myplayer[i].randomitem];
 			myplayer[i].weapontype.rangey = rangey[myplayer[i].randomitem];
@@ -591,6 +599,40 @@ beginning:
 			myplayer[i].magic1.magicitems[myplayer[i].magic1.magiccount] = playermagicitems[myplayer[i].magic1.nextrandommagic2];
 
 			myplayer[i].magic1.magiccount++;
+
+			myplayer[i].weapontype.weaponcount = 0;
+
+			myplayer[i].weapontype.randomweapon = myplayer[i].randomitem;
+
+			myplayer[i].weapontype.item[myplayer[i].weapontype.weaponcount] = item[myplayer[i].weapontype.randomweapon];
+
+			myplayer[i].weapontype.weaponcount++;
+
+			myplayer[i].weapontype.nextrandomweapon = myplayer[i].weapontype.randomweapon;
+
+			while(myplayer[i].weapontype.nextrandomweapon == myplayer[i].weapontype.randomweapon)
+			{
+				myplayer[i].weapontype.nextrandomweapon = rand() % allitems;
+			}
+
+			myplayer[i].weapontype.item[myplayer[i].weapontype.weaponcount] = item[myplayer[i].weapontype.nextrandomweapon];
+
+			myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.randomweapon];
+
+			myplayer[i].weapon = myplayer[i].weapontype.equiped;
+
+			myplayer[i].weapontype.weaponcount++;
+
+			myplayer[i].weapontype.nextrandomweapon2 = myplayer[i].weapontype.randomweapon;
+
+			while(myplayer[i].weapontype.nextrandomweapon2 == myplayer[i].weapontype.nextrandomweapon || myplayer[i].weapontype.nextrandomweapon2 == myplayer[i].weapontype.randomweapon)
+			{
+				myplayer[i].weapontype.nextrandomweapon2 = rand() % allitems;
+			}
+
+			myplayer[i].weapontype.item[myplayer[i].weapontype.weaponcount] = item[myplayer[i].weapontype.nextrandomweapon2];
+
+			myplayer[i].weapontype.weaponcount++;
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -729,11 +771,6 @@ beginning:
 					break;
 				}
 			}
-		}
-
-		for(int i = 0; i < maxplayers; i++)
-		{
-			myplayer[i].weapontype.equiped = myplayer[i].weapontype.item[myplayer[i].randomitem];
 		}
 
 		for(int i = 0; i < maxenemies; i++)
@@ -4864,6 +4901,8 @@ beginning:
 				int gotcharacter;
 				int keypressed;
 
+				int list = 0;
+
 				clear();
 				
 				int l = 0;
@@ -4879,6 +4918,9 @@ beginning:
 				mvprintw(l, 0, "press s to move down\n");
 				l++;
 				mvprintw(l, 0, "press e to select\n");
+				l++;
+				mvprintw(l, 0, "press d to move to next category\n");
+				l++;
 				
 				int u = 0;
 
@@ -4902,10 +4944,60 @@ beginning:
 					{
 						u++;
 
-						if(u > (myplayer[i].magic1.magiccount - 1))
+						if(u > (myplayer[i].magic1.magiccount - 1) && list == 0)
 						{
 							u = myplayer[i].magic1.magiccount - 1;
 						}
+
+						if(u > (myplayer[i].weapontype.weaponcount - 1) && list == 1)
+						{
+							u = myplayer[i].weapontype.weaponcount - 1;
+						}
+					}
+
+					if(gotcharacter == 'd')
+					{
+						list++;
+
+						if(list > 1)
+						{
+							list = 0;
+						}
+
+						u = 0;
+
+						clear();
+
+						if(list == 0)
+						{
+							l = 0;
+							
+							while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+							{
+								mvprintw(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l], l+1);
+								l++;
+							}
+						}
+
+						if(list == 1)
+						{
+							l = 0;
+
+							while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
+							{
+								mvprintw(l, 0, "Weapon item %d is %s.\n", l + 1, myplayer[i].weapontype.item[l], l+1);
+								l++;
+							}
+						}
+
+						mvprintw(l, 0, "press w to move up\n");
+						l++;
+						mvprintw(l, 0, "press s to move down\n");
+						l++;
+						mvprintw(l, 0, "press e to select\n");
+						l++;
+						mvprintw(l, 0, "press d to move to next category\n");
+						l++;
 					}
 
 					move(u, 0);
@@ -4913,33 +5005,63 @@ beginning:
 					refresh();
 				}
 
-				myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u];
-
-				if(u == 0)
+				if(list == 0)
 				{
-					myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.randommagic];
-					myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.randommagic];
-					myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.randommagic];
-					myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
+					myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u];
+
+					if(u == 0)
+					{
+						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.randommagic];
+						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.randommagic];
+						myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.randommagic];
+						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
+					}
+
+					if(u == 1)
+					{
+						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic];
+						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic];
+						myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic];
+						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic];
+					}
+
+					if(u == 2)
+					{
+						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
+						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
+						myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic2];
+						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic2];
+					}
+
+					myplayer[i].magicattack = myplayer[i].magic1.damage;
 				}
 
-				if(u == 1)
+				if(list == 1)
 				{
-					myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic];
-					myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic];
-					myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic];
-					myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic];
-				}
+					if(u == 0)
+					{
+						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.randomweapon];
+						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.randomweapon];
+						myplayer[i].weapontype.rangex = rangex[myplayer[i].weapontype.randomweapon];
+						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.randomweapon];
+					}
 
-				if(u == 2)
-				{
-					myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
-					myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
-					myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic2];
-					myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic2];
-				}
+					if(u == 1)
+					{
+						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.nextrandomweapon];
+						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon];
+						myplayer[i].weapontype.rangex = rangex[myplayer[i].weapontype.nextrandomweapon];
+						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.nextrandomweapon];
+					}
 
-				myplayer[i].magicattack = myplayer[i].magic1.damage;
+					if(u == 2)
+					{
+						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.nextrandomweapon2];
+						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon2];
+						myplayer[i].weapontype.rangex = rangex[myplayer[i].weapontype.nextrandomweapon2];
+						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.nextrandomweapon2];
+					}
+				}
 
 				l = 0;
 				u = 0;
