@@ -1675,6 +1675,89 @@ beginning:
 
 					myplayer[i].magic1.magicitems[l] = strdup(lineBuffer);
 				}
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].magic1.nextrandommagic2), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].weapontype.randomweapon), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].weapontype.nextrandomweapon), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].weapontype.nextrandomweapon2), lineBuffer, 10);
+
+				for(int l = 0; l < allitems; l++)
+				{
+					for(int k = 0; k < lineamount; k++)
+					{
+						lineBuffer[k] = '\0';
+					}
+
+					j = 0;
+
+					while((c = fgetc(fp1)) != '\n')
+					{
+						lineBuffer[j] = c;
+
+						j++;
+					}
+
+					myplayer[i].weapontype.item[l] = strdup(lineBuffer);
+				}
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
@@ -3659,6 +3742,99 @@ beginning:
 	
 						fwrite(lineBuffer, 1, k+1, fp1);
 					}
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.nextrandommagic2);
+
+					k =  0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.randomweapon);
+
+					k =  0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.nextrandomweapon);
+
+					k =  0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.nextrandomweapon2);
+
+					k =  0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int q = 0; q < allitems; q++)
+					{
+						for(int j = 0; j < lineamount; j++)
+						{
+							lineBuffer[j] = '\0';
+						}
+	
+						strcpy(lineBuffer, myplayer[i].weapontype.item[q]);
+	
+						k = 0;
+	
+						while(lineBuffer[k] != '\0')
+						{
+							k++;
+						}
+	
+						lineBuffer[k] = '\n';
+	
+						fwrite(lineBuffer, 1, k+1, fp1);
+					}
 				}
 
 				for(int i = 0; i < maxenemies; i++)
@@ -4671,10 +4847,10 @@ beginning:
 				mvprintw(2, 0, "Press w to move up");
 				mvprintw(3, 0, "Press s to move down");
 				mvprintw(4, 0, "Press m to use magic");
-				mvprintw(5, 0, "Press M to equip different magic");
+				mvprintw(5, 0, "Press M to equip different magic and weapon");
 				mvprintw(6, 0, "Press n to cycle through player characters forward");
 				mvprintw(7, 0, "Press p to cycle through player characters backward");
-				mvprintw(8, 0, "Press c to see what magic you have");
+				mvprintw(8, 0, "Press c to see what magics and weapons you have");
 				mvprintw(9, 0, "Press h to display this during game to see this screen");
 				mvprintw(10, 0, "The H is a player human and the h is a ai human");
 				mvprintw(11, 0, "The O is a player orc and the o is a ai orc");
@@ -4873,20 +5049,57 @@ beginning:
 			{
 				clear();
 
+				int list = 0;
 				int l = 0;
+				int gotcharacter = '0';
 
-				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+				do
 				{
-					mvprintw(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
+					clear();
+
+					if(gotcharacter == 'd')
+					{
+						list++;
+					}
+
+					if(list > 1)
+					{
+						list = 0;
+					}
+
+					if(list == 0)
+					{
+						while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+						{
+							mvprintw(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
+							l++;
+						}
+					}
+
+					if(list == 1)
+					{
+						while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
+						{
+							mvprintw(l, 0, "Weapon item %d is %s", l + 1, myplayer[i].weapontype.item[l]);
+							l++;
+						}
+					}
+
+					mvprintw(l, 0, "Press d to move to next category\n");
+
 					l++;
-				}
 
-				mvprintw(l, 0, "Press a key to exit");
+					mvprintw(l, 0, "Press anything else to exit this menu\n");
 
-				refresh();
-				
-				getch();
+					l = 0;
 
+					move(0, 0);
+
+					refresh();
+				} 
+				while((gotcharacter = getch()) == 'd');
+
+				list = 0;
 				l = 0;
 				
 				move(myplayer[i].y, myplayer[i].x);
