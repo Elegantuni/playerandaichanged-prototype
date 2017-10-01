@@ -16,8 +16,8 @@
 #define allitems 5
 #define allitemsenemies 6
 
-#define alldefenseitems 2
-#define alldefenseitemsenemies 2
+#define alldefenseitems 5
+#define alldefenseitemsenemies 5
 
 #define allmagics 5
 #define allmagicsenemies 5
@@ -90,6 +90,10 @@ struct shields
 	char* item[alldefenseitems];
 	int damage;
 	int numberitems;
+	int randomshield;
+	int nextrandomshield;
+	int nextrandomshield2;
+	int shieldcount;
 };
 
 struct shieldsenemies
@@ -98,6 +102,10 @@ struct shieldsenemies
 	char* item[alldefenseitemsenemies];
 	int damage;
 	int numberitems;
+	int randomshield;
+	int nextrandomshield;
+	int nextrandomshield2;
+	int shieldcount;
 };
 
 struct weaponsdamage
@@ -280,6 +288,9 @@ beginning:
 		char* itemdamage[alldefenseitems];
 		itemdamage[0] = "Short_Shield";
 		itemdamage[1] = "Long_Shield";
+		itemdamage[2] = "Metal_Shield";
+		itemdamage[3] = "Iron_Shield";
+		itemdamage[4] = "Steel_Shield";
 
 		char* itemenemies[allitemsenemies];
 		itemenemies[0] = "Knife";
@@ -292,6 +303,9 @@ beginning:
 		char* itemdamageenemies[alldefenseitemsenemies];
 		itemdamageenemies[0] = "Short_Shield";
 		itemdamageenemies[1] = "Long_Shield";
+		itemdamageenemies[2] = "Metal_Shield";
+		itemdamageenemies[3] = "Iron_Shield";
+		itemdamageenemies[4] = "Steel_Shield";
 
 		int damage[allitems] = { 40, 60, 50, 80, 120 };
 		int rangey[allitems] = { 1, 2, 3, 4, 2 };
@@ -301,9 +315,9 @@ beginning:
 		int rangeyenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
 		int rangexenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
 
-		int shielddamage[alldefenseitems] = { 2, 4 };
+		int shielddamage[alldefenseitems] = { 2, 4, 6, 8, 10 };
 
-		int shielddamageenemies[alldefenseitemsenemies] = { 2, 4 };
+		int shielddamageenemies[alldefenseitemsenemies] = { 2, 4, 6, 8, 10};
 
 		char* playercharacter1[playercharacters];
 		playercharacter1[0] = "Human";
@@ -498,6 +512,11 @@ beginning:
 				myplayer[i].weapontype.item[j] = "Empty";
 			}
 
+			for(int j = 0; j < alldefenseitems; j++)
+			{
+				myplayer[i].shieldstype.item[j] = "Empty";
+			}
+
 			myplayer[i].y = 10;
 			myplayer[i].x = 12;
 			myplayer[i].hitpoints = 1000;
@@ -538,11 +557,6 @@ beginning:
 				myplayer[i].weaponsdamage1.damage[j] = damage[j];
 				myplayer[i].weaponsdamage1.rangey[j] = rangey[j];
 				myplayer[i].weaponsdamage1.rangex[j] = rangex[j];
-			}
-
-			for(int j = 0; j < alldefenseitems; j++)
-			{
-				myplayer[i].shieldstype.item[j] = itemdamage[j];
 			}
 
 			myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldsrandomitem];
@@ -633,6 +647,38 @@ beginning:
 			myplayer[i].weapontype.item[myplayer[i].weapontype.weaponcount] = item[myplayer[i].weapontype.nextrandomweapon2];
 
 			myplayer[i].weapontype.weaponcount++;
+
+			myplayer[i].shieldstype.shieldcount = 0;
+
+			myplayer[i].shieldstype.randomshield = myplayer[i].shieldsrandomitem;
+
+			myplayer[i].shieldstype.item[myplayer[i].shieldstype.shieldcount] = itemdamage[myplayer[i].shieldstype.randomshield];
+
+			myplayer[i].shieldstype.equiped = myplayer[i].shieldstype.item[0];
+
+			myplayer[i].shieldstype.shieldcount++;
+
+			myplayer[i].shieldstype.nextrandomshield = myplayer[i].shieldstype.randomshield;
+
+			while(myplayer[i].shieldstype.nextrandomshield == myplayer[i].shieldstype.randomshield)
+			{
+				myplayer[i].shieldstype.nextrandomshield = rand() % alldefenseitems;
+			}
+
+			myplayer[i].shieldstype.item[myplayer[i].shieldstype.shieldcount] = itemdamage[myplayer[i].shieldstype.nextrandomshield];
+
+			myplayer[i].shieldstype.shieldcount++;
+
+			myplayer[i].shieldstype.nextrandomshield2 = myplayer[i].shieldstype.randomshield;
+
+			while(myplayer[i].shieldstype.nextrandomshield2 == myplayer[i].shieldstype.nextrandomshield || myplayer[i].shieldstype.nextrandomshield2 == myplayer[i].shieldstype.randomshield)
+			{
+				myplayer[i].shieldstype.nextrandomshield2 = rand() % alldefenseitems;
+			}
+
+			myplayer[i].shieldstype.item[myplayer[i].shieldstype.shieldcount] = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
+
+			myplayer[i].shieldstype.shieldcount++;
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -1757,6 +1803,73 @@ beginning:
 					}
 
 					myplayer[i].weapontype.item[l] = strdup(lineBuffer);
+				}
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].shieldstype.randomshield), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].shieldstype.nextrandomshield), lineBuffer, 10);
+
+				for(int k = 0; k < lineamount; k++)
+				{
+					lineBuffer[k] = '\0';
+				}
+
+				j = 0;
+
+				while((c = fgetc(fp1)) != '\n')
+				{
+					lineBuffer[j] = c;
+
+					j++;
+				}
+
+				str2int(&(myplayer[i].shieldstype.nextrandomshield2), lineBuffer, 10);
+
+				for(int l = 0; l < alldefenseitems; l++)
+				{
+					for(int k = 0; k < lineamount; k++)
+					{
+						lineBuffer[k] = '\0';
+					}
+
+					j = 0;
+
+					while((c = fgetc(fp1)) != '\n')
+					{
+						lineBuffer[j] = c;
+
+						j++;
+					}
+
+					myplayer[i].shieldstype.item[l] = strdup(lineBuffer);
 				}
 			}
 		
@@ -3835,6 +3948,81 @@ beginning:
 	
 						fwrite(lineBuffer, 1, k+1, fp1);
 					}
+					
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.randomshield);
+
+					k = 0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.nextrandomshield);
+
+					k = 0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int j = 0; j < lineamount; j++)
+					{
+						lineBuffer[j] = '\0';
+					}
+
+					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.nextrandomshield2);
+
+					k = 0;
+
+					while(lineBuffer[k] != '\0')
+					{
+						k++;
+					}
+
+					lineBuffer[k] = '\n';
+
+					fwrite(lineBuffer, 1, k+1, fp1);
+
+					for(int q = 0; q < alldefenseitems; q++)
+					{
+						for(int j = 0; j < lineamount; j++)
+						{
+							lineBuffer[j] = '\0';
+						}
+	
+						strcpy(lineBuffer, myplayer[i].shieldstype.item[q]);
+	
+						k = 0;
+	
+						while(lineBuffer[k] != '\0')
+						{
+							k++;
+						}
+	
+						lineBuffer[k] = '\n';
+	
+						fwrite(lineBuffer, 1, k+1, fp1);
+					}
 				}
 
 				for(int i = 0; i < maxenemies; i++)
@@ -4847,10 +5035,10 @@ beginning:
 				mvprintw(2, 0, "Press w to move up");
 				mvprintw(3, 0, "Press s to move down");
 				mvprintw(4, 0, "Press m to use magic");
-				mvprintw(5, 0, "Press M to equip different magic and weapon");
+				mvprintw(5, 0, "Press M to equip different magic, weapon, and shield");
 				mvprintw(6, 0, "Press n to cycle through player characters forward");
 				mvprintw(7, 0, "Press p to cycle through player characters backward");
-				mvprintw(8, 0, "Press c to see what magics and weapons you have");
+				mvprintw(8, 0, "Press c to see what magics, weapons, and shields you have");
 				mvprintw(9, 0, "Press h to display this during game to see this screen");
 				mvprintw(10, 0, "The H is a player human and the h is a ai human");
 				mvprintw(11, 0, "The O is a player orc and the o is a ai orc");
@@ -5062,7 +5250,7 @@ beginning:
 						list++;
 					}
 
-					if(list > 1)
+					if(list > 2)
 					{
 						list = 0;
 					}
@@ -5081,6 +5269,15 @@ beginning:
 						while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
 						{
 							mvprintw(l, 0, "Weapon item %d is %s", l + 1, myplayer[i].weapontype.item[l]);
+							l++;
+						}
+					}
+
+					if(list == 2)
+					{
+						while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
+						{
+							mvprintw(l, 0, "Shield item %d is %s", l + 1, myplayer[i].shieldstype.item[l]);
 							l++;
 						}
 					}
@@ -5166,13 +5363,18 @@ beginning:
 						{
 							u = myplayer[i].weapontype.weaponcount - 1;
 						}
+
+						if(u > (myplayer[i].shieldstype.shieldcount - 1) && list == 2)
+						{
+							u = myplayer[i].shieldstype.shieldcount - 1;
+						}
 					}
 
 					if(gotcharacter == 'd')
 					{
 						list++;
 
-						if(list > 1)
+						if(list > 2)
 						{
 							list = 0;
 						}
@@ -5199,6 +5401,17 @@ beginning:
 							while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
 							{
 								mvprintw(l, 0, "Weapon item %d is %s.\n", l + 1, myplayer[i].weapontype.item[l], l+1);
+								l++;
+							}
+						}
+
+						if(list == 2)
+						{
+							l = 0;
+
+							while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
+							{
+								mvprintw(l, 0, "Shield item %d is %s.\n", l + 1, myplayer[i].shieldstype.item[l], l+1);
 								l++;
 							}
 						}
@@ -5274,6 +5487,32 @@ beginning:
 						myplayer[i].weapontype.rangex = rangex[myplayer[i].weapontype.nextrandomweapon2];
 						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.nextrandomweapon2];
 					}
+				}
+
+				if(list == 2)
+				{
+					if(u == 0)
+					{
+						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.randomshield];
+						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.randomshield];
+						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.randomshield];
+					}
+
+					if(u == 1)
+					{
+						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.nextrandomshield];
+						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield];
+						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.nextrandomshield];
+					}
+
+					if(u == 2)
+					{
+						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
+						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield2];
+						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
+					}
+
+					myplayer[i].shield = myplayer[i].shieldstype.equiped;
 				}
 
 				l = 0;
