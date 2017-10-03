@@ -11,6 +11,9 @@
 
 #ifdef OPENBSD
 #define rand() arc4random()
+#elif LINUX
+#include <bsd/stdlib.h>
+#define rand() arc4random()
 #endif
 
 #define allitems 5
@@ -232,6 +235,20 @@ int main(int argc, char *argv[])
 	struct winsize w;
 	ioctl(0, TIOCGWINSZ, &w);
 
+	if(maxenemies < 1)
+	{
+		printf("You need maxenemies set to 1 or greater\n");
+		
+		return 1;
+	}
+	
+	if(maxplayers < 1)
+	{
+		printf("You need maxplayers set to 1 or greater\n");
+		
+		return 1;
+	}
+	
 	if(w.ws_row < hitpointsy)
 	{
 		printf("Change your terminal row to %d or greater\n", hitpointsy);
@@ -268,6 +285,8 @@ int main(int argc, char *argv[])
 	ch = 'l';
 
 #ifndef OPENBSD
+#elif LINUX
+#else
 	srand(time(NULL));
 #endif
 
