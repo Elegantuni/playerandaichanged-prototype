@@ -9,10 +9,11 @@
 #include <limits.h>
 #include <sys/ioctl.h>
 
-#ifdef OPENBSD
-#define rand() arc4random()
-#elif LINUX
+#ifdef LINUX
 #include <bsd/stdlib.h>
+#endif
+
+#ifndef WINDOWS
 #define rand() arc4random()
 #endif
 
@@ -284,9 +285,7 @@ int main(int argc, char *argv[])
 
 	ch = 'l';
 
-#ifndef OPENBSD
-#elif LINUX
-#else
+#ifdef WINDOWS
 	srand(time(NULL));
 #endif
 
