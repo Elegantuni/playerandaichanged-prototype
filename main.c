@@ -9,7 +9,11 @@
 #include <limits.h>
 #include <sys/ioctl.h>
 
-#ifdef OPENBSD
+#ifdef LINUX
+#include <bsd/stdlib.h>
+#endif
+
+#ifndef WINDOWS
 #define rand() arc4random()
 #endif
 
@@ -232,6 +236,20 @@ int main(int argc, char *argv[])
 	struct winsize w;
 	ioctl(0, TIOCGWINSZ, &w);
 
+	if(maxenemies < 1)
+	{
+		printf("You need maxenemies set to 1 or greater\n");
+		
+		return 1;
+	}
+	
+	if(maxplayers < 1)
+	{
+		printf("You need maxplayers set to 1 or greater\n");
+		
+		return 1;
+	}
+	
 	if(w.ws_row < hitpointsy)
 	{
 		printf("Change your terminal row to %d or greater\n", hitpointsy);
@@ -267,7 +285,7 @@ int main(int argc, char *argv[])
 
 	ch = 'l';
 
-#ifndef OPENBSD
+#ifdef WINDOWS
 	srand(time(NULL));
 #endif
 
