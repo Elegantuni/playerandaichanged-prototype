@@ -26,6 +26,9 @@
 #define allmagics 5
 #define allmagicsenemies 5
 
+#define allarmor 5
+#define allarmorenemies 5
+
 ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
 
 typedef enum {
@@ -164,6 +167,32 @@ struct hitpointspos
 	int ax;
 };
 
+struct armor
+{
+	char *equiped;
+	int protection;
+	int rangey;
+	int rangex;
+	int protections[allarmor];
+	char *item[allarmor];
+	int randomarmor;
+	int nextrandomarmor;
+	int nextrandomarmor2;
+};
+
+struct armorenemies
+{
+	char *equiped;
+	int protection;
+	int rangey;
+	int rangex;
+	int protections[allarmorenemies];
+	char *item[allarmorenemies];
+	int randomarmor;
+	int nextrandomarmor;
+	int nextrandomarmor2;
+};
+
 struct player
 {
 	int y;
@@ -188,6 +217,7 @@ struct player
 	int shieldsrandomitem;
 	struct character character1;
 	struct magic magic1;
+	struct armor armor1;
 };
 
 struct aicharacter
@@ -214,6 +244,7 @@ struct aicharacter
 	int shieldsrandomitem;
 	struct character character1;
 	struct magicenemies magic1;
+	struct armorenemies armor1;
 };
 
 int main(int argc, char *argv[])
@@ -477,7 +508,63 @@ beginning:
 		aimagiccost[2] = 40;
 		aimagiccost[3] = 40;
 		aimagiccost[4] = 40;
-	
+
+		char* playerarmor[allarmor];
+		playerarmor[0] = "Weak armor";
+		playerarmor[1] = "Light armor";
+		playerarmor[2] = "Medium armor";
+		playerarmor[3] = "Heavy armor";
+		playerarmor[4] = "Super armor";
+
+		char* aiarmor[allarmorenemies];
+		aiarmor[0] = "Weak armor";
+		aiarmor[1] = "Light armor";
+		aiarmor[2] = "Medium armor";
+		aiarmor[3] = "Heavy armor";
+		aiarmor[4] = "Super armor";
+
+		int playerarmorpts[allarmor];
+		playerarmorpts[0] = 3;
+		playerarmorpts[1] = 6;
+		playerarmorpts[2] = 9;
+		playerarmorpts[3] = 12;
+		playerarmorpts[4] = 15;
+
+		int aiarmorpts[allarmorenemies];
+		aiarmorpts[0] = 3;
+		aiarmorpts[1] = 6;
+		aiarmorpts[2] = 9;
+		aiarmorpts[3] = 12;
+		aiarmorpts[4] = 15;
+
+		int playerarmordistancex[allarmor];
+		playerarmordistancex[0] = 3;
+		playerarmordistancex[1] = 4;
+		playerarmordistancex[2] = 5;
+		playerarmordistancex[3] = 6;
+		playerarmordistancex[4] = 7;
+
+		int aiarmordistancex[allarmorenemies];
+		aiarmordistancex[0] = 3;
+		aiarmordistancex[1] = 4;
+		aiarmordistancex[2] = 5;
+		aiarmordistancex[3] = 6;
+		aiarmordistancex[4] = 7;
+
+		int playerarmordistancey[allarmor];
+		playerarmordistancey[0] = 3;
+		playerarmordistancey[1] = 4;
+		playerarmordistancey[2] = 5;
+		playerarmordistancey[3] = 6;
+		playerarmordistancey[4] = 7;
+
+		int aiarmordistancey[allarmorenemies];
+		aiarmordistancey[0] = 3;
+		aiarmordistancey[1] = 4;
+		aiarmordistancey[2] = 5;
+		aiarmordistancey[3] = 6;
+		aiarmordistancey[4] = 7;
+
 		for(int i = 0; i < maxplayers; i++)
 		{
 			myplayer[i].randomitem = rand() % allitems;
@@ -520,6 +607,16 @@ beginning:
 
 		for(int i = 0; i < maxplayers; i++)
 		{
+			myplayer[i].armor1.randomarmor = rand() % allarmor;
+		}
+
+		for(int i = 0; i < maxenemies; i++)
+		{
+			myai[i].armor1.randomarmor = rand() % allarmorenemies;
+		}
+
+		for(int i = 0; i < maxplayers; i++)
+		{
 			for(int j = 0; j < allmagics; j++)
 			{
 				myplayer[i].magic1.magicitems[j] = "Empty";
@@ -533,6 +630,11 @@ beginning:
 			for(int j = 0; j < alldefenseitems; j++)
 			{
 				myplayer[i].shieldstype.item[j] = "Empty";
+			}
+
+			for(int j = 0; j < allarmor; j++)
+			{
+				myplayer[i].armor1.item[j] = "Empty";
 			}
 
 			myplayer[i].y = 10;
