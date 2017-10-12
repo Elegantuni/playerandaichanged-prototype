@@ -178,6 +178,7 @@ struct armor
 	int randomarmor;
 	int nextrandomarmor;
 	int nextrandomarmor2;
+        int armorcount;
 };
 
 struct armorenemies
@@ -191,6 +192,7 @@ struct armorenemies
 	int randomarmor;
 	int nextrandomarmor;
 	int nextrandomarmor2;
+        int armorcount;
 };
 
 struct player
@@ -799,6 +801,12 @@ beginning:
 			myplayer[i].shieldstype.item[myplayer[i].shieldstype.shieldcount] = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
 
 			myplayer[i].shieldstype.shieldcount++;
+
+			myplayer[i].armor1.armorcount = 0;
+
+			myplayer[i].armor1.item[myplayer[i].armor1.armorcount] = playerarmor[myplayer[i].armor1.randomarmor];
+
+			myplayer[i].armor1.armorcount++;
 		}
 
 		for(int i = 0; i < maxplayers; i++)
