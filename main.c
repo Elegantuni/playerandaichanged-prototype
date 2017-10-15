@@ -3158,7 +3158,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].weapon);
+					strncpy(lineBuffer, myplayer[i].weapon, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3176,7 +3176,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].shield);
+					strncpy(lineBuffer, myplayer[i].shield, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3194,7 +3194,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].charactersign);
+					strncpy(lineBuffer, myplayer[i].charactersign, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3320,7 +3320,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].weapontype.equiped);
+					strncpy(lineBuffer, myplayer[i].weapontype.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3338,7 +3338,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].character1.character);
+					strncpy(lineBuffer, myplayer[i].character1.character, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3356,7 +3356,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].character1.sign);
+					strncpy(lineBuffer, myplayer[i].character1.sign, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3428,7 +3428,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].weaponsdamage1.item);
+					strncpy(lineBuffer, myplayer[i].weaponsdamage1.item, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3484,7 +3484,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myplayer[i].weapontype.item[q]);
+						strncpy(lineBuffer, myplayer[i].weapontype.item[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -3640,7 +3640,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myplayer[i].shieldstype.item[q]);
+						strncpy(lineBuffer, myplayer[i].shieldstype.item[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -3659,7 +3659,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].shieldstype.equiped);
+					strncpy(lineBuffer, myplayer[i].shieldstype.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3713,7 +3713,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].shieldsdamage1.item);
+					strncpy(lineBuffer, myplayer[i].shieldsdamage1.item, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3752,7 +3752,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].magic1.equiped);
+					strncpy(lineBuffer, myplayer[i].magic1.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3914,7 +3914,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myplayer[i].weapontype.equiped);
+					strncpy(lineBuffer, myplayer[i].weapontype.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -3970,7 +3970,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myplayer[i].magic1.magicitems[q]);
+						strncpy(lineBuffer, myplayer[i].magic1.magicitems[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -4063,7 +4063,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myplayer[i].weapontype.item[q]);
+						strncpy(lineBuffer, myplayer[i].weapontype.item[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -4138,7 +4138,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myplayer[i].shieldstype.item[q]);
+						strncpy(lineBuffer, myplayer[i].shieldstype.item[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -4322,7 +4322,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].weapon);
+					strncpy(lineBuffer, myai[i].weapon, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4340,7 +4340,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].shield);
+					strncpy(lineBuffer, myai[i].shield, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4358,7 +4358,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].charactersign);
+					strncpy(lineBuffer, myai[i].charactersign, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4484,7 +4484,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].weapontype.equiped);
+					strncpy(lineBuffer, myai[i].weapontype.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4502,7 +4502,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].character1.character);
+					strncpy(lineBuffer, myai[i].character1.character, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4520,7 +4520,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].character1.sign);
+					strncpy(lineBuffer, myai[i].character1.sign, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4592,7 +4592,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].weaponsdamage1.item);
+					strncpy(lineBuffer, myai[i].weaponsdamage1.item, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4648,7 +4648,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myai[i].weapontype.item[q]);
+						strncpy(lineBuffer, myai[i].weapontype.item[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -4804,7 +4804,7 @@ beginning:
 							lineBuffer[j] = '\0';
 						}
 	
-						strcpy(lineBuffer, myai[i].shieldstype.item[q]);
+						strncpy(lineBuffer, myai[i].shieldstype.item[q], sizeof(lineBuffer) - 1);
 	
 						k = 0;
 	
@@ -4823,7 +4823,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].shieldstype.equiped);
+					strncpy(lineBuffer, myai[i].shieldstype.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4877,7 +4877,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].shieldsdamage1.item);
+					strncpy(lineBuffer, myai[i].shieldsdamage1.item, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -4916,7 +4916,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].magic1.equiped);
+					strncpy(lineBuffer, myai[i].magic1.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
@@ -5078,7 +5078,7 @@ beginning:
 						lineBuffer[j] = '\0';
 					}
 
-					strcpy(lineBuffer, myai[i].weapontype.equiped);
+					strncpy(lineBuffer, myai[i].weapontype.equiped, sizeof(lineBuffer) - 1);
 
 					k = 0;
 
