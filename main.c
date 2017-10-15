@@ -2930,7 +2930,7 @@ beginning:
 	
 		cbreak();
 
-		positiony = (myplayer[0].y / 24) * 24;
+		positiony = (myplayer[0].y / hitpointsy) * hitpointsy;
 
 		if(positiony > 0)
 		{
@@ -5220,7 +5220,7 @@ beginning:
 
 					if(myplayer[i].hitpoints > 0)
 					{
-						positiony = (myplayer[i].y / 24) * 24;
+						positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
 
 						break;
 					}
@@ -5268,7 +5268,7 @@ beginning:
 
 					if(myplayer[i].hitpoints > 0)
 					{
-						positiony = ((myplayer[i].y) / 24) * 24;
+						positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 
 						break;
 					}
@@ -5314,7 +5314,7 @@ beginning:
 					myplayer[i].y = 0;
 				}
 
-				positiony = ((myplayer[i].y) / 24) * 24;
+				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
 			if(ch == 'u')
@@ -5358,7 +5358,7 @@ beginning:
 					myplayer[i].y = (hitpointspos1.y - 1);
 				}
 
-				positiony = ((myplayer[i].y) / 24) * 24;
+				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
 			if(ch == 'c')
@@ -5837,7 +5837,7 @@ beginning:
 					myplayer[i].y = myplayer[i].prevy;
 					myplayer[i].x = myplayer[i].prevx;
 
-					positiony = (myplayer[i].y / 24) * 24;
+					positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
 					
 					if(positiony > 0)
 					{
@@ -5856,7 +5856,7 @@ beginning:
 							myplayer[i].y = myplayer[i].prevy;
 							myplayer[i].x = myplayer[i].prevx;
 
-							positiony = (myplayer[i].y / 24) * 24;
+							positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
 							
 							if(positiony > 0)
 							{
