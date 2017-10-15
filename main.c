@@ -968,7 +968,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -984,7 +984,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -1000,7 +1000,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -1016,7 +1016,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1032,7 +1032,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -1048,7 +1048,7 @@ beginning:
 		
 				j = 0;
 		
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -1064,7 +1064,7 @@ beginning:
 		
 				j = 0;
 		
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -1080,7 +1080,7 @@ beginning:
 		
 				j = 0;
 		
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -1096,7 +1096,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1112,14 +1112,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].weapon = strdup(lineBuffer);
+				myplayer[i].weapon = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1128,14 +1128,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].shield = strdup(lineBuffer);
+				myplayer[i].shield = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1144,7 +1144,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1152,7 +1152,7 @@ beginning:
 
 				}
 
-				myplayer[i].charactersign = strdup(lineBuffer);
+				myplayer[i].charactersign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1161,7 +1161,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1177,7 +1177,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1193,7 +1193,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1209,7 +1209,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1225,7 +1225,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1241,7 +1241,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1257,14 +1257,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].weapontype.equiped = strdup(lineBuffer);
+				myplayer[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1273,7 +1273,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1282,7 +1282,7 @@ beginning:
 
 				lineBuffer[j] = '\0';
 
-				myplayer[i].character1.character = strdup(lineBuffer);
+				myplayer[i].character1.character = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1291,14 +1291,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].character1.sign = strdup(lineBuffer);
+				myplayer[i].character1.sign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1307,7 +1307,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1323,7 +1323,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1339,7 +1339,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1355,14 +1355,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].weaponsdamage1.item = strdup(lineBuffer);
+				myplayer[i].weaponsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 
 				for(int k = 0; k < lineamount; k++)
@@ -1372,7 +1372,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1388,7 +1388,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1406,14 +1406,14 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
 						j++;
 					}
 
-					myplayer[i].weapontype.item[q] = strdup(lineBuffer);
+					myplayer[i].weapontype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 
 				for(int k = 0; k < lineamount; k++)
@@ -1423,7 +1423,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1439,7 +1439,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1455,7 +1455,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1471,7 +1471,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1489,7 +1489,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -1508,7 +1508,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -1527,7 +1527,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -1546,14 +1546,14 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
 						j++;
 					}
 
-					myplayer[i].shieldstype.item[q] = strdup(lineBuffer);
+					myplayer[i].shieldstype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 
 				for(int k = 0; k < lineamount; k++)
@@ -1563,14 +1563,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].shieldstype.equiped = strdup(lineBuffer);
+				myplayer[i].shieldstype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1579,7 +1579,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1595,7 +1595,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1611,14 +1611,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myplayer[i].shieldsdamage1.item = strdup(lineBuffer);
+				myplayer[i].shieldsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int q = 0; q < alldefenseitems; q++)
 				{
@@ -1629,7 +1629,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -1646,14 +1646,14 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
 					j++;
 				}
 
-				myplayer[i].magic1.equiped = strdup(lineBuffer);
+				myplayer[i].magic1.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1662,7 +1662,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1678,7 +1678,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1694,7 +1694,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1710,7 +1710,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1726,7 +1726,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1742,7 +1742,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1758,7 +1758,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1774,7 +1774,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -1790,14 +1790,14 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
 					j++;
 				}
 
-				myplayer[i].weapontype.equiped = strdup(lineBuffer);
+				myplayer[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -1806,7 +1806,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1822,7 +1822,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1840,14 +1840,14 @@ beginning:
 
 					j = 0;
 
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 
 						j++;
 					}
 
-					myplayer[i].magic1.magicitems[l] = strdup(lineBuffer);
+					myplayer[i].magic1.magicitems[l] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 
 				for(int k = 0; k < lineamount; k++)
@@ -1857,7 +1857,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1873,7 +1873,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1889,7 +1889,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1905,7 +1905,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1923,14 +1923,14 @@ beginning:
 
 					j = 0;
 
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 
 						j++;
 					}
 
-					myplayer[i].weapontype.item[l] = strdup(lineBuffer);
+					myplayer[i].weapontype.item[l] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 
 				for(int k = 0; k < lineamount; k++)
@@ -1940,7 +1940,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1956,7 +1956,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1972,7 +1972,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -1990,14 +1990,14 @@ beginning:
 
 					j = 0;
 
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 
 						j++;
 					}
 
-					myplayer[i].shieldstype.item[l] = strdup(lineBuffer);
+					myplayer[i].shieldstype.item[l] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 			}
 		
@@ -2010,7 +2010,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2026,7 +2026,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -2042,7 +2042,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -2058,7 +2058,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2074,7 +2074,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -2090,7 +2090,7 @@ beginning:
 		
 				j = 0;
 		
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -2106,7 +2106,7 @@ beginning:
 		
 				j = 0;
 		
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -2122,7 +2122,7 @@ beginning:
 		
 				j = 0;
 		
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 		
@@ -2138,7 +2138,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2154,14 +2154,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].weapon = strdup(lineBuffer);
+				myai[i].weapon = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2170,14 +2170,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].shield = strdup(lineBuffer);
+				myai[i].shield = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2186,7 +2186,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2194,7 +2194,7 @@ beginning:
 				}
 				
 
-				myai[i].charactersign = strdup(lineBuffer);
+				myai[i].charactersign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2203,7 +2203,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2219,7 +2219,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2235,7 +2235,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2251,7 +2251,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2267,7 +2267,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2283,7 +2283,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2299,14 +2299,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].weapontype.equiped = strdup(lineBuffer);
+				myai[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2315,14 +2315,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].character1.character = strdup(lineBuffer);
+				myai[i].character1.character = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2331,14 +2331,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].character1.sign = strdup(lineBuffer);
+				myai[i].character1.sign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2347,7 +2347,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2363,7 +2363,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2379,7 +2379,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2395,14 +2395,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].weaponsdamage1.item = strdup(lineBuffer);
+				myai[i].weaponsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2411,7 +2411,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2427,7 +2427,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2445,14 +2445,14 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
 						j++;
 					}
 
-					myai[i].weapontype.item[q] = strdup(lineBuffer);
+					myai[i].weapontype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 
 				for(int k = 0; k < lineamount; k++)
@@ -2462,7 +2462,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2478,7 +2478,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2494,7 +2494,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2510,7 +2510,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2528,7 +2528,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -2547,7 +2547,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -2566,7 +2566,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -2585,14 +2585,14 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
 						j++;
 					}
 
-					myai[i].shieldstype.item[q] = strdup(lineBuffer);
+					myai[i].shieldstype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 				}
 
 				for(int k = 0; k < lineamount; k++)
@@ -2602,14 +2602,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].shieldstype.equiped = strdup(lineBuffer);
+				myai[i].shieldstype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2618,7 +2618,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2634,7 +2634,7 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
@@ -2650,14 +2650,14 @@ beginning:
 
 				j = 0;
 
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 
 					j++;
 				}
 
-				myai[i].shieldsdamage1.item = strdup(lineBuffer);
+				myai[i].shieldsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int q = 0; q < alldefenseitemsenemies; q++)
 				{
@@ -2668,7 +2668,7 @@ beginning:
 	
 					j = 0;
 	
-					while((c = fgetc(fp1)) != '\n')
+					while((c = fgetc(fp1)) != '\n' && j < lineamount)
 					{
 						lineBuffer[j] = c;
 	
@@ -2685,14 +2685,14 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
 					j++;
 				}
 
-				myai[i].magic1.equiped = strdup(lineBuffer);
+				myai[i].magic1.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 
 				for(int k = 0; k < lineamount; k++)
 				{
@@ -2701,7 +2701,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2717,7 +2717,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2733,7 +2733,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2749,7 +2749,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2765,7 +2765,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2781,7 +2781,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2797,7 +2797,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2813,7 +2813,7 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
@@ -2829,14 +2829,14 @@ beginning:
 	
 				j = 0;
 	
-				while((c = fgetc(fp1)) != '\n')
+				while((c = fgetc(fp1)) != '\n' && j < lineamount)
 				{
 					lineBuffer[j] = c;
 	
 					j++;
 				}
 
-				myai[i].weapontype.equiped = strdup(lineBuffer);
+				myai[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
 			}
 
 			for(int k = 0; k < lineamount; k++)
@@ -2846,7 +2846,7 @@ beginning:
 
 			j = 0;
 
-			while((c = fgetc(fp1)) != '\n')
+			while((c = fgetc(fp1)) != '\n' && j < lineamount)
 			{
 				lineBuffer[j] = c;
 
@@ -2862,7 +2862,7 @@ beginning:
 
 			j = 0;
 
-			while((c = fgetc(fp1)) != '\n')
+			while((c = fgetc(fp1)) != '\n' && j < lineamount)
 			{
 				lineBuffer[j] = c;
 
@@ -2878,7 +2878,7 @@ beginning:
 
 			j = 0;
 
-			while((c = fgetc(fp1)) != '\n')
+			while((c = fgetc(fp1)) != '\n' && j < lineamount)
 			{
 				lineBuffer[j] = c;
 			
