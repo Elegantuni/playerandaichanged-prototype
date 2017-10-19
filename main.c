@@ -30,6 +30,10 @@
 #define allarmorenemies 5
 
 ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
+void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp);
+void writestring(char lineBuffer[], int lineamount1, char* element, FILE* fp);
+void loadnumber(int lineamount1, int* element, FILE* fp1);
+void loadstring(int lineamount1, char** element, FILE* fp1);
 
 typedef enum {
     STR2INT_SUCCESS,
@@ -961,1931 +965,288 @@ beginning:
 			
 			for(int i = 0; i < maxplayers; i++)
 			{
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].randomitem), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-
-				str2int(&(myplayer[i].shieldsrandomitem), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-
-				str2int(&(myplayer[i].character1.randomcharacter), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].magic1.randommagic), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myplayer[i].y), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-		
-				j = 0;
-		
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myplayer[i].x), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-		
-				j = 0;
-		
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myplayer[i].hitpoints), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].randomitem, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-		
-				j = 0;
-		
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myplayer[i].magicpoints), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].shieldsrandomitem, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].character1.randomcharacter, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].magic1.randommagic, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myplayer[i].y, fp1);
 
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].x, fp1);
 
-				str2int(&(myplayer[i].defensepoints), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].hitpoints, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].magicpoints, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].defensepoints, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadstring(lineamount, &myplayer[i].weapon, fp1);
 
-					j++;
-				}
+				loadstring(lineamount, &myplayer[i].shield, fp1);
 
-				myplayer[i].weapon = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadstring(lineamount, &myplayer[i].charactersign, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].prevy, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].prevx, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myplayer[i].magicattack, fp1);
 
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].count, fp1);
 
-				myplayer[i].shield = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadnumber(lineamount, &myplayer[i].replayer, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].playerturn, fp1);
 
-				j = 0;
+				loadstring(lineamount, &myplayer[i].weapontype.equiped, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadstring(lineamount, &myplayer[i].character1.character, fp1);
 
-					j++;
+				loadstring(lineamount, &myplayer[i].character1.sign, fp1);
 
-				}
+				loadnumber(lineamount, &myplayer[i].character1.hitpoints, fp1);
 
-				myplayer[i].charactersign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadnumber(lineamount, &myplayer[i].character1.defense, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].character1.attack, fp1);
 
-				j = 0;
+				loadstring(lineamount, &myplayer[i].weaponsdamage1.item, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myplayer[i].defensepoints, fp1);
 
-					j++;
-				}
-
-				str2int(&(myplayer[i].prevy), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].prevx), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].magicattack), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].count), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].replayer), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].playerturn), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myplayer[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				lineBuffer[j] = '\0';
-
-				myplayer[i].character1.character = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myplayer[i].character1.sign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].character1.hitpoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].character1.defense), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].character1.attack), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myplayer[i].weaponsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].defensepoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].hitpoints), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].hitpoints, fp1);
 
 				for(int q = 0; q < allitems; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myplayer[i].weapontype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myplayer[i].weapontype.item[q], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].weapontype.damage, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].weapontype.rangey, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myplayer[i].weapontype.rangex, fp1);
 
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.damage), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.rangey), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.rangex), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.numberitems), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].weapontype.numberitems, fp1);
 
 				for(int q = 0; q < allitems; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].weaponsdamage1.damage[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myplayer[i].weaponsdamage1.damage[q], fp1);
 				}
 
 				for(int q = 0; q < allitems; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].weaponsdamage1.rangey[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myplayer[i].weaponsdamage1.rangey[q], fp1);
 				}
 
 				for(int q = 0; q < allitems; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myplayer[i].weaponsdamage1.rangex[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myplayer[i].weaponsdamage1.rangex[q], fp1);
 				}
 
 				for(int q = 0; q < alldefenseitems; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myplayer[i].shieldstype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myplayer[i].shieldstype.item[q], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadstring(lineamount, &myplayer[i].shieldstype.equiped, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].shieldstype.damage, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myplayer[i].shieldstype.numberitems, fp1);
 
-					j++;
-				}
-
-				myplayer[i].shieldstype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].shieldstype.damage), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].shieldstype.numberitems), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myplayer[i].shieldsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadstring(lineamount, &myplayer[i].shieldsdamage1.item, fp1);
 
 				for(int q = 0; q < alldefenseitems; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-					
-					str2int(&(myplayer[i].shieldsdamage1.damage[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myplayer[i].shieldsdamage1.damage[q], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadstring(lineamount, &myplayer[i].magic1.equiped, fp1);
 
-				myplayer[i].magic1.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadnumber(lineamount, &myplayer[i].magic1.rangey, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].magic1.rangex, fp1);
 
-				str2int(&(myplayer[i].magic1.rangey), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].magic1.damage, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].magicattack, fp1);
 
-				str2int(&(myplayer[i].magic1.rangex), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].character1.magicresist, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].magicpoints, fp1);
 
-				str2int(&(myplayer[i].magic1.damage), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].magic1.cost, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].weapontype.numberitems, fp1);
 
-				str2int(&(myplayer[i].magicattack), lineBuffer, 10);
+				loadstring(lineamount, &myplayer[i].weapontype.equiped, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myplayer[i].magic1.magiccount, fp1);
 
-				str2int(&(myplayer[i].character1.magicresist), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myplayer[i].magicpoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myplayer[i].magic1.cost), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.numberitems), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				myplayer[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].magic1.magiccount), lineBuffer, 10);
-			
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].magic1.nextrandommagic), lineBuffer, 10);
-
+				loadnumber(lineamount, &myplayer[i].magic1.nextrandommagic, fp1);
+				
 				for(int l = 0; l < allmagics; l++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-
-					j = 0;
-
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-
-						j++;
-					}
-
-					myplayer[i].magic1.magicitems[l] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myplayer[i].magic1.magicitems[l], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].magic1.nextrandommagic2, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].weapontype.randomweapon, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myplayer[i].weapontype.nextrandomweapon, fp1);
 
-					j++;
-				}
-
-				str2int(&(myplayer[i].magic1.nextrandommagic2), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.randomweapon), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.nextrandomweapon), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].weapontype.nextrandomweapon2), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].weapontype.nextrandomweapon2, fp1);
 
 				for(int l = 0; l < allitems; l++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-
-					j = 0;
-
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-
-						j++;
-					}
-
-					myplayer[i].weapontype.item[l] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myplayer[i].weapontype.item[l], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myplayer[i].shieldstype.randomshield, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myplayer[i].shieldstype.nextrandomshield, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].shieldstype.randomshield), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].shieldstype.nextrandomshield), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myplayer[i].shieldstype.nextrandomshield2), lineBuffer, 10);
+				loadnumber(lineamount, &myplayer[i].shieldstype.nextrandomshield2, fp1);
 
 				for(int l = 0; l < alldefenseitems; l++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-
-					j = 0;
-
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-
-						j++;
-					}
-
-					myplayer[i].shieldstype.item[l] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myplayer[i].shieldstype.item[l], fp1);
 				}
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
 			{
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].randomitem), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-
-				str2int(&(myai[i].shieldsrandomitem), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-
-				str2int(&(myai[i].character1.randomcharacter), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].magic1.randommagic), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myai[i].y), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-		
-				j = 0;
-		
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myai[i].x), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-		
-				j = 0;
-		
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myai[i].hitpoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-		
-				j = 0;
-		
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-		
-					j++;
-				}
-		
-				str2int(&(myai[i].magicpoints), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].randomitem, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myai[i].shieldsrandomitem, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].character1.randomcharacter, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myai[i].magic1.randommagic, fp1);
 
-					j++;
-				}
+				loadnumber(lineamount, &myai[i].y, fp1);
 
-				str2int(&(myai[i].defensepoints), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].x, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myai[i].hitpoints, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].magicpoints, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myai[i].defensepoints, fp1);
 
-					j++;
-				}
+				loadstring(lineamount, &myai[i].weapon, fp1);
 
-				myai[i].weapon = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadstring(lineamount, &myai[i].shield, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadstring(lineamount, &myai[i].charactersign, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].prevy, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myai[i].prevx, fp1);
 
-					j++;
-				}
+				loadnumber(lineamount, &myai[i].magicattack, fp1);
 
-				myai[i].shield = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadnumber(lineamount, &myai[i].count, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myai[i].replayer, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].playerturn, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadstring(lineamount, &myai[i].weapontype.equiped, fp1);
 
-					j++;
-				}
-				
+				loadstring(lineamount, &myai[i].character1.character, fp1);
 
-				myai[i].charactersign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadstring(lineamount, &myai[i].character1.sign, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myai[i].character1.hitpoints, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].character1.defense, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myai[i].character1.attack, fp1);
 
-					j++;
-				}
+				loadstring(lineamount, &myai[i].weaponsdamage1.item, fp1);
 
-				str2int(&(myai[i].prevy), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].defensepoints, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].prevx), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].magicattack), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].count), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].replayer), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].playerturn), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myai[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myai[i].character1.character = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myai[i].character1.sign = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].character1.hitpoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].character1.defense), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].character1.attack), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myai[i].weaponsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].defensepoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].hitpoints), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].hitpoints, fp1);
 
 				for(int q = 0; q < allitemsenemies; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myai[i].weapontype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myai[i].weapontype.item[q], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadnumber(lineamount, &myai[i].weapontype.damage, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].weapontype.rangey, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myai[i].weapontype.rangex, fp1);
 
-					j++;
-				}
-
-				str2int(&(myai[i].weapontype.damage), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].weapontype.rangey), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].weapontype.rangex), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].weapontype.numberitems), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].weapontype.numberitems, fp1);
 
 				for(int q = 0; q < allitemsenemies; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].weaponsdamage1.damage[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myai[i].weaponsdamage1.damage[q], fp1);
 				}
 
 				for(int q = 0; q < allitemsenemies; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].weaponsdamage1.rangey[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myai[i].weaponsdamage1.rangey[q], fp1);
 				}
 
 				for(int q = 0; q < allitemsenemies; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					str2int(&(myai[i].weaponsdamage1.rangex[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myai[i].weaponsdamage1.rangex[q], fp1);
 				}
 
 				for(int q = 0; q < alldefenseitemsenemies; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-
-					myai[i].shieldstype.item[q] = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+					loadstring(lineamount, &myai[i].shieldstype.item[q], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
+				loadstring(lineamount, &myai[i].shieldstype.equiped, fp1);
 
-				j = 0;
+				loadnumber(lineamount, &myai[i].shieldstype.damage, fp1);
 
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
+				loadnumber(lineamount, &myai[i].shieldstype.numberitems, fp1);
 
-					j++;
-				}
-
-				myai[i].shieldstype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].shieldstype.damage), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				str2int(&(myai[i].shieldstype.numberitems), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-
-				j = 0;
-
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-
-					j++;
-				}
-
-				myai[i].shieldsdamage1.item = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadstring(lineamount, &myai[i].shieldsdamage1.item, fp1);
 
 				for(int q = 0; q < alldefenseitemsenemies; q++)
 				{
-					for(int k = 0; k < lineamount; k++)
-					{
-						lineBuffer[k] = '\0';
-					}
-	
-					j = 0;
-	
-					while((c = fgetc(fp1)) != '\n' && j < lineamount)
-					{
-						lineBuffer[j] = c;
-	
-						j++;
-					}
-				
-					str2int(&(myai[i].shieldsdamage1.damage[q]), lineBuffer, 10);
+					loadnumber(lineamount, &myai[i].shieldsdamage1.damage[q], fp1);
 				}
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadstring(lineamount, &myai[i].magic1.equiped, fp1);
 
-				myai[i].magic1.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadnumber(lineamount, &myai[i].magic1.rangey, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myai[i].magic1.rangex, fp1);
 
-				str2int(&(myai[i].magic1.rangey), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].magic1.damage, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myai[i].magicattack, fp1);
 
-				str2int(&(myai[i].magic1.rangex), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].character1.magicresist, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myai[i].magicpoints, fp1);
 
-				str2int(&(myai[i].magic1.damage), lineBuffer, 10);
+				loadnumber(lineamount, &myai[i].magic1.cost, fp1);
 
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
+				loadnumber(lineamount, &myai[i].weapontype.numberitems, fp1);
 
-				str2int(&(myai[i].magicattack), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myai[i].character1.magicresist), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myai[i].magicpoints), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myai[i].magic1.cost), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				str2int(&(myai[i].weapontype.numberitems), lineBuffer, 10);
-
-				for(int k = 0; k < lineamount; k++)
-				{
-					lineBuffer[k] = '\0';
-				}
-	
-				j = 0;
-	
-				while((c = fgetc(fp1)) != '\n' && j < lineamount)
-				{
-					lineBuffer[j] = c;
-	
-					j++;
-				}
-
-				myai[i].weapontype.equiped = strndup(lineBuffer, sizeof(lineBuffer) - 1);
+				loadstring(lineamount, &myai[i].weapontype.equiped, fp1);
 			}
 
-			for(int k = 0; k < lineamount; k++)
-			{
-				lineBuffer[k] = '\0';
-			}
+			loadnumber(lineamount, &roundssofar, fp1);
 
-			j = 0;
+			loadnumber(lineamount, &positiony, fp1);
 
-			while((c = fgetc(fp1)) != '\n' && j < lineamount)
-			{
-				lineBuffer[j] = c;
-
-				j++;
-			}
-
-			str2int(&(roundssofar), lineBuffer, 10);
-
-			for(int k = 0; k < lineamount; k++)
-			{
-				lineBuffer[k] = '\0';
-			}
-
-			j = 0;
-
-			while((c = fgetc(fp1)) != '\n' && j < lineamount)
-			{
-				lineBuffer[j] = c;
-
-				j++;
-			}
-
-			str2int(&(positiony), lineBuffer, 10);
-
-			for(int k = 0; k < lineamount; k++)
-			{
-				lineBuffer[k] = '\0';
-			}
-
-			j = 0;
-
-			while((c = fgetc(fp1)) != '\n' && j < lineamount)
-			{
-				lineBuffer[j] = c;
-			
-				j++;
-			}
-	
-			str2int(&(aiopponent), lineBuffer, 10);
+			loadnumber(lineamount, &aiopponent, fp1);
 
 			fclose(fp1);
 
@@ -2991,2161 +1352,289 @@ beginning:
 
 				for(int i = 0; i < maxplayers; i++)
 				{
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].randomitem, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].randomitem);
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldsrandomitem, fp1);
 
-					int k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldsrandomitem);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].character1.randomcharacter);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].character1.randomcharacter, fp1);
+					
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.randommagic, fp1);
 				
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].y, fp1);
+					
+					writenumber(lineBuffer, lineamount, myplayer[i].x, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.randommagic);
+					writenumber(lineBuffer, lineamount, myplayer[i].hitpoints, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].magicpoints, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].defensepoints, fp1);
 
-					lineBuffer[k] = '\n';
+					writestring(lineBuffer, lineamount, myplayer[i].weapon, fp1);
 
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writestring(lineBuffer, lineamount, myplayer[i].shield, fp1);
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writestring(lineBuffer, lineamount, myplayer[i].charactersign, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].y);
+					writenumber(lineBuffer, lineamount, myplayer[i].prevy, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].prevx, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].magicattack, fp1);
 
-					lineBuffer[k] = '\n';
+					writenumber(lineBuffer, lineamount, myplayer[i].count, fp1);
 
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].replayer, fp1);
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].playerturn, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].x);
+					writestring(lineBuffer, lineamount, myplayer[i].weapontype.equiped, fp1);
 
-					k = 0;
+					writestring(lineBuffer, lineamount, myplayer[i].character1.character, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
+					writestring(lineBuffer, lineamount, myplayer[i].character1.sign, fp1);
 
-					lineBuffer[k] = '\n';
+					writenumber(lineBuffer, lineamount, myplayer[i].character1.hitpoints, fp1);
 
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].character1.defense, fp1);
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].character1.attack, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].hitpoints);
+					writestring(lineBuffer, lineamount, myplayer[i].weaponsdamage1.item, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].defensepoints, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magicpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].defensepoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].weapon, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].shield, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].charactersign, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].prevy);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].prevx);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magicattack);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].count);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].replayer);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].playerturn);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].weapontype.equiped, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].character1.character, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].character1.sign, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].character1.hitpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].character1.defense);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].character1.attack);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].weaponsdamage1.item, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].defensepoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].hitpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].hitpoints, fp1);
 
 					for(int q = 0; q < allitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myplayer[i].weapontype.item[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writestring(lineBuffer, lineamount, myplayer[i].weapontype.item[q], fp1);
+						
 					}
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.damage, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.damage);
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.rangey, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.rangex, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.rangey);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.rangex);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.numberitems);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.numberitems, fp1);
 
 					for(int q = 0; q < allitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myplayer[i].weaponsdamage1.damage[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writenumber(lineBuffer, lineamount, myplayer[i].weaponsdamage1.damage[q], fp1);
 					}
 
 					for(int q = 0; q < allitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myplayer[i].weaponsdamage1.rangey[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writenumber(lineBuffer, lineamount, myplayer[i].weaponsdamage1.rangey[q], fp1);
 					}
 
 					for(int q = 0; q < allitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myplayer[i].weaponsdamage1.rangex[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writenumber(lineBuffer, lineamount, myplayer[i].weaponsdamage1.rangex[q], fp1);
 					}
 
 					for(int q = 0; q < alldefenseitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myplayer[i].shieldstype.item[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writestring(lineBuffer, lineamount, myplayer[i].shieldstype.item[q], fp1);
 					}
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writestring(lineBuffer, lineamount, myplayer[i].shieldstype.equiped, fp1);
 
-					strncpy(lineBuffer, myplayer[i].shieldstype.equiped, sizeof(lineBuffer) - 1);
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.damage, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.numberitems, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.damage);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.numberitems);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].shieldsdamage1.item, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writestring(lineBuffer, lineamount, myplayer[i].shieldsdamage1.item, fp1);
 
 					for(int q = 0; q < alldefenseitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldsdamage1.damage[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writenumber(lineBuffer, lineamount, myplayer[i].shieldsdamage1.damage[q], fp1);
 					}
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writestring(lineBuffer, lineamount, myplayer[i].magic1.equiped, fp1);
 
-					strncpy(lineBuffer, myplayer[i].magic1.equiped, sizeof(lineBuffer) - 1);
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.rangey, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.rangex, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.damage, fp1);
 
-					lineBuffer[k] = '\n';
+					writenumber(lineBuffer, lineamount, myplayer[i].magicattack, fp1);
 
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].character1.magicresist, fp1);
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].magicpoints, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.rangey);
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.cost, fp1);
 
-					k = 0;
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.numberitems, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
+					writestring(lineBuffer, lineamount, myplayer[i].weapontype.equiped, fp1);
 
-					lineBuffer[k] = '\n';
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.magiccount, fp1);
 
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.rangex);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.damage);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magicattack);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].character1.magicresist);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magicpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.cost);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.numberitems);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myplayer[i].weapontype.equiped, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.magiccount);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-				
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-	
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.nextrandommagic);
-	
-					k = 0;
-	
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-	
-					lineBuffer[k] = '\n';
-	
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.nextrandommagic, fp1);
 					
 					for(int q = 0; q < allmagics; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myplayer[i].magic1.magicitems[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writestring(lineBuffer, lineamount, myplayer[i].magic1.magicitems[q], fp1);
 					}
 
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].magic1.nextrandommagic2, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].magic1.nextrandommagic2);
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.randomweapon, fp1);
 
-					k =  0;
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.nextrandomweapon, fp1);
 
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.randomweapon);
-
-					k =  0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.nextrandomweapon);
-
-					k =  0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].weapontype.nextrandomweapon2);
-
-					k =  0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.nextrandomweapon2, fp1);
 
 					for(int q = 0; q < allitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myplayer[i].weapontype.item[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writestring(lineBuffer, lineamount, myplayer[i].weapontype.item[q], fp1);
 					}
 					
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.randomshield, fp1);
 
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.randomshield);
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.nextrandomshield, fp1);
 
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.nextrandomshield);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myplayer[i].shieldstype.nextrandomshield2);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.nextrandomshield2, fp1);
 
 					for(int q = 0; q < alldefenseitems; q++)
 					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myplayer[i].shieldstype.item[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
+						writestring(lineBuffer, lineamount, myplayer[i].shieldstype.item[q], fp1);
 					}
 				}
 
 				for(int i = 0; i < maxenemies; i++)
 				{
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].randomitem);
-
-					int k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].shieldsrandomitem);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].character1.randomcharacter);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-				
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magic1.randommagic);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].y);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].x);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].hitpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magicpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].defensepoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].weapon, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].shield, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].charactersign, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].prevy);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].prevx);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magicattack);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].count);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].replayer);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].playerturn);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].weapontype.equiped, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].character1.character, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].character1.sign, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].character1.hitpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].character1.defense);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].character1.attack);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].weaponsdamage1.item, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].defensepoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].hitpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int q = 0; q < allitemsenemies; q++)
-					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myai[i].weapontype.item[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
-					}
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].weapontype.damage);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].weapontype.rangey);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].weapontype.rangex);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].weapontype.numberitems);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int q = 0; q < allitemsenemies; q++)
-					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myai[i].weaponsdamage1.damage[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
-					}
-
-					for(int q = 0; q < allitemsenemies; q++)
-					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myai[i].weaponsdamage1.rangey[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
-					}
-
-					for(int q = 0; q < allitemsenemies; q++)
-					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myai[i].weaponsdamage1.rangex[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
-					}
-
-					for(int q = 0; q < alldefenseitemsenemies; q++)
-					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						strncpy(lineBuffer, myai[i].shieldstype.item[q], sizeof(lineBuffer) - 1);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
-					}
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].shieldstype.equiped, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].shieldstype.damage);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].shieldstype.numberitems);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].shieldsdamage1.item, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int q = 0; q < alldefenseitemsenemies; q++)
-					{
-						for(int j = 0; j < lineamount; j++)
-						{
-							lineBuffer[j] = '\0';
-						}
-	
-						snprintf(lineBuffer, lineamount, "%d", myai[i].shieldsdamage1.damage[q]);
-	
-						k = 0;
-	
-						while(lineBuffer[k] != '\0')
-						{
-							k++;
-						}
-	
-						lineBuffer[k] = '\n';
-	
-						fwrite(lineBuffer, 1, k+1, fp1);
-					}
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].magic1.equiped, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magic1.rangey);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magic1.rangex);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magic1.damage);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magicattack);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].character1.magicresist);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magicpoints);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].magic1.cost);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					snprintf(lineBuffer, lineamount, "%d", myai[i].weapontype.numberitems);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
-
-					for(int j = 0; j < lineamount; j++)
-					{
-						lineBuffer[j] = '\0';
-					}
-
-					strncpy(lineBuffer, myai[i].weapontype.equiped, sizeof(lineBuffer) - 1);
-
-					k = 0;
-
-					while(lineBuffer[k] != '\0')
-					{
-						k++;
-					}
-
-					lineBuffer[k] = '\n';
-
-					fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myai[i].randomitem, fp1);
 					
-				}
+					writenumber(lineBuffer, lineamount, myai[i].shieldsrandomitem, fp1);
 
-				for(int j = 0; j < lineamount; j++)
-				{
-					lineBuffer[j] = '\0';
-				}
+					writenumber(lineBuffer, lineamount, myai[i].character1.randomcharacter, fp1);
 
-				snprintf(lineBuffer, lineamount, "%d", roundssofar);
-
-				int k = 0;
-
-				while(lineBuffer[k] != '\0')
-				{
-					k++;
-				}
-
-				lineBuffer[k] = '\n';
-
-				fwrite(lineBuffer, 1, k+1, fp1);
+					writenumber(lineBuffer, lineamount, myai[i].magic1.randommagic, fp1);
 				
-				for(int j = 0; j < lineamount; j++)
-				{
-					lineBuffer[j] = '\0';
+					writenumber(lineBuffer, lineamount, myai[i].y, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].x, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].hitpoints, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magicpoints, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].defensepoints, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].weapon, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].shield, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].charactersign, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].prevy, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].prevx, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magicattack, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].count, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].replayer, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].playerturn, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].weapontype.equiped, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].character1.character, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].character1.sign, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].character1.hitpoints, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].character1.defense, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].character1.attack, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].weaponsdamage1.item, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].defensepoints, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].hitpoints, fp1);
+
+					for(int q = 0; q < allitemsenemies; q++)
+					{
+						writestring(lineBuffer, lineamount, myai[i].weapontype.item[q], fp1);
+					}
+					
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.damage, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.rangey, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.rangex, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.numberitems, fp1);
+
+					for(int q = 0; q < allitemsenemies; q++)
+					{
+						writenumber(lineBuffer, lineamount, myai[i].weaponsdamage1.damage[q], fp1);
+					}
+
+					for(int q = 0; q < allitemsenemies; q++)
+					{
+						writenumber(lineBuffer, lineamount, myai[i].weaponsdamage1.rangey[q], fp1);
+					}
+
+					for(int q = 0; q < allitemsenemies; q++)
+					{
+						writenumber(lineBuffer, lineamount, myai[i].weaponsdamage1.rangex[q], fp1);
+					}
+
+					for(int q = 0; q < alldefenseitemsenemies; q++)
+					{
+						writestring(lineBuffer, lineamount, myai[i].shieldstype.item[q], fp1);
+					}
+
+					writestring(lineBuffer, lineamount, myai[i].shieldstype.equiped, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].shieldstype.damage, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].shieldstype.numberitems, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].shieldsdamage1.item, fp1);
+
+					for(int q = 0; q < alldefenseitemsenemies; q++)
+					{
+						writenumber(lineBuffer, lineamount, myai[i].shieldsdamage1.damage[q], fp1);
+					}
+
+					writestring(lineBuffer, lineamount, myai[i].magic1.equiped, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magic1.rangey, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magic1.rangex, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magic1.damage, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magicattack, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].character1.magicresist, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magicpoints, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].magic1.cost, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.numberitems, fp1);
+
+					writestring(lineBuffer, lineamount, myai[i].weapontype.equiped, fp1);
 				}
 
-				snprintf(lineBuffer, lineamount, "%d", positiony);
+				writenumber(lineBuffer, lineamount, roundssofar, fp1);
 
-				k = 0;
-
-				while(lineBuffer[k] != '\0')
-				{
-					k++;
-				}
-
-				lineBuffer[k] = '\n';
-
-				fwrite(lineBuffer, 1, k+1, fp1);
-
-				for(int j = 0; j < lineamount; j++)
-				{
-					lineBuffer[j] = '\0';
-				}
-
-				snprintf(lineBuffer, lineamount, "%d", aiopponent);
-
-				k = 0;
-
-				while(lineBuffer[k] != '\0')
-				{
-					k++;
-				}
-
-				lineBuffer[k] = '\n';
-
-				fwrite(lineBuffer, 1, k+1, fp1);
+				writenumber(lineBuffer, lineamount, positiony, fp1);
+				
+				writenumber(lineBuffer, lineamount, aiopponent, fp1);
 
 				fclose(fp1);
 
@@ -6114,4 +2603,94 @@ str2int_errno str2int(int *out, char *s, int base) {
         return STR2INT_INCONVERTIBLE;
     *out = l;
     return STR2INT_SUCCESS;
+}
+
+void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp)
+{
+	for(int j = 0; j < lineamount1; j++)
+	{
+		lineBuffer[j] = '\0';
+	}
+
+	snprintf(lineBuffer, lineamount1, "%d", element);
+
+	int k = 0;
+
+	while(lineBuffer[k] != '\0')
+	{
+		k++;
+	}
+
+	lineBuffer[k] = '\n';
+
+	fwrite(lineBuffer, 1, k+1, fp);
+}
+
+void writestring(char lineBuffer[], int lineamount1, char* element, FILE *fp)
+{
+	for(int j = 0; j < lineamount1; j++)
+	{
+		lineBuffer[j] = '\0';
+	}
+
+	strncpy(lineBuffer, element, lineamount1 - 1);
+
+	int k = 0;
+
+	while(lineBuffer[k] != '\0')
+	{
+		k++;
+	}
+
+	lineBuffer[k] = '\n';
+
+	fwrite(lineBuffer, 1, k+1, fp);
+}
+
+void loadnumber(int lineamount1, int* element, FILE* fp1)
+{
+	int j;
+	int c;
+	
+	char lineBuffer[lineamount1];
+
+	for(int k = 0; k < lineamount1; k++)
+	{
+		lineBuffer[k] = '\0';
+	}
+
+	j = 0;
+
+	while((c = fgetc(fp1)) != '\n' && j < lineamount1)
+	{
+		lineBuffer[j] = c;
+
+		j++;
+	}
+
+	str2int(&(*element), lineBuffer, 10);
+}
+
+void loadstring(int lineamount1, char** element, FILE* fp1)
+{
+	int j;
+	int c;
+
+	char lineBuffer[lineamount1];
+
+	for(int k = 0; k < lineamount1; k++)
+	{
+		lineBuffer[k] = '\0';
+	}
+
+	j = 0;
+
+	while((c = fgetc(fp1)) != '\n' && j < lineamount1)
+	{
+		lineBuffer[j] = c;
+
+		j++;
+	}
+
+	element[0] = strndup(lineBuffer, lineamount - 1);
 }
