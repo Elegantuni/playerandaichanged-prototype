@@ -947,6 +947,14 @@ beginning:
 			myai[i].magic1.cost = aimagiccost[myai[i].magic1.randommagic];
 
 			myai[i].weapontype.numberitems = allitemsenemies;
+
+			myai[i].armor1.equiped = aiarmor[myai[i].armor1.randomarmor];
+
+			myai[i].armor1.protection = aiarmorpts[myai[i].armor1.randomarmor];
+
+			myai[i].armor1.rangey = aiarmordistancey[myai[i].armor1.randomarmor];
+
+			myai[i].armor1.rangex = aiarmordistancex[myai[i].armor1.randomarmor];
 		}
 
 		for(int i = 0; i < maxenemies; i++)
@@ -2306,19 +2314,22 @@ beginning:
 				{
 					for(int j = 0; j < maxplayers; j++)
 					{
-						if(t != -1 )
+						if(t != -1)
 						{
 							p = t;
 
 							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 							{
-								if(abs(myplayer[j].y - myai[p].y) <= myplayer[j].armor1.rangey)
+								if(j == i)
 								{
-									myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist + myplayer[j].armor1.protection;
-								}
-								else
-								{
-									myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist;
+									if((abs(myplayer[j].y - myai[p].y) <= myai[p].armor1.rangey) && (abs(myplayer[j].x - myai[p].x) <= myai[p].armor1.rangex))
+									{
+										myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist + myplayer[j].armor1.protection;
+									}
+									else
+									{
+										myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist;
+									}
 								}
 
 								if(i == j)
@@ -2361,26 +2372,32 @@ beginning:
 
 					for(int j = 0; j < maxplayers; j++)
 					{
-						if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+						if(t != -1)
 						{
+							p = t;
+
 							if(j == i)
 							{
-								myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
+								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+								{
+									myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
 						
-							}	myplayer[j].magicpoints = myplayer[j].magicpoints - myplayer[j].magic1.cost;
+									myplayer[j].magicpoints = myplayer[j].magicpoints - myplayer[j].magic1.cost;
 					
-							for(int k = 0; k < maxenemies; k++)
-							{
-								if(myai[k].hitpoints > 0)
-								{
-									break;
-								}
+									for(int k = 0; k < maxenemies; k++)
+									{
+										if(myai[k].hitpoints > 0)
+										{
+											break;
+										}
 						
-								if(k == maxenemies - 1)
-								{
-									winner = "player";
+										if(k == maxenemies - 1)
+										{
+											winner = "player";
 						
-									goto ended;
+											goto ended;
+										}
+									}
 								}
 							}
 						}
@@ -2397,42 +2414,48 @@ beginning:
 			{
 				for(int j = 0; j < maxplayers; j++)
 				{
-					if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
-					{	
-						myai[p].hitpoints = myai[p].hitpoints - myplayer[j].weapontype.damage - myplayer[j].character1.attack + myai[p].shieldstype.damage + myai[p].defensepoints;
+					if(j == i)
+					{
+						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						{	
+							myai[p].hitpoints = myai[p].hitpoints - myplayer[j].weapontype.damage - myplayer[j].character1.attack + myai[p].shieldstype.damage + myai[p].defensepoints;
 					
-						for(int k = 0; k < maxenemies; k++)
-						{
-							if(myai[k].hitpoints > 0)
+							for(int k = 0; k < maxenemies; k++)
 							{
-								break;
-							}
+								if(myai[k].hitpoints > 0)
+								{
+									break;
+								}
 						
-							if(k == maxenemies - 1)
-							{
-								winner = "player";
+								if(k == maxenemies - 1)
+								{
+									winner = "player";
 				
-								goto ended;
+									goto ended;
+								}
 							}
 						}
 					}
 
-					if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
-					{	
-						myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].weapontype.damage - myai[p].character1.attack + myplayer[j].shieldstype.damage + myplayer[j].defensepoints;
+					if(j == i)
+					{
+						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						{	
+							myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].weapontype.damage - myai[p].character1.attack + myplayer[j].shieldstype.damage + myplayer[j].defensepoints;
 
-						for(int k = 0; k < maxplayers; k++)
-						{
-							if(myplayer[k].hitpoints > 0)
+							for(int k = 0; k < maxplayers; k++)
 							{
-								break;
-							}
+								if(myplayer[k].hitpoints > 0)
+								{
+									break;
+								}
 
-							if(k == maxenemies - 1)
-							{
-								winner = "ai";
+								if(k == maxenemies - 1)
+								{
+									winner = "ai";
 
-								goto ended;
+									goto ended;
+								}
 							}
 						}
 					}
