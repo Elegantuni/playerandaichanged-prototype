@@ -1152,6 +1152,36 @@ beginning:
 				{
 					loadstring(lineamount, &myplayer[i].shieldstype.item[l], fp1);
 				}
+
+				loadnumber(lineamount, &myplayer[i].armor1.randomarmor, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].armor1.nextrandomarmor, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].armor1.nextrandomarmor2, fp1);
+				
+				loadstring(lineamount, &myplayer[i].armor1.equiped, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].armor1.rangey, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].armor1.rangex, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].armor1.protection, fp1);
+				
+				for(int q = 0; q < allarmor; q++)
+				{
+					loadstring(lineamount, &myplayer[i].armor1.item[q], fp1);
+				}
+				
+				for(int q = 0; q < allarmor; q++)
+				{
+					loadnumber(lineamount, &myplayer[i].armor1.protections[q], fp1);
+				}
+				
+				loadnumber(lineamount, &myplayer[i].weapontype.weaponcount, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].shieldstype.shieldcount, fp1);
+				
+				loadnumber(lineamount, &myplayer[i].armor1.armorcount, fp1);
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
@@ -1540,6 +1570,36 @@ beginning:
 					{
 						writestring(lineBuffer, lineamount, myplayer[i].shieldstype.item[q], fp1);
 					}
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.randomarmor, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.nextrandomarmor, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.nextrandomarmor2, fp1);
+
+					writestring(lineBuffer, lineamount, myplayer[i].armor1.equiped, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.rangey, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.rangex, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.protection, fp1);
+
+					for(int q = 0; q < allarmor; q++)
+					{
+						writestring(lineBuffer, lineamount, myplayer[i].armor1.item[q], fp1);
+					}
+
+					for(int q = 0; q < allarmor; q++)
+					{
+						writenumber(lineBuffer, lineamount, myplayer[i].armor1.protections[q], fp1);
+					}
+
+					writenumber(lineBuffer, lineamount, myplayer[i].weapontype.weaponcount, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.shieldcount, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].armor1.armorcount, fp1);
 				}
 
 				for(int i = 0; i < maxenemies; i++)
@@ -1687,10 +1747,10 @@ beginning:
 				mvprintw(2, 0, "Press w to move up");
 				mvprintw(3, 0, "Press s to move down");
 				mvprintw(4, 0, "Press m to use magic");
-				mvprintw(5, 0, "Press M to equip different magic, weapon, and shield");
+				mvprintw(5, 0, "Press M to equip different magic, weapon, shield, and armor");
 				mvprintw(6, 0, "Press n to cycle through player characters forward");
 				mvprintw(7, 0, "Press p to cycle through player characters backward");
-				mvprintw(8, 0, "Press c to see what magics, weapons, and shields you have");
+				mvprintw(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
 				mvprintw(9, 0, "Press h to display this during game to see this screen");
 				mvprintw(10, 0, "The H is a player human and the h is a ai human");
 				mvprintw(11, 0, "The O is a player orc and the o is a ai orc");
