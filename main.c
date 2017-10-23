@@ -182,7 +182,7 @@ struct armor
 	int randomarmor;
 	int nextrandomarmor;
 	int nextrandomarmor2;
-        int armorcount;
+    int armorcount;
 };
 
 struct armorenemies
@@ -196,7 +196,7 @@ struct armorenemies
 	int randomarmor;
 	int nextrandomarmor;
 	int nextrandomarmor2;
-        int armorcount;
+    int armorcount;
 };
 
 struct player
@@ -266,7 +266,7 @@ int main(int argc, char *argv[])
 	int terminalend = maxenemies + maxplayers + 50;
 
 	int hitpointsy = 24;
-	int hitpointsx = 95;
+	int hitpointsx = 107;
 	int positiony = 0;
 	int aiopponent = 0;
 
@@ -811,6 +811,41 @@ beginning:
 			myplayer[i].armor1.item[myplayer[i].armor1.armorcount] = playerarmor[myplayer[i].armor1.randomarmor];
 
 			myplayer[i].armor1.armorcount++;
+
+			myplayer[i].armor1.nextrandomarmor = myplayer[i].armor1.randomarmor;
+
+			while(myplayer[i].armor1.nextrandomarmor == myplayer[i].armor1.randomarmor)
+			{
+				myplayer[i].armor1.nextrandomarmor = rand() % allarmor;
+			}
+
+			myplayer[i].armor1.item[myplayer[i].armor1.armorcount] = playerarmor[myplayer[i].armor1.nextrandomarmor];
+
+			myplayer[i].armor1.armorcount++;
+
+			myplayer[i].armor1.nextrandomarmor2 = myplayer[i].armor1.randomarmor;
+
+			while(myplayer[i].armor1.nextrandomarmor2 == myplayer[i].armor1.nextrandomarmor || myplayer[i].armor1.nextrandomarmor2 == myplayer[i].armor1.randomarmor)
+			{
+				myplayer[i].armor1.nextrandomarmor2 = rand() % allarmor;
+			}
+
+			myplayer[i].armor1.item[myplayer[i].armor1.armorcount] = playerarmor[myplayer[i].armor1.nextrandomarmor2];
+
+			myplayer[i].armor1.armorcount++;
+
+			for(int i = 0; i < allarmor; i++)
+			{
+				myplayer[i].armor1.protections[i] = playerarmorpts[i];
+			}
+
+			myplayer[i].armor1.rangey = playerarmordistancey[myplayer[i].armor1.randomarmor];
+
+			myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.randomarmor];
+
+			myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.randomarmor];
+
+			myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -1318,7 +1353,7 @@ beginning:
 		{
 			if((hitpointspos1.y + i) > positiony)
 			{
-				mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+				mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d ", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped, myplayer[i].armor1.equiped, myplayer[i].armor1.protection);
 		
 			}
 		}
@@ -1867,7 +1902,7 @@ beginning:
 						list++;
 					}
 
-					if(list > 2)
+					if(list > 3)
 					{
 						list = 0;
 					}
@@ -1895,6 +1930,15 @@ beginning:
 						while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
 						{
 							mvprintw(l, 0, "Shield item %d is %s", l + 1, myplayer[i].shieldstype.item[l]);
+							l++;
+						}
+					}
+
+					if(list == 3)
+					{
+						while(strcmp(myplayer[i].armor1.item[l], "Empty") != 0)
+						{
+							mvprintw(l, 0, "Armor item %d is %s", l + 1, myplayer[i].armor1.item[l]);
 							l++;
 						}
 					}
@@ -1985,13 +2029,18 @@ beginning:
 						{
 							u = myplayer[i].shieldstype.shieldcount - 1;
 						}
+
+						if(u > (myplayer[i].armor1.armorcount - 1) && list == 3)
+						{
+							u = myplayer[i].armor1.armorcount - 1;
+						}
 					}
 
 					if(gotcharacter == 'd')
 					{
 						list++;
 
-						if(list > 2)
+						if(list > 3)
 						{
 							list = 0;
 						}
@@ -2029,6 +2078,17 @@ beginning:
 							while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
 							{
 								mvprintw(l, 0, "Shield item %d is %s.\n", l + 1, myplayer[i].shieldstype.item[l], l+1);
+								l++;
+							}
+						}
+
+						if(list == 3)
+						{
+							l = 0;
+
+							while(strcmp(myplayer[i].armor1.item[l], "Empty") != 0)
+							{
+								mvprintw(l, 0, "Armor item %d is %s.\n", l + 1, myplayer[i].armor1.item[l], l+1);
 								l++;
 							}
 						}
@@ -2132,6 +2192,33 @@ beginning:
 					myplayer[i].shield = myplayer[i].shieldstype.equiped;
 				}
 
+				if(list == 3)
+				{
+					if(u == 0)
+					{
+						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
+						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.randomarmor];
+						myplayer[i].armor1.rangey = playerarmordistancey[myplayer[i].armor1.randomarmor];
+						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.randomarmor];
+					}
+
+					if(u == 1)
+					{
+						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.nextrandomarmor];
+						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.nextrandomarmor];
+						myplayer[i].armor1.rangey = playerarmordistancey[myplayer[i].armor1.nextrandomarmor];
+						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.nextrandomarmor];
+					}
+
+					if(u == 2)
+					{
+						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.nextrandomarmor2];
+						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.nextrandomarmor2];
+						myplayer[i].armor1.rangey = playerarmordistancey[myplayer[i].armor1.nextrandomarmor2];
+						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.nextrandomarmor2];
+					}
+				}
+
 				l = 0;
 				u = 0;
 
@@ -2165,7 +2252,14 @@ beginning:
 
 							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 							{
-								myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist;
+								if(abs(myplayer[j].y - myai[p].y) <= myplayer[j].armor1.rangey)
+								{
+									myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist + myplayer[j].armor1.protection;
+								}
+								else
+								{
+									myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].magicattack + myplayer[j].character1.magicresist;
+								}
 
 								if(i == j)
 								{
@@ -2452,7 +2546,7 @@ beginning:
 			{
 				if((hitpointspos1.y + i) > positiony)
 				{
-					mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped);
+					mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped, myplayer[i].armor1.equiped, myplayer[i].armor1.protection);
 			
 				}
 			}
