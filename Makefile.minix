@@ -1,5 +1,0 @@
-playerandai1:
-	$(CC) -o playerandai1 main.c -I/usr/pkg/include/ -I/usr/pkg/include/ncurses -L/usr/pkg/lib -lncurses
-  
-clean:
-	rm -f playerandai1
