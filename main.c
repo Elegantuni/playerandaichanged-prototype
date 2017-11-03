@@ -1613,7 +1613,7 @@ beginning:
 		int i = 0;
 	
 		while((ch = getch()) != 'q')
-		{	
+		{
 			if(ch == 'S')
 			{
 				clear();
@@ -2665,16 +2665,75 @@ beginning:
 			if(ch == 'm')
 			{
 				int t = -1;
+
+				int aimagicdamage2 = -1;
+				int themagicchoose = -1;
 				
 				for(int j = 0; j < maxenemies; j++)
 				{
+					myai[j].magic1.equiped = aimagicitems[myai[j].magic1.randommagic];
+					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.randommagic];
+					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.randommagic];
+					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.randommagic];
+
 					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
 					{
-						t = j;
-						break;
+						if(myai[j].magic1.damage > aimagicdamage2)
+						{
+							aimagicdamage2 = aimagicdamage[myai[j].magic1.randommagic];
+							themagicchoose = myai[j].magic1.randommagic;
+							t = j;		
+						}
 					}
-				
+
+					myai[j].magic1.equiped = aimagicitems[myai[j].magic1.nextrandommagic];
+					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.nextrandommagic];
+					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.nextrandommagic];
+					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic];
+
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
+					{
+						if(myai[j].magic1.damage > aimagicdamage2)
+						{
+							aimagicdamage2 = aimagicdamage[myai[j].magic1.nextrandommagic];
+							themagicchoose = myai[j].magic1.nextrandommagic;
+							t = j;		
+						}
+					}
+
+					myai[j].magic1.equiped = aimagicitems[myai[j].magic1.nextrandommagic2];
+					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.nextrandommagic2];
+					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.nextrandommagic2];
+					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic2];
+
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
+					{
+						if(myai[j].magic1.damage > aimagicdamage2)
+						{
+							aimagicdamage2 = aimagicdamage[myai[j].magic1.nextrandommagic2];
+							themagicchoose = myai[j].magic1.nextrandommagic2;
+							t = j;	
+						}
+					}
+
+					if(themagicchoose != -1)
+					{
+						myai[j].magic1.equiped = aimagicitems[themagicchoose];
+						myai[j].magic1.rangey = aimagicdistance[themagicchoose];
+						myai[j].magic1.rangex = aimagicdistance[themagicchoose];
+						myai[j].magic1.damage = aimagicdamage[themagicchoose];
+					}
+					else
+					{
+						myai[j].magic1.equiped = aimagicitems[myai[j].magic1.randommagic];
+						myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.randommagic];
+						myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.randommagic];
+						myai[j].magic1.damage = aimagicdamage[myai[j].magic1.randommagic];
+					}
 				}
+
+				themagicchoose = -1;
+
 				for(int p = 0; p < maxenemies; p++)
 				{
 					for(int j = 0; j < maxplayers; j++)
@@ -2779,6 +2838,66 @@ beginning:
 			{
 				for(int j = 0; j < maxplayers; j++)
 				{
+					int aiequipedweapon = -1;
+					int thechoose = -1;
+	
+					myai[p].weapontype.equiped = itemenemies[myai[p].weapontype.randomweapon];
+					myai[p].weapontype.rangey = rangeyenemies[myai[p].weapontype.randomweapon];
+					myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.randomweapon];
+					myai[p].weapontype.damage = damageenemies[myai[p].weapontype.randomweapon];
+	
+					if( (positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+					{
+						if(myai[p].weapontype.damage > aiequipedweapon)
+						{
+							aiequipedweapon = myai[p].weapontype.damage;
+							thechoose = myai[p].weapontype.randomweapon;
+						}
+					}
+	
+					myai[p].weapontype.equiped = itemenemies[myai[p].weapontype.nextrandomweapon];
+					myai[p].weapontype.rangey = rangeyenemies[myai[p].weapontype.nextrandomweapon];
+					myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon];
+					myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon];
+	
+					if( (positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+					{
+						if(myai[i].weapontype.damage > aiequipedweapon)
+						{
+							aiequipedweapon = myai[p].weapontype.damage;
+							thechoose = myai[p].weapontype.nextrandomweapon;
+						}
+					}
+	
+					myai[p].weapontype.equiped = itemenemies[myai[p].weapontype.nextrandomweapon2];
+					myai[p].weapontype.rangey = rangeyenemies[myai[p].weapontype.nextrandomweapon2];
+					myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon2];
+					myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon2];
+	
+					if( (positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+					{
+						if(myai[i].weapontype.damage > aiequipedweapon)
+						{
+							aiequipedweapon = myai[p].weapontype.damage;
+							thechoose = myai[p].weapontype.nextrandomweapon2;
+						}
+					}
+	
+					if(thechoose != -1)
+					{
+						myai[p].weapontype.equiped = itemenemies[thechoose];
+						myai[p].weapontype.rangey = rangeyenemies[thechoose];
+						myai[p].weapontype.rangex = rangexenemies[thechoose];
+						myai[p].weapontype.damage = damageenemies[thechoose];
+					}
+					else
+					{
+						myai[p].weapontype.equiped = itemenemies[myai[p].weapontype.randomweapon];
+						myai[p].weapontype.rangey = rangeyenemies[myai[p].weapontype.randomweapon];
+						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.randomweapon];
+						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.randomweapon];
+					}
+
 					if(j == i)
 					{
 						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
@@ -2824,6 +2943,8 @@ beginning:
 							}
 						}
 					}
+
+					thechoose = -1;
 				}
 			}
 
