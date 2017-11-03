@@ -870,6 +870,26 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
+			for(int j = 0; j < allmagicsenemies; j++)
+			{
+				myai[i].magic1.magicitems[j] = "Empty";
+			}
+
+			for(int j = 0; j < allitemsenemies; j++)
+			{
+				myai[i].weapontype.item[j] = "Empty";
+			}
+
+			for(int j = 0; j < alldefenseitemsenemies; j++)
+			{
+				myai[i].shieldstype.item[j] = "Empty";
+			}
+
+			for(int j = 0; j < allarmorenemies; j++)
+			{
+				myai[i].armor1.item[j] = "Empty";
+			}
+
 			myai[i].y = 10;
 			myai[i].x = 70;
 			myai[i].hitpoints = 500;
@@ -898,11 +918,6 @@ beginning:
 			myai[i].defensepoints = myai[i].character1.defense;
 			myai[i].hitpoints = myai[i].character1.hitpoints;
 
-			for(int j = 0; j < allitemsenemies; j++)
-			{
-				myai[i].weapontype.item[j] = itemenemies[j];
-			}
-
 			myai[i].weapontype.damage = damageenemies[myai[i].randomitem];
 			myai[i].weapontype.rangey = rangeyenemies[myai[i].randomitem];
 			myai[i].weapontype.rangex = rangexenemies[myai[i].randomitem];
@@ -914,11 +929,6 @@ beginning:
 				myai[i].weaponsdamage1.rangex[j] = rangexenemies[j];
 			}
 
-			for(int j = 0; j < alldefenseitemsenemies; j++)
-			{
-				myai[i].shieldstype.item[j] = itemdamageenemies[j];
-			}
-
 			myai[i].shieldstype.equiped = itemdamageenemies[myai[i].shieldsrandomitem];
 
 			myai[i].shield = myai[i].shieldstype.equiped;
@@ -928,10 +938,7 @@ beginning:
 
 			myai[i].shieldsdamage1.item = itemdamageenemies[myai[i].shieldsrandomitem];
 
-			for(int j = 0; j < alldefenseitemsenemies; j++)
-			{
-				myai[i].shieldsdamage1.damage[j] = shielddamageenemies[j];
-			}
+			myai[i].magic1.magiccount = 0;
 
 			myai[i].magic1.equiped = aimagicitems[myai[i].magic1.randommagic];
 			myai[i].magic1.rangey = aimagicdistance[myai[i].magic1.randommagic];
@@ -955,6 +962,139 @@ beginning:
 			myai[i].armor1.rangey = aiarmordistancey[myai[i].armor1.randomarmor];
 
 			myai[i].armor1.rangex = aiarmordistancex[myai[i].armor1.randomarmor];
+
+			for(int j = 0; j < allitemsenemies; j++)
+			{
+				myai[i].weaponsdamage1.damage[j] = damageenemies[j];
+				myai[i].weaponsdamage1.rangey[j] = rangeyenemies[j];
+				myai[i].weaponsdamage1.rangex[j] = rangexenemies[j];
+			}
+
+			for(int j = 0; j < alldefenseitemsenemies; j++)
+			{
+				myai[i].shieldsdamage1.damage[j] = shielddamageenemies[j];
+			}
+
+			for(int i = 0; i < allarmorenemies; i++)
+			{
+				myai[i].armor1.protections[i] = aiarmorpts[i];
+			}
+
+			myai[i].magic1.magiccount = 0;
+
+			myai[i].magic1.magicitems[myai[i].magic1.magiccount] = aimagicitems[myai[i].magic1.randommagic];
+
+			myai[i].magic1.nextrandommagic = myai[i].magic1.randommagic;
+
+			myai[i].magic1.magiccount++;
+
+			while(myai[i].magic1.nextrandommagic == myai[i].magic1.randommagic)
+			{
+				myai[i].magic1.nextrandommagic = rand() % allmagicsenemies;
+			}
+
+			myai[i].magic1.magicitems[myai[i].magic1.magiccount] = aimagicitems[myai[i].magic1.nextrandommagic];
+
+			myai[i].magic1.magiccount++;
+
+			myai[i].magic1.nextrandommagic2 = myai[i].magic1.randommagic;
+
+			while(myai[i].magic1.nextrandommagic2 == myai[i].magic1.nextrandommagic || myai[i].magic1.nextrandommagic2 == myai[i].magic1.randommagic)
+			{
+				myai[i].magic1.nextrandommagic2 = rand() % allmagicsenemies;
+			}
+
+			myai[i].magic1.magicitems[myai[i].magic1.magiccount] = aimagicitems[myai[i].magic1.nextrandommagic2];
+
+			myai[i].magic1.magiccount++;
+
+			myai[i].armor1.armorcount = 0;
+
+			myai[i].armor1.item[myai[i].armor1.armorcount] = aiarmor[myai[i].armor1.randomarmor];
+			
+			myai[i].armor1.armorcount++;
+
+			myai[i].armor1.nextrandomarmor = myai[i].armor1.randomarmor;
+
+			while(myai[i].armor1.nextrandomarmor == myai[i].armor1.randomarmor)
+			{
+				myai[i].armor1.nextrandomarmor = rand() % allarmorenemies;
+			}
+
+			myai[i].armor1.item[myai[i].armor1.armorcount] = aiarmor[myai[i].armor1.nextrandomarmor];
+
+			myai[i].armor1.armorcount++;
+
+			myai[i].armor1.nextrandomarmor2 = myai[i].armor1.randomarmor;
+
+			while(myai[i].armor1.nextrandomarmor2 == myai[i].armor1.nextrandomarmor || myai[i].armor1.nextrandomarmor2 == myai[i].armor1.randomarmor)
+			{
+				myai[i].armor1.nextrandomarmor2 = rand() % allarmorenemies;
+			}
+			
+			myai[i].armor1.item[myai[i].armor1.armorcount] = aiarmor[myai[i].armor1.nextrandomarmor2];
+
+			myai[i].armor1.armorcount++;
+
+			myai[i].shieldstype.shieldcount = 0;
+
+			myai[i].shieldstype.randomshield = myai[i].shieldsrandomitem;
+
+			myai[i].shieldstype.item[myai[i].shieldstype.shieldcount] = itemdamageenemies[myai[i].shieldstype.randomshield];
+
+			myai[i].shieldstype.shieldcount++;
+
+			myai[i].shieldstype.nextrandomshield = myai[i].shieldstype.randomshield;
+
+			while(myai[i].shieldstype.nextrandomshield == myai[i].shieldstype.randomshield)
+			{
+				myai[i].shieldstype.nextrandomshield = rand() % alldefenseitemsenemies;
+			}
+
+			myai[i].shieldstype.item[myai[i].shieldstype.shieldcount] = itemdamageenemies[myai[i].shieldstype.nextrandomshield];
+
+			myai[i].shieldstype.shieldcount++;
+
+			myai[i].shieldstype.nextrandomshield2 = myai[i].shieldstype.randomshield;
+
+			while(myai[i].shieldstype.nextrandomshield2 == myai[i].shieldstype.nextrandomshield || myai[i].shieldstype.nextrandomshield2 == myai[i].shieldstype.randomshield)
+			{
+				myai[i].shieldstype.nextrandomshield2 = rand() % alldefenseitemsenemies;
+			}
+
+			myai[i].shieldstype.item[myai[i].shieldstype.shieldcount] = itemdamageenemies[myai[i].shieldstype.nextrandomshield2];
+
+			myai[i].shieldstype.shieldcount++;
+
+			myai[i].weapontype.weaponcount = 0;
+
+			myai[i].weapontype.randomweapon = myai[i].randomitem;
+
+			myai[i].weapontype.item[myai[i].weapontype.weaponcount] = itemenemies[myai[i].weapontype.randomweapon];
+
+			myai[i].weapontype.weaponcount++;
+
+			myai[i].weapontype.nextrandomweapon = myai[i].weapontype.randomweapon;
+
+			while(myai[i].weapontype.nextrandomweapon == myai[i].weapontype.randomweapon)
+			{
+				myai[i].weapontype.nextrandomweapon = rand() % allitemsenemies;
+			}
+
+			myai[i].weapontype.item[myai[i].weapontype.weaponcount] = itemenemies[myai[i].weapontype.nextrandomweapon];
+
+			myai[i].weapontype.weaponcount++;
+
+			myai[i].weapontype.nextrandomweapon2 = myai[i].weapontype.randomweapon;
+
+			while(myai[i].weapontype.nextrandomweapon2 == myai[i].weapontype.nextrandomweapon || myai[i].weapontype.nextrandomweapon2 == myai[i].weapontype.randomweapon)
+			{
+				myai[i].weapontype.nextrandomweapon2 = rand() % allitemsenemies;
+			}
+
+			myai[i].weapontype.item[myai[i].weapontype.weaponcount] = itemenemies[myai[i].weapontype.nextrandomweapon2];
+
+			myai[i].weapontype.weaponcount++;
 		}
 
 		for(int i = 0; i < maxenemies; i++)
@@ -1314,15 +1454,68 @@ beginning:
 
 				loadstring(lineamount, &myai[i].weapontype.equiped, fp1);
 
+				loadnumber(lineamount, &myai[i].magic1.magiccount, fp1);
+				
+				loadnumber(lineamount, &myai[i].magic1.nextrandommagic, fp1);
+								
+				for(int l = 0; l < allmagicsenemies; l++)
+				{
+					loadstring(lineamount, &myai[i].magic1.magicitems[l], fp1);
+				}
+				
+				loadnumber(lineamount, &myai[i].magic1.nextrandommagic2, fp1);
+				
+				loadnumber(lineamount, &myai[i].weapontype.randomweapon, fp1);
+				
+				loadnumber(lineamount, &myai[i].weapontype.nextrandomweapon, fp1);
+				
+				loadnumber(lineamount, &myai[i].weapontype.nextrandomweapon2, fp1);
+				
+				for(int l = 0; l < allitemsenemies; l++)
+				{
+					loadstring(lineamount, &myai[i].weapontype.item[l], fp1);
+				}
+				
+				loadnumber(lineamount, &myai[i].shieldstype.randomshield, fp1);
+				
+				loadnumber(lineamount, &myai[i].shieldstype.nextrandomshield, fp1);
+				
+				loadnumber(lineamount, &myai[i].shieldstype.nextrandomshield2, fp1);
+				
+				for(int l = 0; l < alldefenseitemsenemies; l++)
+				{
+					loadstring(lineamount, &myai[i].shieldstype.item[l], fp1);
+				}
+				
 				loadnumber(lineamount, &myai[i].armor1.randomarmor, fp1);
-				
+								
+				loadnumber(lineamount, &myai[i].armor1.nextrandomarmor, fp1);
+								
+				loadnumber(lineamount, &myai[i].armor1.nextrandomarmor2, fp1);
+								
 				loadstring(lineamount, &myai[i].armor1.equiped, fp1);
-				
-				loadnumber(lineamount, &myai[i].armor1.protection, fp1);
-				
+								
 				loadnumber(lineamount, &myai[i].armor1.rangey, fp1);
-				
+								
 				loadnumber(lineamount, &myai[i].armor1.rangex, fp1);
+								
+				loadnumber(lineamount, &myai[i].armor1.protection, fp1);
+								
+				for(int q = 0; q < allarmorenemies; q++)
+				{
+					loadstring(lineamount, &myai[i].armor1.item[q], fp1);
+				}
+								
+				for(int q = 0; q < allarmorenemies; q++)
+				{
+					loadnumber(lineamount, &myai[i].armor1.protections[q], fp1);
+				}
+								
+				loadnumber(lineamount, &myai[i].weapontype.weaponcount, fp1);
+								
+				loadnumber(lineamount, &myai[i].shieldstype.shieldcount, fp1);
+								
+				loadnumber(lineamount, &myai[i].armor1.armorcount, fp1);
 			}
 
 			loadnumber(lineamount, &roundssofar, fp1);
@@ -1740,15 +1933,68 @@ beginning:
 
 					writestring(lineBuffer, lineamount, myai[i].weapontype.equiped, fp1);
 
+					writenumber(lineBuffer, lineamount, myai[i].magic1.magiccount, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].magic1.nextrandommagic, fp1);
+										
+					for(int q = 0; q < allmagicsenemies; q++)
+					{
+						writestring(lineBuffer, lineamount, myai[i].magic1.magicitems[q], fp1);
+					}
+					
+					writenumber(lineBuffer, lineamount, myai[i].magic1.nextrandommagic2, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.randomweapon, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.nextrandomweapon, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.nextrandomweapon2, fp1);
+					
+					for(int q = 0; q < allitemsenemies; q++)
+					{
+						writestring(lineBuffer, lineamount, myai[i].weapontype.item[q], fp1);
+					}
+										
+					writenumber(lineBuffer, lineamount, myai[i].shieldstype.randomshield, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].shieldstype.nextrandomshield, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].shieldstype.nextrandomshield2, fp1);
+					
+					for(int q = 0; q < alldefenseitemsenemies; q++)
+					{
+						writestring(lineBuffer, lineamount, myai[i].shieldstype.item[q], fp1);
+					}
+					
 					writenumber(lineBuffer, lineamount, myai[i].armor1.randomarmor, fp1);
-
+					
+					writenumber(lineBuffer, lineamount, myai[i].armor1.nextrandomarmor, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].armor1.nextrandomarmor2, fp1);
+					
 					writestring(lineBuffer, lineamount, myai[i].armor1.equiped, fp1);
-
-					writenumber(lineBuffer, lineamount, myai[i].armor1.protection, fp1);
-
+					
 					writenumber(lineBuffer, lineamount, myai[i].armor1.rangey, fp1);
-
+					
 					writenumber(lineBuffer, lineamount, myai[i].armor1.rangex, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].armor1.protection, fp1);
+					
+					for(int q = 0; q < allarmorenemies; q++)
+					{
+						writestring(lineBuffer, lineamount, myai[i].armor1.item[q], fp1);
+					}
+					
+					for(int q = 0; q < allarmorenemies; q++)
+					{
+						writenumber(lineBuffer, lineamount, myai[i].armor1.protections[q], fp1);
+					}
+					
+					writenumber(lineBuffer, lineamount, myai[i].weapontype.weaponcount, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].shieldstype.shieldcount, fp1);
+					
+					writenumber(lineBuffer, lineamount, myai[i].armor1.armorcount, fp1);
 				}
 
 				writenumber(lineBuffer, lineamount, roundssofar, fp1);
@@ -1777,16 +2023,17 @@ beginning:
 				mvprintw(6, 0, "Press n to cycle through player characters forward");
 				mvprintw(7, 0, "Press p to cycle through player characters backward");
 				mvprintw(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
-				mvprintw(9, 0, "Press h to display this during game to see this screen");
-				mvprintw(10, 0, "The H is a player human and the h is a ai human");
-				mvprintw(11, 0, "The O is a player orc and the o is a ai orc");
-				mvprintw(12, 0, "The E is a player elf and the e is a ai elf");
-				mvprintw(13, 0, "The D is a player dwarf and the d is a ai elf");
-				mvprintw(14, 0, "Press q from battle screen to quit game");
-				mvprintw(15, 0, "Press S to save and quit");
-				mvprintw(16, 0, "Press u to scroll up");
-				mvprintw(17, 0, "Press j to scroll down");
-				mvprintw(18, 0, "Press key to quit help");
+				mvprintw(9, 0, "Press i to see what magics, weapons, shields, and armor ai have");
+				mvprintw(10, 0, "Press h to display this during game to see this screen");
+				mvprintw(11, 0, "The H is a player human and the h is a ai human");
+				mvprintw(12, 0, "The O is a player orc and the o is a ai orc");
+				mvprintw(13, 0, "The E is a player elf and the e is a ai elf");
+				mvprintw(14, 0, "The D is a player dwarf and the d is a ai elf");
+				mvprintw(15, 0, "Press q from battle screen to quit game");
+				mvprintw(16, 0, "Press S to save and quit");
+				mvprintw(17, 0, "Press u to scroll up");
+				mvprintw(18, 0, "Press j to scroll down");
+				mvprintw(19, 0, "Press key to quit help");
 
 				refresh();
 
@@ -1846,7 +2093,7 @@ beginning:
 					}
 				}
 			}
-		
+			
 			if(ch == 'n')
 			{
 				i++;
@@ -2050,6 +2297,106 @@ beginning:
 
 				clear();
 
+				refresh();
+			}
+
+			if(ch == 'i')
+			{
+				clear();
+				
+				int list = 0;
+				int l = 0;
+				int gotcharacter = '0';
+				int theenemy = 0;
+
+				do
+				{
+					clear();
+					
+					if(gotcharacter == 'k')
+					{
+						theenemy++;
+					}
+
+					if(theenemy > maxenemies - 1)
+					{
+						theenemy = 0;
+					}
+
+					if(gotcharacter == 'd')
+					{
+						list++;
+					}
+					
+					if(list > 3)
+					{
+						list = 0;
+					}
+					
+					mvprintw(l, 0, "Enemy %d", theenemy + 1);
+
+					if(list == 0)
+					{
+						while(strcmp(myai[theenemy].magic1.magicitems[l], "Empty") != 0)
+						{
+							mvprintw(l+1, 0, "Magic item %d is %s", l + 1, myai[theenemy].magic1.magicitems[l]);
+							l++;
+						}
+					}
+					
+					if(list == 1)
+					{
+						while(strcmp(myai[theenemy].weapontype.item[l], "Empty") != 0)
+						{
+							mvprintw(l+1, 0, "Weapon item %d is %s", l + 1, myai[theenemy].weapontype.item[l]);
+							l++;
+						}
+					}
+					
+					if(list == 2)
+					{
+						while(strcmp(myai[theenemy].shieldstype.item[l], "Empty") != 0)
+						{
+							mvprintw(l+1, 0, "Shield item %d is %s", l + 1, myai[theenemy].shieldstype.item[l]);
+							l++;
+						}
+					}
+					
+					if(list == 3)
+					{
+						while(strcmp(myai[theenemy].armor1.item[l], "Empty") != 0)
+						{
+							mvprintw(l+1, 0, "Armor item %d is %s", l + 1, myai[theenemy].armor1.item[l]);
+							l++;
+						}
+					}
+					
+					mvprintw(l+1, 0, "Press d to move to next category\n");
+					
+					l++;
+
+					mvprintw(l+1, 0, "Press k to move to next enemy stat\n");
+
+					l++;
+					
+					mvprintw(l+1, 0, "Press anything else to exit this menu\n");
+					
+					l = 0;
+					
+					move(0, 0);
+					
+					refresh();
+				} 
+				while((gotcharacter = getch()) == 'd' || gotcharacter == 'k');
+					
+				list = 0;
+				l = 0;
+				theenemy = 0;
+									
+				move(myplayer[i].y, myplayer[i].x);
+					
+				clear();
+					
 				refresh();
 			}
 
