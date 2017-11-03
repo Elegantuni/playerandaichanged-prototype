@@ -2333,7 +2333,7 @@ beginning:
 						list = 0;
 					}
 					
-					mvprintw(l, 0, "Enemy %d", theenemy + 1);
+					mvprintw(l, 0, "AI %d", theenemy + 1);
 
 					if(list == 0)
 					{
