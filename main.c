@@ -457,10 +457,10 @@ beginning:
 		playermagicdamage[4] = 40;
 
 		int aimagicdamage[aimagiclist];
-		aimagicdamage[0] = 40;
-		aimagicdamage[1] = 40;
-		aimagicdamage[2] = 40;
-		aimagicdamage[3] = 40;
+		aimagicdamage[0] = 80;
+		aimagicdamage[1] = 70;
+		aimagicdamage[2] = 60;
+		aimagicdamage[3] = 50;
 		aimagicdamage[4] = 40;
 
 		int playermagicdistance[playermagiclist];
@@ -2730,9 +2730,9 @@ beginning:
 						myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.randommagic];
 						myai[j].magic1.damage = aimagicdamage[myai[j].magic1.randommagic];
 					}
-				}
 
-				themagicchoose = -1;
+					themagicchoose = -1;
+				}
 
 				for(int p = 0; p < maxenemies; p++)
 				{
