@@ -396,13 +396,13 @@ beginning:
 		playerhitpoints[0] = 1500;
 		playerhitpoints[1] = 2000;
 		playerhitpoints[2] = 1000;
-		playerhitpoints[3] = 800;
+		playerhitpoints[3] = 2200;
 
 		int aihitpoints[aicharacters];
 		aihitpoints[0] = 1500;
 		aihitpoints[1] = 2000;
 		aihitpoints[2] = 1000;
-		aihitpoints[3] = 800;
+		aihitpoints[3] = 2200;
 
 		int playerdefense[playercharacters];
 		playerdefense[0] = 10;
