@@ -268,7 +268,6 @@ int main(int argc, char *argv[])
 	int hitpointsy = 24;
 	int hitpointsx = 115;
 	int positiony = 0;
-	int aiopponent = 0;
 
 	struct winsize w;
 	ioctl(0, TIOCGWINSZ, &w);
@@ -299,11 +298,6 @@ int main(int argc, char *argv[])
 		printf("Change your terminal col to %d or greater\n", hitpointsx);
 
 		return 1;
-	}
-	
-	if((argc == 2) && strcmp(argv[1], "ai") == 0)
-	{
-		aiopponent = 1;
 	}
 
 	FILE *fp1;
@@ -1522,8 +1516,6 @@ beginning:
 
 			loadnumber(lineamount, &positiony, fp1);
 
-			loadnumber(lineamount, &aiopponent, fp1);
-
 			fclose(fp1);
 
 			remove("SaveFile.txt");
@@ -2000,8 +1992,6 @@ beginning:
 				writenumber(lineBuffer, lineamount, roundssofar, fp1);
 
 				writenumber(lineBuffer, lineamount, positiony, fp1);
-				
-				writenumber(lineBuffer, lineamount, aiopponent, fp1);
 
 				fclose(fp1);
 
@@ -2693,7 +2683,7 @@ beginning:
 					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic];
 					myai[j].magic1.cost = aimagiccost[myai[j].magic1.nextrandommagic];
 
-					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0))
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
 					{
 						if(myai[j].magic1.damage > aimagicdamage2)
 						{
@@ -2968,22 +2958,6 @@ beginning:
 				if(myplayer[i].hitpoints > 0)
 				{
 					break;
-				}
-			}
-
-			if(aiopponent == 1 && (ch != 'u' || ch != 'j' || ch != 'h'))
-			{
-				for(int j = 0; j < maxenemies; j++)
-				{
-					if(myplayer[i].y < myai[j].y)
-					{
-						myai[j].y = myai[j].y - 1;
-					}
-
-					if(myplayer[i].y > myai[j].y)
-					{
-						myai[j].y = myai[j].y + 1;
-					}
 				}
 			}
 		
