@@ -2658,9 +2658,57 @@ beginning:
 
 				int aimagicdamage2 = -1;
 				int themagicchoose = -1;
+				int aiarmorprotection = -1;
+				int thearmorchoose = -1;
 				
 				for(int j = 0; j < maxenemies; j++)
 				{
+					myai[j].armor1.equiped = aiarmor[myai[j].armor1.randomarmor];
+					myai[j].armor1.rangey = aiarmordistancey[myai[j].armor1.randomarmor];
+					myai[j].armor1.rangex = aiarmordistancex[myai[j].armor1.randomarmor];
+					myai[j].armor1.protection = aiarmorpts[myai[j].armor1.randomarmor];
+	
+					if((abs(myplayer[i].y - myai[j].y) <= myai[j].armor1.rangey) && (abs(myplayer[i].x - myai[j].x) <= myai[j].armor1.rangex) && myai[j].armor1.protection > aiarmorprotection)
+					{
+						aiarmorprotection = aiarmorpts[myai[j].armor1.randomarmor];
+						thearmorchoose = myai[j].armor1.randomarmor;
+					}
+
+					myai[j].armor1.equiped = aiarmor[myai[j].armor1.nextrandomarmor];
+					myai[j].armor1.rangey = aiarmordistancey[myai[j].armor1.nextrandomarmor];
+					myai[j].armor1.rangex = aiarmordistancex[myai[j].armor1.nextrandomarmor];
+					myai[j].armor1.protection = aiarmorpts[myai[j].armor1.nextrandomarmor];
+	
+					if((abs(myplayer[i].y - myai[j].y) <= myai[j].armor1.rangey) && (abs(myplayer[i].x - myai[j].x) <= myai[j].armor1.rangex) && myai[j].armor1.protection > aiarmorprotection)
+					{
+						aiarmorprotection = aiarmorpts[myai[j].armor1.nextrandomarmor];
+						thearmorchoose = myai[j].armor1.nextrandomarmor;
+					}
+
+					myai[j].armor1.equiped = aiarmor[myai[j].armor1.nextrandomarmor2];
+					myai[j].armor1.rangey = aiarmordistancey[myai[j].armor1.nextrandomarmor2];
+					myai[j].armor1.rangex = aiarmordistancex[myai[j].armor1.nextrandomarmor2];
+					myai[j].armor1.protection = aiarmorpts[myai[j].armor1.nextrandomarmor2];
+	
+					if((abs(myplayer[i].y - myai[j].y) <= myai[j].armor1.rangey) && (abs(myplayer[i].x - myai[j].x) <= myai[j].armor1.rangex) && myai[j].armor1.protection > aiarmorprotection)
+					{
+						aiarmorprotection = aiarmorpts[myai[j].armor1.nextrandomarmor2];
+						thearmorchoose = myai[j].armor1.nextrandomarmor2;
+					}
+
+					myai[j].armor1.equiped = aiarmor[thearmorchoose];
+					myai[j].armor1.rangey = aiarmordistancey[thearmorchoose];
+					myai[j].armor1.rangex = aiarmordistancex[thearmorchoose];
+					myai[j].armor1.protection = aiarmorpts[thearmorchoose];
+
+					if(thearmorchoose == -1)
+					{
+						myai[j].armor1.equiped = aiarmor[myai[j].armor1.randomarmor];
+						myai[j].armor1.rangey = aiarmordistancey[myai[j].armor1.randomarmor];
+						myai[j].armor1.rangex = aiarmordistancex[myai[j].armor1.randomarmor];
+						myai[j].armor1.protection = aiarmorpts[myai[j].armor1.randomarmor];
+					}
+
 					myai[j].magic1.equiped = aimagicitems[myai[j].magic1.randommagic];
 					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.randommagic];
 					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.randommagic];
@@ -2726,7 +2774,10 @@ beginning:
 						myai[j].magic1.cost = aimagiccost[myai[j].magic1.randommagic];
 					}
 
-					themagicchoose = -1;
+					int aimagicdamage2 = -1;
+					int themagicchoose = -1;
+					int aiarmorprotection = -1;
+					int thearmorchoose = -1;
 				}
 
 				for(int p = 0; p < maxenemies; p++)
@@ -2835,7 +2886,39 @@ beginning:
 				{
 					int aiequipedweapon = -1;
 					int thechoose = -1;
-	
+					int aishieldweapon = -1;
+					int thechooseshield = -1;
+
+					myai[p].shieldstype.equiped = itemdamageenemies[myai[p].shieldstype.randomshield];
+					myai[p].shieldstype.damage = shielddamageenemies[myai[p].shieldstype.randomshield];
+
+					if(myai[p].shieldstype.damage > aishieldweapon)
+					{
+						thechooseshield = myai[p].shieldstype.randomshield;
+						aishieldweapon = shielddamageenemies[myai[p].shieldstype.randomshield];
+					}
+
+					myai[p].shieldstype.equiped = itemdamageenemies[myai[p].shieldstype.nextrandomshield];
+					myai[p].shieldstype.damage = shielddamageenemies[myai[p].shieldstype.nextrandomshield];
+
+					if(myai[p].shieldstype.damage > aishieldweapon)
+					{
+						thechooseshield = myai[p].shieldstype.nextrandomshield;
+						aishieldweapon = shielddamageenemies[myai[p].shieldstype.nextrandomshield];
+					}
+
+					myai[p].shieldstype.equiped = itemdamageenemies[myai[p].shieldstype.nextrandomshield2];
+					myai[p].shieldstype.damage = shielddamageenemies[myai[p].shieldstype.nextrandomshield2];
+
+					if(myai[p].shieldstype.damage > aishieldweapon)
+					{
+						thechooseshield = myai[p].shieldstype.nextrandomshield2;
+						aishieldweapon = shielddamageenemies[myai[p].shieldstype.nextrandomshield2];
+					}
+
+					myai[p].shieldstype.equiped = itemdamageenemies[thechooseshield];
+					myai[p].shieldstype.damage = shielddamageenemies[thechooseshield];
+
 					myai[p].weapontype.equiped = itemenemies[myai[p].weapontype.randomweapon];
 					myai[p].weapontype.rangey = rangeyenemies[myai[p].weapontype.randomweapon];
 					myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.randomweapon];
@@ -2940,6 +3023,9 @@ beginning:
 					}
 
 					thechoose = -1;
+					thechooseshield = -1;
+					aiequipedweapon = -1;
+					aishieldweapon = -1;
 				}
 			}
 
@@ -2998,70 +3084,12 @@ beginning:
 						}
 					}
 				}
-
-				for(int l = 0; l < maxenemies; l++)
-				{
-					if(j != l)
-					{
-						if(myai[j].y == myai[l].y && myai[j].x == myai[l].x && myai[j].hitpoints > 0 && myai[l].hitpoints > 0)
-						{
-							myai[j].y = myai[j].prevy;
-							myai[j].x = myai[j].prevx;
-
-							myai[j].replayer = 1;
-						}
-					}
-				}
-
-				for(int k = 0; k < maxplayers; k++)
-				{
-					if(myplayer[k].y == myai[j].y && myplayer[k].x == myai[j].x && myplayer[k].hitpoints > 0 && myai[j].hitpoints > 0)
-					{
-						myai[j].y = myai[j].prevy;
-						myai[j].x = myai[j].prevx;
-
-						myai[j].replayer = 1;
-					}
-				}
-			}
-
-			if(myplayer[i].replayer == 1)
-			{
-				for(int j = 0; j < maxenemies; j++)
-				{
-					if(myai[j].y == myai[j].prevy && myplayer[i].x != myai[j].x && myplayer[i].y == (myai[j].y - 1))
-					{
-						myai[j].y = myai[j].y - 1;
-					}
-
-					if(myai[j].y == myai[j].prevy && myplayer[i].x != myai[j].x && myplayer[i].y == (myai[j].y + 1))
-					{
-						myai[j].y = myai[j].y + 1;
-					}
-
-					if(!(abs(myplayer[i].y - myai[j].y) < 1 && myplayer[i].x != myai[j].x))
-					{
-						if(myplayer[i].y == myai[j].prevy && myplayer[i].x != myai[j].x && myplayer[i].y != myai[j].y)
-						{
-							myai[j].y = myai[j].prevy;
-						}
-					}
-				}
 			}
 
 			if(myplayer[i].replayer == 0)
 			{
 				myplayer[i].prevy = myplayer[i].y;
 				myplayer[i].prevx = myplayer[i].x;
-			}
-
-			for(int j = 0; j < maxenemies; j++)
-			{
-				if(myai[j].replayer == 0)
-				{
-					myai[j].prevy = myai[j].y;
-					myai[j].prevx = myai[j].x;
-				}
 			}
 		
 			for(int i = 0; i < maxplayers; i++)
