@@ -2675,8 +2675,9 @@ beginning:
 					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.randommagic];
 					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.randommagic];
 					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.randommagic];
+					myai[j].magic1.cost = aimagiccost[myai[j].magic1.randommagic];
 
-					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
 					{
 						if(myai[j].magic1.damage > aimagicdamage2)
 						{
@@ -2690,8 +2691,9 @@ beginning:
 					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.nextrandommagic];
 					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.nextrandommagic];
 					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic];
+					myai[j].magic1.cost = aimagiccost[myai[j].magic1.nextrandommagic];
 
-					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0))
 					{
 						if(myai[j].magic1.damage > aimagicdamage2)
 						{
@@ -2705,8 +2707,9 @@ beginning:
 					myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.nextrandommagic2];
 					myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.nextrandommagic2];
 					myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic2];
+					myai[j].magic1.cost = aimagiccost[myai[j].magic1.nextrandommagic2];
 
-					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex)
+					if((positionydiff = abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
 					{
 						if(myai[j].magic1.damage > aimagicdamage2)
 						{
@@ -2722,6 +2725,7 @@ beginning:
 						myai[j].magic1.rangey = aimagicdistance[themagicchoose];
 						myai[j].magic1.rangex = aimagicdistance[themagicchoose];
 						myai[j].magic1.damage = aimagicdamage[themagicchoose];
+						myai[j].magic1.cost = aimagiccost[themagicchoose];
 					}
 					else
 					{
@@ -2729,6 +2733,7 @@ beginning:
 						myai[j].magic1.rangey = aimagicdistance[myai[j].magic1.randommagic];
 						myai[j].magic1.rangex = aimagicdistance[myai[j].magic1.randommagic];
 						myai[j].magic1.damage = aimagicdamage[myai[j].magic1.randommagic];
+						myai[j].magic1.cost = aimagiccost[myai[j].magic1.randommagic];
 					}
 
 					themagicchoose = -1;
