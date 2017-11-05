@@ -2757,6 +2757,11 @@ beginning:
 						}
 					}
 
+					if( (t == -1) && (positionydiff = abs(myplayer[i].y - myai[j].y)) <= myplayer[i].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myplayer[i].magic1.rangex)
+					{
+						t = j;
+					}
+
 					if(themagicchoose != -1)
 					{
 						myai[j].magic1.equiped = aimagicitems[themagicchoose];
@@ -2778,6 +2783,11 @@ beginning:
 					int themagicchoose = -1;
 					int aiarmorprotection = -1;
 					int thearmorchoose = -1;
+				}
+
+				if(t == -1)
+				{
+					t = 0;
 				}
 
 				for(int p = 0; p < maxenemies; p++)
@@ -2878,6 +2888,8 @@ beginning:
 						break;
 					}
 				}
+
+				t = -1;
 			}
 
 			for(int p = 0; p < maxenemies; p++)
