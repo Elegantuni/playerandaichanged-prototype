@@ -1,5 +1,5 @@
 playerandai1:
-	$(CC) -std=c99 -o playerandai1 main.c /usr/lib/libncurses.a 
+	$(CC) -std=c99 -o playerandai1 main.c -lncurses 
 	
 clean:
 	rm -f playerandai1
