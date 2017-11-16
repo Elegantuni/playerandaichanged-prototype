@@ -9,6 +9,30 @@
 #include <limits.h>
 #include <sys/ioctl.h>
 
+#ifdef FREEBSD
+size_t strnlen(const char *str, size_t len)
+{
+    for (size_t size = 0; size < len; size++)
+    {
+        if (str[size] == '\0')
+            return size;
+    }
+    return len;
+}
+
+char *strndup(const char *str, size_t len)
+{
+    size_t act = strnlen(str, len);
+    char *dst = malloc(act + 1);
+    if (dst != 0)
+    {
+        memmove(dst, str, act);
+        dst[act] = '\0';
+    }
+    return dst;
+}
+#endif
+
 #ifdef LINUX
 #include <bsd/stdlib.h>
 #endif
