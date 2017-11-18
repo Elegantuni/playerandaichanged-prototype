@@ -292,9 +292,12 @@ int main(int argc, char *argv[])
 	int hitpointsy = 24;
 	int hitpointsx = 115;
 	int positiony = 0;
+	int row;
+	int col;
 
-	struct winsize w;
-	ioctl(0, TIOCGWINSZ, &w);
+	initscr();
+	getmaxyx(stdscr, row, col);
+	endwin();
 
 	if(maxenemies < 1)
 	{
@@ -310,14 +313,14 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	if(w.ws_row < hitpointsy)
+	if(row < hitpointsy)
 	{
 		printf("Change your terminal row to %d or greater\n", hitpointsy);
 
 		return 1;
 	}
 
-	if(w.ws_col < hitpointsx)
+	if(col < hitpointsx)
 	{
 		printf("Change your terminal col to %d or greater\n", hitpointsx);
 
