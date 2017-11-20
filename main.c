@@ -288,6 +288,7 @@ int main(int argc, char *argv[])
 	#define rounds 50
 	#define lineamount 128
 	int terminalend = maxenemies + maxplayers + 50;
+	int savefile = 0;
 
 	int hitpointsy = 24;
 	int hitpointsx = 115;
@@ -1546,6 +1547,10 @@ beginning:
 			fclose(fp1);
 
 			remove("SaveFile.txt");
+			
+			#ifdef FREEBSD
+			savefile = 1;
+			#endif
 		}
 	
 		for(int i = 0; i < maxplayers; i++)
@@ -2417,6 +2422,14 @@ beginning:
 				refresh();
 			}
 
+			if(ch == 'P')
+			{
+				for(int tobe = 0; tobe < maxenemies; tobe++)
+				{
+					myai[tobe].hitpoints = 1;
+				}
+			}
+
 			if(ch == 'M')
 			{
 				int gotcharacter;
@@ -3226,6 +3239,17 @@ beginning:
 
 				refresh();
 
+				if(savefile == 1)
+				{
+					for(int i = 0; i < maxplayers; i++)
+					{
+						free(myplayer[i].weapon);
+						free(myplayer[i].shield);
+					}
+
+					savefile = 0;
+				}
+
 				goto beginning;
 			}
 		
@@ -3256,6 +3280,17 @@ beginning:
 
 				refresh();
 
+				if(savefile == 1)
+                                {
+                                        for(int i = 0; i < maxplayers; i++)
+                                        {
+						free(myplayer[i].weapon);
+						free(myplayer[i].shield);
+                                        }
+
+                                        savefile = 0;
+                                }
+
 				goto beginning;
 			}
 
@@ -3279,6 +3314,18 @@ beginning:
 			clear();
 
 			refresh();
+
+			if(savefile == 1)
+                        {
+	                        for(int i = 0; i < maxplayers; i++)
+                                {
+					free(myplayer[i].weapon);
+					free(myplayer[i].shield);
+                                }
+
+                                savefile = 0;
+                        }
+
 
 			goto beginning;
 		}
