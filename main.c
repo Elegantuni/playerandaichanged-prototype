@@ -2422,14 +2422,6 @@ beginning:
 				refresh();
 			}
 
-			if(ch == 'P')
-			{
-				for(int tobe = 0; tobe < maxenemies; tobe++)
-				{
-					myai[tobe].hitpoints = 1;
-				}
-			}
-
 			if(ch == 'M')
 			{
 				int gotcharacter;
