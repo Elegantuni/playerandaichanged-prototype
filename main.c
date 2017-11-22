@@ -3206,6 +3206,125 @@ beginning:
 
 	ended:
 		clear();
+
+		if(savefile == 1)
+		{
+			for(int i = 0; i < maxplayers; i++)
+			{
+				free(myplayer[i].weapon);
+				
+				free(myplayer[i].shield);
+				
+				free(myplayer[i].charactersign);
+				
+				free(myplayer[i].weapontype.equiped);
+				
+				free(myplayer[i].character1.character);
+				
+				free(myplayer[i].character1.sign);
+				
+				free(myplayer[i].weaponsdamage1.item);
+
+				for(int tobe = 0; tobe < allitems; tobe++)
+				{
+					free(myplayer[i].weapontype.item[tobe]);
+				}
+
+				for(int tobe = 0; tobe < alldefenseitems; tobe++)
+				{
+					free(myplayer[i].shieldstype.item[tobe]);
+				}
+
+				free(myplayer[i].shieldstype.equiped);
+
+				free(myplayer[i].shieldsdamage1.item);
+
+				free(myplayer[i].magic1.equiped);
+
+				free(myplayer[i].weapontype.equiped);
+
+				for(int tobe = 0; tobe < allmagics; tobe++)
+				{
+					free(myplayer[i].magic1.magicitems[tobe]);
+				}
+
+				for(int tobe = 0; tobe < allitems; tobe++)
+				{
+					free(myplayer[i].weapontype.item[tobe]);
+				}
+
+				for(int tobe = 0; tobe < alldefenseitems; tobe++)
+				{
+					free(myplayer[i].shieldstype.item[tobe]);
+				}
+
+				free(myplayer[i].armor1.equiped);
+
+				for(int tobe = 0; tobe < allarmor; tobe++)
+				{
+					free(myplayer[i].armor1.item[tobe]);
+				}
+			}
+
+			for(int i = 0; i < maxenemies; i++)
+			{
+				free(myai[i].weapon);
+				
+				free(myai[i].shield);
+				
+				free(myai[i].charactersign);
+				
+				free(myai[i].weapontype.equiped);
+				
+				free(myai[i].character1.character);
+				
+				free(myai[i].character1.sign);
+				
+				free(myai[i].weaponsdamage1.item);
+
+				for(int tobe = 0; tobe < allitemsenemies; tobe++)
+				{
+					free(myai[i].weapontype.item[tobe]);
+				}
+
+				for(int tobe = 0; tobe < alldefenseitemsenemies; tobe++)
+				{
+					free(myai[i].shieldstype.item[tobe]);
+				}
+
+				free(myai[i].shieldstype.equiped);
+
+				free(myai[i].shieldsdamage1.item);
+
+				free(myai[i].magic1.equiped);
+
+				free(myai[i].weapontype.equiped);
+
+				for(int tobe = 0; tobe < allmagicsenemies; tobe++)
+				{
+					free(myai[i].magic1.magicitems[tobe]);
+				}
+
+				for(int tobe = 0; tobe < allitemsenemies; tobe++)
+				{
+					free(myai[i].weapontype.item[tobe]);
+				}
+
+				for(int tobe = 0; tobe < alldefenseitemsenemies; tobe++)
+				{
+					free(myai[i].shieldstype.item[tobe]);
+				}
+
+				free(myai[i].armor1.equiped);
+
+				for(int tobe = 0; tobe < allarmorenemies; tobe++)
+				{
+					free(myai[i].armor1.item[tobe]);
+				}
+			}
+
+			savefile = 0;
+		}
 	
 		if(ch == 'q')
 		{
@@ -3239,17 +3358,6 @@ beginning:
 
 				refresh();
 
-				if(savefile == 1)
-				{
-					for(int i = 0; i < maxplayers; i++)
-					{
-						free(myplayer[i].weapon);
-						free(myplayer[i].shield);
-					}
-
-					savefile = 0;
-				}
-
 				goto beginning;
 			}
 		
@@ -3279,17 +3387,6 @@ beginning:
 				clear();
 
 				refresh();
-
-				if(savefile == 1)
-                                {
-                                        for(int i = 0; i < maxplayers; i++)
-                                        {
-						free(myplayer[i].weapon);
-						free(myplayer[i].shield);
-                                        }
-
-                                        savefile = 0;
-                                }
 
 				goto beginning;
 			}
