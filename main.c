@@ -3404,18 +3404,6 @@ beginning:
 
 			refresh();
 
-			if(savefile == 1)
-                        {
-	                        for(int i = 0; i < maxplayers; i++)
-                                {
-					free(myplayer[i].weapon);
-					free(myplayer[i].shield);
-                                }
-
-                                savefile = 0;
-                        }
-
-
 			goto beginning;
 		}
 
