@@ -33,6 +33,10 @@ char *strndup(const char *str, size_t len)
 }
 #endif
 
+#ifdef INITNCURSESNOW
+#define RETURNTYPEVIDEO int
+#endif
+
 #ifdef LINUX
 #include <bsd/stdlib.h>
 #endif
@@ -58,6 +62,17 @@ void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp);
 void writestring(char lineBuffer[], int lineamount1, char* element, FILE* fp);
 void loadnumber(int lineamount1, int* element, FILE* fp1);
 void loadstring(int lineamount1, char** element, FILE* fp1);
+void initvideo(int hitpointsy, int hitpointsx);
+int ncursesinput();
+void* inputgetter();
+void ncursesprint(int y, int x, char* c);
+void ncursesprintarg1(int y, int x, char* c, int d);
+void ncursesprintarg2(int y, int x, char* c, int d, char* e);
+void ncursesprintstats(int y, int x, char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1);
+void videoprinternorm(int y, int x, char* c);
+void videoprinterarg1(int y, int x, char* c, int d);
+void videoprinterarg2(int y, int x, char* c, int d, char* e);
+void videoprinterstats(int y, int x, char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1);
 
 typedef enum {
     STR2INT_SUCCESS,
@@ -293,12 +308,6 @@ int main(int argc, char *argv[])
 	int hitpointsy = 24;
 	int hitpointsx = 115;
 	int positiony = 0;
-	int row;
-	int col;
-
-	initscr();
-	getmaxyx(stdscr, row, col);
-	endwin();
 
 	if(maxenemies < 1)
 	{
@@ -314,6 +323,15 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
+	#ifdef INITNCURSESNOW
+	
+	int row;
+	int col;
+
+	initscr();
+	getmaxyx(stdscr, row, col);
+	endwin();
+	
 	if(row < hitpointsy)
 	{
 		printf("Change your terminal row to %d or greater\n", hitpointsy);
@@ -328,6 +346,8 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	#endif
+
 	FILE *fp1;
 
 	char lineBuffer[lineamount];
@@ -340,7 +360,11 @@ int main(int argc, char *argv[])
 
 	int roundssofar = 1;
 
+	#ifdef INITNCURSESNOW
+
 	int ch;
+
+	#endif
 
 	ch = 'l';
 
@@ -1583,13 +1607,7 @@ beginning:
 	
 		struct hitpointspos hitpointspos1 = { terminalend - (maxplayers + maxenemies), 0, terminalend - (maxenemies), 0 };
 	
-		initscr();
-		
-		resize_term(hitpointsy, hitpointsx);
-
-		noecho();
-	
-		cbreak();
+		initvideo(hitpointsy, hitpointsx);
 
 		positiony = (myplayer[0].y / hitpointsy) * hitpointsy;
 
@@ -1602,7 +1620,7 @@ beginning:
 		{
 			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy))
 			{
-				mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+				videoprinternorm(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 			}
 		}
 	
@@ -1610,7 +1628,7 @@ beginning:
 		{
 			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy))
 			{
-				   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+				   videoprinternorm(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
 			}
 		}
 	
@@ -1618,7 +1636,7 @@ beginning:
 		{
 			if((hitpointspos1.y + i) > positiony)
 			{
-				mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped, myplayer[i].armor1.equiped, myplayer[i].armor1.protection);
+				videoprinterstats(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped, myplayer[i].armor1.equiped, myplayer[i].armor1.protection);
 			}
 		}
 
@@ -1626,7 +1644,7 @@ beginning:
 		{
 			if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
 			{
-				mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
+				videoprinterstats(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 			}
 		}
 	
@@ -1636,13 +1654,13 @@ beginning:
 	
 		int i = 0;
 	
-		while((ch = getch()) != 'q')
+		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
 			if(ch == 'S')
 			{
 				clear();
 
-				mvprintw(0, 0, "Saving now and then exiting");
+				videoprinternorm(0, 0, "Saving now and then exiting");
 
 				refresh();
 
@@ -2036,30 +2054,30 @@ beginning:
 			{
 				clear();
 
-				mvprintw(0, 0, "Press a to move left");
-				mvprintw(1, 0, "Press d to move right");
-				mvprintw(2, 0, "Press w to move up");
-				mvprintw(3, 0, "Press s to move down");
-				mvprintw(4, 0, "Press m to use magic");
-				mvprintw(5, 0, "Press M to equip different magic, weapon, shield, and armor");
-				mvprintw(6, 0, "Press n to cycle through player characters forward");
-				mvprintw(7, 0, "Press p to cycle through player characters backward");
-				mvprintw(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
-				mvprintw(9, 0, "Press i to see what magics, weapons, shields, and armor ai have");
-				mvprintw(10, 0, "Press h to display this during game to see this screen");
-				mvprintw(11, 0, "The H is a player human and the h is a ai human");
-				mvprintw(12, 0, "The O is a player orc and the o is a ai orc");
-				mvprintw(13, 0, "The E is a player elf and the e is a ai elf");
-				mvprintw(14, 0, "The D is a player dwarf and the d is a ai elf");
-				mvprintw(15, 0, "Press q from battle screen to quit game");
-				mvprintw(16, 0, "Press S to save and quit");
-				mvprintw(17, 0, "Press u to scroll up");
-				mvprintw(18, 0, "Press j to scroll down");
-				mvprintw(19, 0, "Press key to quit help");
+				videoprinternorm(0, 0, "Press a to move left");
+				videoprinternorm(1, 0, "Press d to move right");
+				videoprinternorm(2, 0, "Press w to move up");
+				videoprinternorm(3, 0, "Press s to move down");
+				videoprinternorm(4, 0, "Press m to use magic");
+				videoprinternorm(5, 0, "Press M to equip different magic, weapon, shield, and armor");
+				videoprinternorm(6, 0, "Press n to cycle through player characters forward");
+				videoprinternorm(7, 0, "Press p to cycle through player characters backward");
+				videoprinternorm(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
+				videoprinternorm(9, 0, "Press i to see what magics, weapons, shields, and armor ai have");
+				videoprinternorm(10, 0, "Press h to display this during game to see this screen");
+				videoprinternorm(11, 0, "The H is a player human and the h is a ai human");
+				videoprinternorm(12, 0, "The O is a player orc and the o is a ai orc");
+				videoprinternorm(13, 0, "The E is a player elf and the e is a ai elf");
+				videoprinternorm(14, 0, "The D is a player dwarf and the d is a ai elf");
+				videoprinternorm(15, 0, "Press q from battle screen to quit game");
+				videoprinternorm(16, 0, "Press S to save and quit");
+				videoprinternorm(17, 0, "Press u to scroll up");
+				videoprinternorm(18, 0, "Press j to scroll down");
+				videoprinternorm(19, 0, "Press key to quit help");
 
 				refresh();
 
-				getch();
+				(RETURNTYPEVIDEO)inputgetter();
 
 				move(myplayer[i].y, myplayer[i].x);
 
@@ -2266,7 +2284,7 @@ beginning:
 					{
 						while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
 						{
-							mvprintw(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
+							videoprinterarg2(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
 							l++;
 						}
 					}
@@ -2275,7 +2293,7 @@ beginning:
 					{
 						while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
 						{
-							mvprintw(l, 0, "Weapon item %d is %s", l + 1, myplayer[i].weapontype.item[l]);
+							videoprinterarg2(l, 0, "Weapon item %d is %s", l + 1, myplayer[i].weapontype.item[l]);
 							l++;
 						}
 					}
@@ -2284,7 +2302,7 @@ beginning:
 					{
 						while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
 						{
-							mvprintw(l, 0, "Shield item %d is %s", l + 1, myplayer[i].shieldstype.item[l]);
+							videoprinterarg2(l, 0, "Shield item %d is %s", l + 1, myplayer[i].shieldstype.item[l]);
 							l++;
 						}
 					}
@@ -2293,16 +2311,16 @@ beginning:
 					{
 						while(strcmp(myplayer[i].armor1.item[l], "Empty") != 0)
 						{
-							mvprintw(l, 0, "Armor item %d is %s", l + 1, myplayer[i].armor1.item[l]);
+							videoprinterarg2(l, 0, "Armor item %d is %s", l + 1, myplayer[i].armor1.item[l]);
 							l++;
 						}
 					}
 
-					mvprintw(l, 0, "Press d to move to next category\n");
+					videoprinternorm(l, 0, "Press d to move to next category\n");
 
 					l++;
 
-					mvprintw(l, 0, "Press anything else to exit this menu\n");
+					videoprinternorm(l, 0, "Press anything else to exit this menu\n");
 
 					l = 0;
 
@@ -2310,7 +2328,7 @@ beginning:
 
 					refresh();
 				} 
-				while((gotcharacter = getch()) == 'd');
+				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
 
 				list = 0;
 				l = 0;
@@ -2355,13 +2373,13 @@ beginning:
 						list = 0;
 					}
 					
-					mvprintw(l, 0, "AI %d", theenemy + 1);
+					videoprinterarg1(l, 0, "AI %d", theenemy + 1);
 
 					if(list == 0)
 					{
 						while(strcmp(myai[theenemy].magic1.magicitems[l], "Empty") != 0)
 						{
-							mvprintw(l+1, 0, "Magic item %d is %s", l + 1, myai[theenemy].magic1.magicitems[l]);
+							videoprinterarg2(l+1, 0, "Magic item %d is %s", l + 1, myai[theenemy].magic1.magicitems[l]);
 							l++;
 						}
 					}
@@ -2370,7 +2388,7 @@ beginning:
 					{
 						while(strcmp(myai[theenemy].weapontype.item[l], "Empty") != 0)
 						{
-							mvprintw(l+1, 0, "Weapon item %d is %s", l + 1, myai[theenemy].weapontype.item[l]);
+							videoprinterarg2(l+1, 0, "Weapon item %d is %s", l + 1, myai[theenemy].weapontype.item[l]);
 							l++;
 						}
 					}
@@ -2379,7 +2397,7 @@ beginning:
 					{
 						while(strcmp(myai[theenemy].shieldstype.item[l], "Empty") != 0)
 						{
-							mvprintw(l+1, 0, "Shield item %d is %s", l + 1, myai[theenemy].shieldstype.item[l]);
+							videoprinterarg2(l+1, 0, "Shield item %d is %s", l + 1, myai[theenemy].shieldstype.item[l]);
 							l++;
 						}
 					}
@@ -2388,20 +2406,20 @@ beginning:
 					{
 						while(strcmp(myai[theenemy].armor1.item[l], "Empty") != 0)
 						{
-							mvprintw(l+1, 0, "Armor item %d is %s", l + 1, myai[theenemy].armor1.item[l]);
+							videoprinterarg2(l+1, 0, "Armor item %d is %s", l + 1, myai[theenemy].armor1.item[l]);
 							l++;
 						}
 					}
 					
-					mvprintw(l+1, 0, "Press d to move to next category\n");
+					videoprinternorm(l+1, 0, "Press d to move to next category\n");
 					
 					l++;
 
-					mvprintw(l+1, 0, "Press k to move to next enemy stat\n");
+					videoprinternorm(l+1, 0, "Press k to move to next enemy stat\n");
 
 					l++;
 					
-					mvprintw(l+1, 0, "Press anything else to exit this menu\n");
+					videoprinternorm(l+1, 0, "Press anything else to exit this menu\n");
 					
 					l = 0;
 					
@@ -2409,7 +2427,7 @@ beginning:
 					
 					refresh();
 				} 
-				while((gotcharacter = getch()) == 'd' || gotcharacter == 'k');
+				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
 					
 				list = 0;
 				l = 0;
@@ -2435,17 +2453,17 @@ beginning:
 				
 				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
 				{
-					mvprintw(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l], l+1);
+					videoprinterarg2(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l]);
 					l++;
 				}
 
-				mvprintw(l, 0, "press w to move up\n");
+				videoprinternorm(l, 0, "press w to move up\n");
 				l++;
-				mvprintw(l, 0, "press s to move down\n");
+				videoprinternorm(l, 0, "press s to move down\n");
 				l++;
-				mvprintw(l, 0, "press e to select\n");
+				videoprinternorm(l, 0, "press e to select\n");
 				l++;
-				mvprintw(l, 0, "press d to move to next category\n");
+				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
 				
 				int u = 0;
@@ -2454,7 +2472,7 @@ beginning:
 
 				refresh();
 
-				while((gotcharacter = getch()) != 'e')
+				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
 				{
 					if(gotcharacter == 'w')
 					{
@@ -2510,7 +2528,7 @@ beginning:
 							
 							while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
 							{
-								mvprintw(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l], l+1);
+								videoprinterarg2(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l]);
 								l++;
 							}
 						}
@@ -2521,7 +2539,7 @@ beginning:
 
 							while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
 							{
-								mvprintw(l, 0, "Weapon item %d is %s.\n", l + 1, myplayer[i].weapontype.item[l], l+1);
+								videoprinterarg2(l, 0, "Weapon item %d is %s.\n", l + 1, myplayer[i].weapontype.item[l]);
 								l++;
 							}
 						}
@@ -2532,7 +2550,7 @@ beginning:
 
 							while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
 							{
-								mvprintw(l, 0, "Shield item %d is %s.\n", l + 1, myplayer[i].shieldstype.item[l], l+1);
+								videoprinterarg2(l, 0, "Shield item %d is %s.\n", l + 1, myplayer[i].shieldstype.item[l]);
 								l++;
 							}
 						}
@@ -2543,18 +2561,18 @@ beginning:
 
 							while(strcmp(myplayer[i].armor1.item[l], "Empty") != 0)
 							{
-								mvprintw(l, 0, "Armor item %d is %s.\n", l + 1, myplayer[i].armor1.item[l], l+1);
+								videoprinterarg2(l, 0, "Armor item %d is %s.\n", l + 1, myplayer[i].armor1.item[l]);
 								l++;
 							}
 						}
 
-						mvprintw(l, 0, "press w to move up\n");
+						videoprinternorm(l, 0, "press w to move up\n");
 						l++;
-						mvprintw(l, 0, "press s to move down\n");
+						videoprinternorm(l, 0, "press s to move down\n");
 						l++;
-						mvprintw(l, 0, "press e to select\n");
+						videoprinternorm(l, 0, "press e to select\n");
 						l++;
-						mvprintw(l, 0, "press d to move to next category\n");
+						videoprinternorm(l, 0, "press d to move to next category\n");
 						l++;
 					}
 
@@ -3150,7 +3168,7 @@ beginning:
 			{
 				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy))
 				{
-					mvprintw(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+					videoprinternorm(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
 				}
 			}
 		
@@ -3158,7 +3176,7 @@ beginning:
 			{
 				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy))
 				{
-					   mvprintw(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+					   videoprinternorm(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
 				}
 			}
 		
@@ -3166,7 +3184,7 @@ beginning:
 			{
 				if((hitpointspos1.y + i) > positiony)
 				{
-					mvprintw(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped, myplayer[i].armor1.equiped, myplayer[i].armor1.protection);
+					videoprinterstats(hitpointspos1.y + i - positiony, hitpointspos1.x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myplayer[i].count, myplayer[i].character1.character, myplayer[i].hitpoints, myplayer[i].magicpoints, myplayer[i].weapontype.damage + myplayer[i].character1.attack, myplayer[i].magic1.equiped, myplayer[i].magic1.damage, myplayer[i].defensepoints + myplayer[i].shieldstype.damage, myplayer[i].weapontype.equiped, myplayer[i].shieldstype.equiped, myplayer[i].armor1.equiped, myplayer[i].armor1.protection);
 				}
 			}
 
@@ -3174,7 +3192,7 @@ beginning:
 			{
 				if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
 				{
-					mvprintw(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
+					videoprinterstats(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 				}
 			}
 
@@ -3330,8 +3348,8 @@ beginning:
 	
 		if(strcmp(winner, "ai") == 0)
 		{
-			mvprintw(0, 0, "You lose the ai won the game is over.");
-			mvprintw(1, 0, "Press y to end");
+			videoprinternorm(0, 0, "You lose the ai won the game is over.");
+			videoprinternorm(1, 0, "Press y to end");
 
 			refresh();
 
@@ -3340,7 +3358,7 @@ beginning:
 				remove("SaveFile.txt");
 			}
 
-			ch = getch();
+			ch = (RETURNTYPEVIDEO)inputgetter();
 
 			if(ch != 'y')
 			{
@@ -3360,8 +3378,8 @@ beginning:
 
 		if(roundssofar == rounds)
 		{
-			mvprintw(0, 0, "You have beat the game. Congratulations.");
-			mvprintw(1, 0, "Press y to end");
+			videoprinternorm(0, 0, "You have beat the game. Congratulations.");
+			videoprinternorm(1, 0, "Press y to end");
 
 			refresh();
 
@@ -3370,7 +3388,7 @@ beginning:
 				remove("SaveFile.txt");
 			}
 
-			ch = getch();
+			ch = (RETURNTYPEVIDEO)inputgetter();
 
 			if(ch != 'y')
 			{
@@ -3388,13 +3406,13 @@ beginning:
 			return 0;
 		}
 
-		mvprintw(0, 0, "The winner of the %d battle is %s.", roundssofar, winner);
-		mvprintw(1, 0, "You have %d battle to go", rounds - roundssofar);
-		mvprintw(2, 0, "Press y to end"); 
+		videoprinterarg2(0, 0, "The winner of the %d battle is %s.", roundssofar, winner);
+		videoprinterarg1(1, 0, "You have %d battle to go", rounds - roundssofar);
+		videoprinternorm(2, 0, "Press y to end"); 
 	
 		refresh();
 	
-		ch = getch();
+		ch = (RETURNTYPEVIDEO)inputgetter();
 
 		if(ch != 'y')
 		{
@@ -3524,4 +3542,81 @@ void loadstring(int lineamount1, char** element, FILE* fp1)
 	}
 
 	element[0] = strndup(lineBuffer, lineamount - 1);
+}
+
+void initvideo(int hitpointsy, int hitpointsx)
+{
+	#ifdef INITNCURSESNOW
+	
+	initscr();
+		
+	resize_term(hitpointsy, hitpointsx);
+
+	noecho();
+	
+	cbreak();
+
+	#endif
+}
+
+int ncursesinput()
+{
+	return getch();
+}
+
+void* inputgetter()
+{
+	#ifdef INITNCURSESNOW
+
+	ncursesinput();
+
+	#endif
+}
+
+void ncursesprint(int y, int x, char* c)
+{
+	mvprintw(y, x, c);
+}
+
+void ncursesprintarg1(int y, int x, char* c, int d)
+{
+	mvprintw(y, x, c, d);
+}
+
+void ncursesprintarg2(int y, int x, char* c, int d, char* e)
+{
+	mvprintw(y, x, c, d, e);
+}
+
+void ncursesprintstats(int y, int x, char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1)
+{
+	mvprintw(y, x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
+}
+
+void videoprinternorm(int y, int x, char *c)
+{
+	#ifdef INITNCURSESNOW
+	ncursesprint(y, x, c);
+	#endif
+}
+
+void videoprinterarg1(int y, int x, char* c, int d)
+{
+	#ifdef INITNCURSESNOW
+	ncursesprintarg1(y, x, c, d);
+	#endif
+}
+
+void videoprinterarg2(int y, int x, char* c, int d, char* e)
+{
+	#ifdef INITNCURSESNOW
+	ncursesprintarg2(y, x, c, d, e);
+	#endif
+}
+
+void videoprinterstats(int y, int x, char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1)
+{
+	#ifdef INITNCURSESNOW
+	ncursesprintstats(y, x, m1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
+	#endif
 }

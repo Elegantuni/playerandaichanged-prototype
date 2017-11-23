@@ -1,5 +1,5 @@
 playerandai1:
-	gcc -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` -DFREEBSD -DWINDOWS
+	gcc -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW
 	
 clean:
 	rm -f playerandai1
