@@ -1647,9 +1647,11 @@ beginning:
 				videoprinterstats(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 			}
 		}
-	
-		move(myplayer[0].y - positiony, myplayer[0].x);
 
+		#ifdef INITNCURSESNOW
+		move(myplayer[0].y - positiony, myplayer[0].x);
+		#endif
+		
 		refresh();
 	
 		int i = 0;
@@ -2079,8 +2081,10 @@ beginning:
 
 				(RETURNTYPEVIDEO)inputgetter();
 
+				#ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
-
+				#endif
+				
 				refresh();
 			}
 		
@@ -2225,8 +2229,10 @@ beginning:
 					positiony = 0;
 				}
 
+				#ifdef INITNCURSESNOW
 				move(positiony, 0);
-
+				#endif
+	
 				refresh();
 			}
 
@@ -2241,7 +2247,9 @@ beginning:
 					positiony = (terminalend + 1 - hitpointsy);
 				}
 
+				#ifdef INITNCURSESNOW
 				move(positiony, 0);
+				#endif
 
 				refresh();
 			}
@@ -2327,17 +2335,21 @@ beginning:
 
 					l = 0;
 
+					#ifdef INITNCURSESNOW
 					move(0, 0);
-
+					#endif
+					
 					refresh();
 				} 
 				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
 
 				list = 0;
 				l = 0;
-				
-				move(myplayer[i].y, myplayer[i].x);
 
+				#ifdef INITNCURSESNOW
+				move(myplayer[i].y, myplayer[i].x);
+				#endif
+				
 				clear();
 
 				refresh();
@@ -2425,8 +2437,10 @@ beginning:
 					videoprinternorm(l+1, 0, "Press anything else to exit this menu\n");
 					
 					l = 0;
-					
+
+					#ifdef INITNCURSESNOW
 					move(0, 0);
+					#endif
 					
 					refresh();
 				} 
@@ -2435,9 +2449,11 @@ beginning:
 				list = 0;
 				l = 0;
 				theenemy = 0;
-									
+				
+				#ifdef INITNCURSESNOW					
 				move(myplayer[i].y, myplayer[i].x);
-					
+				#endif
+				
 				clear();
 					
 				refresh();
@@ -2474,8 +2490,10 @@ beginning:
 				
 				int u = 1;
 
+				#ifdef INITNCURSESNOW
 				move(u, 0);
-
+				#endif
+				
 				refresh();
 
 				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
@@ -2594,8 +2612,10 @@ beginning:
 						l++;
 					}
 
+					#ifdef INITNCURSESNOW
 					move(u, 0);
-
+					#endif
+					
 					refresh();
 				}
 
@@ -2713,7 +2733,9 @@ beginning:
 				l = 0;
 				u = 1;
 
+				#ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
+				#endif
 				
 				clear();
 				
@@ -3227,8 +3249,10 @@ beginning:
 				}
 			}
 
+			#ifdef INITNCURSESNOW
 			move(myplayer[i].y - positiony, myplayer[i].x);
-
+			#endif
+			
 			refresh();
 		}
 
