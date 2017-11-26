@@ -2285,36 +2285,36 @@ beginning:
 					
 					if(list == 0)
 					{
-						while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+						while(strcmp(myplayer[i].magic1.magicitems[l-1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Magic item %d is %s", l + 1, myplayer[i].magic1.magicitems[l]);
+							videoprinterarg2(l, 0, "Magic item %d is %s", l, myplayer[i].magic1.magicitems[l-1]);
 							l++;
 						}
 					}
 
 					if(list == 1)
 					{
-						while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
+						while(strcmp(myplayer[i].weapontype.item[l-1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Weapon item %d is %s", l + 1, myplayer[i].weapontype.item[l]);
+							videoprinterarg2(l, 0, "Weapon item %d is %s", l, myplayer[i].weapontype.item[l-1]);
 							l++;
 						}
 					}
 
 					if(list == 2)
 					{
-						while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
+						while(strcmp(myplayer[i].shieldstype.item[l-1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Shield item %d is %s", l + 1, myplayer[i].shieldstype.item[l]);
+							videoprinterarg2(l, 0, "Shield item %d is %s", l, myplayer[i].shieldstype.item[l-1]);
 							l++;
 						}
 					}
 
 					if(list == 3)
 					{
-						while(strcmp(myplayer[i].armor1.item[l], "Empty") != 0)
+						while(strcmp(myplayer[i].armor1.item[l-1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Armor item %d is %s", l + 1, myplayer[i].armor1.item[l]);
+							videoprinterarg2(l, 0, "Armor item %d is %s", l, myplayer[i].armor1.item[l-1]);
 							l++;
 						}
 					}
@@ -2454,12 +2454,12 @@ beginning:
 				
 				int l = 0;
 				
-				videoprinterarg1(l, 0 "Player %d", i+1);
+				videoprinterarg1(l, 0, "Player %d", i+1);
 				l++;
-				
-				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+
+				while(strcmp(myplayer[i].magic1.magicitems[l-1], "Empty") != 0)
 				{
-					videoprinterarg2(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l]);
+					videoprinterarg2(l, 0, "Magic item %d is %s.\n", l, myplayer[i].magic1.magicitems[l-1]);
 					l++;
 				}
 
@@ -2472,7 +2472,7 @@ beginning:
 				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
 				
-				int u = 0;
+				int u = 1;
 
 				move(u, 0);
 
@@ -2484,9 +2484,9 @@ beginning:
 					{
 						u--;
 
-						if(u < 0)
+						if(u < 1)
 						{
-							u = 0;
+							u = 1;
 						}
 					}
 
@@ -2494,24 +2494,24 @@ beginning:
 					{
 						u++;
 
-						if(u > (myplayer[i].magic1.magiccount - 1) && list == 0)
+						if(u > (myplayer[i].magic1.magiccount) && list == 0)
 						{
-							u = myplayer[i].magic1.magiccount - 1;
+							u = myplayer[i].magic1.magiccount;
 						}
 
-						if(u > (myplayer[i].weapontype.weaponcount - 1) && list == 1)
+						if(u > (myplayer[i].weapontype.weaponcount) && list == 1)
 						{
-							u = myplayer[i].weapontype.weaponcount - 1;
+							u = myplayer[i].weapontype.weaponcount;
 						}
 
-						if(u > (myplayer[i].shieldstype.shieldcount - 1) && list == 2)
+						if(u > (myplayer[i].shieldstype.shieldcount) && list == 2)
 						{
-							u = myplayer[i].shieldstype.shieldcount - 1;
+							u = myplayer[i].shieldstype.shieldcount;
 						}
 
-						if(u > (myplayer[i].armor1.armorcount - 1) && list == 3)
+						if(u > (myplayer[i].armor1.armorcount) && list == 3)
 						{
-							u = myplayer[i].armor1.armorcount - 1;
+							u = myplayer[i].armor1.armorcount;
 						}
 					}
 
@@ -2524,17 +2524,20 @@ beginning:
 							list = 0;
 						}
 
-						u = 0;
+						u = 1;
 
 						clear();
 
 						if(list == 0)
 						{
 							l = 0;
+
+							videoprinterarg1(l, 0, "Player %d", i+1);
+							l++;
 							
-							while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
+							while(strcmp(myplayer[i].magic1.magicitems[l-1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Magic item %d is %s.\n", l + 1, myplayer[i].magic1.magicitems[l]);
+								videoprinterarg2(l, 0, "Magic item %d is %s.\n", l, myplayer[i].magic1.magicitems[l-1]);
 								l++;
 							}
 						}
@@ -2542,10 +2545,13 @@ beginning:
 						if(list == 1)
 						{
 							l = 0;
+							
+							videoprinterarg1(l, 0, "Player %d", i+1);
+							l++;
 
-							while(strcmp(myplayer[i].weapontype.item[l], "Empty") != 0)
+							while(strcmp(myplayer[i].weapontype.item[l-1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Weapon item %d is %s.\n", l + 1, myplayer[i].weapontype.item[l]);
+								videoprinterarg2(l, 0, "Weapon item %d is %s.\n", l, myplayer[i].weapontype.item[l-1]);
 								l++;
 							}
 						}
@@ -2554,9 +2560,12 @@ beginning:
 						{
 							l = 0;
 
-							while(strcmp(myplayer[i].shieldstype.item[l], "Empty") != 0)
+							videoprinterarg1(l, 0, "Player %d", i+1);
+							l++;
+
+							while(strcmp(myplayer[i].shieldstype.item[l-1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Shield item %d is %s.\n", l + 1, myplayer[i].shieldstype.item[l]);
+								videoprinterarg2(l, 0, "Shield item %d is %s.\n", l, myplayer[i].shieldstype.item[l-1]);
 								l++;
 							}
 						}
@@ -2564,10 +2573,13 @@ beginning:
 						if(list == 3)
 						{
 							l = 0;
+							
+							videoprinterarg1(l, 0, "Player %d", i+1);
+							l++;
 
-							while(strcmp(myplayer[i].armor1.item[l], "Empty") != 0)
+							while(strcmp(myplayer[i].armor1.item[l-1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Armor item %d is %s.\n", l + 1, myplayer[i].armor1.item[l]);
+								videoprinterarg2(l, 0, "Armor item %d is %s.\n", l, myplayer[i].armor1.item[l-1]);
 								l++;
 							}
 						}
@@ -2591,7 +2603,7 @@ beginning:
 				{
 					myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u];
 
-					if(u == 0)
+					if(u == 1)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.randommagic];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.randommagic];
@@ -2599,7 +2611,7 @@ beginning:
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
 					}
 
-					if(u == 1)
+					if(u == 2)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic];
@@ -2607,7 +2619,7 @@ beginning:
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic];
 					}
 
-					if(u == 2)
+					if(u == 3)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
@@ -2620,7 +2632,7 @@ beginning:
 
 				if(list == 1)
 				{
-					if(u == 0)
+					if(u == 1)
 					{
 						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.randomweapon];
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.randomweapon];
@@ -2628,7 +2640,7 @@ beginning:
 						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.randomweapon];
 					}
 
-					if(u == 1)
+					if(u == 2)
 					{
 						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.nextrandomweapon];
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon];
@@ -2636,7 +2648,7 @@ beginning:
 						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.nextrandomweapon];
 					}
 
-					if(u == 2)
+					if(u == 3)
 					{
 						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.nextrandomweapon2];
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon2];
@@ -2647,21 +2659,21 @@ beginning:
 
 				if(list == 2)
 				{
-					if(u == 0)
+					if(u == 1)
 					{
 						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.randomshield];
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.randomshield];
 						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.randomshield];
 					}
 
-					if(u == 1)
+					if(u == 2)
 					{
 						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.nextrandomshield];
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield];
 						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.nextrandomshield];
 					}
 
-					if(u == 2)
+					if(u == 3)
 					{
 						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield2];
@@ -2673,7 +2685,7 @@ beginning:
 
 				if(list == 3)
 				{
-					if(u == 0)
+					if(u == 1)
 					{
 						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
 						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.randomarmor];
@@ -2681,7 +2693,7 @@ beginning:
 						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.randomarmor];
 					}
 
-					if(u == 1)
+					if(u == 2)
 					{
 						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.nextrandomarmor];
 						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.nextrandomarmor];
@@ -2689,7 +2701,7 @@ beginning:
 						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.nextrandomarmor];
 					}
 
-					if(u == 2)
+					if(u == 3)
 					{
 						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.nextrandomarmor2];
 						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.nextrandomarmor2];
@@ -2699,7 +2711,7 @@ beginning:
 				}
 
 				l = 0;
-				u = 0;
+				u = 1;
 
 				move(myplayer[i].y, myplayer[i].x);
 				
