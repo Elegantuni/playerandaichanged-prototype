@@ -2280,6 +2280,9 @@ beginning:
 						list = 0;
 					}
 
+					videoprinterarg1(l, 0, "Player %d", i+1);
+					l++;
+					
 					if(list == 0)
 					{
 						while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
@@ -2450,6 +2453,9 @@ beginning:
 				clear();
 				
 				int l = 0;
+				
+				videoprinterarg1(l, 0 "Player %d", i+1);
+				l++;
 				
 				while(strcmp(myplayer[i].magic1.magicitems[l], "Empty") != 0)
 				{
