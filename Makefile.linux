@@ -1,5 +1,5 @@
 playerandai1:
-	$(CC) -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` -DLINUX -DINITNCURSESNOW -lbsd
+	$(CC) -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -lbsd
 	
 clean:
 	rm -f playerandai1
