@@ -1,15 +1,38 @@
+#ifdef INITWINDOWSNOW
+#include <curses.h>
+#include <Windows.h>
+#include <tchar.h>
+int fileExists(TCHAR *file);
+#endif
+
+#ifdef INITNCURSESNOW2
 #include <ncurses.h>
+#endif
+
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+
+#ifdef INITNCURSESNOW2
 #include <unistd.h>
+#endif
+
 #include <stdio.h>
 #include <errno.h>
 #include <ctype.h>
 #include <limits.h>
+
+#ifdef INITNCURSESNOW2
 #include <sys/ioctl.h>
+#endif
+
+#if defined(_MSC_VER)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
 
 #ifdef FREEBSD
+#if !defined(_MSC_VER)
 size_t strnlen(const char *str, size_t len)
 {
     for (size_t size = 0; size < len; size++)
@@ -19,11 +42,11 @@ size_t strnlen(const char *str, size_t len)
     }
     return len;
 }
-
+#endif
 char *strndup(const char *str, size_t len)
 {
     size_t act = strnlen(str, len);
-    char *dst = malloc(act + 1);
+    char *dst = (char *)malloc(act + 1);
     if (dst != 0)
     {
         memmove(dst, str, act);
@@ -57,9 +80,8 @@ char *strndup(const char *str, size_t len)
 #define allarmor 5
 #define allarmorenemies 5
 
-ssize_t getline(char **restrict lineptr, size_t *restrict n, FILE *restrict stream);
-void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp);
 void writestring(char lineBuffer[], int lineamount1, char* element, FILE* fp);
+void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp);
 void loadnumber(int lineamount1, int* element, FILE* fp1);
 void loadstring(int lineamount1, char** element, FILE* fp1);
 void initvideo(int hitpointsy, int hitpointsx);
@@ -301,7 +323,11 @@ int main(int argc, char *argv[])
 	#define playermagiclist allmagics
 	#define aimagiclist allmagicsenemies
 	#define rounds 50
+#if defined(_MSC_VER)
+	int lineamount = 128;
+#else
 	#define lineamount 128
+#endif
 	int terminalend = maxenemies + maxplayers + 50;
 	int savefile = 0;
 
@@ -323,7 +349,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	
-	#ifdef INITNCURSESNOW
+	#ifdef INITNCURSESNOW2
 	
 	int row;
 	int col;
@@ -349,8 +375,12 @@ int main(int argc, char *argv[])
 	#endif
 
 	FILE *fp1;
-
+#if defined(_MSC_VER)
+	char lineBuffer[128];
+	lineamount = 128;
+#else
 	char lineBuffer[lineamount];
+#endif
 	ssize_t len = 0;
 
 	for(int j = 0; j < lineamount; j++)
@@ -880,9 +910,9 @@ beginning:
 
 			myplayer[i].armor1.armorcount++;
 
-			for(int i = 0; i < allarmor; i++)
+			for (int j = 0; j < allarmor; j++)
 			{
-				myplayer[i].armor1.protections[i] = playerarmorpts[i];
+				myplayer[i].armor1.protections[j] = playerarmorpts[j];
 			}
 
 			myplayer[i].armor1.rangey = playerarmordistancey[myplayer[i].armor1.randomarmor];
@@ -1021,9 +1051,9 @@ beginning:
 				myai[i].shieldsdamage1.damage[j] = shielddamageenemies[j];
 			}
 
-			for(int i = 0; i < allarmorenemies; i++)
+			for(int j = 0; j < allarmorenemies; j++)
 			{
-				myai[i].armor1.protections[i] = aiarmorpts[i];
+				myai[i].armor1.protections[j] = aiarmorpts[j];
 			}
 
 			myai[i].magic1.magiccount = 0;
@@ -1184,10 +1214,13 @@ beginning:
 		{
 			myai[i].weapontype.equiped = myai[i].weapontype.item[myai[i].randomitem];
 		}
-
+		
+#if defined(_MSC_VER)
+		if(fileExists("SaveFile.txt"))
+#else
 		if(access("SaveFile.txt", F_OK ) != -1)
+#endif
 		{
-			int c;
 			int j = 0;
 		
 			fp1 = fopen("SaveFile.txt", "r");
@@ -1572,9 +1605,7 @@ beginning:
 
 			remove("SaveFile.txt");
 			
-			#ifdef FREEBSD
 			savefile = 1;
-			#endif
 		}
 	
 		for(int i = 0; i < maxplayers; i++)
@@ -1647,24 +1678,25 @@ beginning:
 				videoprinterstats(hitpointspos1.ay + i - positiony, hitpointspos1.ax, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 			}
 		}
-
-		#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 		move(myplayer[0].y - positiony, myplayer[0].x);
-		#endif
-		
+
 		refresh();
-	
+#endif
+
 		int i = 0;
 	
 		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
 			if(ch == 'S')
 			{
+#ifdef INITNCURSESNOW
 				clear();
-
+#endif
 				videoprinternorm(0, 0, "Saving now and then exiting");
-
+#ifdef INITNCURSESNOW
 				refresh();
+#endif
 
 				fp1 = fopen("SaveFile.txt", "w");
 
@@ -2047,14 +2079,18 @@ beginning:
 
 				fclose(fp1);
 
+#ifdef INITNCURSESNOW
 				endwin();
+#endif
 
 				return 0;
 			}
 
 			if(ch == 'h')
 			{
+#ifdef INITNCURSESNOW
 				clear();
+#endif
 
 				videoprinternorm(0, 0, "Press a to move left");
 				videoprinternorm(1, 0, "Press d to move right");
@@ -2077,18 +2113,21 @@ beginning:
 				videoprinternorm(18, 0, "Press j to scroll down");
 				videoprinternorm(19, 0, "Press key to quit help");
 
+#ifdef INITNCURSESNOW
 				refresh();
+#endif
 
 				(RETURNTYPEVIDEO)inputgetter();
 
-				#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
-				#endif
-				
+
 				refresh();
+#endif
 			}
-		
+#ifdef INITNCURSESNOW
 			clear();
+#endif
 
 			if(ch == 'p')
 			{
@@ -2220,7 +2259,9 @@ beginning:
 
 			if(ch == 'u')
 			{
+#ifdef INITNCURSESNOW
 				clear();
+#endif
 
 				positiony--;
 				
@@ -2229,16 +2270,18 @@ beginning:
 					positiony = 0;
 				}
 
-				#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 				move(positiony, 0);
-				#endif
-	
+
 				refresh();
+#endif
 			}
 
 			if(ch == 'j')
 			{
+#ifdef INITNCURSESNOW
 				clear();
+#endif
 
 				positiony++;
 				
@@ -2247,11 +2290,11 @@ beginning:
 					positiony = (terminalend + 1 - hitpointsy);
 				}
 
-				#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 				move(positiony, 0);
-				#endif
 
 				refresh();
+#endif
 			}
 		
 			if(ch == 's')
@@ -2266,63 +2309,68 @@ beginning:
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(ch == 'c')
+			if (ch == 'c')
 			{
+#ifdef INITNCURSESNOW
 				clear();
+#endif
 
 				int list = 0;
 				int l = 0;
+#ifdef INITNCURSESNOW
 				int gotcharacter = '0';
-
+#endif
 				do
 				{
+#ifdef INITNCURSESNOW
 					clear();
+#endif
 
-					if(gotcharacter == 'd')
+					if (gotcharacter == 'd')
 					{
 						list++;
 					}
 
-					if(list > 3)
+					if (list > 3)
 					{
 						list = 0;
 					}
 
-					videoprinterarg1(l, 0, "Player %d", i+1);
+					videoprinterarg1(l, 0, "Player %d", i + 1);
 					l++;
-					
-					if(list == 0)
+
+					if (list == 0)
 					{
-						while(strcmp(myplayer[i].magic1.magicitems[l-1], "Empty") != 0)
+						while (strcmp(myplayer[i].magic1.magicitems[l - 1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Magic item %d is %s", l, myplayer[i].magic1.magicitems[l-1]);
+							videoprinterarg2(l, 0, "Magic item %d is %s", l, myplayer[i].magic1.magicitems[l - 1]);
 							l++;
 						}
 					}
 
-					if(list == 1)
+					if (list == 1)
 					{
-						while(strcmp(myplayer[i].weapontype.item[l-1], "Empty") != 0)
+						while (strcmp(myplayer[i].weapontype.item[l - 1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Weapon item %d is %s", l, myplayer[i].weapontype.item[l-1]);
+							videoprinterarg2(l, 0, "Weapon item %d is %s", l, myplayer[i].weapontype.item[l - 1]);
 							l++;
 						}
 					}
 
-					if(list == 2)
+					if (list == 2)
 					{
-						while(strcmp(myplayer[i].shieldstype.item[l-1], "Empty") != 0)
+						while (strcmp(myplayer[i].shieldstype.item[l - 1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Shield item %d is %s", l, myplayer[i].shieldstype.item[l-1]);
+							videoprinterarg2(l, 0, "Shield item %d is %s", l, myplayer[i].shieldstype.item[l - 1]);
 							l++;
 						}
 					}
 
-					if(list == 3)
+					if (list == 3)
 					{
-						while(strcmp(myplayer[i].armor1.item[l-1], "Empty") != 0)
+						while (strcmp(myplayer[i].armor1.item[l - 1], "Empty") != 0)
 						{
-							videoprinterarg2(l, 0, "Armor item %d is %s", l, myplayer[i].armor1.item[l-1]);
+							videoprinterarg2(l, 0, "Armor item %d is %s", l, myplayer[i].armor1.item[l - 1]);
 							l++;
 						}
 					}
@@ -2335,39 +2383,46 @@ beginning:
 
 					l = 0;
 
-					#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 					move(0, 0);
-					#endif
-					
+
 					refresh();
-				} 
-				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
+#endif
+				} while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
 
 				list = 0;
 				l = 0;
 
-				#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
-				#endif
-				
+
 				clear();
 
 				refresh();
+#endif
 			}
+
 
 			if(ch == 'i')
 			{
+#ifdef INITNCURSESNOW
 				clear();
-				
+#endif
+
 				int list = 0;
 				int l = 0;
+#ifdef INITNCURSESNOW
 				int gotcharacter = '0';
+#endif
+
 				int theenemy = 0;
 
 				do
 				{
+#ifdef INITNCURSESNOW
 					clear();
-					
+#endif
+
 					if(gotcharacter == 'k')
 					{
 						theenemy++;
@@ -2437,45 +2492,48 @@ beginning:
 					videoprinternorm(l+1, 0, "Press anything else to exit this menu\n");
 					
 					l = 0;
-
-					#ifdef INITNCURSESNOW
+					
+#ifdef INITNCURSESNOW
 					move(0, 0);
-					#endif
 					
 					refresh();
+#endif
 				} 
 				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
 					
 				list = 0;
 				l = 0;
 				theenemy = 0;
-				
-				#ifdef INITNCURSESNOW					
+						
+#ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
-				#endif
-				
+					
 				clear();
 					
 				refresh();
+#endif
 			}
-
-			if(ch == 'M')
+				
+			if (ch == 'M')
 			{
+#ifdef INITNCURSESNOW
 				int gotcharacter;
-				int keypressed;
+#endif
 
 				int list = 0;
 
+#ifdef INITNCURSESNOW
 				clear();
-				
+#endif
+
 				int l = 0;
-				
-				videoprinterarg1(l, 0, "Player %d", i+1);
+
+				videoprinterarg1(l, 0, "Player %d", i + 1);
 				l++;
 
-				while(strcmp(myplayer[i].magic1.magicitems[l-1], "Empty") != 0)
+				while (strcmp(myplayer[i].magic1.magicitems[l - 1], "Empty") != 0)
 				{
-					videoprinterarg2(l, 0, "Magic item %d is %s.\n", l, myplayer[i].magic1.magicitems[l-1]);
+					videoprinterarg2(l, 0, "Magic item %d is %s.\n", l, myplayer[i].magic1.magicitems[l - 1]);
 					l++;
 				}
 
@@ -2487,117 +2545,123 @@ beginning:
 				l++;
 				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
-				
+
 				int u = 1;
 
-				#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 				move(u, 0);
-				#endif
-				
-				refresh();
 
-				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
+				refresh();
+#endif
+				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
 				{
-					if(gotcharacter == 'w')
+					if (gotcharacter == 'w')
 					{
 						u--;
 
-						if(u < 1)
+						if (u < 1)
 						{
 							u = 1;
 						}
 					}
 
-					if(gotcharacter == 's')
+					if (gotcharacter == 's')
 					{
 						u++;
 
-						if(u > (myplayer[i].magic1.magiccount) && list == 0)
+						if (u > 3)
+						{
+							u = 3;
+						}
+
+						if (u >(myplayer[i].magic1.magiccount) && list == 0)
 						{
 							u = myplayer[i].magic1.magiccount;
 						}
 
-						if(u > (myplayer[i].weapontype.weaponcount) && list == 1)
+						if (u > (myplayer[i].weapontype.weaponcount) && list == 1)
 						{
 							u = myplayer[i].weapontype.weaponcount;
 						}
 
-						if(u > (myplayer[i].shieldstype.shieldcount) && list == 2)
+						if (u > (myplayer[i].shieldstype.shieldcount) && list == 2)
 						{
 							u = myplayer[i].shieldstype.shieldcount;
 						}
 
-						if(u > (myplayer[i].armor1.armorcount) && list == 3)
+						if (u > (myplayer[i].armor1.armorcount) && list == 3)
 						{
 							u = myplayer[i].armor1.armorcount;
 						}
 					}
 
-					if(gotcharacter == 'd')
+					if (gotcharacter == 'd')
 					{
 						list++;
 
-						if(list > 3)
+						if (list > 3)
 						{
 							list = 0;
 						}
 
 						u = 1;
 
+#ifdef INITNCURSESNOW
 						clear();
+#endif
 
-						if(list == 0)
+						if (list == 0)
 						{
 							l = 0;
 
-							videoprinterarg1(l, 0, "Player %d", i+1);
+							videoprinterarg1(l, 0, "Player %d", i + 1);
 							l++;
-							
-							while(strcmp(myplayer[i].magic1.magicitems[l-1], "Empty") != 0)
+
+							while (strcmp(myplayer[i].magic1.magicitems[l - 1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Magic item %d is %s.\n", l, myplayer[i].magic1.magicitems[l-1]);
+								videoprinterarg2(l, 0, "Magic item %d is %s.\n", l, myplayer[i].magic1.magicitems[l - 1]);
 								l++;
 							}
 						}
 
-						if(list == 1)
+						if (list == 1)
 						{
 							l = 0;
-							
-							videoprinterarg1(l, 0, "Player %d", i+1);
+
+							videoprinterarg1(l, 0, "Player %d", i + 1);
 							l++;
 
-							while(strcmp(myplayer[i].weapontype.item[l-1], "Empty") != 0)
+							while (strcmp(myplayer[i].weapontype.item[l - 1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Weapon item %d is %s.\n", l, myplayer[i].weapontype.item[l-1]);
+								videoprinterarg2(l, 0, "Weapon item %d is %s.\n", l, myplayer[i].weapontype.item[l - 1]);
 								l++;
 							}
 						}
 
-						if(list == 2)
+						if (list == 2)
 						{
 							l = 0;
 
-							videoprinterarg1(l, 0, "Player %d", i+1);
+							videoprinterarg1(l, 0, "Player %d", i + 1);
 							l++;
 
-							while(strcmp(myplayer[i].shieldstype.item[l-1], "Empty") != 0)
+							while (strcmp(myplayer[i].shieldstype.item[l - 1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Shield item %d is %s.\n", l, myplayer[i].shieldstype.item[l-1]);
+								videoprinterarg2(l, 0, "Shield item %d is %s.\n", l, myplayer[i].shieldstype.item[l - 1]);
 								l++;
 							}
 						}
 
-						if(list == 3)
+						if (list == 3)
 						{
 							l = 0;
-							
-							videoprinterarg1(l, 0, "Player %d", i+1);
+
+							videoprinterarg1(l, 0, "Player %d", i + 1);
 							l++;
 
-							while(strcmp(myplayer[i].armor1.item[l-1], "Empty") != 0)
+							while (strcmp(myplayer[i].armor1.item[l - 1], "Empty") != 0)
 							{
-								videoprinterarg2(l, 0, "Armor item %d is %s.\n", l, myplayer[i].armor1.item[l-1]);
+								videoprinterarg2(l, 0, "Armor item %d is %s.\n", l, myplayer[i].armor1.item[l - 1]);
 								l++;
 							}
 						}
@@ -2612,18 +2676,18 @@ beginning:
 						l++;
 					}
 
-					#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 					move(u, 0);
-					#endif
-					
+
 					refresh();
+#endif
 				}
 
-				if(list == 0)
+				if (list == 0)
 				{
-					myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u];
+					myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u-1];
 
-					if(u == 1)
+					if (u == 1)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.randommagic];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.randommagic];
@@ -2631,7 +2695,7 @@ beginning:
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
 					}
 
-					if(u == 2)
+					if (u == 2)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic];
@@ -2639,7 +2703,7 @@ beginning:
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic];
 					}
 
-					if(u == 3)
+					if (u == 3)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
@@ -2650,9 +2714,9 @@ beginning:
 					myplayer[i].magicattack = myplayer[i].magic1.damage;
 				}
 
-				if(list == 1)
+				if (list == 1)
 				{
-					if(u == 1)
+					if (u == 1)
 					{
 						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.randomweapon];
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.randomweapon];
@@ -2660,7 +2724,7 @@ beginning:
 						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.randomweapon];
 					}
 
-					if(u == 2)
+					if (u == 2)
 					{
 						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.nextrandomweapon];
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon];
@@ -2668,7 +2732,7 @@ beginning:
 						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.nextrandomweapon];
 					}
 
-					if(u == 3)
+					if (u == 3)
 					{
 						myplayer[i].weapontype.equiped = item[myplayer[i].weapontype.nextrandomweapon2];
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon2];
@@ -2677,23 +2741,23 @@ beginning:
 					}
 				}
 
-				if(list == 2)
+				if (list == 2)
 				{
-					if(u == 1)
+					if (u == 1)
 					{
 						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.randomshield];
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.randomshield];
 						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.randomshield];
 					}
 
-					if(u == 2)
+					if (u == 2)
 					{
 						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.nextrandomshield];
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield];
 						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.nextrandomshield];
 					}
 
-					if(u == 3)
+					if (u == 3)
 					{
 						myplayer[i].shieldstype.equiped = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield2];
@@ -2703,9 +2767,9 @@ beginning:
 					myplayer[i].shield = myplayer[i].shieldstype.equiped;
 				}
 
-				if(list == 3)
+				if (list == 3)
 				{
-					if(u == 1)
+					if (u == 1)
 					{
 						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
 						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.randomarmor];
@@ -2713,7 +2777,7 @@ beginning:
 						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.randomarmor];
 					}
 
-					if(u == 2)
+					if (u == 2)
 					{
 						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.nextrandomarmor];
 						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.nextrandomarmor];
@@ -2721,7 +2785,7 @@ beginning:
 						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.nextrandomarmor];
 					}
 
-					if(u == 3)
+					if (u == 3)
 					{
 						myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.nextrandomarmor2];
 						myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.nextrandomarmor2];
@@ -2733,13 +2797,13 @@ beginning:
 				l = 0;
 				u = 1;
 
-				#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
-				#endif
-				
+
 				clear();
-				
+
 				refresh();
+#endif
 			}
 
 			if(ch == 'm')
@@ -3248,17 +3312,18 @@ beginning:
 					goto ended;
 				}
 			}
-
-			#ifdef INITNCURSESNOW
+#ifdef INITNCURSESNOW
 			move(myplayer[i].y - positiony, myplayer[i].x);
-			#endif
-			
+
 			refresh();
+#endif
 		}
 
 	ended:
+#ifdef INITNCURSESNOW
 		clear();
-
+#endif
+		
 		if(savefile == 1)
 		{
 			for(int i = 0; i < maxplayers; i++)
@@ -3375,12 +3440,17 @@ beginning:
 				}
 			}
 
+
 			savefile = 0;
 		}
-	
-		if(ch == 'q')
+
+		if (ch == 'q')
 		{
-			if(access("SaveFile.txt", F_OK ) != -1)
+#if defined(_MSC_VER)
+			if(fileExists("SaveFile.txt"))
+#else
+			if (access("SaveFile.txt", F_OK) != -1)
+#endif
 			{
 				remove("SaveFile.txt");
 			}
@@ -3393,9 +3463,15 @@ beginning:
 			videoprinternorm(0, 0, "You lose the ai won the game is over.");
 			videoprinternorm(1, 0, "Press y to end");
 
+#ifdef INITNCURSESNOW
 			refresh();
+#endif
 
+#if defined(_MSC_VER)
+			if(fileExists("SaveFile.txt"))
+#else
 			if(access("SaveFile.txt", F_OK ) != -1)
+#endif
 			{
 				remove("SaveFile.txt");
 			}
@@ -3406,14 +3482,18 @@ beginning:
 			{
 				roundssofar = 1;
 
+#ifdef INITNCURSESNOW
 				clear();
 
 				refresh();
+#endif
 
 				goto beginning;
 			}
 		
+#ifdef INITNCURSESNOW
 			endwin();
+#endif
 
 			return 0;
 		}
@@ -3423,9 +3503,15 @@ beginning:
 			videoprinternorm(0, 0, "You have beat the game. Congratulations.");
 			videoprinternorm(1, 0, "Press y to end");
 
+#ifdef INITNCURSESNOW
 			refresh();
+#endif
 
+#if defined(_MSC_VER)
+			if(fileExists("SaveFile.txt"))
+#else
 			if(access("SaveFile.txt", F_OK ) != -1)
+#endif
 			{
 				remove("SaveFile.txt");
 			}
@@ -3436,14 +3522,18 @@ beginning:
 			{
 				roundssofar = 1;
 
+#ifdef INITNCURSESNOW
 				clear();
 
 				refresh();
+#endif
 
 				goto beginning;
 			}
 
+#ifdef INITNCURSESNOW
 			endwin();
+#endif
 
 			return 0;
 		}
@@ -3452,7 +3542,9 @@ beginning:
 		videoprinterarg1(1, 0, "You have %d battle to go", rounds - roundssofar);
 		videoprinternorm(2, 0, "Press y to end"); 
 	
+#ifdef INITNCURSESNOW
 		refresh();
+#endif
 	
 		ch = (RETURNTYPEVIDEO)inputgetter();
 
@@ -3460,20 +3552,19 @@ beginning:
 		{
 			roundssofar++;
 
+#ifdef INITNCURSESNOW
 			clear();
 
 			refresh();
+#endif
 
 			goto beginning;
 		}
 
 	endmenow:
-		if(access("SaveFile.txt", F_OK ) != -1)
-		{
-			remove("SaveFile.txt");
-		}
-
+#ifdef INITNCURSESNOW
 		endwin();
+#endif
 	
 		return 0;
 	}
@@ -3486,12 +3577,18 @@ str2int_errno str2int(int *out, char *s, int base) {
     errno = 0;
     long l = strtol(s, &end, base);
     /* Both checks are needed because INT_MAX == LONG_MAX is possible. */
-    if (l > INT_MAX || (errno == ERANGE && l == LONG_MAX))
-        return STR2INT_OVERFLOW;
-    if (l < INT_MIN || (errno == ERANGE && l == LONG_MIN))
-        return STR2INT_UNDERFLOW;
-    if (*end != '\0')
-        return STR2INT_INCONVERTIBLE;
+	if (l > INT_MAX || (errno == ERANGE && l == LONG_MAX))
+	{
+		return STR2INT_OVERFLOW;
+	}
+	if (l < INT_MIN || (errno == ERANGE && l == LONG_MIN))
+	{
+		return STR2INT_UNDERFLOW;
+	}
+	if (*end != '\0')
+	{
+		return STR2INT_INCONVERTIBLE;
+	}
     *out = l;
     return STR2INT_SUCCESS;
 }
@@ -3543,7 +3640,12 @@ void loadnumber(int lineamount1, int* element, FILE* fp1)
 	int j;
 	int c;
 	
+#if defined(_MSC_VER)
+	char lineBuffer[128];
+	lineamount1 = 128;
+#else
 	char lineBuffer[lineamount1];
+#endif
 
 	for(int k = 0; k < lineamount1; k++)
 	{
@@ -3567,7 +3669,12 @@ void loadstring(int lineamount1, char** element, FILE* fp1)
 	int j;
 	int c;
 
+#if defined(_MSC_VER)
+	char lineBuffer[128];
+	lineamount1 = 128;
+#else
 	char lineBuffer[lineamount1];
+#endif
 
 	for(int k = 0; k < lineamount1; k++)
 	{
@@ -3582,8 +3689,13 @@ void loadstring(int lineamount1, char** element, FILE* fp1)
 
 		j++;
 	}
+#if !defined(_MSC_VER)
+	element[0] = strndup(lineBuffer, lineamount1);
+#endif
 
-	element[0] = strndup(lineBuffer, lineamount - 1);
+#if defined(_MSC_VER)
+	element[0] = _strdup(lineBuffer);
+#endif
 }
 
 void initvideo(int hitpointsy, int hitpointsx)
@@ -3610,7 +3722,7 @@ void* inputgetter()
 {
 	#ifdef INITNCURSESNOW
 
-	ncursesinput();
+	return ncursesinput();
 
 	#endif
 }
@@ -3662,3 +3774,18 @@ void videoprinterstats(int y, int x, char* m1, int a1, char* b1, int c1, int d1,
 	ncursesprintstats(y, x, m1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
 	#endif
 }
+
+#if defined(_MSC_VER)
+int fileExists(TCHAR * file)
+{
+	WIN32_FIND_DATA FindFileData;
+	HANDLE handle = FindFirstFile(file, &FindFileData);
+	int found = handle != INVALID_HANDLE_VALUE;
+	if (found)
+	{
+		//FindClose(&handle); this will crash
+		FindClose(handle);
+	}
+	return found;
+}
+#endif
