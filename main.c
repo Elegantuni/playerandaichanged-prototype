@@ -3744,7 +3744,7 @@ void ncursesprintarg2(int y, int x, char* c, int d, char* e)
 
 void ncursesprintstats(int y, int x, char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1)
 {
-	mvprintw(y, x, "Player %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
+	mvprintw(y, x, m1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
 }
 
 void videoprinternorm(int y, int x, char *c)
