@@ -316,8 +316,35 @@ struct aicharacter
 
 int main(int argc, char *argv[])
 {
-	#define maxenemies 10
-	#define maxplayers 10
+	int maxenemies1 = 0;
+	int maxplayers1 = 0;
+
+	while(maxplayers1 < 10 || maxplayers1 > 1000)
+	{
+		printf("Enter the amount of ai you want to face (10 - 1000).  If there is a save file this won't work: ");
+
+		scanf("%d", &maxplayers1);
+	}
+
+#if defined(_MSC_VER)
+                if(fileExists("SaveFile.txt"))
+		{
+#else
+                if(access("SaveFile.txt", F_OK ) != -1)
+#endif
+ 		{
+			int fp11 = fopen("SaveFile.txt", "r");
+
+			loadnumber(128, &maxplayers1, fp11);
+
+			fclose(fp11);
+		}
+	
+	const int maxenemies2 = maxplayers1;
+	const int maxplayers2 = maxplayers1;
+
+	#define maxenemies maxenemies2
+	#define maxplayers maxplayers2
 	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist allmagics
@@ -328,7 +355,7 @@ int main(int argc, char *argv[])
 #else
 	#define lineamount 128
 #endif
-	int terminalend = maxenemies + maxplayers + 50;
+	int terminalend = (maxenemies + maxplayers) * 3;
 	int savefile = 0;
 
 	int hitpointsy = 24;
@@ -1227,6 +1254,8 @@ beginning:
 			
 			for(int i = 0; i < maxplayers; i++)
 			{
+				loadnumber(lineamount, &maxplayers1, fp1);
+
 				loadnumber(lineamount, &myplayer[i].randomitem, fp1);
 
 				loadnumber(lineamount, &myplayer[i].shieldsrandomitem, fp1);
@@ -1608,26 +1637,6 @@ beginning:
 			savefile = 1;
 		}
 	
-		for(int i = 0; i < maxplayers; i++)
-		{
-			if(myplayer[i].y >= (terminalend - (maxplayers + maxenemies)))
-			{
-				printf("The player initialization code isn't correct.\n");
-
-				return 1;
-			}
-		}
-
-		for(int i = 0; i < maxenemies; i++)
-		{
-			if(myai[i].y >= (terminalend - (maxplayers + maxenemies)))
-			{
-				printf("The ai initialization code isn't correct.\n");
-
-				return 1;
-			}
-		}
-
 		char* winner = "ai";
 	
 		int replayer = 0;
@@ -1702,6 +1711,8 @@ beginning:
 
 				for(int i = 0; i < maxplayers; i++)
 				{
+					writenumber(lineBuffer, lineamount, maxplayers1, fp1);
+
 					writenumber(lineBuffer, lineamount, myplayer[i].randomitem, fp1);
 
 					writenumber(lineBuffer, lineamount, myplayer[i].shieldsrandomitem, fp1);
@@ -3323,127 +3334,6 @@ beginning:
 #ifdef INITNCURSESNOW
 		clear();
 #endif
-		
-		if(savefile == 1)
-		{
-			for(int i = 0; i < maxplayers; i++)
-			{
-				free(myplayer[i].weapon);
-				
-				free(myplayer[i].shield);
-				
-				free(myplayer[i].charactersign);
-				
-				free(myplayer[i].weapontype.equiped);
-				
-				free(myplayer[i].character1.character);
-				
-				free(myplayer[i].character1.sign);
-				
-				free(myplayer[i].weaponsdamage1.item);
-
-				for(int tobe = 0; tobe < allitems; tobe++)
-				{
-					free(myplayer[i].weapontype.item[tobe]);
-				}
-
-				for(int tobe = 0; tobe < alldefenseitems; tobe++)
-				{
-					free(myplayer[i].shieldstype.item[tobe]);
-				}
-
-				free(myplayer[i].shieldstype.equiped);
-
-				free(myplayer[i].shieldsdamage1.item);
-
-				free(myplayer[i].magic1.equiped);
-
-				free(myplayer[i].weapontype.equiped);
-
-				for(int tobe = 0; tobe < allmagics; tobe++)
-				{
-					free(myplayer[i].magic1.magicitems[tobe]);
-				}
-
-				for(int tobe = 0; tobe < allitems; tobe++)
-				{
-					free(myplayer[i].weapontype.item[tobe]);
-				}
-
-				for(int tobe = 0; tobe < alldefenseitems; tobe++)
-				{
-					free(myplayer[i].shieldstype.item[tobe]);
-				}
-
-				free(myplayer[i].armor1.equiped);
-
-				for(int tobe = 0; tobe < allarmor; tobe++)
-				{
-					free(myplayer[i].armor1.item[tobe]);
-				}
-			}
-
-			for(int i = 0; i < maxenemies; i++)
-			{
-				free(myai[i].weapon);
-				
-				free(myai[i].shield);
-				
-				free(myai[i].charactersign);
-				
-				free(myai[i].weapontype.equiped);
-				
-				free(myai[i].character1.character);
-				
-				free(myai[i].character1.sign);
-				
-				free(myai[i].weaponsdamage1.item);
-
-				for(int tobe = 0; tobe < allitemsenemies; tobe++)
-				{
-					free(myai[i].weapontype.item[tobe]);
-				}
-
-				for(int tobe = 0; tobe < alldefenseitemsenemies; tobe++)
-				{
-					free(myai[i].shieldstype.item[tobe]);
-				}
-
-				free(myai[i].shieldstype.equiped);
-
-				free(myai[i].shieldsdamage1.item);
-
-				free(myai[i].magic1.equiped);
-
-				free(myai[i].weapontype.equiped);
-
-				for(int tobe = 0; tobe < allmagicsenemies; tobe++)
-				{
-					free(myai[i].magic1.magicitems[tobe]);
-				}
-
-				for(int tobe = 0; tobe < allitemsenemies; tobe++)
-				{
-					free(myai[i].weapontype.item[tobe]);
-				}
-
-				for(int tobe = 0; tobe < alldefenseitemsenemies; tobe++)
-				{
-					free(myai[i].shieldstype.item[tobe]);
-				}
-
-				free(myai[i].armor1.equiped);
-
-				for(int tobe = 0; tobe < allarmorenemies; tobe++)
-				{
-					free(myai[i].armor1.item[tobe]);
-				}
-			}
-
-
-			savefile = 0;
-		}
-
 		if (ch == 'q')
 		{
 #if defined(_MSC_VER)
