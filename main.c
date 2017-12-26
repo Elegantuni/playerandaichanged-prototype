@@ -333,7 +333,7 @@ int main(int argc, char *argv[])
                 if(access("SaveFile.txt", F_OK ) != -1)
 #endif
  		{
-			int fp11 = fopen("SaveFile.txt", "r");
+			FILE *fp11 = fopen("SaveFile.txt", "r");
 
 			loadnumber(128, &maxplayers1, fp11);
 
