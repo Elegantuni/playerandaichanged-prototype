@@ -22,10 +22,6 @@ int fileExists(TCHAR *file);
 #include <ctype.h>
 #include <limits.h>
 
-#ifdef INITNCURSESNOW2
-#include <sys/ioctl.h>
-#endif
-
 #if defined(_MSC_VER)
 #include <BaseTsd.h>
 typedef SSIZE_T ssize_t;
