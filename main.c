@@ -348,7 +348,15 @@ int main(int argc, char *argv[])
 
 		scanf("%d", &maxplayers1);
 	}
-
+	
+	int rounds = 1;
+	
+	while(rounds < 10 || rounds > 1000)
+	{
+		printf("Enter the amount of rounds you want to play (10 - 1000).  If you want a real acheivemnet choose 50 or greater: ");
+		scanf("%d", &rounds);
+	}
+	
 #if defined(_MSC_VER)
                 if(fileExists("SaveFile.txt"))
 		{
@@ -372,7 +380,7 @@ int main(int argc, char *argv[])
 	#define aicharacters 4
 	#define playermagiclist allmagics
 	#define aimagiclist allmagicsenemies
-	#define rounds 50
+	
 #if defined(_MSC_VER)
 	int lineamount = 128;
 #else
@@ -3387,7 +3395,16 @@ beginning:
 		if(roundssofar == rounds)
 		{
 			videoprinternorm(0, 0, "You have beat the game. Congratulations.");
-			videoprinternorm(1, 0, "Press y to end");
+			
+			if(rounds >= 50)
+			{
+				videoprinternorm(1, 0, "You achieved a real accomplishment by beating 50 or more rounds.");
+				videoprinternorm(2, 0, "Press y to end");
+			}
+			else
+			{
+				videoprinternorm(1, 0, "Press y to end");
+			}
 
 #ifdef INITNCURSESNOW
 			refresh();
