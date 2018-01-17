@@ -353,7 +353,7 @@ int main(int argc, char *argv[])
 	
 	while(rounds < 10 || rounds > 1000)
 	{
-		printf("Enter the amount of rounds you want to play (10 - 1000).  If you want a real acheivemnet choose 50 or greater: ");
+		printf("Enter the amount of rounds you want to play (10 - 1000).  If you want a real acheivemnet choose 50 or greater.\nIf there is a save file this won't work: ");
 		scanf("%d", &rounds);
 	}
 	
@@ -1634,6 +1634,8 @@ beginning:
 
 			loadnumber(lineamount, &positiony, fp1);
 
+			loadnumber(lineamount, &rounds, fp1);
+			
 			fclose(fp1);
 
 			remove("SaveFile.txt");
@@ -2092,6 +2094,8 @@ beginning:
 
 				writenumber(lineBuffer, lineamount, positiony, fp1);
 
+				writenumber(lineBuffer, lineamount, rounds, fp1);
+				
 				fclose(fp1);
 
 #ifdef INITNCURSESNOW
