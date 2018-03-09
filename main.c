@@ -345,7 +345,9 @@ int main(int argc, char *argv[])
 	while(maxplayers1 < 10 || maxplayers1 > 1000)
 	{
 		printf("Enter the amount of ai you want to face (10 - 1000).  If there is a save file this won't work: ");
-
+		
+		fflush(stdout);
+		
 		scanf("%d", &maxplayers1);
 	}
 	
@@ -354,6 +356,9 @@ int main(int argc, char *argv[])
 	while(rounds < 10 || rounds > 1000)
 	{
 		printf("Enter the amount of rounds you want to play (10 - 1000).  If you want a real acheivemnet choose 50 or greater.\nIf there is a save file this won't work: ");
+		
+		fflush(stdout);
+
 		scanf("%d", &rounds);
 	}
 	
