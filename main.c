@@ -315,7 +315,7 @@ int main(int argc, char *argv[])
 	int maxenemies1 = 0;
 	int maxplayers1 = 0;
 	int hitpointsy = 24;
-	int hitpointsx = 115;
+	int hitpointsx = 80;
 
 	#ifdef INITNCURSESNOW2
 
@@ -392,9 +392,12 @@ int main(int argc, char *argv[])
 	#define lineamount 128
 #endif
 	int terminalend = (maxenemies + maxplayers) * 3;
+	int terminalendx = 120;
+
 	int savefile = 0;
 
 	int positiony = 0;
+	int positionx = 0;
 
 	if(maxenemies < 1)
 	{
@@ -967,7 +970,7 @@ beginning:
 				if(i != j && myplayer[i].y == myplayer[j].y && myplayer[i].x == myplayer[j].x)
 				{
 					myplayer[j].y = rand() % (terminalend - (maxplayers + maxenemies));
-					myplayer[j].x = rand() % (hitpointsx - 1);
+					myplayer[j].x = rand() % (terminalendx - 1);
 
 					myplayer[j].prevy = myplayer[j].y;
 					myplayer[j].prevx = myplayer[j].x;
@@ -1216,7 +1219,7 @@ beginning:
 				if(i != j && myai[i].y == myai[j].y && myai[i].x == myai[j].x)
 				{
 					myai[j].y = rand() % (terminalend - (maxplayers + maxenemies));
-					myai[j].x = rand() % (hitpointsx - 1);
+					myai[j].x = rand() % (terminalendx - 1);
 				
 					myai[j].prevy = myai[j].y;
 					myai[j].prevx = myai[j].x;
@@ -1233,7 +1236,7 @@ beginning:
 				if(myai[i].y == myplayer[j].y && myai[i].x == myplayer[j].x)
 				{
 					myai[i].y = rand() % (terminalend - (maxplayers + maxenemies));
-					myai[i].x = rand() % (hitpointsx - 1);
+					myai[i].x = rand() % (terminalendx - 1);
 
 					myai[i].prevy = myai[i].y;
 					myai[i].prevx = myai[i].x;
@@ -1640,6 +1643,8 @@ beginning:
 			loadnumber(lineamount, &positiony, fp1);
 
 			loadnumber(lineamount, &rounds, fp1);
+
+			loadnumber(lineamount, &positionx, fp1);
 			
 			fclose(fp1);
 
@@ -1656,30 +1661,36 @@ beginning:
 	
 		int positionydiff;
 	
-		struct hitpointspos hitpointspos1 = { terminalend - (maxplayers + maxenemies), 0, terminalend - (maxenemies), 0 };
+		struct hitpointspos hitpointspos1 = { terminalend - (maxplayers + maxenemies), 0, terminalend - (maxenemies), 120};
 	
 		initvideo(hitpointsy, hitpointsx);
 
 		positiony = (myplayer[0].y / hitpointsy) * hitpointsy;
+		positionx = (myplayer[0].x / hitpointsx) * hitpointsx;
 
 		if(positiony > 0)
 		{
 			positiony++;
 		}
+
+		if(positionx > 0)
+		{
+			positionx++;
+		}
 	
 		for(int i = 0; i < maxplayers; i++)
 		{
-			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy))
+			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy) && myplayer[i].x >= (positionx - hitpointsx))
 			{
-				videoprinternorm(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+				videoprinternorm(myplayer[i].y - positiony, myplayer[i].x - positionx, myplayer[i].charactersign);
 			}
 		}
 	
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy))
+			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy) && myai[i].x >= (positionx - hitpointsx))
 			{
-				   videoprinternorm(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+				   videoprinternorm(myai[i].y - positiony, myai[i].x - positionx, myai[i].charactersign);
 			}
 		}
 	
@@ -1699,7 +1710,7 @@ beginning:
 			}
 		}
 #ifdef INITNCURSESNOW
-		move(myplayer[0].y - positiony, myplayer[0].x);
+		move(myplayer[0].y - positiony, myplayer[0].x - positionx);
 
 		refresh();
 #endif
@@ -2101,6 +2112,7 @@ beginning:
 
 				writenumber(lineBuffer, lineamount, rounds, fp1);
 				
+				writenumber(lineBuffer, lineamount, positionx, fp1);
 				fclose(fp1);
 
 #ifdef INITNCURSESNOW
@@ -2185,6 +2197,7 @@ beginning:
 					if(myplayer[i].hitpoints > 0)
 					{
 						positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
+						positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
 
 						break;
 					}
@@ -2233,6 +2246,7 @@ beginning:
 					if(myplayer[i].hitpoints > 0)
 					{
 						positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
+						positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 
 						break;
 					}
@@ -2257,16 +2271,20 @@ beginning:
 				{
 					myplayer[i].x = 0;
 				}
+
+				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
 		
 			if(ch == 'd')
 			{
 				myplayer[i].x = myplayer[i].x + 1;
 			
-				if(myplayer[i].x > hitpointsx - 1)
+				if(myplayer[i].x > hitpointspos1.ax - 1)
 				{
-					myplayer[i].x = hitpointsx - 1;
+					myplayer[i].x = hitpointspos1.ax - 1;
 				}
+
+				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
 		
 			if(ch == 'w')
@@ -2319,6 +2337,38 @@ beginning:
 
 				refresh();
 #endif
+			}
+
+			if(ch == 'r')
+			{
+				clear();
+
+				positionx--;
+
+				if(positionx < 0)
+				{
+					positionx = 0;
+				}
+
+				move(positionx, 0);
+
+				refresh();
+			}
+
+			if(ch == 'f')
+			{
+				clear();
+
+				positionx++;
+				
+				if(positionx > (terminalendx + 1 - hitpointsx))
+				{
+					positionx = (terminalendx + 1 - hitpointsx);
+				}
+
+				move(positionx, 0);
+
+				refresh();
 			}
 		
 			if(ch == 's')
@@ -3245,10 +3295,16 @@ beginning:
 					myplayer[i].x = myplayer[i].prevx;
 
 					positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
+					positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
 					
 					if(positiony > 0)
 					{
 						positiony++;
+					}
+
+					if(positionx > 0)
+					{
+						positionx++;
 					}
 			
 					myplayer[i].replayer = 1;
@@ -3264,10 +3320,16 @@ beginning:
 							myplayer[i].x = myplayer[i].prevx;
 
 							positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
+							positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
 							
 							if(positiony > 0)
 							{
 								positiony++;
+							}
+
+							if(positionx > 0)
+							{
+								positionx++;
 							}
 							
 							myplayer[i].replayer = 1;
@@ -3294,17 +3356,17 @@ beginning:
 		
 			for(int i = 0; i < maxplayers; i++)
 			{
-				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy))
+				if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy) && myplayer[i].x >= (positionx - hitpointsx))
 				{
-					videoprinternorm(myplayer[i].y - positiony, myplayer[i].x, myplayer[i].charactersign);
+					videoprinternorm(myplayer[i].y - positiony, myplayer[i].x - positionx, myplayer[i].charactersign);
 				}
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
 			{
-				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy))
+				if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy) && myai[i].x >= (positionx - hitpointsx))
 				{
-					   videoprinternorm(myai[i].y - positiony, myai[i].x, myai[i].charactersign);
+					videoprinternorm(myai[i].y - positiony, myai[i].x - positionx, myai[i].charactersign);
 				}
 			}
 		
@@ -3337,7 +3399,7 @@ beginning:
 				}
 			}
 #ifdef INITNCURSESNOW
-			move(myplayer[i].y - positiony, myplayer[i].x);
+			move(myplayer[i].y - positiony, myplayer[i].x - positionx);
 
 			refresh();
 #endif
