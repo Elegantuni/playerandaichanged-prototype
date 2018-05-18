@@ -2133,7 +2133,7 @@ beginning:
 				videoprinternorm(2, 0, "Press w to move up");
 				videoprinternorm(3, 0, "Press s to move down");
 				videoprinternorm(4, 0, "Press m to use magic");
-				videoprinternorm(5, 0, "Press shift+m to equip different magic, weapon, shield, and armor");
+				videoprinternorm(5, 0, "Press Shift+m to equip different magic, weapon, shield, and armor");
 				videoprinternorm(6, 0, "Press n to cycle through player characters forward");
 				videoprinternorm(7, 0, "Press p to cycle through player characters backward");
 				videoprinternorm(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
@@ -2144,7 +2144,7 @@ beginning:
 				videoprinternorm(13, 0, "The E is a player elf and the e is a ai elf");
 				videoprinternorm(14, 0, "The D is a player dwarf and the d is a ai elf");
 				videoprinternorm(15, 0, "Press q from battle screen to quit game");
-				videoprinternorm(16, 0, "Press shift+s to save and quit");
+				videoprinternorm(16, 0, "Press Shift+s to save and quit");
 				videoprinternorm(17, 0, "Press u to scroll up");
 				videoprinternorm(18, 0, "Press j to scroll down");
 				videoprinternorm(19, 0, "Press r to scroll left");
