@@ -314,6 +314,7 @@ int main(int argc, char *argv[])
 {
 	int maxenemies1 = 0;
 	int maxplayers1 = 0;
+
 	int hitpointsy = 24;
 	int hitpointsx = 80;
 
@@ -340,6 +341,11 @@ int main(int argc, char *argv[])
 	   return 1;
 	}
 
+	#endif
+
+	#ifdef INITWINDOWSNCURSES
+		hitpointsy = 24;
+		hitpointsx = 150;
 	#endif
 
 	while(maxplayers1 < 10 || maxplayers1 > 1000)
