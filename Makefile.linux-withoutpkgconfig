@@ -1,5 +1,5 @@
 playerandai1:
-	$(CC) -std=c99 -o playerandai1 main.c -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -lncurses -lssl -lcrypto
+	$(CC) -std=c99 -o playerandai1 main.c -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -lncurses -lssl -lcrypto
 	
 clean:
 	rm -f playerandai1
