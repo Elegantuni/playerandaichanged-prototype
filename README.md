@@ -1,5 +1,7 @@
 # playerandai-prototype
-
+To run a makefile (Debian 9 example): <br />
+make -f Makefile.linux <br />
+<br />
 For windows you will need in msys2 launching from shortcut mingw64.exe in the msys2 install directory: <br />
 git <br />
 ncurses <br />
@@ -20,3 +22,6 @@ pkg-config <br />
 <br />
 For Ubuntu you can install them using: <br />
 sudo apt-get install git libncurses-dev libssl-dev build-essential pkg-config <br />
+<br />
+In Ubuntu 18.04 on digital ocean I had to disable stack protector when I passed a argument to playerandai1.  Use <br />
+make -f Makefile.linux-withnostackprotector <br />
