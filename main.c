@@ -5,6 +5,11 @@
 int fileExists(TCHAR *file);
 #endif
 
+#ifdef INITOPENSSL
+#include <openssl/md5.h>
+char *str2md5(const char *str, int length);
+#endif
+
 #ifdef INITNCURSESNOW2
 #include <ncurses.h>
 #endif
@@ -54,14 +59,6 @@ char *strndup(const char *str, size_t len)
 
 #ifdef INITNCURSESNOW
 #define RETURNTYPEVIDEO int
-#endif
-
-#ifdef LINUX
-#include <bsd/stdlib.h>
-#endif
-
-#ifndef WINDOWS
-#define rand() arc4random()
 #endif
 
 #define allitems 5
@@ -318,6 +315,21 @@ int main(int argc, char *argv[])
 	int hitpointsy = 24;
 	int hitpointsx = 80;
 
+	long theseed;
+	char *digest;
+	int commandlineset = 0;
+
+	if(argc == 2)
+	{
+		char *end;
+		digest = str2md5(argv[1], sizeof(argv[1]));
+		theseed = strtol(digest, &end, 10);
+	}
+	else
+	{
+		theseed = NULL;	
+	}
+
 	#ifdef INITNCURSESNOW2
 
 	int row;
@@ -345,7 +357,7 @@ int main(int argc, char *argv[])
 
 	#ifdef INITWINDOWSNCURSES
 		hitpointsy = 24;
-		hitpointsx = 150;
+		hitpointsx = 120;
 	#endif
 
 	while(maxplayers1 < 10 || maxplayers1 > 1000)
@@ -378,6 +390,8 @@ int main(int argc, char *argv[])
 			FILE *fp11 = fopen("SaveFile.txt", "r");
 
 			loadnumber(128, &maxplayers1, fp11);
+			loadnumber(128, &commandlineset, fp11);
+			loadnumber(128, &theseed, fp11);
 
 			fclose(fp11);
 		}
@@ -443,9 +457,15 @@ int main(int argc, char *argv[])
 
 	ch = 'l';
 
-#ifdef WINDOWS
-	srand(time(NULL));
-#endif
+	if(commandlineset == 1 || argc == 2)
+	{
+		srand(theseed);
+		commandlineset = 1;
+	}
+	else
+	{
+		srand(time(theseed));
+	}
 
 beginning:
 
@@ -1274,6 +1294,10 @@ beginning:
 			{
 				loadnumber(lineamount, &maxplayers1, fp1);
 
+				loadnumber(lineamount, &commandlineset, fp1);
+
+				loadnumber(lineamount, &theseed, fp1);
+
 				loadnumber(lineamount, &myplayer[i].randomitem, fp1);
 
 				loadnumber(lineamount, &myplayer[i].shieldsrandomitem, fp1);
@@ -1741,6 +1765,10 @@ beginning:
 				{
 					writenumber(lineBuffer, lineamount, maxplayers1, fp1);
 
+					writenumber(lineBuffer, lineamount, commandlineset, fp1);
+
+					writenumber(lineBuffer, lineamount, theseed, fp1);
+
 					writenumber(lineBuffer, lineamount, myplayer[i].randomitem, fp1);
 
 					writenumber(lineBuffer, lineamount, myplayer[i].shieldsrandomitem, fp1);
@@ -2119,6 +2147,7 @@ beginning:
 				writenumber(lineBuffer, lineamount, rounds, fp1);
 				
 				writenumber(lineBuffer, lineamount, positionx, fp1);
+
 				fclose(fp1);
 
 #ifdef INITNCURSESNOW
@@ -3769,5 +3798,34 @@ int fileExists(TCHAR * file)
 		FindClose(handle);
 	}
 	return found;
+}
+#endif
+
+#ifdef INITOPENSSL
+char *str2md5(const char *str, int length) {
+    int n;
+    MD5_CTX c;
+    unsigned char digest[4];
+    char *out = (char*)malloc(17);
+
+    MD5_Init(&c);
+
+    while (length > 0) {
+        if (length > 512) {
+            MD5_Update(&c, str, 512);
+        } else {
+            MD5_Update(&c, str, length);
+        }
+        length -= 512;
+        str += 512;
+    }
+
+    MD5_Final(digest, &c);
+
+    for (n = 0; n < 4; ++n) {
+        snprintf(&(out[n*2]), 3, "%02d", (unsigned int)digest[n]);
+    }
+
+    return out;
 }
 #endif
