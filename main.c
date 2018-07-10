@@ -382,7 +382,6 @@ int main(int argc, char *argv[])
 	
 #if defined(_MSC_VER)
                 if(fileExists("SaveFile.txt"))
-		{
 #else
                 if(access("SaveFile.txt", F_OK ) != -1)
 #endif
@@ -471,8 +470,8 @@ beginning:
 
 	while(roundssofar <= rounds && ch != 'y')
 	{
-		struct player myplayer[maxplayers];
-		struct aicharacter myai[maxenemies];
+		struct player *myplayer = (struct player *) malloc(sizeof(struct player) * maxplayers);
+		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
 
 		char* item[allitems];
 		item[0] = "Knife";
