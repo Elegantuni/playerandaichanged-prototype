@@ -316,14 +316,16 @@ int main(int argc, char *argv[])
 	int hitpointsx = 80;
 
 	long theseed;
-	char *digest;
+	char *digest = NULL;
 	int commandlineset = 0;
 
 	if(argc == 2)
 	{
+#ifdef INITOPENSSL
 		char *end;
 		digest = str2md5(argv[1], sizeof(argv[1]));
 		theseed = strtol(digest, &end, 10);
+#endif
 	}
 	else
 	{
