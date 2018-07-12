@@ -1,5 +1,5 @@
 playerandai1:
-	$(CC) -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 	
 clean:
 	rm -f playerandai1
