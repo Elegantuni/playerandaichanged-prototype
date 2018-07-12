@@ -23,8 +23,5 @@ pkg-config <br />
 For Ubuntu you can install them using: <br />
 sudo apt-get install git libncurses-dev libssl-dev build-essential pkg-config <br />
 <br />
-In Ubuntu 18.04 on digital ocean I had to disable stack protector when I passed a argument to playerandai1.  Use <br />
-make -f Makefile.linux-withnostackprotector <br />
-<br />
 To compile with visual studio 2017 you will need pdcurses and openssl development includes and libs. You can get openssl from http://slproweb.com/products/Win32OpenSSL.html The preprocessor need the options 
 _CRT_SECURE_NO_WARNINGS;INITWINDOWSNOW;INITNCURSESNOW;FREEBSD;INITWINDOWSNCURSES;INITOPENSSL; and keep the options there already for the preprocessor. <br />
