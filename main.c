@@ -325,6 +325,9 @@ int main(int argc, char *argv[])
 		char *end;
 		digest = str2md5(argv[1], sizeof(argv[1]));
 		theseed = strtol(digest, &end, 10);
+		#ifdef OPENBSD
+			srand_deterministic(theseed);
+		#endif
 #endif
 	}
 	else
@@ -460,7 +463,9 @@ int main(int argc, char *argv[])
 
 	if(commandlineset == 1 || argc == 2)
 	{
+#ifndef OPENBSD
 		srand(theseed);
+#endif
 		commandlineset = 1;
 	}
 	else
@@ -472,8 +477,13 @@ beginning:
 
 	while(roundssofar <= rounds && ch != 'y')
 	{
+#ifndef INITWINDOWSNOW
+		struct player myplayer[maxplayers];
+		struct aicharacter myai[maxenemies];
+#else
 		struct player *myplayer = (struct player *) malloc(sizeof(struct player) * maxplayers);
 		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
+#endif
 
 		char* item[allitems];
 		item[0] = "Knife";
