@@ -17,6 +17,7 @@ char *str2md5(const char *str, int length);
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <stdint.h>
 
 #ifdef INITNCURSESNOW2
 #include <unistd.h>
@@ -58,7 +59,7 @@ char *strndup(const char *str, size_t len)
 #endif
 
 #ifdef INITNCURSESNOW
-#define RETURNTYPEVIDEO int
+#define RETURNTYPEVIDEO intptr_t
 #endif
 
 #define allitems 5
