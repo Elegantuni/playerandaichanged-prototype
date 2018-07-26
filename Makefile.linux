@@ -1,6 +1,14 @@
-playerandai1:
-	clang++ -std=c++11 -o playerandai1 main.cpp `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+playerandai1: main.o seed.o str2int.o
+	clang++ -std=c++11 -o playerandai1 main.o seed.o str2int.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 	
-clean:
-	rm -f playerandai1
+main.o:
+	clang++ -c main.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
+seed.o:
+	clang++ -c seed.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+str2int.o:
+	clang++ -c str2int.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+clean:
+	rm -f playerandai1 main.o seed.o str2int.o
