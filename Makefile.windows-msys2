@@ -1,6 +1,0 @@
-playerandai1:
-	$(CC) -std=c99 -o playerandai1 main.c `pkg-config --static --cflags --libs ncursesw` `pkg-config --static --cflags --libs openssl` -DINITNCURSESNOW -DINITNCURSESNOW2 -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -static
-	
-clean:
-	rm -f playerandai1
-

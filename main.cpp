@@ -1,13 +1,10 @@
 #ifdef INITWINDOWSNOW
 #include <curses.h>
-#include <Windows.h>
-#include <tchar.h>
-int fileExists(const char *file);
+#include "fileexists.h"
 #endif
 
 #ifdef INITOPENSSL
-#include <openssl/md5.h>
-char *str2md5(const char *str, int length);
+#include "seed.h"
 #endif
 
 #ifdef INITNCURSESNOW2
@@ -23,10 +20,9 @@ char *str2md5(const char *str, int length);
 #include <unistd.h>
 #endif
 
+#include "str2int.h"
+
 #include <stdio.h>
-#include <errno.h>
-#include <ctype.h>
-#include <limits.h>
 
 #if defined(_MSC_VER)
 #include <BaseTsd.h>
@@ -34,45 +30,14 @@ typedef SSIZE_T ssize_t;
 #endif
 
 #ifdef FREEBSD
-#if !defined(_MSC_VER)
-size_t strnlen(const char *str, size_t len)
-{
-    for (size_t size = 0; size < len; size++)
-    {
-        if (str[size] == '\0')
-            return size;
-    }
-    return len;
-}
-#endif
-char *strndup(const char *str, size_t len)
-{
-    size_t act = strnlen(str, len);
-    char *dst = (char *)malloc(act + 1);
-    if (dst != 0)
-    {
-        memmove(dst, str, act);
-        dst[act] = '\0';
-    }
-    return dst;
-}
+#include "freebsddepends.h"
 #endif
 
 #ifdef INITNCURSESNOW
 #define RETURNTYPEVIDEO intptr_t
 #endif
 
-#define allitems 5
-#define allitemsenemies 6
-
-#define alldefenseitems 5
-#define alldefenseitemsenemies 5
-
-#define allmagics 5
-#define allmagicsenemies 5
-
-#define allarmor 5
-#define allarmorenemies 5
+#include "alldefines.h"
 
 void writestring(char lineBuffer[], int lineamount1, char* element, FILE* fp);
 void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp);
@@ -90,89 +55,19 @@ void videoprinterarg1(int y, int x, const char* c, int d);
 void videoprinterarg2(int y, int x, const char* c, int d, char* e);
 void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1);
 
-typedef enum {
-    STR2INT_SUCCESS,
-    STR2INT_OVERFLOW,
-    STR2INT_UNDERFLOW,
-    STR2INT_INCONVERTIBLE
-} str2int_errno;
+#include "magic.h"
 
-str2int_errno str2int(int *out, char *s, int base);
+#include "magicenemies.h"
 
-struct magic
-{
-	char* equiped;
-	int damage;
-	int randommagic;
-	int rangey;
-	int rangex;
-	int cost;
-	char* magicitems[allmagics];
-	int nextrandommagic;
-	int nextrandommagic2;
-	int magiccount;
-};
+#include "character.h"
 
-struct magicenemies
-{
-	char* equiped;
-	int damage;
-	int randommagic;
-	int rangey;
-	int rangex;
-	int cost;
-	char* magicitems[allmagicsenemies];
-	int nextrandommagic;
-	int nextrandommagic2;
-	int magiccount;
-};
+#include "shieldsdamage.h"
 
-struct charactertemp
-{
-	char* character;
-	char* sign;
-	int hitpoints;
-	int attack;
-	int defense;
-	int randomcharacter;
-	int magicresist;
-};
+#include "shieldsdamageenemies.h"
 
-struct shieldsdamage
-{
-	char* item;
-	int damage[alldefenseitems];
-};
+#include "shields.h"
 
-struct shieldsdamageenemies
-{
-	char* item;
-	int damage[alldefenseitemsenemies];
-};
-
-struct shields
-{
-	char* equiped;
-	char* item[alldefenseitems];
-	int damage;
-	int numberitems;
-	int randomshield;
-	int nextrandomshield;
-	int nextrandomshield2;
-	int shieldcount;
-};
-
-struct shieldsenemies
-{
-	char* equiped;
-	char* item[alldefenseitemsenemies];
-	int damage;
-	int numberitems;
-	int randomshield;
-	int nextrandomshield;
-	int nextrandomshield2;
-	int shieldcount;
-};
+#include "shieldsenemies.h"
 
 struct weaponsdamage
 {
@@ -3597,29 +3492,6 @@ beginning:
 	}
 }
 
-str2int_errno str2int(int *out, char *s, int base) {
-    char *end;
-    if (s[0] == '\0' || isspace((unsigned char) s[0]))
-        return STR2INT_INCONVERTIBLE;
-    errno = 0;
-    long l = strtol(s, &end, base);
-    /* Both checks are needed because INT_MAX == LONG_MAX is possible. */
-	if (l > INT_MAX || (errno == ERANGE && l == LONG_MAX))
-	{
-		return STR2INT_OVERFLOW;
-	}
-	if (l < INT_MIN || (errno == ERANGE && l == LONG_MIN))
-	{
-		return STR2INT_UNDERFLOW;
-	}
-	if (*end != '\0')
-	{
-		return STR2INT_INCONVERTIBLE;
-	}
-    *out = l;
-    return STR2INT_SUCCESS;
-}
-
 void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp)
 {
 	for(int j = 0; j < lineamount1; j++)
@@ -3801,47 +3673,3 @@ void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, i
 	ncursesprintstats(y, x, m1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
 	#endif
 }
-
-#if defined(_MSC_VER)
-int fileExists(const char *file)
-{
-	WIN32_FIND_DATA FindFileData;
-	HANDLE handle = FindFirstFile(file, &FindFileData);
-	int found = handle != INVALID_HANDLE_VALUE;
-	if (found)
-	{
-		//FindClose(&handle); this will crash
-		FindClose(handle);
-	}
-	return found;
-}
-#endif
-
-#ifdef INITOPENSSL
-char *str2md5(const char *str, int length) {
-    int n;
-    MD5_CTX c;
-    unsigned char digest[4];
-    char *out = (char*)malloc(17);
-
-    MD5_Init(&c);
-
-    while (length > 0) {
-        if (length > 512) {
-            MD5_Update(&c, str, 512);
-        } else {
-            MD5_Update(&c, str, length);
-        }
-        length -= 512;
-        str += 512;
-    }
-
-    MD5_Final(digest, &c);
-
-    for (n = 0; n < 4; ++n) {
-        snprintf(&(out[n*2]), 3, "%02d", (unsigned int)digest[n]);
-    }
-
-    return out;
-}
-#endif
