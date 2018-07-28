@@ -39,10 +39,6 @@ typedef SSIZE_T ssize_t;
 
 #include "alldefines.h"
 
-void writestring(char lineBuffer[], int lineamount1, char* element, FILE* fp);
-void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp);
-void loadnumber(int lineamount1, int* element, FILE* fp1);
-void loadstring(int lineamount1, char** element, FILE* fp1);
 void initvideo(int hitpointsy, int hitpointsx);
 int ncursesinput();
 void* inputgetter();
@@ -69,139 +65,31 @@ void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, i
 
 #include "shieldsenemies.h"
 
-struct weaponsdamage
-{
-	char* item;
-	int damage[allitems];
-	int rangey[allitems];
-	int rangex[allitems];
-};
+#include "weaponsdamage.h"
 
-struct weaponsdamageenemies
-{
-	char* item;
-	int damage[allitemsenemies];
-	int rangey[allitemsenemies];
-	int rangex[allitemsenemies];
-};
+#include "weaponsdamageenemies.h"
 
-struct weapons
-{
-	char* equiped;
-	char* item[allitems];
-	int damage;
-	int rangey;
-	int rangex;
-	int numberitems;
-	int randomweapon;
-	int nextrandomweapon;
-	int nextrandomweapon2;
-	int weaponcount;
-};
+#include "weapons.h"
 
-struct weaponsenemies
-{
-	char* equiped;
-	char* item[allitemsenemies];
-	int damage;
-	int rangey;
-	int rangex;
-	int numberitems;
-	int randomweapon;
-	int nextrandomweapon;
-	int nextrandomweapon2;
-	int weaponcount;
-};
+#include "weaponsenemies.h"
 
-struct hitpointspos
-{
-	int y;
-	int x;
-	int ay;
-	int ax;
-};
+#include "hitpointspos.h"
 
-struct armor
-{
-	char *equiped;
-	int protection;
-	int rangey;
-	int rangex;
-	int protections[allarmor];
-	char *item[allarmor];
-	int randomarmor;
-	int nextrandomarmor;
-	int nextrandomarmor2;
-    int armorcount;
-};
+#include "armor.h"
 
-struct armorenemies
-{
-	char *equiped;
-	int protection;
-	int rangey;
-	int rangex;
-	int protections[allarmorenemies];
-	char *item[allarmorenemies];
-	int randomarmor;
-	int nextrandomarmor;
-	int nextrandomarmor2;
-    int armorcount;
-};
+#include "armorenemies.h"
 
-struct player
-{
-	int y;
-	int x;
-	int hitpoints;
-	int magicpoints;
-	int defensepoints;
-	char* weapon;
-	char* shield;
-	char* charactersign;
-	int prevy;
-	int prevx;
-	int magicattack;
-	int count;
-	int replayer;
-	int playerturn;
-	struct weapons weapontype;
-	struct weaponsdamage weaponsdamage1;
-	int randomitem;
-	struct shields shieldstype;
-	struct shieldsdamage shieldsdamage1;
-	int shieldsrandomitem;
-	struct charactertemp character1;
-	struct magic magic1;
-	struct armor armor1;
-};
+#include "player.h"
 
-struct aicharacter
-{
-	int y;
-	int x;
-	int hitpoints;
-	int magicpoints;
-	int defensepoints;
-	char* weapon;
-	char* shield;
-	char* charactersign;
-	int prevy;
-	int prevx;
-	int magicattack;
-	int count;
-	int replayer;
-	int playerturn;
-	struct weaponsenemies weapontype;
-	struct weaponsdamageenemies weaponsdamage1;
-	int randomitem;
-	struct shieldsenemies shieldstype;
-	struct shieldsdamageenemies shieldsdamage1;
-	int shieldsrandomitem;
-	struct charactertemp character1;
-	struct magicenemies magic1;
-	struct armorenemies armor1;
-};
+#include "aicharacter.h"
+
+#include "writestring.h"
+
+#include "writenumber.h"
+
+#include "loadnumber.h"
+
+#include "loadstring.h"
 
 int main(int argc, char *argv[])
 {
@@ -3490,111 +3378,6 @@ beginning:
 	
 		return 0;
 	}
-}
-
-void writenumber(char lineBuffer[], int lineamount1, int element, FILE* fp)
-{
-	for(int j = 0; j < lineamount1; j++)
-	{
-		lineBuffer[j] = '\0';
-	}
-
-	snprintf(lineBuffer, lineamount1, "%d", element);
-
-	int k = 0;
-
-	while(lineBuffer[k] != '\0')
-	{
-		k++;
-	}
-
-	lineBuffer[k] = '\n';
-
-	fwrite(lineBuffer, 1, k+1, fp);
-}
-
-void writestring(char lineBuffer[], int lineamount1, char* element, FILE *fp)
-{
-	for(int j = 0; j < lineamount1; j++)
-	{
-		lineBuffer[j] = '\0';
-	}
-
-	strncpy(lineBuffer, element, lineamount1 - 1);
-
-	int k = 0;
-
-	while(lineBuffer[k] != '\0')
-	{
-		k++;
-	}
-
-	lineBuffer[k] = '\n';
-
-	fwrite(lineBuffer, 1, k+1, fp);
-}
-
-void loadnumber(int lineamount1, int* element, FILE* fp1)
-{
-	int j;
-	int c;
-	
-#if defined(_MSC_VER)
-	char lineBuffer[128];
-	lineamount1 = 128;
-#else
-	char lineBuffer[lineamount1];
-#endif
-
-	for(int k = 0; k < lineamount1; k++)
-	{
-		lineBuffer[k] = '\0';
-	}
-
-	j = 0;
-
-	while((c = fgetc(fp1)) != '\n' && j < lineamount1)
-	{
-		lineBuffer[j] = c;
-
-		j++;
-	}
-
-	str2int(&(*element), lineBuffer, 10);
-}
-
-void loadstring(int lineamount1, char** element, FILE* fp1)
-{
-	int j;
-	int c;
-
-#if defined(_MSC_VER)
-	char lineBuffer[128];
-	lineamount1 = 128;
-#else
-	char lineBuffer[lineamount1];
-#endif
-
-	for(int k = 0; k < lineamount1; k++)
-	{
-		lineBuffer[k] = '\0';
-	}
-
-	j = 0;
-
-	while((c = fgetc(fp1)) != '\n' && j < lineamount1)
-	{
-		lineBuffer[j] = c;
-
-		j++;
-	}
-#if !defined(_MSC_VER)
-	element[0] = strndup(lineBuffer, lineamount1);
-#endif
-
-#if defined(_MSC_VER)
-	element[0] = _strdup(lineBuffer);
-#endif
 }
 
 void initvideo(int hitpointsy, int hitpointsx)
