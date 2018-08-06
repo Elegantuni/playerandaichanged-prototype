@@ -39,7 +39,8 @@ typedef SSIZE_T ssize_t;
 
 #include "alldefines.h"
 
-void initvideo(int hitpointsy, int hitpointsx);
+#include "initvideo.h"
+
 int ncursesinput();
 void* inputgetter();
 void ncursesprint(int y, int x, const char* c);
@@ -3378,21 +3379,6 @@ beginning:
 	
 		return 0;
 	}
-}
-
-void initvideo(int hitpointsy, int hitpointsx)
-{
-	#ifdef INITNCURSESNOW
-	
-	initscr();
-		
-	resize_term(hitpointsy, hitpointsx);
-
-	noecho();
-	
-	cbreak();
-
-	#endif
 }
 
 int ncursesinput()
