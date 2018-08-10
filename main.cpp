@@ -57,7 +57,8 @@ typedef SSIZE_T ssize_t;
 
 #include "videoprinterarg1.h"
 
-void videoprinterarg2(int y, int x, const char* c, int d, char* e);
+#include "videoprinterarg2.h"
+
 void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1);
 
 #include "magic.h"
@@ -3387,13 +3388,6 @@ beginning:
 	
 		return 0;
 	}
-}
-
-void videoprinterarg2(int y, int x, const char* c, int d, char* e)
-{
-	#ifdef INITNCURSESNOW
-	ncursesprintarg2(y, x, c, d, e);
-	#endif
 }
 
 void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1)
