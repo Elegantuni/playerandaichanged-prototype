@@ -1,5 +1,5 @@
-playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o
-	clang++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o
+	clang++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 	
 main.o:
 	clang++ -c main.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
@@ -30,7 +30,9 @@ ncursesinput.o:
 
 inputgetter.o:
 	clang++ -c inputgetter.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
-	
+
+ncursesprint.o:
+	clang++ -c ncursesprint.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 clean:
-	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o
+	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o
 
