@@ -41,7 +41,8 @@ typedef SSIZE_T ssize_t;
 
 #include "initvideo.h"
 
-int ncursesinput();
+#include "ncursesinput.h"
+
 void* inputgetter();
 void ncursesprint(int y, int x, const char* c);
 void ncursesprintarg1(int y, int x, const char* c, int d);
@@ -3379,11 +3380,6 @@ beginning:
 	
 		return 0;
 	}
-}
-
-int ncursesinput()
-{
-	return getch();
 }
 
 void* inputgetter()
