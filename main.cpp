@@ -53,7 +53,8 @@ typedef SSIZE_T ssize_t;
 
 #include "ncursesprintstats.h"
 
-void videoprinternorm(int y, int x, const char* c);
+#include "videoprinternorm.h"
+
 void videoprinterarg1(int y, int x, const char* c, int d);
 void videoprinterarg2(int y, int x, const char* c, int d, char* e);
 void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, int d1, int e1, char* f1, int g1, int h1, char* i1, char* j1, char* k1, int l1);
@@ -3385,13 +3386,6 @@ beginning:
 	
 		return 0;
 	}
-}
-
-void videoprinternorm(int y, int x, const char *c)
-{
-	#ifdef INITNCURSESNOW
-	ncursesprint(y, x, c);
-	#endif
 }
 
 void videoprinterarg1(int y, int x, const char* c, int d)
