@@ -43,7 +43,8 @@ typedef SSIZE_T ssize_t;
 
 #include "ncursesinput.h"
 
-void* inputgetter();
+#include "inputgetter.h"
+
 void ncursesprint(int y, int x, const char* c);
 void ncursesprintarg1(int y, int x, const char* c, int d);
 void ncursesprintarg2(int y, int x, const char* c, int d, char* e);
@@ -3380,15 +3381,6 @@ beginning:
 	
 		return 0;
 	}
-}
-
-void* inputgetter()
-{
-	#ifdef INITNCURSESNOW
-
-	return (void *)ncursesinput();
-
-	#endif
 }
 
 void ncursesprint(int y, int x, const char* c)
