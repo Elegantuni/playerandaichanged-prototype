@@ -4,7 +4,7 @@
 #include <Windows.h>
 #endif
 
-#ifdef LINUX
+#ifndef INITWINDOWSNOW
 #include <stdlib.h>
 #endif
 

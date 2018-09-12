@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		theseed = NULL;	
+		theseed = 0;	
 	}
 
 	#ifdef INITNCURSESNOW2
