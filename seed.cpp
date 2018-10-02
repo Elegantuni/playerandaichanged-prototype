@@ -5,7 +5,7 @@ char *str2md5(const char *str, int length) {
 	int n;
 	MD5_CTX c;
 	unsigned char digest[4];
-	char *out = (char*)malloc(17);
+	char *out = (char*)malloc(33);
 
 	MD5_Init(&c);
 
