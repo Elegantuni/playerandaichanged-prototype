@@ -20,6 +20,10 @@
 #include <unistd.h>
 #endif
 
+#ifdef INITMSYS2NOW
+#include <unistd.h>
+#endif
+
 #include "str2int.h"
 
 #include <stdio.h>
