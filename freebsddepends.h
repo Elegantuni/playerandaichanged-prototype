@@ -1,5 +1,10 @@
 #pragma once
 
+#ifdef INITOPENINDIANA
+#include <cstdlib>
+#include <cstring>
+#endif
+
 #ifdef INITWINDOWSNOW
 #include <Windows.h>
 #endif
