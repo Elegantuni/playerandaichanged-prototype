@@ -1,0 +1,60 @@
+playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	g++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	
+main.o:
+	g++ -c main.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+seed.o:
+	g++ -c seed.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+str2int.o:
+	g++ -c str2int.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+loadnumber.o:
+	g++ -c loadnumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+loadstring.o:
+	g++ -c loadstring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+writenumber.o:
+	g++ -c writenumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	
+writestring.o:
+	g++ -c writestring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+initvideo.o:
+	g++ -c initvideo.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesinput.o:
+	g++ -c ncursesinput.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+inputgetter.o:
+	g++ -c inputgetter.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprint.o:
+	g++ -c ncursesprint.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintarg1.o:
+	g++ -c ncursesprintarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintarg2.o:
+	g++ -c ncursesprintarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintstats.o:
+	g++ -c ncursesprintstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinternorm.o:
+	g++ -c videoprinternorm.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterarg1.o:
+	g++ -c videoprinterarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterarg2.o:
+	g++ -c videoprinterarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterstats.o:
+	g++ -c videoprinterstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+clean:
+	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+
