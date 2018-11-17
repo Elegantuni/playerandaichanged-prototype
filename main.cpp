@@ -224,19 +224,9 @@ int main(int argc, char *argv[])
 #else
 	#define lineamount 128
 #endif
-	int terminalend;
-	int terminalendx;
-	
-	if(maxplayers < 10000)
-	{
-		terminalend = (maxenemies + maxplayers) * 3;
-		terminalendx = 140;
-	}
-	else
-	{
-		terminalend = (maxenemies + maxplayers) * 3;
-		terminalendx = 140;
-	}
+		
+	int terminalend = (maxenemies + maxplayers) * 3;
+	int terminalendx = 140;
 	
 	int savefile = 0;
 
