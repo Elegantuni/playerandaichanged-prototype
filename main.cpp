@@ -172,9 +172,9 @@ int main(int argc, char *argv[])
 		hitpointsx = 120;
 	#endif
 
-	while(maxplayers1 < 10 || maxplayers1 > 1000)
+	while(maxplayers1 < 10 || maxplayers1 > 1000000)
 	{
-		printf("Enter the amount of ai you want to face (10 - 1000).  If there is a save file this won't work: ");
+		printf("Enter the amount of ai you want to face (10 - 1000000). You will have to use in bash ulimit -s unlimited for values above 7000 probably. If there is a save file this won't work: ");
 		
 		fflush(stdout);
 		
@@ -183,9 +183,9 @@ int main(int argc, char *argv[])
 	
 	int rounds = 1;
 	
-	while(rounds < 10 || rounds > 1000)
+	while(rounds < 10 || rounds > 1000000)
 	{
-		printf("Enter the amount of rounds you want to play (10 - 1000).  If you want a real acheivemnet choose 50 or greater.\nIf there is a save file this won't work: ");
+		printf("Enter the amount of rounds you want to play (10 - 1000000).  If you want a real acheivemnet choose 50 or greater.\nIf there is a save file this won't work: ");
 		
 		fflush(stdout);
 
@@ -224,9 +224,20 @@ int main(int argc, char *argv[])
 #else
 	#define lineamount 128
 #endif
-	int terminalend = (maxenemies + maxplayers) * 3;
-	int terminalendx = 140;
-
+	int terminalend;
+	int terminalendx;
+	
+	if(maxplayers < 10000)
+	{
+		terminalend = (maxenemies + maxplayers) * 3;
+		terminalendx = 140;
+	}
+	else
+	{
+		terminalend = (maxenemies + maxplayers) * 3;
+		terminalendx = 140;
+	}
+	
 	int savefile = 0;
 
 	int positiony = 0;
