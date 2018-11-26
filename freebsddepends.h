@@ -5,6 +5,11 @@
 #include <cstring>
 #endif
 
+#ifdef FREEBSD
+#include <cstdlib>
+#include <cstring>
+#endif
+
 #ifdef INITWINDOWSNOW
 #include <Windows.h>
 #endif
