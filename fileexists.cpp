@@ -11,6 +11,12 @@ int fileExists(const char *file)
 		//FindClose(&handle); this will crash
 		FindClose(handle);
 	}
+
+	if(handle == INVALID_HANDLE_VALUE)
+	{
+		return -1;
+	}
+
 	return found;
 }
 #endif
