@@ -117,6 +117,7 @@ int main(int argc, char *argv[])
 	char *digest = (char *)malloc(sizeof(char) * 33);
 
 	int commandlineset = 0;
+	int rounds = 1;
 
 	if(argc == 2)
 	{
@@ -146,7 +147,6 @@ int main(int argc, char *argv[])
 
 	int row;
 	int col;
-	int rounds = 1;
 
 	initscr();
 	getmaxyx(stdscr, row, col);
@@ -174,7 +174,7 @@ int main(int argc, char *argv[])
 	#endif
 
 #if defined(_MSC_VER)
-                if(fileExists("SaveFile.txt") == -1)
+                if(!fileExists("SaveFile.txt"))
 #else
                 if(access("SaveFile.txt", F_OK ) == -1)
 #endif
@@ -187,6 +187,8 @@ int main(int argc, char *argv[])
 		
 		scanf("%d", &maxplayers1);
 	}
+
+	rounds = 1;
 	
 	while(rounds < 10 || rounds > 1000000)
 	{
@@ -197,8 +199,9 @@ int main(int argc, char *argv[])
 		scanf("%d", &rounds);
 	}
 	}
+
 #if defined(_MSC_VER)
-                if(fileExists("SaveFile.txt") != -1)
+                if(fileExists("SaveFile.txt"))
 #else
                 if(access("SaveFile.txt", F_OK ) != -1)
 #endif
