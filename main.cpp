@@ -41,6 +41,8 @@ typedef SSIZE_T ssize_t;
 #define RETURNTYPEVIDEO intptr_t
 #endif
 
+#include "playerweapons_initialize.h"
+
 #include "alldefines.h"
 
 #include "initvideo.h"
@@ -303,12 +305,28 @@ beginning:
 		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
 #endif
 
+		for(int i = 0; i < maxplayers; i++)
+		{
+			myplayer[i].weapontype.item = (char**)malloc(sizeof(char) * allitems);
+		}
+
+		for(int i = 0; i < maxplayers; i++)
+		{
+			myplayer[i].weaponsdamage1.damage = (int *)malloc(sizeof(int) * allitems);
+			myplayer[i].weaponsdamage1.rangex = (int *)malloc(sizeof(int) * allitems);
+			myplayer[i].weaponsdamage1.rangey = (int *)malloc(sizeof(int) * allitems);
+		}
+		
 		char* item[allitems];
-		item[0] = const_cast<char *>("Knife");
-		item[1] = const_cast<char *>("Gun");
-		item[2] = const_cast<char *>("Pistol");
-		item[3] = const_cast<char *>("Shotgun");
-		item[4] = const_cast<char *>("Machine Gun");
+
+		fp1 = fopen("PLAYERWEAPONS.txt", "r");
+
+		for(int i = 0; i < allitems; i++)
+		{
+			loadstring(lineamount, &item[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* itemdamage[alldefenseitems];
 		itemdamage[0] = const_cast<char *>("Short_Shield");
@@ -332,9 +350,39 @@ beginning:
 		itemdamageenemies[3] = const_cast<char *>("Iron_Shield");
 		itemdamageenemies[4] = const_cast<char *>("Steel_Shield");
 
-		int damage[allitems] = { 40, 60, 50, 80, 120 };
-		int rangey[allitems] = { 1, 2, 3, 4, 2 };
-		int rangex[allitems] = { 1, 2, 3, 4, 2 };
+
+		int* damage = (int *)malloc(sizeof(int) * allitems);
+
+		fp1 = fopen("PLAYERWEAPONSDAMAGE.txt", "r");
+
+		for(int i = 0; i < allitems; i++)
+		{
+			loadnumber(lineamount, &damage[i], fp1);
+		}
+
+		fclose(fp1);
+
+		int* rangey = (int *)malloc(sizeof(int) * allitems);
+
+		fp1 = fopen("PLAYERWEAPONSRANGEY.txt", "r");
+
+		for(int i = 0; i < allitems; i++)
+		{
+			loadnumber(lineamount, &rangey[i], fp1);
+		}
+
+		fclose(fp1);
+
+		int* rangex = (int *)malloc(sizeof(int) * allitems);
+
+		fp1 = fopen("PLAYERWEAPONSRANGEX.txt", "r");
+
+		for(int i = 0; i < allitems; i++)
+		{
+			loadnumber(lineamount, &rangex[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int damageenemies[allitemsenemies] = { 40, 60, 50, 80, 120, 20 };
 		int rangeyenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };

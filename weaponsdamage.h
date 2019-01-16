@@ -1,9 +1,11 @@
 #pragma once
 
+#include <stdlib.h>
+
 struct weaponsdamage
 {
 	char* item;
-	int damage[allitems];
-	int rangey[allitems];
-	int rangex[allitems];
+	int* damage;
+	int* rangey;
+	int* rangex;
 };

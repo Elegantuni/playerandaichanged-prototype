@@ -1,6 +1,9 @@
 #pragma once
 
-#define allitems 5
+const int theitemnumber1 = playerweaponsinitialize();
+
+#define allitems theitemnumber1
+
 #define allitemsenemies 6
 
 #define alldefenseitems 5
