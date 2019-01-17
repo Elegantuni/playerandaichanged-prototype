@@ -1,5 +1,3 @@
-#pragma once
-
 #include "playerweapons_initialize.h"
 
 int playerweaponsinitialize()
