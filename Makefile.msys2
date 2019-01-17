@@ -1,6 +1,9 @@
-playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
-	g++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+playerandai1: playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	g++ -std=c++11 -o playerandai1 playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 	
+playerweapons_initialize.o:
+	g++ -c playerweapons_initialize.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
 main.o:
 	g++ -c main.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
@@ -59,5 +62,5 @@ freebsddepends.o:
 	g++ -c freebsddepends.cpp -I/mingw64/include/ncurse -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 	
 clean:
-	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	rm -f playerandai1 playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
 
