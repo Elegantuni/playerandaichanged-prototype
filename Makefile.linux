@@ -1,62 +1,65 @@
-playerandai1: playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-	clang++ -o playerandai1 playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+playerandai1: playerdefense_initialize.o playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	clang++ -o playerandai1 playerdefense_initialize.o playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+
+playerdefense_initialize.o:
+	clang++ -c playerdefense_initialize.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 playerweapons_initialize.o:
-	clang++ -c playerweapons_initialize.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c playerweapons_initialize.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 main.o:
-	clang++ -c main.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c main.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 seed.o:
-	clang++ -c seed.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c seed.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 str2int.o:
-	clang++ -c str2int.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c str2int.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 loadnumber.o:
-	clang++ -c loadnumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c loadnumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 loadstring.o:
-	clang++ -c loadstring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c loadstring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 writenumber.o:
-	clang++ -c writenumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c writenumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 	
 writestring.o:
-	clang++ -c writestring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c writestring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 initvideo.o:
-	clang++ -c initvideo.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c initvideo.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesinput.o:
-	clang++ -c ncursesinput.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c ncursesinput.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 inputgetter.o:
-	clang++ -c inputgetter.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c inputgetter.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprint.o:
-	clang++ -c ncursesprint.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c ncursesprint.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprintarg1.o:
-	clang++ -c ncursesprintarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c ncursesprintarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprintarg2.o:
-	clang++ -c ncursesprintarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c ncursesprintarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprintstats.o:
-	clang++ -c ncursesprintstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c ncursesprintstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinternorm.o:
-	clang++ -c videoprinternorm.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c videoprinternorm.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinterarg1.o:
-	clang++ -c videoprinterarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c videoprinterarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinterarg2.o:
-	clang++ -c videoprinterarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c videoprinterarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinterstats.o:
-	clang++ -c videoprinterstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL 
+	clang++ -c videoprinterstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 clean:
-	rm -f playerandai1 playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	rm -f playerandai1 playerdefense_initialize.o playerweapons_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o

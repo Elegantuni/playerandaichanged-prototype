@@ -316,6 +316,16 @@ beginning:
 			myplayer[i].weaponsdamage1.rangex = (int *)malloc(sizeof(int) * allitems);
 			myplayer[i].weaponsdamage1.rangey = (int *)malloc(sizeof(int) * allitems);
 		}
+
+		for(int i = 0; i < maxplayers; i++)
+		{
+			myplayer[i].shieldsdamage1.damage = (int *)malloc(sizeof(int) * alldefenseitems);
+		}
+
+		for(int i = 0; i < maxplayers; i++)
+		{
+			myplayer[i].shieldstype.item = (char**)malloc(sizeof(char) * alldefenseitems);
+		}
 		
 		char* item[allitems];
 
@@ -329,11 +339,15 @@ beginning:
 		fclose(fp1);
 
 		char* itemdamage[alldefenseitems];
-		itemdamage[0] = const_cast<char *>("Short_Shield");
-		itemdamage[1] = const_cast<char *>("Long_Shield");
-		itemdamage[2] = const_cast<char *>("Metal_Shield");
-		itemdamage[3] = const_cast<char *>("Iron_Shield");
-		itemdamage[4] = const_cast<char *>("Steel_Shield");
+
+		fp1 = fopen("PLAYERDEFENSE.txt", "r");
+
+		for(int i = 0; i < alldefenseitems; i++)
+		{
+			loadstring(lineamount, &itemdamage[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* itemenemies[allitemsenemies];
 		itemenemies[0] = const_cast<char *>("Knife");
@@ -388,7 +402,16 @@ beginning:
 		int rangeyenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
 		int rangexenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
 
-		int shielddamage[alldefenseitems] = { 2, 4, 6, 8, 10 };
+		int* shielddamage = (int *)malloc(sizeof(int) * alldefenseitems);
+
+		fp1 = fopen("PLAYERSHIELDDAMAGE.txt", "r");
+
+		for(int i = 0; i < alldefenseitems; i++)
+		{
+			loadnumber(lineamount, &shielddamage[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int shielddamageenemies[alldefenseitemsenemies] = { 2, 4, 6, 8, 10};
 
