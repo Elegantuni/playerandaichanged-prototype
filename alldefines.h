@@ -1,7 +1,12 @@
 #pragma once
 
+#include "playercharacter_initialize.h"
 #include "playerweapons_initialize.h"
 #include "playerdefense_initialize.h"
+
+const int theplayercharacter1 = playercharacterinitialize();
+
+#define playercharacters theplayercharacter1
 
 const int theitemnumber1 = playerweaponsinitialize();
 

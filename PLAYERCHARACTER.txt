@@ -1,0 +1,5 @@
+Human
+Orc
+Elf
+Dwarf
+Mouse
