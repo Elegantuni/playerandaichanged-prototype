@@ -3,4 +3,4 @@
 #include <stdio.h>
 #include "loadnumber.h"
 
-int playerweaponsinitialize();
+int playercharacterinitialize();

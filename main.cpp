@@ -41,8 +41,6 @@ typedef SSIZE_T ssize_t;
 #define RETURNTYPEVIDEO intptr_t
 #endif
 
-#include "playerweapons_initialize.h"
-
 #include "alldefines.h"
 
 #include "initvideo.h"
@@ -224,7 +222,6 @@ int main(int argc, char *argv[])
 
 	#define maxenemies maxenemies2
 	#define maxplayers maxplayers2
-	#define playercharacters 4
 	#define aicharacters 4
 	#define playermagiclist allmagics
 	#define aimagiclist allmagicsenemies
@@ -304,11 +301,12 @@ beginning:
 		struct player *myplayer = (struct player *) malloc(sizeof(struct player) * maxplayers);
 		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
 #endif
-
+		/*
 		for(int i = 0; i < maxplayers; i++)
 		{
 			myplayer[i].weapontype.item = (char**)malloc(sizeof(char) * allitems);
 		}
+		*/
 
 		for(int i = 0; i < maxplayers; i++)
 		{
@@ -321,11 +319,13 @@ beginning:
 		{
 			myplayer[i].shieldsdamage1.damage = (int *)malloc(sizeof(int) * alldefenseitems);
 		}
-
+		
+		/*
 		for(int i = 0; i < maxplayers; i++)
 		{
 			myplayer[i].shieldstype.item = (char**)malloc(sizeof(char) * alldefenseitems);
 		}
+		*/
 		
 		char* item[allitems];
 
@@ -416,10 +416,15 @@ beginning:
 		int shielddamageenemies[alldefenseitemsenemies] = { 2, 4, 6, 8, 10};
 
 		char* playercharacter1[playercharacters];
-		playercharacter1[0] = const_cast<char *>("Human");
-		playercharacter1[1] = const_cast<char *>("Orc");
-		playercharacter1[2] = const_cast<char *>("Elf");
-		playercharacter1[3] = const_cast<char *>("Dwarf");
+
+		fp1 = fopen("PLAYERCHARACTER.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadstring(lineamount, &playercharacter1[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* aicharacter1[aicharacters];
 		aicharacter1[0] = const_cast<char *>("Human");
@@ -428,10 +433,15 @@ beginning:
 		aicharacter1[3] = const_cast<char *>("Dwarf");
 
 		char* playersigns[playercharacters];
-		playersigns[0] = const_cast<char *>("H");
-		playersigns[1] = const_cast<char *>("O");
-		playersigns[2] = const_cast<char *>("E");
-		playersigns[3] = const_cast<char *>("D");
+
+		fp1 = fopen("PLAYERSIGN.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadstring(lineamount, &playersigns[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* aisigns[aicharacters];
 		aisigns[0] = const_cast<char *>("h");
@@ -440,10 +450,15 @@ beginning:
 		aisigns[3] = const_cast<char *>("d");
 
 		int playerhitpoints[playercharacters];
-		playerhitpoints[0] = 1500;
-		playerhitpoints[1] = 2000;
-		playerhitpoints[2] = 1000;
-		playerhitpoints[3] = 2200;
+		
+		fp1 = fopen("PLAYERHITPOINTS.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadnumber(lineamount, &playerhitpoints[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aihitpoints[aicharacters];
 		aihitpoints[0] = 1500;
@@ -452,10 +467,15 @@ beginning:
 		aihitpoints[3] = 2200;
 
 		int playerdefense[playercharacters];
-		playerdefense[0] = 10;
-		playerdefense[1] = 30;
-		playerdefense[2] = 3;
-		playerdefense[3] = 20;
+		
+		fp1 = fopen("PLAYERDEFENSEVALUES.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadnumber(lineamount, &playerdefense[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aidefense[aicharacters];
 		aidefense[0] = 10;
@@ -464,10 +484,15 @@ beginning:
 		aidefense[3] = 20;
 
 		int playerattack[playercharacters];
-		playerattack[0] = 10;
-		playerattack[1] = 20;
-		playerattack[2] = 8;
-		playerattack[3] = 15;
+
+		fp1 = fopen("PLAYERATTACK.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadnumber(lineamount, &playerattack[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aiattack[aicharacters];
 		aiattack[0] = 10;
@@ -531,10 +556,15 @@ beginning:
 		aimagicresist[3] = 10;
 
 		int playermagicpoints[playercharacters];
-		playermagicpoints[0] = 400;
-		playermagicpoints[1] = 200;
-		playermagicpoints[2] = 500;
-		playermagicpoints[3] = 100;
+		
+		fp1 = fopen("PLAYERMAGICPOINTS.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadnumber(lineamount, &playermagicpoints[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aimagicpoints[aicharacters];
 		aimagicpoints[0] = 400;

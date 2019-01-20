@@ -1,7 +1,8 @@
 #pragma once
 
-struct player
+class player
 {
+public:
 	int y;
 	int x;
 	int hitpoints;
