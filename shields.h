@@ -3,7 +3,7 @@
 struct shields
 {
 	char* equiped;
-	char** item;
+	char* item[alldefenseitems];
 	int damage;
 	int numberitems;
 	int randomshield;

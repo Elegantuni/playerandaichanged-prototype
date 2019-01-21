@@ -41,8 +41,6 @@ typedef SSIZE_T ssize_t;
 #define RETURNTYPEVIDEO intptr_t
 #endif
 
-#include "playerweapons_initialize.h"
-
 #include "alldefines.h"
 
 #include "initvideo.h"
@@ -303,11 +301,12 @@ beginning:
 		struct player *myplayer = (struct player *) malloc(sizeof(struct player) * maxplayers);
 		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
 #endif
-
+		/*
 		for(int i = 0; i < maxplayers; i++)
 		{
 			myplayer[i].weapontype.item = (char**)malloc(sizeof(char) * allitems);
 		}
+		*/
 
 		for(int i = 0; i < maxplayers; i++)
 		{
@@ -320,11 +319,13 @@ beginning:
 		{
 			myplayer[i].shieldsdamage1.damage = (int *)malloc(sizeof(int) * alldefenseitems);
 		}
-
+		
+		/*
 		for(int i = 0; i < maxplayers; i++)
 		{
 			myplayer[i].shieldstype.item = (char**)malloc(sizeof(char) * alldefenseitems);
 		}
+		*/
 		
 		char* item[allitems];
 

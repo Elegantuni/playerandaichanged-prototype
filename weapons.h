@@ -1,12 +1,9 @@
 #pragma once
 
-#include <vector>
-using namespace std;
-
 struct weapons
 {
 	char* equiped;
-	char** item;
+	char* item[allitems];
 	int damage;
 	int rangey;
 	int rangex;
