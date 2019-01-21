@@ -595,11 +595,15 @@ beginning:
 		aimagiccost[4] = 40;
 
 		char* playerarmor[allarmor];
-		playerarmor[0] = const_cast<char *>("Weak armor");
-		playerarmor[1] = const_cast<char *>("Light armor");
-		playerarmor[2] = const_cast<char *>("Medium armor");
-		playerarmor[3] = const_cast<char *>("Heavy armor");
-		playerarmor[4] = const_cast<char *>("Super armor");
+
+		fp1 = fopen("PLAYERARMOR.txt", "r");
+
+		for(int i = 0; i < allarmor; i++)
+		{
+			loadstring(lineamount, &playerarmor[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* aiarmor[allarmorenemies];
 		aiarmor[0] = const_cast<char *>("Weak armor");
@@ -609,11 +613,15 @@ beginning:
 		aiarmor[4] = const_cast<char *>("Super armor");
 
 		int playerarmorpts[allarmor];
-		playerarmorpts[0] = 3;
-		playerarmorpts[1] = 6;
-		playerarmorpts[2] = 9;
-		playerarmorpts[3] = 12;
-		playerarmorpts[4] = 15;
+		
+		fp1 = fopen("PLAYERARMORPOINTS.txt", "r");
+
+		for(int i = 0; i < allarmor; i++)
+		{
+			loadnumber(lineamount, &playerarmorpts[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aiarmorpts[allarmorenemies];
 		aiarmorpts[0] = 3;
@@ -623,11 +631,15 @@ beginning:
 		aiarmorpts[4] = 15;
 
 		int playerarmordistancex[allarmor];
-		playerarmordistancex[0] = 3;
-		playerarmordistancex[1] = 4;
-		playerarmordistancex[2] = 5;
-		playerarmordistancex[3] = 6;
-		playerarmordistancex[4] = 7;
+
+		fp1 = fopen("PLAYERARMORDISTANCEX.txt", "r");
+
+		for(int i = 0; i < allarmor; i++)
+		{
+			loadnumber(lineamount, &playerarmordistancex[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aiarmordistancex[allarmorenemies];
 		aiarmordistancex[0] = 3;
@@ -637,11 +649,15 @@ beginning:
 		aiarmordistancex[4] = 7;
 
 		int playerarmordistancey[allarmor];
-		playerarmordistancey[0] = 3;
-		playerarmordistancey[1] = 4;
-		playerarmordistancey[2] = 5;
-		playerarmordistancey[3] = 6;
-		playerarmordistancey[4] = 7;
+		
+		fp1 = fopen("PLAYERARMORDISTANCEY.txt", "r");
+
+		for(int i = 0; i < allarmor; i++)
+		{
+			loadnumber(lineamount, &playerarmordistancey[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aiarmordistancey[allarmorenemies];
 		aiarmordistancey[0] = 3;
