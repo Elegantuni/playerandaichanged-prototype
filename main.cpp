@@ -489,11 +489,15 @@ beginning:
 
 
 		char* playermagicitems[playermagiclist];
-		playermagicitems[0] = const_cast<char *>("Fire");
-		playermagicitems[1] = const_cast<char *>("Wind");
-		playermagicitems[2] = const_cast<char *>("Ice");
-		playermagicitems[3] = const_cast<char *>("Water");
-		playermagicitems[4] = const_cast<char *>("Lightning");
+		
+		fp1 = fopen("PLAYERMAGICS.txt", "r");
+
+		for(int i = 0; i < playermagiclist; i++)
+		{
+			loadstring(lineamount, &playermagicitems[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* aimagicitems[aimagiclist];
 		aimagicitems[0] = const_cast<char *>("Fire");
@@ -503,11 +507,15 @@ beginning:
 		aimagicitems[4] = const_cast<char *>("Lightning");
 
 		int playermagicdamage[playermagiclist];
-		playermagicdamage[0] = 80;
-		playermagicdamage[1] = 70;
-		playermagicdamage[2] = 60;
-		playermagicdamage[3] = 50;
-		playermagicdamage[4] = 40;
+		
+		fp1 = fopen("PLAYERMAGICSDAMAGE.txt", "r");
+
+		for(int i = 0; i < playermagiclist; i++)
+		{
+			loadnumber(lineamount, &playermagicdamage[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aimagicdamage[aimagiclist];
 		aimagicdamage[0] = 80;
@@ -517,11 +525,15 @@ beginning:
 		aimagicdamage[4] = 40;
 
 		int playermagicdistance[playermagiclist];
-		playermagicdistance[0] = 8;
-		playermagicdistance[1] = 8;
-		playermagicdistance[2] = 8;
-		playermagicdistance[3] = 8;
-		playermagicdistance[4] = 8;
+		
+		fp1 = fopen("PLAYERMAGICSDISTANCE.txt", "r");
+
+		for(int i = 0; i < playermagiclist; i++)
+		{
+			loadnumber(lineamount, &playermagicdistance[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aimagicdistance[aimagiclist];
 		aimagicdistance[0] = 8;
@@ -531,10 +543,15 @@ beginning:
 		aimagicdistance[4] = 8;
 
 		int playermagicresist[playercharacters];
-		playermagicresist[0] = 20;
-		playermagicresist[1] = 5;
-		playermagicresist[2] = 40;
-		playermagicresist[3] = 10;
+		
+		fp1 = fopen("PLAYERMAGICRESISTANCE.txt", "r");
+
+		for(int i = 0; i < playercharacters; i++)
+		{
+			loadnumber(lineamount, &playermagicresist[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aimagicresist[aicharacters];
 		aimagicresist[0] = 20;
@@ -560,11 +577,15 @@ beginning:
 		aimagicpoints[3] = 100;
 
 		int playermagiccost[playermagiclist];
-		playermagiccost[0] = 50;
-		playermagiccost[1] = 40;
-		playermagiccost[2] = 30;
-		playermagiccost[3] = 20;
-		playermagiccost[4] = 10;
+
+		fp1 = fopen("PLAYERMAGICSCOST.txt", "r");
+
+		for(int i = 0; i < playermagiclist; i++)
+		{
+			loadnumber(lineamount, &playermagiccost[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int aimagiccost[aimagiclist];
 		aimagiccost[0] = 40;
