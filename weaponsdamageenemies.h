@@ -3,7 +3,7 @@
 struct weaponsdamageenemies
 {
 	char* item;
-	int damage[allitemsenemies];
-	int rangey[allitemsenemies];
-	int rangex[allitemsenemies];
+	int* damage;
+	int* rangey;
+	int* rangex;
 };

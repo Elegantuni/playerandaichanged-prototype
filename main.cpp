@@ -313,6 +313,18 @@ beginning:
 		{
 			myplayer[i].shieldsdamage1.damage = (int *)malloc(sizeof(int) * alldefenseitems);
 		}
+
+		for(int i = 0; i < maxenemies; i++)
+		{
+			myai[i].weaponsdamage1.damage = (int *)malloc(sizeof(int) * allitemsenemies);
+			myai[i].weaponsdamage1.rangex = (int *)malloc(sizeof(int) * allitemsenemies);
+			myai[i].weaponsdamage1.rangey = (int *)malloc(sizeof(int) * allitemsenemies);
+		}
+
+		for(int i = 0; i < maxenemies; i++)
+		{
+			myai[i].shieldsdamage1.damage = (int *)malloc(sizeof(int) * alldefenseitemsenemies);
+		}
 		
 		char* item[allitems];
 
@@ -337,12 +349,15 @@ beginning:
 		fclose(fp1);
 
 		char* itemenemies[allitemsenemies];
-		itemenemies[0] = const_cast<char *>("Knife");
-		itemenemies[1] = const_cast<char *>("Gun");
-		itemenemies[2] = const_cast<char *>("Pistol");
-		itemenemies[3] = const_cast<char *>("Shotgun");
-		itemenemies[4] = const_cast<char *>("Machine Gun");
-		itemenemies[5] = const_cast<char *>("Weak Hammer");
+		
+		fp1 = fopen("AIWEAPONS.txt", "r");
+
+		for(int i = 0; i < allitemsenemies; i++)
+		{
+			loadstring(lineamount, &itemenemies[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* itemdamageenemies[alldefenseitemsenemies];
 		itemdamageenemies[0] = const_cast<char *>("Short_Shield");
@@ -385,9 +400,38 @@ beginning:
 
 		fclose(fp1);
 
-		int damageenemies[allitemsenemies] = { 40, 60, 50, 80, 120, 20 };
-		int rangeyenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
-		int rangexenemies[allitemsenemies] = { 1, 2, 3, 4, 2, 1 };
+		int* damageenemies = (int *)malloc(sizeof(int) * allitemsenemies);
+
+		fp1 = fopen("AIWEAPONSDAMAGE.txt", "r");
+
+		for(int i = 0; i < allitemsenemies; i++)
+		{
+			loadnumber(lineamount, &damageenemies[i], fp1);
+		}
+
+		fclose(fp1);
+
+		int* rangeyenemies = (int *)malloc(sizeof(int) * allitemsenemies);
+
+		fp1 = fopen("AIWEAPONSRANGEY.txt", "r");
+
+		for(int i = 0; i < allitemsenemies; i++)
+		{
+			loadnumber(lineamount, &rangeyenemies[i], fp1);
+		}
+
+		fclose(fp1);
+
+		int* rangexenemies = (int *)malloc(sizeof(int) * allitemsenemies);
+
+		fp1 = fopen("AIWEAPONSRANGEX.txt", "r");
+
+		for(int i = 0; i < allitemsenemies; i++)
+		{
+			loadnumber(lineamount, &rangexenemies[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int* shielddamage = (int *)malloc(sizeof(int) * alldefenseitems);
 
@@ -400,7 +444,16 @@ beginning:
 
 		fclose(fp1);
 
-		int shielddamageenemies[alldefenseitemsenemies] = { 2, 4, 6, 8, 10};
+		int* shielddamageenemies = (int *)malloc(sizeof(int) * alldefenseitemsenemies);
+
+		fp1 = fopen("AISHIELDDAMAGE.txt", "r");
+
+		for(int i = 0; i < alldefenseitemsenemies; i++)
+		{
+			loadnumber(lineamount, &shielddamageenemies[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* playercharacter1[playercharacters];
 

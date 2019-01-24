@@ -1,0 +1,6 @@
+Knife
+Gun
+Pistol
+Shotgun
+Machine Gun
+Weak Hammer
