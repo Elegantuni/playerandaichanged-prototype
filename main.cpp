@@ -222,7 +222,6 @@ int main(int argc, char *argv[])
 
 	#define maxenemies maxenemies2
 	#define maxplayers maxplayers2
-	#define aicharacters 4
 	#define playermagiclist allmagics
 	#define aimagiclist allmagicsenemies
 	
@@ -360,12 +359,15 @@ beginning:
 		fclose(fp1);
 
 		char* itemdamageenemies[alldefenseitemsenemies];
-		itemdamageenemies[0] = const_cast<char *>("Short_Shield");
-		itemdamageenemies[1] = const_cast<char *>("Long_Shield");
-		itemdamageenemies[2] = const_cast<char *>("Metal_Shield");
-		itemdamageenemies[3] = const_cast<char *>("Iron_Shield");
-		itemdamageenemies[4] = const_cast<char *>("Steel_Shield");
+		
+		fp1 = fopen("AIDEFENSE.txt", "r");
 
+		for(int i = 0; i < alldefenseitemsenemies; i++)
+		{
+			loadstring(lineamount, &itemdamageenemies[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int* damage = (int *)malloc(sizeof(int) * allitems);
 
@@ -467,10 +469,15 @@ beginning:
 		fclose(fp1);
 
 		char* aicharacter1[aicharacters];
-		aicharacter1[0] = const_cast<char *>("Human");
-		aicharacter1[1] = const_cast<char *>("Orc");
-		aicharacter1[2] = const_cast<char *>("Elf");
-		aicharacter1[3] = const_cast<char *>("Dwarf");
+
+		fp1 = fopen("AICHARACTER.txt", "r");
+
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadstring(lineamount, &aicharacter1[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* playersigns[playercharacters];
 
@@ -484,10 +491,15 @@ beginning:
 		fclose(fp1);
 
 		char* aisigns[aicharacters];
-		aisigns[0] = const_cast<char *>("h");
-		aisigns[1] = const_cast<char *>("o");
-		aisigns[2] = const_cast<char *>("e");
-		aisigns[3] = const_cast<char *>("d");
+		
+		fp1 = fopen("AISIGN.txt", "r");
+
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadstring(lineamount, &aisigns[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playerhitpoints[playercharacters];
 		
@@ -501,10 +513,15 @@ beginning:
 		fclose(fp1);
 
 		int aihitpoints[aicharacters];
-		aihitpoints[0] = 1500;
-		aihitpoints[1] = 2000;
-		aihitpoints[2] = 1000;
-		aihitpoints[3] = 2200;
+		
+		fp1 = fopen("AIHITPOINTS.txt", "r");
+
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadnumber(lineamount, &aihitpoints[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playerdefense[playercharacters];
 		
@@ -518,10 +535,15 @@ beginning:
 		fclose(fp1);
 
 		int aidefense[aicharacters];
-		aidefense[0] = 10;
-		aidefense[1] = 30;
-		aidefense[2] = 3;
-		aidefense[3] = 20;
+		
+		fp1 = fopen("AIDEFENSEVALUES.txt", "r");
+
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadnumber(lineamount, &aidefense[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playerattack[playercharacters];
 
@@ -535,11 +557,15 @@ beginning:
 		fclose(fp1);
 
 		int aiattack[aicharacters];
-		aiattack[0] = 10;
-		aiattack[1] = 20;
-		aiattack[2] = 8;
-		aiattack[3] = 15;
+		
+		fp1 = fopen("AIATTACK.txt", "r");
 
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadnumber(lineamount, &aiattack[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* playermagicitems[playermagiclist];
 		
@@ -553,11 +579,15 @@ beginning:
 		fclose(fp1);
 
 		char* aimagicitems[aimagiclist];
-		aimagicitems[0] = const_cast<char *>("Fire");
-		aimagicitems[1] = const_cast<char *>("Wind");
-		aimagicitems[2] = const_cast<char *>("Ice");
-		aimagicitems[3] = const_cast<char *>("Water");
-		aimagicitems[4] = const_cast<char *>("Lightning");
+		
+		fp1 = fopen("AIMAGICS.txt", "r");
+
+		for(int i = 0; i < aimagiclist; i++)
+		{
+			loadstring(lineamount, &aimagicitems[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playermagicdamage[playermagiclist];
 		
@@ -571,11 +601,15 @@ beginning:
 		fclose(fp1);
 
 		int aimagicdamage[aimagiclist];
-		aimagicdamage[0] = 80;
-		aimagicdamage[1] = 70;
-		aimagicdamage[2] = 60;
-		aimagicdamage[3] = 50;
-		aimagicdamage[4] = 40;
+		
+		fp1 = fopen("AIMAGICSDAMAGE.txt", "r");
+
+		for(int i = 0; i < aimagiclist; i++)
+		{
+			loadnumber(lineamount, &aimagicdamage[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playermagicdistance[playermagiclist];
 		
@@ -589,11 +623,15 @@ beginning:
 		fclose(fp1);
 
 		int aimagicdistance[aimagiclist];
-		aimagicdistance[0] = 8;
-		aimagicdistance[1] = 8;
-		aimagicdistance[2] = 8;
-		aimagicdistance[3] = 8;
-		aimagicdistance[4] = 8;
+
+		fp1 = fopen("AIMAGICSDISTANCE.txt", "r");
+
+		for(int i = 0; i < aimagiclist; i++)
+		{
+			loadnumber(lineamount, &aimagicdistance[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playermagicresist[playercharacters];
 		
@@ -607,10 +645,15 @@ beginning:
 		fclose(fp1);
 
 		int aimagicresist[aicharacters];
-		aimagicresist[0] = 20;
-		aimagicresist[1] = 5;
-		aimagicresist[2] = 40;
-		aimagicresist[3] = 10;
+		
+		fp1 = fopen("AIMAGICRESISTANCE.txt", "r");
+
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadnumber(lineamount, &aimagicresist[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playermagicpoints[playercharacters];
 		
@@ -624,10 +667,15 @@ beginning:
 		fclose(fp1);
 
 		int aimagicpoints[aicharacters];
-		aimagicpoints[0] = 400;
-		aimagicpoints[1] = 200;
-		aimagicpoints[2] = 500;
-		aimagicpoints[3] = 100;
+		
+		fp1 = fopen("AIMAGICPOINTS.txt", "r");
+
+		for(int i = 0; i < aicharacters; i++)
+		{
+			loadnumber(lineamount, &aimagicpoints[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playermagiccost[playermagiclist];
 
@@ -641,11 +689,15 @@ beginning:
 		fclose(fp1);
 
 		int aimagiccost[aimagiclist];
-		aimagiccost[0] = 40;
-		aimagiccost[1] = 40;
-		aimagiccost[2] = 40;
-		aimagiccost[3] = 40;
-		aimagiccost[4] = 40;
+		
+		fp1 = fopen("AIMAGICSCOST.txt", "r");
+
+		for(int i = 0; i < aimagiclist; i++)
+		{
+			loadnumber(lineamount, &aimagiccost[i], fp1);
+		}
+
+		fclose(fp1);
 
 		char* playerarmor[allarmor];
 
@@ -659,11 +711,15 @@ beginning:
 		fclose(fp1);
 
 		char* aiarmor[allarmorenemies];
-		aiarmor[0] = const_cast<char *>("Weak armor");
-		aiarmor[1] = const_cast<char *>("Light armor");
-		aiarmor[2] = const_cast<char *>("Medium armor");
-		aiarmor[3] = const_cast<char *>("Heavy armor");
-		aiarmor[4] = const_cast<char *>("Super armor");
+
+		fp1 = fopen("AIARMOR.txt", "r");
+
+		for(int i = 0; i < allarmorenemies; i++)
+		{
+			loadstring(lineamount, &aiarmor[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playerarmorpts[allarmor];
 		
@@ -677,11 +733,15 @@ beginning:
 		fclose(fp1);
 
 		int aiarmorpts[allarmorenemies];
-		aiarmorpts[0] = 3;
-		aiarmorpts[1] = 6;
-		aiarmorpts[2] = 9;
-		aiarmorpts[3] = 12;
-		aiarmorpts[4] = 15;
+		
+		fp1 = fopen("AIARMORPOINTS.txt", "r");
+
+		for(int i = 0; i < allarmorenemies; i++)
+		{
+			loadnumber(lineamount, &aiarmorpts[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playerarmordistancex[allarmor];
 
@@ -695,11 +755,15 @@ beginning:
 		fclose(fp1);
 
 		int aiarmordistancex[allarmorenemies];
-		aiarmordistancex[0] = 3;
-		aiarmordistancex[1] = 4;
-		aiarmordistancex[2] = 5;
-		aiarmordistancex[3] = 6;
-		aiarmordistancex[4] = 7;
+
+		fp1 = fopen("AIARMORDISTANCEX.txt", "r");
+
+		for(int i = 0; i < allarmorenemies; i++)
+		{
+			loadnumber(lineamount, &aiarmordistancex[i], fp1);
+		}
+
+		fclose(fp1);
 
 		int playerarmordistancey[allarmor];
 		
@@ -713,11 +777,15 @@ beginning:
 		fclose(fp1);
 
 		int aiarmordistancey[allarmorenemies];
-		aiarmordistancey[0] = 3;
-		aiarmordistancey[1] = 4;
-		aiarmordistancey[2] = 5;
-		aiarmordistancey[3] = 6;
-		aiarmordistancey[4] = 7;
+		
+		fp1 = fopen("AIARMORDISTANCEY.txt", "r");
+
+		for(int i = 0; i < allarmorenemies; i++)
+		{
+			loadnumber(lineamount, &aiarmordistancey[i], fp1);
+		}
+
+		fclose(fp1);
 
 		for(int i = 0; i < maxplayers; i++)
 		{

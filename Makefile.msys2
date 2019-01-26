@@ -1,14 +1,11 @@
-playerandai1: playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
-	g++ -std=c++11 -o playerandai1 playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+playerandai1: aicharacter_initialize.o playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	g++ -std=c++11 -o playerandai1 aicharacter_initialize.o playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+
+aicharacter_initialize.o:
+	g++ -c aicharacter_initialize.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
 
 playercharacter_initialize.o:
 	g++ -c playercharacter_initialize.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
-	
-playerdefense_initialize.o:
-	g++ -c playerdefense_initialize.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
-		
-playerweapons_initialize.o:
-	g++ -c playerweapons_initialize.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
 
 main.o:
 	g++ -c main.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
@@ -68,5 +65,5 @@ freebsddepends.o:
 	g++ -c freebsddepends.cpp -I/mingw64/include/ncurse -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 	
 clean:
-	rm -f playerandai1 playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	rm -f playerandai1 aicharacter_initialize.o playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
 
