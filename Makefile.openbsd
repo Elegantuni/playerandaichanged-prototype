@@ -1,5 +1,11 @@
-playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-	clang++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs openssl` -lncurses -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+playerandai1: aicharacter_initialize.o playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	clang++ -std=c++11 -o playerandai1 aicharacter_initialize.o playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs openssl` -lncurses -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+
+aicharacter_initialize.o:
+	clang++ -c aicharacter_initialize.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+
+playercharacter_initialize.o:
+	clang++ -c playercharacter_initialize.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
 	
 main.o:
 	clang++ -c main.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
@@ -56,5 +62,5 @@ videoprinterstats.o:
 	clang++ -c videoprinterstats.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
 
 clean:
-	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	rm -f playerandai1 aicharacter_initialize.o playercharacter_initialize.o main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
 
