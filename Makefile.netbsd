@@ -1,0 +1,69 @@
+playerandai1: aicharacter_initialize.o playercharacter_initialize.o main.o freebsddepends.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	g++ -std=c++11 -o playerandai1 aicharacter_initialize.o playercharacter_initialize.o main.o freebsddepends.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+aicharacter_initialize.o:
+	g++ -c aicharacter_initialize.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+playercharacter_initialize.o:
+	g++ -c playercharacter_initialize.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+main.o:
+	g++ -c main.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+seed.o:
+	g++ -c seed.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+str2int.o:
+	g++ -c str2int.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+loadnumber.o:
+	g++ -c loadnumber.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+loadstring.o:
+	g++ -c loadstring.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+writenumber.o:
+	g++ -c writenumber.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	
+writestring.o:
+	g++ -c writestring.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+initvideo.o:
+	g++ -c initvideo.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesinput.o:
+	g++ -c ncursesinput.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+inputgetter.o:
+	g++ -c inputgetter.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprint.o:
+	g++ -c ncursesprint.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintarg1.o:
+	g++ -c ncursesprintarg1.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintarg2.o:
+	g++ -c ncursesprintarg2.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintstats.o:
+	g++ -c ncursesprintstats.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinternorm.o:
+	g++ -c videoprinternorm.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterarg1.o:
+	g++ -c videoprinterarg1.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterarg2.o:
+	g++ -c videoprinterarg2.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterstats.o:
+	g++ -c videoprinterstats.cpp `pkg-config --cflags ncurses` -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+freebsddepends.o:
+	g++ -c freebsddepends.cpp -DFREEBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+ 
+clean:
+	rm -f playerandai1 aicharacter_initialize.o playercharacter_initialize.o main.o freebsddepends.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+
