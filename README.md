@@ -11,7 +11,7 @@ base-devel <br />
 pkg-config <br />
 <br />
 For windows in msys2 you can install them using: <br />
-pacman -S ncurses-devel openssl-devel mingw-w64-x86_64-toolchain base-devel pkg-config <br />
+pacman -S ncurses-devel mingw-w64-x86_64-ncurses openssl-devel mingw-w64-x86_64-toolchain base-devel pkg-config <br />
 <br />
 For Ubuntu you will need: <br />
 git <br />
