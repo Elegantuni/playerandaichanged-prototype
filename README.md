@@ -18,7 +18,6 @@ git <br />
 libncurses-dev <br />
 libssl-dev (needed, because if you want to choose a seed 'example from bash: ./playerandai1 "This is better now"') <br />
 build-essential <br />
-clang <br />
 pkg-config <br />
 <br />
 For Ubuntu you can install them using: <br />
