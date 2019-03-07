@@ -1,0 +1,5 @@
+Weak armor
+Light armor
+Medium armor
+Heavy armor
+Super armor

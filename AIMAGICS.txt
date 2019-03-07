@@ -1,0 +1,5 @@
+Fire
+Wind
+Ice
+Water
+Lightning

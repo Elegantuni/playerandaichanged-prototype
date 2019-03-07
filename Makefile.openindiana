@@ -1,6 +1,63 @@
-playerandai1:
-	gcc -std=c99 -o playerandai1 main.c `pkg-config --cflags --libs ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2
+playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	g++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+	
+main.o:
+	g++ -c main.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+seed.o:
+	g++ -c seed.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+str2int.o:
+	g++ -c str2int.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+loadnumber.o:
+	g++ -c loadnumber.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+loadstring.o:
+	g++ -c loadstring.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+writenumber.o:
+	g++ -c writenumber.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+	
+writestring.o:
+	g++ -c writestring.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+initvideo.o:
+	g++ -c initvideo.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+ncursesinput.o:
+	g++ -c ncursesinput.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+inputgetter.o:
+	g++ -c inputgetter.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+ncursesprint.o:
+	g++ -c ncursesprint.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+ncursesprintarg1.o:
+	g++ -c ncursesprintarg1.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+ncursesprintarg2.o:
+	g++ -c ncursesprintarg2.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+ncursesprintstats.o:
+	g++ -c ncursesprintstats.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+videoprinternorm.o:
+	g++ -c videoprinternorm.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+videoprinterarg1.o:
+	g++ -c videoprinterarg1.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+videoprinterarg2.o:
+	g++ -c videoprinterarg2.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+videoprinterstats.o:
+	g++ -c videoprinterstats.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
+
+freebsddepends.o:
+	g++ -c freebsddepends.cpp `pkg-config --cflags ncurses` -DFREEBSD -DWINDOWS -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENINDIANA 
 	
 clean:
-	rm -f playerandai1
+	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
 

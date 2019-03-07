@@ -1,5 +1,60 @@
-playerandai1:
-	$(CC) -o playerandai1 main.c -I/usr/pkg/include -I/usr/pkg/include/ncurses -DINITNCURSESNOW -DINITNCURSESNOW2 -L/usr/pkg/lib -lncurses
+playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	clang++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs openssl` -L/usr/pkg/lib -lncurses -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 	
+main.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses main.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+seed.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses seed.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+str2int.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses str2int.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+loadnumber.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses loadnumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+loadstring.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses loadstring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+writenumber.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses writenumber.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	
+writestring.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses writestring.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+initvideo.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses initvideo.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesinput.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesinput.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+inputgetter.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses inputgetter.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprint.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprint.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintarg1.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprintarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintarg2.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprintarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+ncursesprintstats.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprintstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinternorm.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinternorm.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterarg1.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinterarg1.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterarg2.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinterarg2.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterstats.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinterstats.cpp -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
 clean:
-	rm -f playerandai1
+	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+
