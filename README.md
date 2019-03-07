@@ -6,12 +6,12 @@ For windows you will need msys2 or visual studio 2017.  To run the compiled prog
 git <br />
 ncurses <br />
 openssl-devel (needed, because if you want to choose a seed 'example from cmd: .\playerandai1.exe "This is better now"') <br />
-mingw-w64-x8__64-toolchain <br />
+mingw-w64-x86_64-toolchain <br />
 base-devel <br />
 pkg-config <br />
 <br />
 For windows in msys2 you can install them using: <br />
-pacman -S ncurses openssl-devel mingw-w64-x86_64-toolchain base-devel pkg-config <br />
+pacman -S ncurses-devel openssl-devel mingw-w64-x86_64-toolchain base-devel pkg-config <br />
 <br />
 For Ubuntu you will need: <br />
 git <br />
