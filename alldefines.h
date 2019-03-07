@@ -1,15 +1,8 @@
 #pragma once
 
-#include "playercharacter_initialize.h"
-#include "aicharacter_initialize.h"
+#define playercharacters 4
 
-const int theplayercharacter1 = playercharacterinitialize();
-
-#define playercharacters theplayercharacter1
-
-const int theaicharacter1 = aicharacterinitialize();
-
-#define aicharacters theaicharacter1
+#define aicharacters 4
 
 #define allitems 5
 

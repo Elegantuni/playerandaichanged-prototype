@@ -491,7 +491,7 @@ beginning:
 		fclose(fp1);
 
 		char* aisigns[aicharacters];
-		
+
 		fp1 = fopen("AISIGN.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
@@ -502,7 +502,7 @@ beginning:
 		fclose(fp1);
 
 		int playerhitpoints[playercharacters];
-		
+
 		fp1 = fopen("PLAYERHITPOINTS.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
@@ -513,7 +513,7 @@ beginning:
 		fclose(fp1);
 
 		int aihitpoints[aicharacters];
-		
+
 		fp1 = fopen("AIHITPOINTS.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
@@ -524,7 +524,7 @@ beginning:
 		fclose(fp1);
 
 		int playerdefense[playercharacters];
-		
+
 		fp1 = fopen("PLAYERDEFENSEVALUES.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
@@ -535,7 +535,7 @@ beginning:
 		fclose(fp1);
 
 		int aidefense[aicharacters];
-		
+
 		fp1 = fopen("AIDEFENSEVALUES.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
@@ -557,7 +557,7 @@ beginning:
 		fclose(fp1);
 
 		int aiattack[aicharacters];
-		
+
 		fp1 = fopen("AIATTACK.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
@@ -634,7 +634,7 @@ beginning:
 		fclose(fp1);
 
 		int playermagicresist[playercharacters];
-		
+
 		fp1 = fopen("PLAYERMAGICRESISTANCE.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
@@ -645,7 +645,7 @@ beginning:
 		fclose(fp1);
 
 		int aimagicresist[aicharacters];
-		
+
 		fp1 = fopen("AIMAGICRESISTANCE.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
@@ -656,7 +656,7 @@ beginning:
 		fclose(fp1);
 
 		int playermagicpoints[playercharacters];
-		
+
 		fp1 = fopen("PLAYERMAGICPOINTS.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
@@ -667,7 +667,7 @@ beginning:
 		fclose(fp1);
 
 		int aimagicpoints[aicharacters];
-		
+
 		fp1 = fopen("AIMAGICPOINTS.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
