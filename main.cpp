@@ -119,12 +119,12 @@ int main(int argc, char *argv[])
 	int commandlineset = 0;
 	int rounds = 1;
 
-	if(argc == 2)
+	if(argc >= 2 && strcmp(argv[1], "none") != 0)
 	{
 #ifdef INITOPENSSL
 		char *end;
 		int sizeofthis = 0;
-		
+
 		while (argv[1][sizeofthis] != '\0')
 		{
 			sizeofthis++;
