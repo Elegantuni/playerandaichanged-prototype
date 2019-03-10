@@ -119,6 +119,9 @@ int main(int argc, char *argv[])
 	int commandlineset = 0;
 	int rounds = 1;
 
+	int twoplayers = 0;
+	int whosturn = 0;
+
 	if(argc >= 2 && strcmp(argv[1], "none") != 0)
 	{
 #ifdef INITOPENSSL
@@ -1752,7 +1755,11 @@ beginning:
 			loadnumber(lineamount, &rounds, fp1);
 
 			loadnumber(lineamount, &positionx, fp1);
-			
+		
+			loadnumber(lineamount, &twoplayers, fp1);
+
+			loadnumber(lineamount, &whosturn, fp1);
+
 			fclose(fp1);
 
 			remove("SaveFile.txt");
@@ -2224,6 +2231,10 @@ beginning:
 				writenumber(lineBuffer, lineamount, rounds, fp1);
 				
 				writenumber(lineBuffer, lineamount, positionx, fp1);
+
+				writenumber(lineBuffer, lineamount, twoplayers, fp1);
+
+				writenumber(lineBuffer, lineamount, whosturn, fp1);
 
 				fclose(fp1);
 
