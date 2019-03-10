@@ -2360,7 +2360,7 @@ beginning:
 				}
 			}
 			
-			if(ch == 'p' && whosturn == 1)
+			if(ch == 'p' && whosturn == 1 && twoplayers == 1)
 			{
 				iai--;
 
@@ -3626,10 +3626,15 @@ beginning:
 			refresh();
 
 
-			if(ch == 'w' || ch == 's' || ch == 'd' || ch == 'a' || ch == 'm')
+			if((ch == 'w' || ch == 's' || ch == 'd' || ch == 'a' || ch == 'm') && twoplayers == 1)
 			{
 				whosturn++;
 				sleep(2);
+			}
+
+			if(twoplayers == 0)
+			{
+				whosturn = 0;
 			}
 
 			if(whosturn > 1)
