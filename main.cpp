@@ -2507,7 +2507,7 @@ beginning:
 				}
 			}
 		
-			if(ch == 'a')
+			if(ch == 'a' && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x - 1;
 			
@@ -2518,8 +2518,20 @@ beginning:
 
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
+
+			if(ch == 'a' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].x = myai[iai].x - 1;
+
+				if(myai[iai].x < 0)
+				{
+					myai[iai].x = 0;
+				}
+
+				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
+			}
 		
-			if(ch == 'd')
+			if(ch == 'd' && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x + 1;
 			
@@ -2530,8 +2542,20 @@ beginning:
 
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
+
+			if(ch == 'd' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].x = myai[iai].x + 1;
+
+				if(myai[iai].x > hitpointspos1.ax - 1)
+				{
+					myai[iai].x = hitpointspos1.ax - 1;
+				}
+
+				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
+			}
 		
-			if(ch == 'w')
+			if(ch == 'w' && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y - 1;
 			
@@ -2541,6 +2565,18 @@ beginning:
 				}
 
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
+			}
+
+			if(ch == 'w' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].y = myai[iai].y - 1;
+
+				if(myai[iai].y < 0)
+				{
+					myai[iai].y = 0;
+				}
+
+				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
 			if(ch == 'u')
@@ -2615,7 +2651,7 @@ beginning:
 				refresh();
 			}
 		
-			if(ch == 's')
+			if(ch == 's' && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y + 1;
 			
@@ -2625,6 +2661,18 @@ beginning:
 				}
 
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
+			}
+
+			if(ch == 's' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].y = myai[iai].y + 1;
+
+				if(myai[iai].y > (hitpointspos1.y - 1))
+				{
+					myai[iai].y = (hitpointspos1.y - 1);
+				}
+
+				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
 			if (ch == 'c')
