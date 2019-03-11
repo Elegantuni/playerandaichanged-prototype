@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 			  twoplayers = 1;
 	}
 
-	if(argc >= 2 && (strcmp(argv[1], "none") != 0))
+	if(argc >= 2)
 	{
 #ifdef INITOPENSSL
 		char *end;
