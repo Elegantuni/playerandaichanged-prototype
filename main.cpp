@@ -2880,7 +2880,7 @@ beginning:
 #endif
 			}
 				
-			if (ch == 'M')
+			if (ch == 'M' && whosturn == 0)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
