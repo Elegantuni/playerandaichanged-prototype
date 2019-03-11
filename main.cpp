@@ -122,7 +122,12 @@ int main(int argc, char *argv[])
 	int twoplayers = 0;
 	int whosturn = 0;
 
-	if(argc >= 2 && strcmp(argv[1], "none") != 0)
+	if(argc >= 3 && strcmp(argv[2], "1") == 0)
+	{
+			  twoplayers = 1;
+	}
+
+	if(argc >= 2)
 	{
 #ifdef INITOPENSSL
 		char *end;
@@ -1824,13 +1829,21 @@ beginning:
 			}
 		}
 #ifdef INITNCURSESNOW
-		move(myplayer[0].y - positiony, myplayer[0].x - positionx);
+		if(whosturn == 0)
+		{
+			move(myplayer[0].y - positiony, myplayer[0].x - positionx);
+		}
 
+		if(whosturn == 1)
+		{
+			move(myai[0].y - positiony, myai[0].x - positionx);
+		}
 		refresh();
 #endif
 
 		int i = 0;
-	
+		int iai = 0;
+
 		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
 			if(ch == 'S')
@@ -2281,7 +2294,15 @@ beginning:
 				(RETURNTYPEVIDEO)inputgetter();
 
 #ifdef INITNCURSESNOW
-				move(myplayer[i].y, myplayer[i].x);
+				if(whosturn == 0)
+				{
+					move(myplayer[i].y, myplayer[i].x);
+				}
+				
+				if(whosturn == 1)
+				{
+					move(myai[iai].y, myai[iai].x);
+				}
 
 				refresh();
 #endif
@@ -2290,7 +2311,7 @@ beginning:
 			clear();
 #endif
 
-			if(ch == 'p')
+			if(ch == 'p' && whosturn == 0)
 			{
 				i--;
 
@@ -2339,7 +2360,56 @@ beginning:
 				}
 			}
 			
-			if(ch == 'n')
+			if(ch == 'p' && whosturn == 1 && twoplayers == 1)
+			{
+				iai--;
+
+				if(iai < 0)
+				{
+						  iai = maxenemies - 1;
+				}
+
+				for(int j = 0; j < maxenemies; j++)
+				{
+						  for(int j = 0; j < maxenemies; j++)
+						  {
+									 myai[j].playerturn--;
+						  }
+
+						  if(iai < 0)
+						  {
+									 iai = maxenemies - 1;
+						  }
+
+						  if(myai[0].playerturn < 0)
+						  {
+									 for(int i = 0; i < maxenemies; i++)
+									 {
+												myai[i].playerturn = maxenemies - 1;
+									 }
+						  }
+
+						  if(myai[iai].hitpoints > 0)
+						  {
+									 positiony = (myai[iai].y / hitpointsy) * hitpointsy;
+									 positionx = (myai[iai].x / hitpointsx) * hitpointsx;
+
+									 break;
+						  }
+
+						  if(myai[iai].hitpoints <= 0)
+						  {
+									 iai--;
+
+									 if(iai < 0)
+									 {
+												iai = maxenemies - 1;
+									 }
+						  }
+				}
+			}
+			
+			if(ch == 'n' && whosturn == 0)
 			{
 				i++;
 				
@@ -2387,8 +2457,57 @@ beginning:
 					}
 				}
 			}
+
+			if(ch == 'n' && whosturn == 1 && twoplayers == 1)
+			{
+				iai++;
+
+				if(iai >= maxenemies)
+				{
+					iai = 0;
+				}
+
+				for(int j = 0; j < maxenemies; j++)
+				{
+					for(int j = 0; j < maxenemies; j++)
+					{
+							  myai[j].playerturn++;
+					}
+
+					if(iai == maxenemies)
+					{
+						iai = 0;
+					}
+
+					if(myai[0].playerturn == maxenemies)
+					{
+						for(int i = 0; i < maxenemies; i++)
+						{
+							myai[i].playerturn = 0;
+						}
+					}
+
+					if(myai[iai].hitpoints > 0)
+					{
+						positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
+						positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
+
+						break;
+					}
+
+					if(myai[iai].hitpoints <= 0)
+					{
+						iai++;
+
+						if(iai >= maxenemies)
+						{
+							iai = 0;
+						}
+					}
+				}
+			}
 		
-			if(ch == 'a')
+			if(ch == 'a' && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x - 1;
 			
@@ -2399,8 +2518,20 @@ beginning:
 
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
+
+			if(ch == 'a' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].x = myai[iai].x - 1;
+
+				if(myai[iai].x < 0)
+				{
+					myai[iai].x = 0;
+				}
+
+				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
+			}
 		
-			if(ch == 'd')
+			if(ch == 'd' && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x + 1;
 			
@@ -2411,8 +2542,20 @@ beginning:
 
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
+
+			if(ch == 'd' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].x = myai[iai].x + 1;
+
+				if(myai[iai].x > hitpointspos1.ax - 1)
+				{
+					myai[iai].x = hitpointspos1.ax - 1;
+				}
+
+				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
+			}
 		
-			if(ch == 'w')
+			if(ch == 'w' && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y - 1;
 			
@@ -2422,6 +2565,18 @@ beginning:
 				}
 
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
+			}
+
+			if(ch == 'w' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].y = myai[iai].y - 1;
+
+				if(myai[iai].y < 0)
+				{
+					myai[iai].y = 0;
+				}
+
+				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
 			if(ch == 'u')
@@ -2496,7 +2651,7 @@ beginning:
 				refresh();
 			}
 		
-			if(ch == 's')
+			if(ch == 's' && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y + 1;
 			
@@ -2506,6 +2661,18 @@ beginning:
 				}
 
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
+			}
+
+			if(ch == 's' && whosturn == 1 && twoplayers == 1)
+			{
+				myai[iai].y = myai[iai].y + 1;
+
+				if(myai[iai].y > (hitpointspos1.y - 1))
+				{
+					myai[iai].y = (hitpointspos1.y - 1);
+				}
+
+				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
 			if (ch == 'c')
@@ -2713,7 +2880,7 @@ beginning:
 #endif
 			}
 				
-			if (ch == 'M')
+			if (ch == 'M' && whosturn == 0)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
@@ -3418,10 +3585,19 @@ beginning:
 				{
 					myplayer[i].y = myplayer[i].prevy;
 					myplayer[i].x = myplayer[i].prevx;
-
-					positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
-					positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
 					
+					if(whosturn == 0)
+					{
+						positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
+						positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
+					}
+
+					if(whosturn == 1)
+					{
+						positiony = (myai[iai].y / hitpointsy) * hitpointsy;
+						positionx = (myai[iai].x / hitpointsx) * hitpointsx;
+					}
+
 					if(positiony > 0)
 					{
 						positiony++;
@@ -3444,9 +3620,18 @@ beginning:
 							myplayer[i].y = myplayer[i].prevy;
 							myplayer[i].x = myplayer[i].prevx;
 
-							positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
-							positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
+							if(whosturn == 0)
+							{
+								positiony = (myplayer[i].y / hitpointsy) * hitpointsy;
+								positionx = (myplayer[i].x / hitpointsx) * hitpointsx;
+							}
 							
+							if(whosturn == 1)
+							{
+								positiony = (myai[iai].y / hitpointsy) * hitpointsy;
+								positionx = (myai[iai].x / hitpointsx) * hitpointsx;
+							}
+
 							if(positiony > 0)
 							{
 								positiony++;
@@ -3524,7 +3709,45 @@ beginning:
 				}
 			}
 #ifdef INITNCURSESNOW
-			move(myplayer[i].y - positiony, myplayer[i].x - positionx);
+
+			if(whosturn == 0)
+			{
+				move(myplayer[i].y - positiony, myplayer[i].x - positionx);
+			}
+
+			if(whosturn == 1)
+			{
+				move(myai[iai].y - positiony, myai[iai].x - positionx);
+			}
+
+			refresh();
+
+
+			if((ch == 'w' || ch == 's' || ch == 'd' || ch == 'a' || ch == 'm') && twoplayers == 1)
+			{
+				whosturn++;
+				sleep(2);
+			}
+
+			if(twoplayers == 0)
+			{
+				whosturn = 0;
+			}
+
+			if(whosturn > 1)
+			{
+					  whosturn = 0;
+			}
+
+			if(whosturn == 0)
+			{
+					  move(myplayer[i].y - positiony, myplayer[i].x - positionx);
+			}
+
+			if(whosturn == 1)
+			{
+					  move(myai[iai].y - positiony, myai[iai].x - positionx);
+			}
 
 			refresh();
 #endif
