@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 			  twoplayers = 1;
 	}
 
-	if(argc >= 2 && strcmp(argv[1], "none") != 0)
+	if(argc >= 2 && (strcmp(argv[1], "none") != 0))
 	{
 #ifdef INITOPENSSL
 		char *end;
@@ -2409,7 +2409,7 @@ beginning:
 				}
 			}
 			
-			if(ch == 'n')
+			if(ch == 'n' && whosturn == 0)
 			{
 				i++;
 				
@@ -2453,6 +2453,55 @@ beginning:
 						if(i >= maxplayers)
 						{
 							i = 0;
+						}
+					}
+				}
+			}
+
+			if(ch == 'n' && whosturn == 1 && twoplayers == 1)
+			{
+				iai++;
+
+				if(iai >= maxenemies)
+				{
+					iai = 0;
+				}
+
+				for(int j = 0; j < maxenemies; j++)
+				{
+					for(int j = 0; j < maxenemies; j++)
+					{
+							  myai[j].playerturn++;
+					}
+
+					if(iai == maxenemies)
+					{
+						iai = 0;
+					}
+
+					if(myai[0].playerturn == maxenemies)
+					{
+						for(int i = 0; i < maxenemies; i++)
+						{
+							myai[i].playerturn = 0;
+						}
+					}
+
+					if(myai[iai].hitpoints > 0)
+					{
+						positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
+						positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
+
+						break;
+					}
+
+					if(myai[iai].hitpoints <= 0)
+					{
+						iai++;
+
+						if(iai >= maxenemies)
+						{
+							iai = 0;
 						}
 					}
 				}
