@@ -3726,7 +3726,12 @@ beginning:
 			if((ch == 'w' || ch == 's' || ch == 'd' || ch == 'a' || ch == 'm') && twoplayers == 1)
 			{
 				whosturn++;
+
+#if !defined(_MSC_VER)
 				sleep(2);
+#elif defined(_MSC_VER)
+				Sleep(2000);
+#endif
 			}
 
 			if(twoplayers == 0)
