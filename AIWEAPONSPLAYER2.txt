@@ -1,0 +1,5 @@
+Knife
+Gun
+Pistol
+Shotgun
+Machine Gun

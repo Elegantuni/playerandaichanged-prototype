@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
 #else
 	#define lineamount 128
 #endif
-		
+
 	int terminalend = (maxenemies + maxplayers) * 3;
 	int terminalendx = 140;
 	
@@ -309,6 +309,7 @@ beginning:
 		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
 #endif
 
+
 		for(int i = 0; i < maxplayers; i++)
 		{
 			myplayer[i].weaponsdamage1.damage = (int *)malloc(sizeof(int) * allitems);
@@ -323,9 +324,9 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
-			myai[i].weaponsdamage1.damage = (int *)malloc(sizeof(int) * allitemsenemies);
-			myai[i].weaponsdamage1.rangex = (int *)malloc(sizeof(int) * allitemsenemies);
-			myai[i].weaponsdamage1.rangey = (int *)malloc(sizeof(int) * allitemsenemies);
+			myai[i].weaponsdamage1.damage = (int*)malloc(sizeof(int) * allitemsenemies);
+			myai[i].weaponsdamage1.rangex = (int*)malloc(sizeof(int) * allitemsenemies);
+			myai[i].weaponsdamage1.rangey = (int*)malloc(sizeof(int) * allitemsenemies);
 		}
 
 		for(int i = 0; i < maxenemies; i++)
@@ -356,15 +357,29 @@ beginning:
 		fclose(fp1);
 
 		char* itemenemies[allitemsenemies];
-		
-		fp1 = fopen("AIWEAPONS.txt", "r");
 
-		for(int i = 0; i < allitemsenemies; i++)
+		if (twoplayers != 1)
 		{
-			loadstring(lineamount, &itemenemies[i], fp1);
-		}
+			fp1 = fopen("AIWEAPONS.txt", "r");
 
-		fclose(fp1);
+			for (int i = 0; i < allitemsenemies; i++)
+			{
+				loadstring(lineamount, &itemenemies[i], fp1);
+			}
+
+			fclose(fp1);
+		}
+		else
+		{
+			fp1 = fopen("AIWEAPONSPLAYER2.txt", "r");
+
+			for (int i = 0; i < allitemsenemiesplayer2; i++)
+			{
+				loadstring(lineamount, &itemenemies[i], fp1);
+			}
+
+			fclose(fp1);
+		}
 
 		char* itemdamageenemies[alldefenseitemsenemies];
 		
@@ -414,9 +429,19 @@ beginning:
 
 		fp1 = fopen("AIWEAPONSDAMAGE.txt", "r");
 
-		for(int i = 0; i < allitemsenemies; i++)
+		if (twoplayers != 1)
 		{
-			loadnumber(lineamount, &damageenemies[i], fp1);
+			for (int i = 0; i < allitemsenemies; i++)
+			{
+				loadnumber(lineamount, &damageenemies[i], fp1);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < allitemsenemiesplayer2; i++)
+			{
+				loadnumber(lineamount, &damageenemies[i], fp1);
+			}
 		}
 
 		fclose(fp1);
@@ -425,23 +450,47 @@ beginning:
 
 		fp1 = fopen("AIWEAPONSRANGEY.txt", "r");
 
-		for(int i = 0; i < allitemsenemies; i++)
+		if (twoplayers != 1)
 		{
-			loadnumber(lineamount, &rangeyenemies[i], fp1);
-		}
+			for (int i = 0; i < allitemsenemies; i++)
+			{
+				loadnumber(lineamount, &rangeyenemies[i], fp1);
+			}
 
-		fclose(fp1);
+			fclose(fp1);
+		}
+		else
+		{
+			for (int i = 0; i < allitemsenemiesplayer2; i++)
+			{
+				loadnumber(lineamount, &rangeyenemies[i], fp1);
+			}
+
+			fclose(fp1);
+		}
 
 		int* rangexenemies = (int *)malloc(sizeof(int) * allitemsenemies);
 
 		fp1 = fopen("AIWEAPONSRANGEX.txt", "r");
 
-		for(int i = 0; i < allitemsenemies; i++)
+		if (twoplayers != 1)
 		{
-			loadnumber(lineamount, &rangexenemies[i], fp1);
-		}
+			for (int i = 0; i < allitemsenemies; i++)
+			{
+				loadnumber(lineamount, &rangexenemies[i], fp1);
+			}
 
-		fclose(fp1);
+			fclose(fp1);
+		}
+		else
+		{
+			for (int i = 0; i < allitemsenemiesplayer2; i++)
+			{
+				loadnumber(lineamount, &rangexenemies[i], fp1);
+			}
+
+			fclose(fp1);
+		}
 
 		int* shielddamage = (int *)malloc(sizeof(int) * alldefenseitems);
 
@@ -800,9 +849,16 @@ beginning:
 			myplayer[i].randomitem = rand() % allitems;
 		}
 	
-		for(int i = 0; i < maxenemies; i++)
+		for (int i = 0; i < maxenemies; i++)
 		{
-			myai[i].randomitem = rand() % allitemsenemies;
+			if (twoplayers != 1)
+			{
+				myai[i].randomitem = rand() % allitemsenemies;
+			}
+			else
+			{
+				myai[i].randomitem = rand() % allitemsenemiesplayer2;
+			}
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -1177,7 +1233,14 @@ beginning:
 		
 			myai[i].magic1.cost = aimagiccost[myai[i].magic1.randommagic];
 
-			myai[i].weapontype.numberitems = allitemsenemies;
+			if (twoplayers != 1)
+			{
+				myai[i].weapontype.numberitems = allitemsenemies;
+			}
+			else
+			{
+				myai[i].weapontype.numberitems = allitemsenemiesplayer2;
+			}
 
 			myai[i].armor1.equiped = aiarmor[myai[i].armor1.randomarmor];
 
@@ -1308,7 +1371,14 @@ beginning:
 
 			while(myai[i].weapontype.nextrandomweapon == myai[i].weapontype.randomweapon)
 			{
-				myai[i].weapontype.nextrandomweapon = rand() % allitemsenemies;
+				if (twoplayers != 1)
+				{
+					myai[i].weapontype.nextrandomweapon = rand() % allitemsenemies;
+				}
+				else
+				{
+					myai[i].weapontype.nextrandomweapon = rand() % allitemsenemiesplayer2;
+				}
 			}
 
 			myai[i].weapontype.item[myai[i].weapontype.weaponcount] = itemenemies[myai[i].weapontype.nextrandomweapon];
@@ -1319,7 +1389,14 @@ beginning:
 
 			while(myai[i].weapontype.nextrandomweapon2 == myai[i].weapontype.nextrandomweapon || myai[i].weapontype.nextrandomweapon2 == myai[i].weapontype.randomweapon)
 			{
-				myai[i].weapontype.nextrandomweapon2 = rand() % allitemsenemies;
+				if (twoplayers != 1)
+				{
+					myai[i].weapontype.nextrandomweapon2 = rand() % allitemsenemies;
+				}
+				else
+				{
+					myai[i].weapontype.nextrandomweapon2 = rand() % allitemsenemiesplayer2;
+				}
 			}
 
 			myai[i].weapontype.item[myai[i].weapontype.weaponcount] = itemenemies[myai[i].weapontype.nextrandomweapon2];
@@ -1631,7 +1708,7 @@ beginning:
 
 				loadnumber(lineamount, &myai[i].hitpoints, fp1);
 
-				for(int q = 0; q < allitemsenemies; q++)
+				for (int q = 0; q < allitemsenemies; q++)
 				{
 					loadstring(lineamount, &myai[i].weapontype.item[q], fp1);
 				}
@@ -1644,17 +1721,17 @@ beginning:
 
 				loadnumber(lineamount, &myai[i].weapontype.numberitems, fp1);
 
-				for(int q = 0; q < allitemsenemies; q++)
+				for (int q = 0; q < allitemsenemies; q++)
 				{
 					loadnumber(lineamount, &myai[i].weaponsdamage1.damage[q], fp1);
 				}
-
-				for(int q = 0; q < allitemsenemies; q++)
+	
+				for (int q = 0; q < allitemsenemies; q++)
 				{
 					loadnumber(lineamount, &myai[i].weaponsdamage1.rangey[q], fp1);
 				}
 
-				for(int q = 0; q < allitemsenemies; q++)
+				for (int q = 0; q < allitemsenemies; q++)
 				{
 					loadnumber(lineamount, &myai[i].weaponsdamage1.rangex[q], fp1);
 				}
@@ -1714,11 +1791,11 @@ beginning:
 				
 				loadnumber(lineamount, &myai[i].weapontype.nextrandomweapon2, fp1);
 				
-				for(int l = 0; l < allitemsenemies; l++)
+				for (int l = 0; l < allitemsenemies; l++)
 				{
 					loadstring(lineamount, &myai[i].weapontype.item[l], fp1);
 				}
-				
+
 				loadnumber(lineamount, &myai[i].shieldstype.randomshield, fp1);
 				
 				loadnumber(lineamount, &myai[i].shieldstype.nextrandomshield, fp1);
@@ -2115,7 +2192,7 @@ beginning:
 
 					writenumber(lineBuffer, lineamount, myai[i].hitpoints, fp1);
 
-					for(int q = 0; q < allitemsenemies; q++)
+					for (int q = 0; q < allitemsenemies; q++)
 					{
 						writestring(lineBuffer, lineamount, myai[i].weapontype.item[q], fp1);
 					}
@@ -2128,17 +2205,17 @@ beginning:
 
 					writenumber(lineBuffer, lineamount, myai[i].weapontype.numberitems, fp1);
 
-					for(int q = 0; q < allitemsenemies; q++)
+					for (int q = 0; q < allitemsenemies; q++)
 					{
 						writenumber(lineBuffer, lineamount, myai[i].weaponsdamage1.damage[q], fp1);
 					}
 
-					for(int q = 0; q < allitemsenemies; q++)
+					for (int q = 0; q < allitemsenemies; q++)
 					{
 						writenumber(lineBuffer, lineamount, myai[i].weaponsdamage1.rangey[q], fp1);
 					}
 
-					for(int q = 0; q < allitemsenemies; q++)
+					for (int q = 0; q < allitemsenemies; q++)
 					{
 						writenumber(lineBuffer, lineamount, myai[i].weaponsdamage1.rangex[q], fp1);
 					}
@@ -2198,11 +2275,11 @@ beginning:
 					
 					writenumber(lineBuffer, lineamount, myai[i].weapontype.nextrandomweapon2, fp1);
 					
-					for(int q = 0; q < allitemsenemies; q++)
+					for (int q = 0; q < allitemsenemies; q++)
 					{
 						writestring(lineBuffer, lineamount, myai[i].weapontype.item[q], fp1);
 					}
-										
+
 					writenumber(lineBuffer, lineamount, myai[i].shieldstype.randomshield, fp1);
 					
 					writenumber(lineBuffer, lineamount, myai[i].shieldstype.nextrandomshield, fp1);

@@ -8,6 +8,8 @@
 
 #define allitemsenemies 6
 
+#define allitemsenemiesplayer2 5
+
 #define alldefenseitems 5
 
 #define alldefenseitemsenemies 5
