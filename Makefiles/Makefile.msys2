@@ -1,63 +1,63 @@
 playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
-	g++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -std=c++11 -o playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 main.o:
-	g++ -c main.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c main.cpp -o obj/main.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 seed.o:
-	g++ -c seed.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c seed.cpp -o obj/seed.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 str2int.o:
-	g++ -c str2int.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c str2int.cpp -o obj/str2int.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 loadnumber.o:
-	g++ -c loadnumber.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c loadnumber.cpp -o obj/loadnumber.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 loadstring.o:
-	g++ -c loadstring.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c loadstring.cpp -o obj/loadstring.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 writenumber.o:
-	g++ -c writenumber.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c writenumber.cpp -o obj/writenumber.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 	
 writestring.o:
-	g++ -c writestring.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c writestring.cpp -o obj/writestring.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 initvideo.o:
-	g++ -c initvideo.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c initvideo.cpp -o obj/initvideo.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 ncursesinput.o:
-	g++ -c ncursesinput.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c ncursesinput.cpp -o obj/ncursesinput.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 inputgetter.o:
-	g++ -c inputgetter.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c inputgetter.cpp -o obj/inputgetter.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 ncursesprint.o:
-	g++ -c ncursesprint.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c ncursesprint.cpp -o obj/ncursesprint.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 ncursesprintarg1.o:
-	g++ -c ncursesprintarg1.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c ncursesprintarg1.cpp -o obj/ncursesprintarg1.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 ncursesprintarg2.o:
-	g++ -c ncursesprintarg2.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c ncursesprintarg2.cpp -o obj/ncursesprintarg2.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 ncursesprintstats.o:
-	g++ -c ncursesprintstats.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c ncursesprintstats.cpp -o obj/ncursesprintstats.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 videoprinternorm.o:
-	g++ -c videoprinternorm.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c videoprinternorm.cpp -o obj/videoprinternorm.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 videoprinterarg1.o:
-	g++ -c videoprinterarg1.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 videoprinterarg2.o:
-	g++ -c videoprinterarg2.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 videoprinterstats.o:
-	g++ -c videoprinterstats.cpp -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 freebsddepends.o:
-	g++ -c freebsddepends.cpp -I/mingw64/include/ncurse -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c freebsddepends.cpp -o obj/freebsddepends.o -I/mingw64/include/ncurse -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 	
 clean:
-	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	rm -f playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o
 
