@@ -1,60 +1,59 @@
 playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-	clang++ -std=c++11 -o playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o `pkg-config --cflags --libs openssl` -lncurses -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -o playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o `pkg-config --cflags --libs openssl` -lncurses -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 main.o:
-	clang++ -c main.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c main.cpp -o obj/main.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 seed.o:
-	clang++ -c seed.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c seed.cpp -o obj/seed.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 str2int.o:
-	clang++ -c str2int.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c str2int.cpp -o obj/str2int.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 loadnumber.o:
-	clang++ -c loadnumber.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c loadnumber.cpp -o obj/loadnumber.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 loadstring.o:
-	clang++ -c loadstring.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c loadstring.cpp -o obj/loadstring.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 writenumber.o:
-	clang++ -c writenumber.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
-	
+	clang++ -c writenumber.cpp -o obj/writenumber.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
 writestring.o:
-	clang++ -c writestring.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c writestring.cpp -o obj/writestring.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 initvideo.o:
-	clang++ -c initvideo.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c initvideo.cpp -o obj/initvideo.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 ncursesinput.o:
-	clang++ -c ncursesinput.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c ncursesinput.cpp -o obj/ncursesinput.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 inputgetter.o:
-	clang++ -c inputgetter.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c inputgetter.cpp -o obj/inputgetter.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 ncursesprint.o:
-	clang++ -c ncursesprint.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c ncursesprint.cpp -o obj/ncursesprint.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 ncursesprintarg1.o:
-	clang++ -c ncursesprintarg1.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c ncursesprintarg1.cpp -o obj/ncursesprintarg1.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 ncursesprintarg2.o:
-	clang++ -c ncursesprintarg2.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c ncursesprintarg2.cpp -o obj/ncursesprintarg2.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 ncursesprintstats.o:
-	clang++ -c ncursesprintstats.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c ncursesprintstats.cpp -o obj/ncursesprintstats.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 videoprinternorm.o:
-	clang++ -c videoprinternorm.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c videoprinternorm.cpp -o obj/videoprinternorm.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 videoprinterarg1.o:
-	clang++ -c videoprinterarg1.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 videoprinterarg2.o:
-	clang++ -c videoprinterarg2.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 videoprinterstats.o:
-	clang++ -c videoprinterstats.cpp -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -DOPENBSD
+	clang++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 clean:
-	rm -f playerandai1 main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-
+	rm -f playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o
