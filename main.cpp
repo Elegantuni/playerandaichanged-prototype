@@ -214,7 +214,7 @@ int main(int argc, char *argv[])
                 if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
  		{
-			FILE *fp11 = fopen("SaveFile.txt", "r");
+			FILE *fp11 = fopen("Data/SaveFile.txt", "r");
 			int temp1;
 			loadnumber(128, &temp1, fp11);
 			maxplayers1 = static_cast<long>(temp1);
