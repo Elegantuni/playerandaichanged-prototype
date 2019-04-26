@@ -182,9 +182,9 @@ int main(int argc, char *argv[])
 	#endif
 
 #if defined(_MSC_VER)
-                if(!fileExists("SaveFile.txt"))
+                if(!fileExists("Data/SaveFile.txt"))
 #else
-                if(access("SaveFile.txt", F_OK ) == -1)
+                if(access("Data/SaveFile.txt", F_OK ) == -1)
 #endif
                 {
 	while(maxplayers1 < 10 || maxplayers1 > 1000000)
@@ -209,9 +209,9 @@ int main(int argc, char *argv[])
 	}
 
 #if defined(_MSC_VER)
-                if(fileExists("SaveFile.txt"))
+                if(fileExists("Data/SaveFile.txt"))
 #else
-                if(access("SaveFile.txt", F_OK ) != -1)
+                if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
  		{
 			FILE *fp11 = fopen("SaveFile.txt", "r");
@@ -336,7 +336,7 @@ beginning:
 		
 		char* item[allitems];
 
-		fp1 = fopen("PLAYERWEAPONS.txt", "r");
+		fp1 = fopen("Data/PLAYERWEAPONS.txt", "r");
 
 		for(int i = 0; i < allitems; i++)
 		{
@@ -347,7 +347,7 @@ beginning:
 
 		char* itemdamage[alldefenseitems];
 
-		fp1 = fopen("PLAYERDEFENSE.txt", "r");
+		fp1 = fopen("Data/PLAYERDEFENSE.txt", "r");
 
 		for(int i = 0; i < alldefenseitems; i++)
 		{
@@ -360,7 +360,7 @@ beginning:
 
 		if (twoplayers != 1)
 		{
-			fp1 = fopen("AIWEAPONS.txt", "r");
+			fp1 = fopen("Data/AIWEAPONS.txt", "r");
 
 			for (int i = 0; i < allitemsenemies; i++)
 			{
@@ -371,7 +371,7 @@ beginning:
 		}
 		else
 		{
-			fp1 = fopen("AIWEAPONSPLAYER2.txt", "r");
+			fp1 = fopen("Data/AIWEAPONSPLAYER2.txt", "r");
 
 			for (int i = 0; i < allitemsenemiesplayer2; i++)
 			{
@@ -383,7 +383,7 @@ beginning:
 
 		char* itemdamageenemies[alldefenseitemsenemies];
 		
-		fp1 = fopen("AIDEFENSE.txt", "r");
+		fp1 = fopen("Data/AIDEFENSE.txt", "r");
 
 		for(int i = 0; i < alldefenseitemsenemies; i++)
 		{
@@ -394,7 +394,7 @@ beginning:
 
 		int* damage = (int *)malloc(sizeof(int) * allitems);
 
-		fp1 = fopen("PLAYERWEAPONSDAMAGE.txt", "r");
+		fp1 = fopen("Data/PLAYERWEAPONSDAMAGE.txt", "r");
 
 		for(int i = 0; i < allitems; i++)
 		{
@@ -405,7 +405,7 @@ beginning:
 
 		int* rangey = (int *)malloc(sizeof(int) * allitems);
 
-		fp1 = fopen("PLAYERWEAPONSRANGEY.txt", "r");
+		fp1 = fopen("Data/PLAYERWEAPONSRANGEY.txt", "r");
 
 		for(int i = 0; i < allitems; i++)
 		{
@@ -416,7 +416,7 @@ beginning:
 
 		int* rangex = (int *)malloc(sizeof(int) * allitems);
 
-		fp1 = fopen("PLAYERWEAPONSRANGEX.txt", "r");
+		fp1 = fopen("Data/PLAYERWEAPONSRANGEX.txt", "r");
 
 		for(int i = 0; i < allitems; i++)
 		{
@@ -427,7 +427,7 @@ beginning:
 
 		int* damageenemies = (int *)malloc(sizeof(int) * allitemsenemies);
 
-		fp1 = fopen("AIWEAPONSDAMAGE.txt", "r");
+		fp1 = fopen("Data/AIWEAPONSDAMAGE.txt", "r");
 
 		if (twoplayers != 1)
 		{
@@ -448,7 +448,7 @@ beginning:
 
 		int* rangeyenemies = (int *)malloc(sizeof(int) * allitemsenemies);
 
-		fp1 = fopen("AIWEAPONSRANGEY.txt", "r");
+		fp1 = fopen("Data/AIWEAPONSRANGEY.txt", "r");
 
 		if (twoplayers != 1)
 		{
@@ -471,7 +471,7 @@ beginning:
 
 		int* rangexenemies = (int *)malloc(sizeof(int) * allitemsenemies);
 
-		fp1 = fopen("AIWEAPONSRANGEX.txt", "r");
+		fp1 = fopen("Data/AIWEAPONSRANGEX.txt", "r");
 
 		if (twoplayers != 1)
 		{
@@ -494,7 +494,7 @@ beginning:
 
 		int* shielddamage = (int *)malloc(sizeof(int) * alldefenseitems);
 
-		fp1 = fopen("PLAYERSHIELDDAMAGE.txt", "r");
+		fp1 = fopen("Data/PLAYERSHIELDDAMAGE.txt", "r");
 
 		for(int i = 0; i < alldefenseitems; i++)
 		{
@@ -505,7 +505,7 @@ beginning:
 
 		int* shielddamageenemies = (int *)malloc(sizeof(int) * alldefenseitemsenemies);
 
-		fp1 = fopen("AISHIELDDAMAGE.txt", "r");
+		fp1 = fopen("Data/AISHIELDDAMAGE.txt", "r");
 
 		for(int i = 0; i < alldefenseitemsenemies; i++)
 		{
@@ -516,7 +516,7 @@ beginning:
 
 		char* playercharacter1[playercharacters];
 
-		fp1 = fopen("PLAYERCHARACTER.txt", "r");
+		fp1 = fopen("Data/PLAYERCHARACTER.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -527,7 +527,7 @@ beginning:
 
 		char* aicharacter1[aicharacters];
 
-		fp1 = fopen("AICHARACTER.txt", "r");
+		fp1 = fopen("Data/AICHARACTER.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -538,7 +538,7 @@ beginning:
 
 		char* playersigns[playercharacters];
 
-		fp1 = fopen("PLAYERSIGN.txt", "r");
+		fp1 = fopen("Data/PLAYERSIGN.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -549,7 +549,7 @@ beginning:
 
 		char* aisigns[aicharacters];
 
-		fp1 = fopen("AISIGN.txt", "r");
+		fp1 = fopen("Data/AISIGN.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -560,7 +560,7 @@ beginning:
 
 		int playerhitpoints[playercharacters];
 
-		fp1 = fopen("PLAYERHITPOINTS.txt", "r");
+		fp1 = fopen("Data/PLAYERHITPOINTS.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -571,7 +571,7 @@ beginning:
 
 		int aihitpoints[aicharacters];
 
-		fp1 = fopen("AIHITPOINTS.txt", "r");
+		fp1 = fopen("Data/AIHITPOINTS.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -582,7 +582,7 @@ beginning:
 
 		int playerdefense[playercharacters];
 
-		fp1 = fopen("PLAYERDEFENSEVALUES.txt", "r");
+		fp1 = fopen("Data/PLAYERDEFENSEVALUES.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -593,7 +593,7 @@ beginning:
 
 		int aidefense[aicharacters];
 
-		fp1 = fopen("AIDEFENSEVALUES.txt", "r");
+		fp1 = fopen("Data/AIDEFENSEVALUES.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -604,7 +604,7 @@ beginning:
 
 		int playerattack[playercharacters];
 
-		fp1 = fopen("PLAYERATTACK.txt", "r");
+		fp1 = fopen("Data/PLAYERATTACK.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -615,7 +615,7 @@ beginning:
 
 		int aiattack[aicharacters];
 
-		fp1 = fopen("AIATTACK.txt", "r");
+		fp1 = fopen("Data/AIATTACK.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -626,7 +626,7 @@ beginning:
 
 		char* playermagicitems[playermagiclist];
 		
-		fp1 = fopen("PLAYERMAGICS.txt", "r");
+		fp1 = fopen("Data/PLAYERMAGICS.txt", "r");
 
 		for(int i = 0; i < playermagiclist; i++)
 		{
@@ -637,7 +637,7 @@ beginning:
 
 		char* aimagicitems[aimagiclist];
 		
-		fp1 = fopen("AIMAGICS.txt", "r");
+		fp1 = fopen("Data/AIMAGICS.txt", "r");
 
 		for(int i = 0; i < aimagiclist; i++)
 		{
@@ -648,7 +648,7 @@ beginning:
 
 		int playermagicdamage[playermagiclist];
 		
-		fp1 = fopen("PLAYERMAGICSDAMAGE.txt", "r");
+		fp1 = fopen("Data/PLAYERMAGICSDAMAGE.txt", "r");
 
 		for(int i = 0; i < playermagiclist; i++)
 		{
@@ -659,7 +659,7 @@ beginning:
 
 		int aimagicdamage[aimagiclist];
 		
-		fp1 = fopen("AIMAGICSDAMAGE.txt", "r");
+		fp1 = fopen("Data/AIMAGICSDAMAGE.txt", "r");
 
 		for(int i = 0; i < aimagiclist; i++)
 		{
@@ -670,7 +670,7 @@ beginning:
 
 		int playermagicdistance[playermagiclist];
 		
-		fp1 = fopen("PLAYERMAGICSDISTANCE.txt", "r");
+		fp1 = fopen("Data/PLAYERMAGICSDISTANCE.txt", "r");
 
 		for(int i = 0; i < playermagiclist; i++)
 		{
@@ -681,7 +681,7 @@ beginning:
 
 		int aimagicdistance[aimagiclist];
 
-		fp1 = fopen("AIMAGICSDISTANCE.txt", "r");
+		fp1 = fopen("Data/AIMAGICSDISTANCE.txt", "r");
 
 		for(int i = 0; i < aimagiclist; i++)
 		{
@@ -692,7 +692,7 @@ beginning:
 
 		int playermagicresist[playercharacters];
 
-		fp1 = fopen("PLAYERMAGICRESISTANCE.txt", "r");
+		fp1 = fopen("Data/PLAYERMAGICRESISTANCE.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -703,7 +703,7 @@ beginning:
 
 		int aimagicresist[aicharacters];
 
-		fp1 = fopen("AIMAGICRESISTANCE.txt", "r");
+		fp1 = fopen("Data/AIMAGICRESISTANCE.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -714,7 +714,7 @@ beginning:
 
 		int playermagicpoints[playercharacters];
 
-		fp1 = fopen("PLAYERMAGICPOINTS.txt", "r");
+		fp1 = fopen("Data/PLAYERMAGICPOINTS.txt", "r");
 
 		for(int i = 0; i < playercharacters; i++)
 		{
@@ -725,7 +725,7 @@ beginning:
 
 		int aimagicpoints[aicharacters];
 
-		fp1 = fopen("AIMAGICPOINTS.txt", "r");
+		fp1 = fopen("Data/AIMAGICPOINTS.txt", "r");
 
 		for(int i = 0; i < aicharacters; i++)
 		{
@@ -736,7 +736,7 @@ beginning:
 
 		int playermagiccost[playermagiclist];
 
-		fp1 = fopen("PLAYERMAGICSCOST.txt", "r");
+		fp1 = fopen("Data/PLAYERMAGICSCOST.txt", "r");
 
 		for(int i = 0; i < playermagiclist; i++)
 		{
@@ -747,7 +747,7 @@ beginning:
 
 		int aimagiccost[aimagiclist];
 		
-		fp1 = fopen("AIMAGICSCOST.txt", "r");
+		fp1 = fopen("Data/AIMAGICSCOST.txt", "r");
 
 		for(int i = 0; i < aimagiclist; i++)
 		{
@@ -758,7 +758,7 @@ beginning:
 
 		char* playerarmor[allarmor];
 
-		fp1 = fopen("PLAYERARMOR.txt", "r");
+		fp1 = fopen("Data/PLAYERARMOR.txt", "r");
 
 		for(int i = 0; i < allarmor; i++)
 		{
@@ -769,7 +769,7 @@ beginning:
 
 		char* aiarmor[allarmorenemies];
 
-		fp1 = fopen("AIARMOR.txt", "r");
+		fp1 = fopen("Data/AIARMOR.txt", "r");
 
 		for(int i = 0; i < allarmorenemies; i++)
 		{
@@ -780,7 +780,7 @@ beginning:
 
 		int playerarmorpts[allarmor];
 		
-		fp1 = fopen("PLAYERARMORPOINTS.txt", "r");
+		fp1 = fopen("Data/PLAYERARMORPOINTS.txt", "r");
 
 		for(int i = 0; i < allarmor; i++)
 		{
@@ -791,7 +791,7 @@ beginning:
 
 		int aiarmorpts[allarmorenemies];
 		
-		fp1 = fopen("AIARMORPOINTS.txt", "r");
+		fp1 = fopen("Data/AIARMORPOINTS.txt", "r");
 
 		for(int i = 0; i < allarmorenemies; i++)
 		{
@@ -802,7 +802,7 @@ beginning:
 
 		int playerarmordistancex[allarmor];
 
-		fp1 = fopen("PLAYERARMORDISTANCEX.txt", "r");
+		fp1 = fopen("Data/PLAYERARMORDISTANCEX.txt", "r");
 
 		for(int i = 0; i < allarmor; i++)
 		{
@@ -813,7 +813,7 @@ beginning:
 
 		int aiarmordistancex[allarmorenemies];
 
-		fp1 = fopen("AIARMORDISTANCEX.txt", "r");
+		fp1 = fopen("Data/AIARMORDISTANCEX.txt", "r");
 
 		for(int i = 0; i < allarmorenemies; i++)
 		{
@@ -824,7 +824,7 @@ beginning:
 
 		int playerarmordistancey[allarmor];
 		
-		fp1 = fopen("PLAYERARMORDISTANCEY.txt", "r");
+		fp1 = fopen("Data/PLAYERARMORDISTANCEY.txt", "r");
 
 		for(int i = 0; i < allarmor; i++)
 		{
@@ -835,7 +835,7 @@ beginning:
 
 		int aiarmordistancey[allarmorenemies];
 		
-		fp1 = fopen("AIARMORDISTANCEY.txt", "r");
+		fp1 = fopen("Data/AIARMORDISTANCEY.txt", "r");
 
 		for(int i = 0; i < allarmorenemies; i++)
 		{
@@ -1449,14 +1449,14 @@ beginning:
 		*/
 		
 #if defined(_MSC_VER)
-		if(fileExists("SaveFile.txt"))
+		if(fileExists("Data/SaveFile.txt"))
 #else
-		if(access("SaveFile.txt", F_OK ) != -1)
+		if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
 		{
 			int j = 0;
 		
-			fp1 = fopen("SaveFile.txt", "r");
+			fp1 = fopen("Data/SaveFile.txt", "r");
 			
 			for(int i = 0; i < maxplayers; i++)
 			{
@@ -1852,7 +1852,7 @@ beginning:
 
 			fclose(fp1);
 
-			remove("SaveFile.txt");
+			remove("Data/SaveFile.txt");
 			
 			savefile = 1;
 		}
@@ -1941,7 +1941,7 @@ beginning:
 				refresh();
 #endif
 
-				fp1 = fopen("SaveFile.txt", "w");
+				fp1 = fopen("Data/SaveFile.txt", "w");
 
 				for(int i = 0; i < maxplayers; i++)
 				{
@@ -4146,12 +4146,12 @@ beginning:
 		if (ch == 'q')
 		{
 #if defined(_MSC_VER)
-			if(fileExists("SaveFile.txt"))
+			if(fileExists("Data/SaveFile.txt"))
 #else
-			if (access("SaveFile.txt", F_OK) != -1)
+			if (access("Data/SaveFile.txt", F_OK) != -1)
 #endif
 			{
-				remove("SaveFile.txt");
+				remove("Data/SaveFile.txt");
 			}
 
 			goto endmenow;
@@ -4167,12 +4167,12 @@ beginning:
 #endif
 
 #if defined(_MSC_VER)
-			if(fileExists("SaveFile.txt"))
+			if(fileExists("Data/SaveFile.txt"))
 #else
-			if(access("SaveFile.txt", F_OK ) != -1)
+			if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
 			{
-				remove("SaveFile.txt");
+				remove("Data/SaveFile.txt");
 			}
 
 			ch = (RETURNTYPEVIDEO)inputgetter();
@@ -4216,12 +4216,12 @@ beginning:
 #endif
 
 #if defined(_MSC_VER)
-			if(fileExists("SaveFile.txt"))
+			if(fileExists("Data/SaveFile.txt"))
 #else
-			if(access("SaveFile.txt", F_OK ) != -1)
+			if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
 			{
-				remove("SaveFile.txt");
+				remove("Data/SaveFile.txt");
 			}
 
 			ch = (RETURNTYPEVIDEO)inputgetter();
