@@ -2,6 +2,9 @@
 To run a makefile (Debian 9 example): <br />
 make -f Makefiles/Makefile.linux-g++ <br />
 <br />
+To run a makefile (Openbsd example): <br />
+gmake -f Makefiles/Makefile.openbsd <br />
+<br />
 For windows you will need msys2 or visual studio 2017.  To run the compiled program from the msys2 and visual studio.  You will have to use cmd.  Msys2 terminal can't run the game properly.  In msys2 launching from shortcut mingw64.exe in the msys2 install directory: <br />
 git <br />
 ncurses <br />
