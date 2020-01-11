@@ -1,9 +1,12 @@
-playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-	g++ -o playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+playerandai1: main.o inputcompare.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	g++ -o playerandai1 obj/main.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o `pkg-config --cflags --libs ncurses` `pkg-config --cflags --libs openssl` -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 main.o:
-	g++ -c main.cpp -o obj/main.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+	g++ -c main.cpp -o obj/main.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector -fpermissive
 
+inputcompare.o:
+	g++ -c inputcompare.cpp -o obj/inputcompare.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector -fpermissive
+	
 seed.o:
 	g++ -c seed.cpp -o obj/seed.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
@@ -56,4 +59,4 @@ videoprinterstats.o:
 	g++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 clean:
-	rm -f playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o
+	rm -f playerandai1 obj/main.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o

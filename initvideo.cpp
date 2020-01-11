@@ -13,4 +13,10 @@ void initvideo(int hitpointsy, int hitpointsx)
 	cbreak();
 
 	#endif
+
+	#ifdef INITLIBTCODNOW
+
+	TCODConsole::initROOT(hitpointsx, hitpointsy, "playerandai-prototype", false);
+
+	#endif
 }

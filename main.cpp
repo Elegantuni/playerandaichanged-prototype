@@ -47,6 +47,8 @@ typedef SSIZE_T ssize_t;
 
 #include "ncursesinput.h"
 
+#include "inputcompare.h"
+
 #include "inputgetter.h"
 
 #include "ncursesprint.h"
@@ -281,9 +283,17 @@ int main(int argc, char *argv[])
 
 	int ch;
 
+	ch = 'l';
+	
 	#endif
 
-	ch = 'l';
+	#ifdef INITLIBTCODNOW
+
+	TCOD_key_t ch;
+
+	ch = TCODK_L;
+	
+	#endif
 
 	if(commandlineset == 1 || argc == 2)
 	{
@@ -1929,16 +1939,31 @@ beginning:
 		int i = 0;
 		int iai = 0;
 
+#ifdef INITLIBTCODNOW
+		while(!TCODConsole::iwWindowClosed()) 
+		{
+			TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS,&ch,NULL);
+#else
 		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
+#endif
 			if(ch == 'S')
 			{
 #ifdef INITNCURSESNOW
 				clear();
 #endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
+
 				videoprinternorm(0, 0, "Saving now and then exiting");
 #ifdef INITNCURSESNOW
 				refresh();
+#endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::flush();
 #endif
 
 				fp1 = fopen("Data/SaveFile.txt", "w");
@@ -2349,6 +2374,10 @@ beginning:
 				clear();
 #endif
 
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
+
 				videoprinternorm(0, 0, "Press a to move left");
 				videoprinternorm(1, 0, "Press d to move right");
 				videoprinternorm(2, 0, "Press w to move up");
@@ -2394,6 +2423,10 @@ beginning:
 			}
 #ifdef INITNCURSESNOW
 			clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+			TCODConsole::root->clear();
 #endif
 
 			if(ch == 'p' && whosturn == 0)
@@ -2494,7 +2527,7 @@ beginning:
 				}
 			}
 			
-			if(ch == 'n' && whosturn == 0)
+			if(inputcompare(ch, 'n') && whosturn == 0)
 			{
 				i++;
 				
@@ -2543,7 +2576,7 @@ beginning:
 				}
 			}
 
-			if(ch == 'n' && whosturn == 1 && twoplayers == 1)
+			if(inputcompare(ch, 'n') && whosturn == 1 && twoplayers == 1)
 			{
 				iai++;
 
@@ -2670,6 +2703,10 @@ beginning:
 				clear();
 #endif
 
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
+
 				positiony--;
 				
 				if(positiony < 0)
@@ -2690,6 +2727,10 @@ beginning:
 				clear();
 #endif
 
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
+
 				positiony++;
 				
 				if(positiony > (terminalend + 1 - hitpointsy))
@@ -2706,7 +2747,13 @@ beginning:
 
 			if(ch == 'r')
 			{
+#ifdef INITNCURSESNOW
 				clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
 
 				positionx--;
 
@@ -2722,7 +2769,13 @@ beginning:
 
 			if(ch == 'f')
 			{
+#ifdef INITNCURSESNOW
 				clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
 
 				positionx++;
 				
@@ -2766,6 +2819,10 @@ beginning:
 				clear();
 #endif
 
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
+#endif
+
 				int list = 0;
 				int l = 0;
 #ifdef INITNCURSESNOW
@@ -2777,6 +2834,9 @@ beginning:
 					clear();
 #endif
 
+#ifdef INITLIBTCODNOW
+					TCODConsole::root->clear();
+#endif
 					if (gotcharacter == 'd')
 					{
 						list++;
@@ -2851,6 +2911,15 @@ beginning:
 
 				refresh();
 #endif
+
+#ifdef INITLIBTCODNOW
+				move(myplayer[i].y, myplayer[i].x);
+
+				TCODConsole::root->clear();
+
+				TCODConsole::flush();
+#endif
+
 			}
 
 
@@ -2858,6 +2927,10 @@ beginning:
 			{
 #ifdef INITNCURSESNOW
 				clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
 #endif
 
 				int list = 0;
@@ -2872,6 +2945,10 @@ beginning:
 				{
 #ifdef INITNCURSESNOW
 					clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+					TCODConsole::root->clear();
 #endif
 
 					if(gotcharacter == 'k')
@@ -2963,6 +3040,15 @@ beginning:
 					
 				refresh();
 #endif
+
+#ifdef INITLIBTCODNOW
+				move(myplayer[i].y, myplayer[i].x);
+
+				TCODConsole::root->clear();
+
+				TCODConsole::flush();
+#endif
+
 			}
 				
 			if (ch == 'M' && whosturn == 0)
@@ -2975,6 +3061,10 @@ beginning:
 
 #ifdef INITNCURSESNOW
 				clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
 #endif
 
 				int l = 0;
@@ -3059,6 +3149,10 @@ beginning:
 
 #ifdef INITNCURSESNOW
 						clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+						TCODConsole::root->clear();
 #endif
 
 						if (list == 0)
@@ -3255,6 +3349,15 @@ beginning:
 
 				refresh();
 #endif
+
+#ifdef INITLIBTCODNOW
+				move(myplayer[i].y, myplayer[i].x);
+
+				TCODConsole::root->clear();
+
+				TCODConsole::flush();
+#endif
+
 			}
 
 			if (ch == 'M' && whosturn == 1 && twoplayers == 1)
@@ -3267,6 +3370,10 @@ beginning:
 
 #ifdef INITNCURSESNOW
 				clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+				TCODConsole::root->clear();
 #endif
 
 				int l = 0;
@@ -3351,6 +3458,10 @@ beginning:
 
 #ifdef INITNCURSESNOW
 						clear();
+#endif
+
+#ifdef INITLIBTCODNOW
+						TCODConsole::root-clear();
 #endif
 
 						if (list == 0)
@@ -3547,6 +3658,15 @@ beginning:
 
 				refresh();
 #endif
+
+#ifdef INITLIBTCODNOW
+				move(myai[iai].y, myai[iai].x);
+
+				TCODConsole::root->clear();
+
+				TCODConsole::flush();
+#endif
+
 			}
 
 			if(ch == 'm')
@@ -4143,6 +4263,11 @@ beginning:
 #ifdef INITNCURSESNOW
 		clear();
 #endif
+
+#ifdef INITLIBTCODNOW
+		TCODConsole::root->clear();
+#endif
+
 		if (ch == 'q')
 		{
 #if defined(_MSC_VER)
