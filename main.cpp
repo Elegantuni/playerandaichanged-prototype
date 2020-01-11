@@ -1947,7 +1947,7 @@ beginning:
 		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
 #endif
-			if(ch == 'S')
+			if(inputcompare(ch, 'S'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2368,7 +2368,7 @@ beginning:
 				return 0;
 			}
 
-			if(ch == 'h')
+			if(inputcompare(ch, 'h'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2429,7 +2429,7 @@ beginning:
 			TCODConsole::root->clear();
 #endif
 
-			if(ch == 'p' && whosturn == 0)
+			if(inputcompare(ch, 'p') && whosturn == 0)
 			{
 				i--;
 
@@ -2478,7 +2478,7 @@ beginning:
 				}
 			}
 			
-			if(ch == 'p' && whosturn == 1 && twoplayers == 1)
+			if(inputcompare(ch, 'p') && whosturn == 1 && twoplayers == 1)
 			{
 				iai--;
 
@@ -2625,7 +2625,7 @@ beginning:
 				}
 			}
 		
-			if(ch == 'a' && whosturn == 0)
+			if(inputcompare(ch, 'a') && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x - 1;
 			
@@ -2637,7 +2637,7 @@ beginning:
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
 
-			if(ch == 'a' && whosturn == 1 && twoplayers == 1)
+			if(inputcompare(ch, 'a') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].x = myai[iai].x - 1;
 
@@ -2649,7 +2649,7 @@ beginning:
 				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
 			}
 		
-			if(ch == 'd' && whosturn == 0)
+			if(inputcompare(ch, 'd') && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x + 1;
 			
@@ -2661,7 +2661,7 @@ beginning:
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
 
-			if(ch == 'd' && whosturn == 1 && twoplayers == 1)
+			if(inputcompare(ch, 'd') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].x = myai[iai].x + 1;
 
@@ -2673,7 +2673,7 @@ beginning:
 				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
 			}
 		
-			if(ch == 'w' && whosturn == 0)
+			if(inputcompare(ch, 'w') && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y - 1;
 			
@@ -2685,7 +2685,7 @@ beginning:
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(ch == 'w' && whosturn == 1 && twoplayers == 1)
+			if(inputcompare(ch, 'w') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].y = myai[iai].y - 1;
 
@@ -2697,7 +2697,7 @@ beginning:
 				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(ch == 'u')
+			if(inputcompare(ch, 'u'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2721,7 +2721,7 @@ beginning:
 #endif
 			}
 
-			if(ch == 'j')
+			if(inputcompare(ch, 'j'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2745,7 +2745,7 @@ beginning:
 #endif
 			}
 
-			if(ch == 'r')
+			if(inputcompare(ch, 'r'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2767,7 +2767,7 @@ beginning:
 				refresh();
 			}
 
-			if(ch == 'f')
+			if(inputcompare(ch, 'f'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2789,7 +2789,7 @@ beginning:
 				refresh();
 			}
 		
-			if(ch == 's' && whosturn == 0)
+			if(inputcompare(ch, 's') && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y + 1;
 			
@@ -2801,7 +2801,7 @@ beginning:
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(ch == 's' && whosturn == 1 && twoplayers == 1)
+			if(inputcompare(ch, 's') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].y = myai[iai].y + 1;
 
@@ -2813,7 +2813,7 @@ beginning:
 				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
-			if (ch == 'c')
+			if (inputcompare(ch, 'c'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -2923,7 +2923,7 @@ beginning:
 			}
 
 
-			if(ch == 'i')
+			if(inputcompare(ch, 'i'))
 			{
 #ifdef INITNCURSESNOW
 				clear();
@@ -3051,7 +3051,7 @@ beginning:
 
 			}
 				
-			if (ch == 'M' && whosturn == 0)
+			if (inputcompare(ch, 'M') && whosturn == 0)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
@@ -3360,7 +3360,7 @@ beginning:
 
 			}
 
-			if (ch == 'M' && whosturn == 1 && twoplayers == 1)
+			if (inputcompare(ch, 'M') && whosturn == 1 && twoplayers == 1)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
@@ -3669,7 +3669,7 @@ beginning:
 
 			}
 
-			if(ch == 'm')
+			if(inputcompare(ch, 'm'))
 			{
 				int t = -1;
 
@@ -3816,7 +3816,7 @@ beginning:
 						{
 							p = t;
 
-							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && inputcompare(ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 							{
 								if(j == i)
 								{
@@ -3876,7 +3876,7 @@ beginning:
 
 							if(j == i)
 							{
-								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && ch == 'm' && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && inputcompare(ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 								{
 									myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
 						
@@ -3956,7 +3956,7 @@ beginning:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.randomweapon];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.randomweapon];
 
-						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
 						{
 							if (myai[p].weapontype.damage > aiequipedweapon)
 							{
@@ -3970,7 +3970,7 @@ beginning:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon];
 
-						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
 						{
 							if (myai[i].weapontype.damage > aiequipedweapon)
 							{
@@ -3984,7 +3984,7 @@ beginning:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon2];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon2];
 
-						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
 						{
 							if (myai[i].weapontype.damage > aiequipedweapon)
 							{
@@ -4011,7 +4011,7 @@ beginning:
 
 					if(j == i)
 					{
-						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
 						{	
 							myai[p].hitpoints = myai[p].hitpoints - myplayer[j].weapontype.damage - myplayer[j].character1.attack + myai[p].shieldstype.damage + myai[p].defensepoints;
 					
@@ -4034,7 +4034,7 @@ beginning:
 
 					if(j == i)
 					{
-						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (ch == 'a' || ch == 'd' || ch == 'w' || ch == 's'))
+						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
 						{	
 							myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].weapontype.damage - myai[p].character1.attack + myplayer[j].shieldstype.damage + myplayer[j].defensepoints;
 
@@ -4224,7 +4224,7 @@ beginning:
 			refresh();
 
 
-			if((ch == 'w' || ch == 's' || ch == 'd' || ch == 'a' || ch == 'm') && twoplayers == 1)
+			if((inputcompare(ch, 'w') || inputcompare(ch, 's') || inputcompare(ch, 'd') || inputcompare(ch, 'a') || inputcompare(ch, 'm')) && twoplayers == 1)
 			{
 				whosturn++;
 
@@ -4268,7 +4268,7 @@ beginning:
 		TCODConsole::root->clear();
 #endif
 
-		if (ch == 'q')
+		if (inputcompare(ch, 'q'))
 		{
 #if defined(_MSC_VER)
 			if(fileExists("Data/SaveFile.txt"))
