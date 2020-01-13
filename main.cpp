@@ -51,6 +51,10 @@ typedef SSIZE_T ssize_t;
 
 #include "inputgetter.h"
 
+#include "screenclear.h"
+
+#include "screenrefresh.h"
+
 #include "ncursesprint.h"
 
 #include "ncursesprintarg1.h"
@@ -1933,7 +1937,7 @@ beginning:
 		{
 			move(myai[0].y - positiony, myai[0].x - positionx);
 		}
-		refresh();
+		screenrefresh();
 #endif
 
 		int i = 0;
@@ -1949,22 +1953,11 @@ beginning:
 #endif
 			if(inputcompare(ch, 'S'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				videoprinternorm(0, 0, "Saving now and then exiting");
-#ifdef INITNCURSESNOW
-				refresh();
-#endif
 
-#ifdef INITLIBTCODNOW
-				TCODConsole::flush();
-#endif
+				screenrefresh();
 
 				fp1 = fopen("Data/SaveFile.txt", "w");
 
@@ -2370,13 +2363,7 @@ beginning:
 
 			if(inputcompare(ch, 'h'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				videoprinternorm(0, 0, "Press a to move left");
 				videoprinternorm(1, 0, "Press d to move right");
@@ -2401,9 +2388,7 @@ beginning:
 				videoprinternorm(20, 0, "Press f to scroll right");
 				videoprinternorm(21, 0, "Press key to quit help");
 
-#ifdef INITNCURSESNOW
-				refresh();
-#endif
+				screenrefresh();
 
 				(RETURNTYPEVIDEO)inputgetter();
 
@@ -2418,16 +2403,12 @@ beginning:
 					move(myai[iai].y, myai[iai].x);
 				}
 
-				refresh();
+				screenrefresh();
 #endif
 			}
-#ifdef INITNCURSESNOW
-			clear();
-#endif
 
-#ifdef INITLIBTCODNOW
-			TCODConsole::root->clear();
-#endif
+			screenclear();
+
 
 			if(inputcompare(ch, 'p') && whosturn == 0)
 			{
@@ -2699,13 +2680,7 @@ beginning:
 
 			if(inputcompare(ch, 'u'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				positiony--;
 				
@@ -2717,19 +2692,14 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(positiony, 0);
 
-				refresh();
+				screenrefresh();
 #endif
 			}
 
 			if(inputcompare(ch, 'j'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
 
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				positiony++;
 				
@@ -2741,19 +2711,13 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(positiony, 0);
 
-				refresh();
+				screenrefresh();
 #endif
 			}
 
 			if(inputcompare(ch, 'r'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				positionx--;
 
@@ -2761,21 +2725,16 @@ beginning:
 				{
 					positionx = 0;
 				}
-
+#ifdef INITNCURSESNOW
 				move(positionx, 0);
 
-				refresh();
+				screenrefresh();
+#endif
 			}
 
 			if(inputcompare(ch, 'f'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				positionx++;
 				
@@ -2786,7 +2745,7 @@ beginning:
 
 				move(positionx, 0);
 
-				refresh();
+				screenrefresh();
 			}
 		
 			if(inputcompare(ch, 's') && whosturn == 0)
@@ -2815,13 +2774,7 @@ beginning:
 
 			if (inputcompare(ch, 'c'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				int list = 0;
 				int l = 0;
@@ -2830,13 +2783,8 @@ beginning:
 #endif
 				do
 				{
-#ifdef INITNCURSESNOW
-					clear();
-#endif
+					screenclear();
 
-#ifdef INITLIBTCODNOW
-					TCODConsole::root->clear();
-#endif
 					if (gotcharacter == 'd')
 					{
 						list++;
@@ -2897,7 +2845,7 @@ beginning:
 #ifdef INITNCURSESNOW
 					move(0, 0);
 
-					refresh();
+					screenrefresh();
 #endif
 				} while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
 
@@ -2907,17 +2855,17 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
 
-				clear();
+				screenclear();
 
-				refresh();
+				screenrefresh();
 #endif
 
 #ifdef INITLIBTCODNOW
 				move(myplayer[i].y, myplayer[i].x);
 
-				TCODConsole::root->clear();
+				screenclear();
 
-				TCODConsole::flush();
+				screenrefresh();
 #endif
 
 			}
@@ -2925,13 +2873,7 @@ beginning:
 
 			if(inputcompare(ch, 'i'))
 			{
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				int list = 0;
 				int l = 0;
@@ -2943,13 +2885,7 @@ beginning:
 
 				do
 				{
-#ifdef INITNCURSESNOW
-					clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-					TCODConsole::root->clear();
-#endif
+					screenclear();
 
 					if(gotcharacter == 'k')
 					{
@@ -3024,7 +2960,7 @@ beginning:
 #ifdef INITNCURSESNOW
 					move(0, 0);
 					
-					refresh();
+					screenrefresh();
 #endif
 				} 
 				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
@@ -3036,17 +2972,17 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
 					
-				clear();
+				screenclear();
 					
-				refresh();
+				screenrefresh();
 #endif
 
 #ifdef INITLIBTCODNOW
 				move(myplayer[i].y, myplayer[i].x);
 
-				TCODConsole::root->clear();
+				screenclear();
 
-				TCODConsole::flush();
+				screenrefresh();
 #endif
 
 			}
@@ -3059,13 +2995,7 @@ beginning:
 
 				int list = 0;
 
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				int l = 0;
 
@@ -3092,7 +3022,7 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(u, 0);
 
-				refresh();
+				screenrefresh();
 #endif
 				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
 				{
@@ -3147,13 +3077,7 @@ beginning:
 
 						u = 1;
 
-#ifdef INITNCURSESNOW
-						clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-						TCODConsole::root->clear();
-#endif
+						screenclear();
 
 						if (list == 0)
 						{
@@ -3224,7 +3148,7 @@ beginning:
 #ifdef INITNCURSESNOW
 					move(u, 0);
 
-					refresh();
+					screenrefresh();
 #endif
 				}
 
@@ -3345,17 +3269,17 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(myplayer[i].y, myplayer[i].x);
 
-				clear();
+				screenclear();
 
-				refresh();
+				screenrefresh();
 #endif
 
 #ifdef INITLIBTCODNOW
 				move(myplayer[i].y, myplayer[i].x);
 
-				TCODConsole::root->clear();
+				screenclear();
 
-				TCODConsole::flush();
+				screenrefresh();
 #endif
 
 			}
@@ -3368,13 +3292,7 @@ beginning:
 
 				int list = 0;
 
-#ifdef INITNCURSESNOW
-				clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-				TCODConsole::root->clear();
-#endif
+				screenclear();
 
 				int l = 0;
 
@@ -3401,7 +3319,7 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(u, 0);
 
-				refresh();
+				screenrefresh();
 #endif
 				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
 				{
@@ -3456,13 +3374,7 @@ beginning:
 
 						u = 1;
 
-#ifdef INITNCURSESNOW
-						clear();
-#endif
-
-#ifdef INITLIBTCODNOW
-						TCODConsole::root-clear();
-#endif
+						screenclear();
 
 						if (list == 0)
 						{
@@ -3533,7 +3445,7 @@ beginning:
 #ifdef INITNCURSESNOW
 					move(u, 0);
 
-					refresh();
+					screenrefresh();
 #endif
 				}
 
@@ -3654,17 +3566,17 @@ beginning:
 #ifdef INITNCURSESNOW
 				move(myai[iai].y, myai[iai].x);
 
-				clear();
+				screenclear();
 
-				refresh();
+				screenrefresh();
 #endif
 
 #ifdef INITLIBTCODNOW
 				move(myai[iai].y, myai[iai].x);
 
-				TCODConsole::root->clear();
+				screenclear();
 
-				TCODConsole::flush();
+				screenrefresh();
 #endif
 
 			}
@@ -4221,7 +4133,7 @@ beginning:
 				move(myai[iai].y - positiony, myai[iai].x - positionx);
 			}
 
-			refresh();
+			screenrefresh();
 
 
 			if((inputcompare(ch, 'w') || inputcompare(ch, 's') || inputcompare(ch, 'd') || inputcompare(ch, 'a') || inputcompare(ch, 'm')) && twoplayers == 1)
@@ -4255,18 +4167,13 @@ beginning:
 					  move(myai[iai].y - positiony, myai[iai].x - positionx);
 			}
 
-			refresh();
+			screenrefresh();
 #endif
 		}
 
 	ended:
-#ifdef INITNCURSESNOW
-		clear();
-#endif
 
-#ifdef INITLIBTCODNOW
-		TCODConsole::root->clear();
-#endif
+		screenclear();
 
 		if (inputcompare(ch, 'q'))
 		{
@@ -4288,7 +4195,7 @@ beginning:
 			videoprinternorm(1, 0, "Press y to end");
 
 #ifdef INITNCURSESNOW
-			refresh();
+			screenrefresh();
 #endif
 
 #if defined(_MSC_VER)
@@ -4306,11 +4213,9 @@ beginning:
 			{
 				roundssofar = 1;
 
-#ifdef INITNCURSESNOW
-				clear();
+				screenclear();
 
-				refresh();
-#endif
+				screenrefresh();
 
 				goto beginning;
 			}
@@ -4337,7 +4242,7 @@ beginning:
 			}
 
 #ifdef INITNCURSESNOW
-			refresh();
+			screenrefresh();
 #endif
 
 #if defined(_MSC_VER)
@@ -4355,11 +4260,9 @@ beginning:
 			{
 				roundssofar = 1;
 
-#ifdef INITNCURSESNOW
-				clear();
+				screenclear();
 
-				refresh();
-#endif
+				screenrefresh();
 
 				goto beginning;
 			}
@@ -4376,7 +4279,7 @@ beginning:
 		videoprinternorm(2, 0, "Press y to end"); 
 	
 #ifdef INITNCURSESNOW
-		refresh();
+		screenrefresh();
 #endif
 	
 		ch = (RETURNTYPEVIDEO)inputgetter();
@@ -4385,11 +4288,9 @@ beginning:
 		{
 			roundssofar++;
 
-#ifdef INITNCURSESNOW
-			clear();
+			screenclear();
 
-			refresh();
-#endif
+			screenrefresh();
 
 			goto beginning;
 		}
