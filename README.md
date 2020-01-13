@@ -1,4 +1,5 @@
 # playerandai-prototype
+<h1>Only Makefiles/Makefile.linux-g++ will build currently, but you can take a look at it and make other platforms compile</h1> <br />
 To run a makefile (Debian 9 example): <br />
 make -f Makefiles/Makefile.linux-g++ <br />
 <br />
