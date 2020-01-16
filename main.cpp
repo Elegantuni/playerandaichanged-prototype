@@ -20,6 +20,10 @@
 #include <unistd.h>
 #endif
 
+#ifdef INITLIBTCODNOW
+#include <unistd.h>
+#endif
+
 #ifdef INITMSYS2NOW
 #include <unistd.h>
 #endif
@@ -41,6 +45,10 @@ typedef SSIZE_T ssize_t;
 #define RETURNTYPEVIDEO intptr_t
 #endif
 
+#ifdef INITLIBTCODNOW
+#define RETURNTYPEVIDEO char
+#endif
+
 #include "alldefines.h"
 
 #include "initvideo.h"
@@ -50,6 +58,8 @@ typedef SSIZE_T ssize_t;
 #include "inputcompare.h"
 
 #include "inputgetter.h"
+
+#include "inputmove.h"
 
 #include "screenclear.h"
 
@@ -187,6 +197,11 @@ int main(int argc, char *argv[])
 		hitpointsx = 120;
 	#endif
 
+	#ifdef INITLIBTCODNOW
+		hitpointsy = 24;
+		hitpointsx = 120;
+	#endif
+
 #if defined(_MSC_VER)
                 if(!fileExists("Data/SaveFile.txt"))
 #else
@@ -293,9 +308,11 @@ int main(int argc, char *argv[])
 
 	#ifdef INITLIBTCODNOW
 
-	TCOD_key_t ch;
+	char ch;
+	
+	ch = 'l';
 
-	ch = TCODK_L;
+	TCOD_key_t key;
 	
 	#endif
 
@@ -1883,6 +1900,11 @@ beginning:
 	
 		initvideo(hitpointsy, hitpointsx);
 
+#ifdef INITLIBTCODNOW
+	TCOD_console_set_default_foreground(NULL, TCOD_color_RGB(255, 255, 255));
+	TCOD_console_set_default_background(NULL, TCOD_color_RGB(0, 0, 0));
+#endif
+
 		positiony = (myplayer[0].y / hitpointsy) * hitpointsy;
 		positionx = (myplayer[0].x / hitpointsx) * hitpointsx;
 
@@ -1927,31 +1949,24 @@ beginning:
 				videoprinterstats(hitpointspos1.ay + i - positiony, 0, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 			}
 		}
-#ifdef INITNCURSESNOW
+		
 		if(whosturn == 0)
 		{
-			move(myplayer[0].y - positiony, myplayer[0].x - positionx);
+			inputmove(myplayer[0].y - positiony, myplayer[0].x - positionx);
 		}
 
 		if(whosturn == 1)
 		{
-			move(myai[0].y - positiony, myai[0].x - positionx);
+			inputmove(myai[0].y - positiony, myai[0].x - positionx);
 		}
 		screenrefresh();
-#endif
 
 		int i = 0;
 		int iai = 0;
 
-#ifdef INITLIBTCODNOW
-		while(!TCODConsole::iwWindowClosed()) 
-		{
-			TCODSystem::checkForEvent(TCOD_EVENT_KEY_PRESS,&ch,NULL);
-#else
 		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
-#endif
-			if(inputcompare(ch, 'S'))
+			if(inputcompare(ch, 'x'))
 			{
 				screenclear();
 
@@ -2370,7 +2385,7 @@ beginning:
 				videoprinternorm(2, 0, "Press w to move up");
 				videoprinternorm(3, 0, "Press s to move down");
 				videoprinternorm(4, 0, "Press m to use magic");
-				videoprinternorm(5, 0, "Press Shift+m to equip different magic, weapon, shield, and armor");
+				videoprinternorm(5, 0, "Press b to equip different magic, weapon, shield, and armor");
 				videoprinternorm(6, 0, "Press n to cycle through player characters forward");
 				videoprinternorm(7, 0, "Press p to cycle through player characters backward");
 				videoprinternorm(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
@@ -2381,7 +2396,7 @@ beginning:
 				videoprinternorm(13, 0, "The E is a player elf and the e is a ai elf");
 				videoprinternorm(14, 0, "The D is a player dwarf and the d is a ai elf");
 				videoprinternorm(15, 0, "Press q from battle screen to quit game");
-				videoprinternorm(16, 0, "Press Shift+s to save and quit");
+				videoprinternorm(16, 0, "Press x to save and quit");
 				videoprinternorm(17, 0, "Press u to scroll up");
 				videoprinternorm(18, 0, "Press j to scroll down");
 				videoprinternorm(19, 0, "Press r to scroll left");
@@ -2392,19 +2407,21 @@ beginning:
 
 				(RETURNTYPEVIDEO)inputgetter();
 
-#ifdef INITNCURSESNOW
+#ifdef INITLIBTCODNOW
+				key = TCODConsole::waitForKeypress(true);
+#endif
+
 				if(whosturn == 0)
 				{
-					move(myplayer[i].y, myplayer[i].x);
+					inputmove(myplayer[i].y, myplayer[i].x);
 				}
 				
 				if(whosturn == 1)
 				{
-					move(myai[iai].y, myai[iai].x);
+					inputmove(myai[iai].y, myai[iai].x);
 				}
 
 				screenrefresh();
-#endif
 			}
 
 			screenclear();
@@ -2689,11 +2706,9 @@ beginning:
 					positiony = 0;
 				}
 
-#ifdef INITNCURSESNOW
-				move(positiony, 0);
+				inputmove(positiony, 0);
 
 				screenrefresh();
-#endif
 			}
 
 			if(inputcompare(ch, 'j'))
@@ -2708,11 +2723,9 @@ beginning:
 					positiony = (terminalend + 1 - hitpointsy);
 				}
 
-#ifdef INITNCURSESNOW
-				move(positiony, 0);
+				inputmove(positiony, 0);
 
 				screenrefresh();
-#endif
 			}
 
 			if(inputcompare(ch, 'r'))
@@ -2725,11 +2738,10 @@ beginning:
 				{
 					positionx = 0;
 				}
-#ifdef INITNCURSESNOW
-				move(positionx, 0);
+
+				inputmove(positionx, 0);
 
 				screenrefresh();
-#endif
 			}
 
 			if(inputcompare(ch, 'f'))
@@ -2743,7 +2755,7 @@ beginning:
 					positionx = (terminalendx + 1 - hitpointsx);
 				}
 
-				move(positionx, 0);
+				inputmove(positionx, 0);
 
 				screenrefresh();
 			}
@@ -2780,6 +2792,10 @@ beginning:
 				int l = 0;
 #ifdef INITNCURSESNOW
 				int gotcharacter = '0';
+#endif
+
+#ifdef INITLIBTCODNOW
+				char gotcharacter = '0';
 #endif
 				do
 				{
@@ -2842,32 +2858,26 @@ beginning:
 
 					l = 0;
 
-#ifdef INITNCURSESNOW
-					move(0, 0);
+					inputmove(0, 0);
 
 					screenrefresh();
-#endif
-				} while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
+#ifdef INITLIBTCODNOW
+					key = TCODConsole::waitForKeypress(true);
 
+					gotcharacter = key.c;
+				} while(gotcharacter == 'd');
+#endif
+#ifdef INITNCURSESNOW
+				} while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd');
+#endif
 				list = 0;
 				l = 0;
 
-#ifdef INITNCURSESNOW
-				move(myplayer[i].y, myplayer[i].x);
+				inputmove(myplayer[i].y, myplayer[i].x);
 
 				screenclear();
 
 				screenrefresh();
-#endif
-
-#ifdef INITLIBTCODNOW
-				move(myplayer[i].y, myplayer[i].x);
-
-				screenclear();
-
-				screenrefresh();
-#endif
-
 			}
 
 
@@ -2879,6 +2889,10 @@ beginning:
 				int l = 0;
 #ifdef INITNCURSESNOW
 				int gotcharacter = '0';
+#endif
+
+#ifdef INITLIBTCODNOW
+				char gotcharacter = '0';
 #endif
 
 				int theenemy = 0;
@@ -2957,40 +2971,31 @@ beginning:
 					
 					l = 0;
 					
-#ifdef INITNCURSESNOW
-					move(0, 0);
+					inputmove(0, 0);
 					
 					screenrefresh();
-#endif
-				} 
-				while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
-					
+				} while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
+
 				list = 0;
 				l = 0;
 				theenemy = 0;
 						
-#ifdef INITNCURSESNOW
-				move(myplayer[i].y, myplayer[i].x);
+				inputmove(myplayer[i].y, myplayer[i].x);
 					
 				screenclear();
 					
 				screenrefresh();
-#endif
-
-#ifdef INITLIBTCODNOW
-				move(myplayer[i].y, myplayer[i].x);
-
-				screenclear();
-
-				screenrefresh();
-#endif
 
 			}
 				
-			if (inputcompare(ch, 'M') && whosturn == 0)
+			if (inputcompare(ch, 'b') && whosturn == 0)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
+#endif
+
+#ifdef INITLIBTCODNOW
+				char gotcharacter;
 #endif
 
 				int list = 0;
@@ -3019,11 +3024,10 @@ beginning:
 
 				int u = 1;
 
-#ifdef INITNCURSESNOW
-				move(u, 0);
+				inputmove(u, 0);
 
 				screenrefresh();
-#endif
+
 				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
 				{
 					if (gotcharacter == 'w')
@@ -3145,11 +3149,9 @@ beginning:
 						l++;
 					}
 
-#ifdef INITNCURSESNOW
-					move(u, 0);
+					inputmove(u, 0);
 
 					screenrefresh();
-#endif
 				}
 
 				if (list == 0)
@@ -3266,28 +3268,22 @@ beginning:
 				l = 0;
 				u = 1;
 
-#ifdef INITNCURSESNOW
-				move(myplayer[i].y, myplayer[i].x);
+				inputmove(myplayer[i].y, myplayer[i].x);
 
 				screenclear();
 
 				screenrefresh();
-#endif
-
-#ifdef INITLIBTCODNOW
-				move(myplayer[i].y, myplayer[i].x);
-
-				screenclear();
-
-				screenrefresh();
-#endif
 
 			}
 
-			if (inputcompare(ch, 'M') && whosturn == 1 && twoplayers == 1)
+			if (inputcompare(ch, 'b') && whosturn == 1 && twoplayers == 1)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
+#endif
+
+#ifdef INITLIBTCODNOW
+				char gotcharacter;
 #endif
 
 				int list = 0;
@@ -3316,11 +3312,10 @@ beginning:
 
 				int u = 1;
 
-#ifdef INITNCURSESNOW
-				move(u, 0);
+				inputmove(u, 0);
 
 				screenrefresh();
-#endif
+
 				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
 				{
 					if (gotcharacter == 'w')
@@ -3442,11 +3437,9 @@ beginning:
 						l++;
 					}
 
-#ifdef INITNCURSESNOW
-					move(u, 0);
+					inputmove(u, 0);
 
 					screenrefresh();
-#endif
 				}
 
 				if (list == 0)
@@ -3563,21 +3556,11 @@ beginning:
 				l = 0;
 				u = 1;
 
-#ifdef INITNCURSESNOW
-				move(myai[iai].y, myai[iai].x);
+				inputmove(myai[iai].y, myai[iai].x);
 
 				screenclear();
 
 				screenrefresh();
-#endif
-
-#ifdef INITLIBTCODNOW
-				move(myai[iai].y, myai[iai].x);
-
-				screenclear();
-
-				screenrefresh();
-#endif
 
 			}
 
@@ -4121,16 +4104,15 @@ beginning:
 					goto ended;
 				}
 			}
-#ifdef INITNCURSESNOW
 
 			if(whosturn == 0)
 			{
-				move(myplayer[i].y - positiony, myplayer[i].x - positionx);
+				inputmove(myplayer[i].y - positiony, myplayer[i].x - positionx);
 			}
 
 			if(whosturn == 1)
 			{
-				move(myai[iai].y - positiony, myai[iai].x - positionx);
+				inputmove(myai[iai].y - positiony, myai[iai].x - positionx);
 			}
 
 			screenrefresh();
@@ -4159,16 +4141,15 @@ beginning:
 
 			if(whosturn == 0)
 			{
-					  move(myplayer[i].y - positiony, myplayer[i].x - positionx);
+					  inputmove(myplayer[i].y - positiony, myplayer[i].x - positionx);
 			}
 
 			if(whosturn == 1)
 			{
-					  move(myai[iai].y - positiony, myai[iai].x - positionx);
+					  inputmove(myai[iai].y - positiony, myai[iai].x - positionx);
 			}
 
 			screenrefresh();
-#endif
 		}
 
 	ended:
@@ -4194,9 +4175,7 @@ beginning:
 			videoprinternorm(0, 0, "You lose the ai won the game is over.");
 			videoprinternorm(1, 0, "Press y to end");
 
-#ifdef INITNCURSESNOW
 			screenrefresh();
-#endif
 
 #if defined(_MSC_VER)
 			if(fileExists("Data/SaveFile.txt"))
@@ -4241,9 +4220,7 @@ beginning:
 				videoprinternorm(1, 0, "Press y to end");
 			}
 
-#ifdef INITNCURSESNOW
 			screenrefresh();
-#endif
 
 #if defined(_MSC_VER)
 			if(fileExists("Data/SaveFile.txt"))
@@ -4278,10 +4255,8 @@ beginning:
 		videoprinterarg1(1, 0, "You have %d battle to go", rounds - roundssofar);
 		videoprinternorm(2, 0, "Press y to end"); 
 	
-#ifdef INITNCURSESNOW
 		screenrefresh();
-#endif
-	
+
 		ch = (RETURNTYPEVIDEO)inputgetter();
 
 		if(ch != 'y')

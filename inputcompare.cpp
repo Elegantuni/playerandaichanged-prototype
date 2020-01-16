@@ -9,5 +9,12 @@ int inputcompare(void *type, char character)
 	}
 #endif
 
+#ifdef INITLIBTCODNOW
+	if((char)type == character)
+	{
+		return 1;
+	}
+#endif
+
 	return 0;
 }

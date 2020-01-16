@@ -7,4 +7,10 @@ void* inputgetter()
 	return (void *)ncursesinput();
 
 	#endif
+
+	#ifdef INITLIBTCODNOW
+
+	return (void *)libtcodinput();
+
+	#endif
 }

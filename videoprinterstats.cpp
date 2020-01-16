@@ -5,4 +5,8 @@ void videoprinterstats(int y, int x, const char* m1, int a1, char* b1, int c1, i
 	#ifdef INITNCURSESNOW
 	ncursesprintstats(y, x, m1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
 	#endif
+
+	#ifdef INITLIBTCODNOW
+	libtcodprintstats(y, x, m1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1);
+	#endif
 }

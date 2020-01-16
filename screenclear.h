@@ -6,7 +6,7 @@
 #endif
 
 #ifdef INITLIBTCODNOW
-#include <libtcod.h>
+#include <libtcod/libtcod.h>
 #endif
 
 void screenclear();

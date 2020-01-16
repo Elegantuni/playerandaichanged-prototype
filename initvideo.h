@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef INITLIBTCODNOW
-#include "libtcod.hpp"
+#include "libtcod/libtcod.hpp"
 #endif
 
 #ifndef INITLIBTCODNOW
