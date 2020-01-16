@@ -1,8 +1,20 @@
-playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
-	g++ -std=c++11 -o playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+playerandai1: main.o inputmove.o inputcompare.o screenclear.o screenrefresh.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	g++ -std=c++11 -o playerandai1 obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o /mingw64/lib/libncurses.a `pkg-config --cflags --libs openssl` -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 
 main.o:
-	g++ -c main.cpp -o obj/main.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
+	g++ -c main.cpp -o obj/main.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW -fpermissive
+
+inputmove.o:
+	g++ -c inputmove.cpp -o obj/inputmove.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
+
+screenclear.o:
+	 g++ -c screenclear.cpp -o obj/screenclear.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
+
+screenrefresh.o:
+	 g++ -c screenrefresh.cpp -o obj/screenrefresh.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW
+
+inputcompare.o: 
+	g++ -c inputcompare.cpp -o obj/inputcompare.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW -fpermissive
 
 seed.o:
 	g++ -c seed.cpp -o obj/seed.o -I/mingw64/include/ncurses -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
@@ -59,5 +71,5 @@ freebsddepends.o:
 	g++ -c freebsddepends.cpp -o obj/freebsddepends.o -I/mingw64/include/ncurse -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DINITMSYS2NOW 
 	
 clean:
-	rm -f playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o
+	rm -f playerandai1 obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o
 
