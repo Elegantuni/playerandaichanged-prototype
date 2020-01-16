@@ -1,0 +1,75 @@
+playerandai1: main.o inputmove.o inputcompare.o screenclear.o screenrefresh.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o libtcodinput.o inputgetter.o libtcodprint.o libtcodprintarg1.o libtcodprintarg2.o libtcodprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o freebsddepends.o
+	g++ -std=c++11 -o playerandai1 obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/libtcodinput.o obj/inputgetter.o obj/libtcodprint.o obj/libtcodprintarg1.o obj/libtcodprintarg2.o obj/libtcodprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o `pkg-config --cflags --libs openssl`  -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL -Iinclude -Llib -ltcod -static-libgcc -static-libstdc++
+
+main.o:
+	g++ -c main.cpp -o obj/main.o  -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL -Iinclude -fpermissive
+
+inputmove.o:
+	g++ -c inputmove.cpp -o obj/inputmove.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude
+
+screenclear.o:
+	 g++ -c screenclear.cpp -o obj/screenclear.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude
+
+screenrefresh.o:
+	 g++ -c screenrefresh.cpp -o obj/screenrefresh.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude
+
+inputcompare.o: 
+	g++ -c inputcompare.cpp -o obj/inputcompare.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude -fpermissive
+
+seed.o:
+	g++ -c seed.cpp -o obj/seed.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+str2int.o:
+	g++ -c str2int.cpp -o obj/str2int.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+loadnumber.o:
+	g++ -c loadnumber.cpp -o obj/loadnumber.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+loadstring.o:
+	g++ -c loadstring.cpp -o obj/loadstring.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+writenumber.o:
+	g++ -c writenumber.cpp -o obj/writenumber.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+	
+writestring.o:
+	g++ -c writestring.cpp -o obj/writestring.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+initvideo.o:
+	g++ -c initvideo.cpp -o obj/initvideo.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+libtcodinput.o:
+	g++ -c libtcodinput.cpp -o obj/libtcodinput.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+inputgetter.o:
+	g++ -c inputgetter.cpp -o obj/inputgetter.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+libtcodprint.o:
+	g++ -c libtcodprint.cpp -o obj/libtcodprint.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+libtcodprintarg1.o:
+	g++ -c libtcodprintarg1.cpp -o obj/libtcodprintarg1.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+libtcodprintarg2.o:
+	g++ -c libtcodprintarg2.cpp -o obj/libtcodprintarg2.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+libtcodprintstats.o:
+	g++ -c libtcodprintstats.cpp -o obj/libtcodprintstats.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+videoprinternorm.o:
+	g++ -c videoprinternorm.cpp -o obj/videoprinternorm.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+videoprinterarg1.o:
+	g++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+videoprinterarg2.o:
+	g++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+videoprinterstats.o:
+	g++ -c videoprinterstats.cpp -o obj/videoprinterstats.o   -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+
+freebsddepends.o:
+	g++ -c freebsddepends.cpp -o obj/freebsddepends.o -DINITLIBTCODNOW -DFREEBSD  -DINITOPENSSL  -Iinclude 
+	
+clean:
+	rm -f playerandai1 obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/libtcodinput.o obj/inputgetter.o obj/libtcodprint.o obj/libtcodprintarg1.o obj/libtcodprintarg2.o obj/libtcodprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/freebsddepends.o
+
