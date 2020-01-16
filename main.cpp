@@ -2974,8 +2974,17 @@ beginning:
 					inputmove(0, 0);
 					
 					screenrefresh();
-				} while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
 
+#ifdef INITLIBTCODNOW
+				key = TCODConsole::waitForKeypress(true);
+
+				gotcharacter = key.c;
+
+				} while(gotcharacter == 'd' || gotcharacter == 'k');
+#endif
+#ifdef INITNCURSESNOW
+				} while((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) == 'd' || gotcharacter == 'k');
+#endif
 				list = 0;
 				l = 0;
 				theenemy = 0;
