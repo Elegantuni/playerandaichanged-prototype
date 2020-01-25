@@ -2922,7 +2922,7 @@ beginning:
 						list++;
 					}
 					
-					if(list > 3)
+					if(list > 4)
 					{
 						list = 0;
 					}
@@ -2931,6 +2931,12 @@ beginning:
 
 					if(list == 0)
 					{
+						videoprinterstats(l+1, 0, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[theenemy].count, myai[theenemy].character1.character, myai[theenemy].hitpoints, myai[theenemy].magicpoints, myai[theenemy].weapontype.damage + myai[theenemy].character1.attack, myai[theenemy].magic1.equiped, myai[theenemy].magic1.damage, myai[theenemy].defensepoints + myai[theenemy].shieldstype.damage, myai[theenemy].weapontype.equiped, myai[theenemy].shieldstype.equiped, myai[theenemy].armor1.equiped, myai[theenemy].armor1.protection);
+						l++;
+					}
+
+					if(list == 1)
+					{
 						while(strcmp(myai[theenemy].magic1.magicitems[l], "Empty") != 0)
 						{
 							videoprinterarg2(l+1, 0, "Magic item %d is %s", l + 1, myai[theenemy].magic1.magicitems[l]);
@@ -2938,7 +2944,7 @@ beginning:
 						}
 					}
 					
-					if(list == 1)
+					if(list == 2)
 					{
 						while(strcmp(myai[theenemy].weapontype.item[l], "Empty") != 0)
 						{
@@ -2947,7 +2953,7 @@ beginning:
 						}
 					}
 					
-					if(list == 2)
+					if(list == 3)
 					{
 						while(strcmp(myai[theenemy].shieldstype.item[l], "Empty") != 0)
 						{
@@ -2956,7 +2962,7 @@ beginning:
 						}
 					}
 					
-					if(list == 3)
+					if(list == 4)
 					{
 						while(strcmp(myai[theenemy].armor1.item[l], "Empty") != 0)
 						{
