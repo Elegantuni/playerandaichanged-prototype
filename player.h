@@ -2,6 +2,7 @@
 
 struct player
 {
+	int thenumber;
 	int y;
 	int x;
 	int hitpoints;

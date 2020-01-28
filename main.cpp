@@ -954,6 +954,7 @@ beginning:
 				myplayer[i].armor1.item[j] = const_cast<char *>("Empty");
 			}
 
+			myplayer[i].thenumber = i + 1;
 			myplayer[i].y = 10;
 			myplayer[i].x = 12;
 			myplayer[i].hitpoints = 1000;
@@ -1217,6 +1218,7 @@ beginning:
 			myai[i].playerturn = 0;
 			myai[i].weapontype.equiped = const_cast<char *>("NULL");
 
+			myai[i].thenumber = i + 1;
 			myai[i].character1.character = aicharacter1[myai[i].character1.randomcharacter];
 			myai[i].character1.sign = aisigns[myai[i].character1.randomcharacter];
 			myai[i].character1.hitpoints = aihitpoints[myai[i].character1.randomcharacter];
@@ -1681,6 +1683,8 @@ beginning:
 				loadnumber(lineamount, &myplayer[i].shieldstype.shieldcount, fp1);
 				
 				loadnumber(lineamount, &myplayer[i].armor1.armorcount, fp1);
+
+				loadnumber(lineamount, &myplayer[i].thenumber, fp1);
 			}
 		
 			for(int i = 0; i < maxenemies; i++)
@@ -1867,6 +1871,8 @@ beginning:
 				loadnumber(lineamount, &myai[i].shieldstype.shieldcount, fp1);
 								
 				loadnumber(lineamount, &myai[i].armor1.armorcount, fp1);
+
+				loadnumber(lineamount, &myai[i].thenumber, fp1);
 			}
 
 			loadnumber(lineamount, &roundssofar, fp1);
@@ -2167,6 +2173,8 @@ beginning:
 					writenumber(lineBuffer, lineamount, myplayer[i].shieldstype.shieldcount, fp1);
 
 					writenumber(lineBuffer, lineamount, myplayer[i].armor1.armorcount, fp1);
+
+					writenumber(lineBuffer, lineamount, myplayer[i].thenumber, fp1);
 				}
 
 				for(int i = 0; i < maxenemies; i++)
@@ -2353,6 +2361,8 @@ beginning:
 					writenumber(lineBuffer, lineamount, myai[i].shieldstype.shieldcount, fp1);
 					
 					writenumber(lineBuffer, lineamount, myai[i].armor1.armorcount, fp1);
+
+					writenumber(lineBuffer, lineamount, myai[i].thenumber, fp1);
 				}
 
 				writenumber(lineBuffer, lineamount, roundssofar, fp1);

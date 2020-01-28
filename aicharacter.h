@@ -2,6 +2,7 @@
 
 struct aicharacter
 {
+	int thenumber;
 	int y;
 	int x;
 	int hitpoints;
