@@ -1,5 +1,5 @@
 # playerandai-prototype
-<h1>Only Makefiles/Makefile.linux-g++, Makefiles/Makefile.linux.libtcod-g++ Makefiles/Makefile.msys and Makefiles/Makefile.msys-libtcod (32 bit ) will build currently, but you can take a look at it and make other platforms compile</h1> <br />
+<h1>Only Makefiles/Makefile.linux-g++, Makefiles/Makefile.linux.libtcod-g++ Makefiles/Makefile.msys Makefiles/Makefile.msys-libtcod (32 bit ) Makefiles/Makefile.freebsd ( gcc9 ) and Makefiles/Makefile.freebsd.libtcod-g++ ( gcc9 ) will build currently, but you can take a look at it and make other platforms compile</h1> <br />
 To run a makefile (Debian 9 example): <br />
 make -f Makefiles/Makefile.linux-g++ <br />
 <br />
