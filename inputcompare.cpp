@@ -3,7 +3,7 @@
 int inputcompare(void *type, char character)
 {
 #ifdef INITNCURSESNOW
-	if((int)type == character)
+	if((int)(size_t)type == character)
 	{
 		return 1;
 	}
