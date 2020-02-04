@@ -1,7 +1,7 @@
 #include "fileexists.h"
 
 #if defined(_MSC_VER)
-int fileExists(const char *file)
+int fileExists(const wchar_t *file)
 {
 	WIN32_FIND_DATA FindFileData;
 	HANDLE handle = FindFirstFile(file, &FindFileData);

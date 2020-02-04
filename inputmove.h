@@ -6,7 +6,7 @@
 #endif
 
 #ifndef INITLIBTCODNOW
-#ifdef INITNCURSESNOW
+#ifndef INITWINDOWSNOW
 #include <ncurses.h>
 #else
 #include <curses.h>

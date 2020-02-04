@@ -1,7 +1,11 @@
 #ifdef INITWINDOWSNOW
 #include <curses.h>
+#endif
+
+#ifdef WINDOWSFILESEXISTS
 #include "fileexists.h"
 #endif
+
 
 #ifdef INITOPENSSL
 #include "seed.h"
@@ -203,7 +207,7 @@ int main(int argc, char *argv[])
 	#endif
 
 #if defined(_MSC_VER)
-                if(!fileExists("Data/SaveFile.txt"))
+                if(!fileExists(L"Data/SaveFile.txt"))
 #else
                 if(access("Data/SaveFile.txt", F_OK ) == -1)
 #endif
@@ -230,7 +234,7 @@ int main(int argc, char *argv[])
 	}
 
 #if defined(_MSC_VER)
-                if(fileExists("Data/SaveFile.txt"))
+                if(fileExists(L"Data/SaveFile.txt"))
 #else
                 if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
@@ -1482,7 +1486,7 @@ beginning:
 		*/
 		
 #if defined(_MSC_VER)
-		if(fileExists("Data/SaveFile.txt"))
+		if(fileExists(L"Data/SaveFile.txt"))
 #else
 		if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
@@ -1972,7 +1976,7 @@ beginning:
 
 		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
 		{
-			if(inputcompare(ch, 'x'))
+			if(inputcompare((void *)ch, 'x'))
 			{
 				screenclear();
 
@@ -2386,7 +2390,7 @@ beginning:
 				return 0;
 			}
 
-			if(inputcompare(ch, 'h'))
+			if(inputcompare((void *)ch, 'h'))
 			{
 				screenclear();
 
@@ -2437,7 +2441,7 @@ beginning:
 			screenclear();
 
 
-			if(inputcompare(ch, 'p') && whosturn == 0)
+			if(inputcompare((void *)ch, 'p') && whosturn == 0)
 			{
 				i--;
 
@@ -2486,7 +2490,7 @@ beginning:
 				}
 			}
 			
-			if(inputcompare(ch, 'p') && whosturn == 1 && twoplayers == 1)
+			if(inputcompare((void *)ch, 'p') && whosturn == 1 && twoplayers == 1)
 			{
 				iai--;
 
@@ -2535,7 +2539,7 @@ beginning:
 				}
 			}
 			
-			if(inputcompare(ch, 'n') && whosturn == 0)
+			if(inputcompare((void *)ch, 'n') && whosturn == 0)
 			{
 				i++;
 				
@@ -2584,7 +2588,7 @@ beginning:
 				}
 			}
 
-			if(inputcompare(ch, 'n') && whosturn == 1 && twoplayers == 1)
+			if(inputcompare((void *)ch, 'n') && whosturn == 1 && twoplayers == 1)
 			{
 				iai++;
 
@@ -2633,7 +2637,7 @@ beginning:
 				}
 			}
 		
-			if(inputcompare(ch, 'a') && whosturn == 0)
+			if(inputcompare((void *)ch, 'a') && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x - 1;
 			
@@ -2645,7 +2649,7 @@ beginning:
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
 
-			if(inputcompare(ch, 'a') && whosturn == 1 && twoplayers == 1)
+			if(inputcompare((void *)ch, 'a') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].x = myai[iai].x - 1;
 
@@ -2657,7 +2661,7 @@ beginning:
 				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
 			}
 		
-			if(inputcompare(ch, 'd') && whosturn == 0)
+			if(inputcompare((void *)ch, 'd') && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x + 1;
 			
@@ -2669,7 +2673,7 @@ beginning:
 				positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
 			}
 
-			if(inputcompare(ch, 'd') && whosturn == 1 && twoplayers == 1)
+			if(inputcompare((void *)ch, 'd') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].x = myai[iai].x + 1;
 
@@ -2681,7 +2685,7 @@ beginning:
 				positionx = ((myai[iai].x) / hitpointsx) * hitpointsx;
 			}
 		
-			if(inputcompare(ch, 'w') && whosturn == 0)
+			if(inputcompare((void *)ch, 'w') && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y - 1;
 			
@@ -2693,7 +2697,7 @@ beginning:
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(inputcompare(ch, 'w') && whosturn == 1 && twoplayers == 1)
+			if(inputcompare((void *)ch, 'w') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].y = myai[iai].y - 1;
 
@@ -2705,7 +2709,7 @@ beginning:
 				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(inputcompare(ch, 'u'))
+			if(inputcompare((void *)ch, 'u'))
 			{
 				screenclear();
 
@@ -2721,7 +2725,7 @@ beginning:
 				screenrefresh();
 			}
 
-			if(inputcompare(ch, 'j'))
+			if(inputcompare((void *)ch, 'j'))
 			{
 
 				screenclear();
@@ -2738,7 +2742,7 @@ beginning:
 				screenrefresh();
 			}
 
-			if(inputcompare(ch, 'r'))
+			if(inputcompare((void *)ch, 'r'))
 			{
 				screenclear();
 
@@ -2754,7 +2758,7 @@ beginning:
 				screenrefresh();
 			}
 
-			if(inputcompare(ch, 'f'))
+			if(inputcompare((void *)ch, 'f'))
 			{
 				screenclear();
 
@@ -2770,7 +2774,7 @@ beginning:
 				screenrefresh();
 			}
 		
-			if(inputcompare(ch, 's') && whosturn == 0)
+			if(inputcompare((void *)ch, 's') && whosturn == 0)
 			{
 				myplayer[i].y = myplayer[i].y + 1;
 			
@@ -2782,7 +2786,7 @@ beginning:
 				positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 			}
 
-			if(inputcompare(ch, 's') && whosturn == 1 && twoplayers == 1)
+			if(inputcompare((void *)ch, 's') && whosturn == 1 && twoplayers == 1)
 			{
 				myai[iai].y = myai[iai].y + 1;
 
@@ -2794,7 +2798,7 @@ beginning:
 				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
 			}
 
-			if (inputcompare(ch, 'c'))
+			if (inputcompare((void *)ch, 'c'))
 			{
 				screenclear();
 
@@ -2897,7 +2901,7 @@ beginning:
 			}
 
 
-			if(inputcompare(ch, 'i'))
+			if(inputcompare((void *)ch, 'i'))
 			{
 				screenclear();
 
@@ -3019,7 +3023,7 @@ beginning:
 
 			}
 				
-			if (inputcompare(ch, 'b') && whosturn == 0)
+			if (inputcompare((void *)ch, 'b') && whosturn == 0)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
@@ -3307,7 +3311,7 @@ beginning:
 
 			}
 
-			if (inputcompare(ch, 'b') && whosturn == 1 && twoplayers == 1)
+			if (inputcompare((void *)ch, 'b') && whosturn == 1 && twoplayers == 1)
 			{
 #ifdef INITNCURSESNOW
 				int gotcharacter;
@@ -3595,7 +3599,7 @@ beginning:
 
 			}
 
-			if(inputcompare(ch, 'm'))
+			if(inputcompare((void *)ch, 'm'))
 			{
 				int t = -1;
 
@@ -3742,7 +3746,7 @@ beginning:
 						{
 							p = t;
 
-							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && inputcompare(ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && inputcompare((void *)ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 							{
 								if(j == i)
 								{
@@ -3802,7 +3806,7 @@ beginning:
 
 							if(j == i)
 							{
-								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && inputcompare(ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && inputcompare((void *)ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 								{
 									myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
 						
@@ -3882,7 +3886,7 @@ beginning:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.randomweapon];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.randomweapon];
 
-						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
+						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{
 							if (myai[p].weapontype.damage > aiequipedweapon)
 							{
@@ -3896,7 +3900,7 @@ beginning:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon];
 
-						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
+						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{
 							if (myai[i].weapontype.damage > aiequipedweapon)
 							{
@@ -3910,7 +3914,7 @@ beginning:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon2];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon2];
 
-						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
+						if ((positionydiff = abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff = abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{
 							if (myai[i].weapontype.damage > aiequipedweapon)
 							{
@@ -3937,7 +3941,7 @@ beginning:
 
 					if(j == i)
 					{
-						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
+						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{	
 							myai[p].hitpoints = myai[p].hitpoints - myplayer[j].weapontype.damage - myplayer[j].character1.attack + myai[p].shieldstype.damage + myai[p].defensepoints;
 					
@@ -3960,7 +3964,7 @@ beginning:
 
 					if(j == i)
 					{
-						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare(ch, 'a') || inputcompare(ch, 'd') || inputcompare(ch, 'w') || inputcompare(ch, 's')))
+						if( (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{	
 							myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].weapontype.damage - myai[p].character1.attack + myplayer[j].shieldstype.damage + myplayer[j].defensepoints;
 
@@ -4149,7 +4153,7 @@ beginning:
 			screenrefresh();
 
 
-			if((inputcompare(ch, 'w') || inputcompare(ch, 's') || inputcompare(ch, 'd') || inputcompare(ch, 'a') || inputcompare(ch, 'm')) && twoplayers == 1)
+			if((inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'm')) && twoplayers == 1)
 			{
 				whosturn++;
 
@@ -4187,10 +4191,10 @@ beginning:
 
 		screenclear();
 
-		if (inputcompare(ch, 'q'))
+		if (inputcompare((void *)ch, 'q'))
 		{
 #if defined(_MSC_VER)
-			if(fileExists("Data/SaveFile.txt"))
+			if(fileExists(L"Data/SaveFile.txt"))
 #else
 			if (access("Data/SaveFile.txt", F_OK) != -1)
 #endif
@@ -4209,7 +4213,7 @@ beginning:
 			screenrefresh();
 
 #if defined(_MSC_VER)
-			if(fileExists("Data/SaveFile.txt"))
+			if(fileExists(L"Data/SaveFile.txt"))
 #else
 			if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
@@ -4254,7 +4258,7 @@ beginning:
 			screenrefresh();
 
 #if defined(_MSC_VER)
-			if(fileExists("Data/SaveFile.txt"))
+			if(fileExists(L"Data/SaveFile.txt"))
 #else
 			if(access("Data/SaveFile.txt", F_OK ) != -1)
 #endif
