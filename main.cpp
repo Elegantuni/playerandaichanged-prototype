@@ -1978,7 +1978,7 @@ beginning:
 		int i = 0;
 		int iai = 0;
 
-		while((ch = (RETURNTYPEVIDEO)inputgetter()) != 'q')
+		while((ch = (RETURNTYPEVIDEO)(size_t)inputgetter()) != 'q')
 		{
 			if(inputcompare((void *)ch, 'x'))
 			{
@@ -2423,7 +2423,7 @@ beginning:
 
 				screenrefresh();
 
-				(RETURNTYPEVIDEO)inputgetter();
+				(RETURNTYPEVIDEO)(size_t)inputgetter();
 
 #ifdef INITLIBTCODNOW
 				key = TCODConsole::waitForKeypress(true);
@@ -3067,7 +3067,7 @@ beginning:
 
 				screenrefresh();
 
-				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
+				while ((gotcharacter = (RETURNTYPEVIDEO)(size_t)inputgetter()) != 'e')
 				{
 					if (gotcharacter == 'w')
 					{
@@ -3355,7 +3355,7 @@ beginning:
 
 				screenrefresh();
 
-				while ((gotcharacter = (RETURNTYPEVIDEO)inputgetter()) != 'e')
+				while ((gotcharacter = (RETURNTYPEVIDEO)(size_t)inputgetter()) != 'e')
 				{
 					if (gotcharacter == 'w')
 					{
@@ -4225,7 +4225,7 @@ beginning:
 				remove("Data/SaveFile.txt");
 			}
 
-			ch = (RETURNTYPEVIDEO)inputgetter();
+			ch = (RETURNTYPEVIDEO)(size_t)inputgetter();
 
 			if(ch != 'y')
 			{
@@ -4270,7 +4270,7 @@ beginning:
 				remove("Data/SaveFile.txt");
 			}
 
-			ch = (RETURNTYPEVIDEO)inputgetter();
+			ch = (RETURNTYPEVIDEO)(size_t)inputgetter();
 
 			if(ch != 'y')
 			{
@@ -4296,7 +4296,7 @@ beginning:
 	
 		screenrefresh();
 
-		ch = (RETURNTYPEVIDEO)inputgetter();
+		ch = (RETURNTYPEVIDEO)(size_t)inputgetter();
 
 		if(ch != 'y')
 		{
