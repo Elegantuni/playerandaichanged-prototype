@@ -15,7 +15,9 @@
 #endif
 
 #ifndef INITWINDOWSNOW
+#if !defined(_MSC_VER)
 size_t strnlen(const char *str, size_t len);
+#endif
 #endif
 
 char *strndup(const char *str, size_t len);

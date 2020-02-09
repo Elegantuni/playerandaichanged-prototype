@@ -10,7 +10,7 @@ int inputcompare(void *type, char character)
 #endif
 
 #ifdef INITLIBTCODNOW
-	if((char)type == character)
+	if((char)(size_t)type == character)
 	{
 		return 1;
 	}

@@ -7,7 +7,7 @@ void inputmove(int y, int x)
 #endif
 
 #ifdef INITLIBTCODNOW
-	TCOD_console_print(NULL, x, y, "@");
+	TCOD_console_printf(NULL, x, y, "@");
 #endif
 }
 
