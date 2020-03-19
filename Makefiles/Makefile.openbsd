@@ -1,59 +1,71 @@
-playerandai1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-	clang++ -o playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o `pkg-config --cflags --libs openssl` -lncurses -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+playerandai1: main.o inputmove.o inputcompare.o screenclear.o screenrefresh.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
+	clang++ -o playerandai1 obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o `pkg-config --cflags --libs openssl` -lncurses -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 main.o:
-	clang++ -c main.cpp -o obj/main.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c main.cpp -o obj/main.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector -fpermissive
 
+inputmove.o:
+	clang++ -c inputmove.cpp -o obj/inputmove.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+
+screenclear.o:
+	clang++ -c screenclear.cpp -o obj/screenclear.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+
+screenrefresh.o:
+	clang++ -c screenrefresh.cpp -o obj/screenrefresh.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+	
+inputcompare.o:
+	clang++ -c inputcompare.cpp -o obj/inputcompare.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector -fpermissive
+	
 seed.o:
-	clang++ -c seed.cpp -o obj/seed.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c seed.cpp -o obj/seed.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 str2int.o:
-	clang++ -c str2int.cpp -o obj/str2int.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c str2int.cpp -o obj/str2int.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 loadnumber.o:
-	clang++ -c loadnumber.cpp -o obj/loadnumber.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c loadnumber.cpp -o obj/loadnumber.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 loadstring.o:
-	clang++ -c loadstring.cpp -o obj/loadstring.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c loadstring.cpp -o obj/loadstring.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 writenumber.o:
-	clang++ -c writenumber.cpp -o obj/writenumber.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
-
+	clang++ -c writenumber.cpp -o obj/writenumber.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
+	
 writestring.o:
-	clang++ -c writestring.cpp -o obj/writestring.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c writestring.cpp -o obj/writestring.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 initvideo.o:
-	clang++ -c initvideo.cpp -o obj/initvideo.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c initvideo.cpp -o obj/initvideo.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesinput.o:
-	clang++ -c ncursesinput.cpp -o obj/ncursesinput.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c ncursesinput.cpp -o obj/ncursesinput.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 inputgetter.o:
-	clang++ -c inputgetter.cpp -o obj/inputgetter.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c inputgetter.cpp -o obj/inputgetter.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprint.o:
-	clang++ -c ncursesprint.cpp -o obj/ncursesprint.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c ncursesprint.cpp -o obj/ncursesprint.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprintarg1.o:
-	clang++ -c ncursesprintarg1.cpp -o obj/ncursesprintarg1.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c ncursesprintarg1.cpp -o obj/ncursesprintarg1.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprintarg2.o:
-	clang++ -c ncursesprintarg2.cpp -o obj/ncursesprintarg2.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c ncursesprintarg2.cpp -o obj/ncursesprintarg2.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 ncursesprintstats.o:
-	clang++ -c ncursesprintstats.cpp -o obj/ncursesprintstats.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c ncursesprintstats.cpp -o obj/ncursesprintstats.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinternorm.o:
-	clang++ -c videoprinternorm.cpp -o obj/videoprinternorm.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c videoprinternorm.cpp -o obj/videoprinternorm.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinterarg1.o:
-	clang++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinterarg2.o:
-	clang++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 videoprinterstats.o:
-	clang++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+	clang++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -DOPENBSD -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL -fno-stack-protector
 
 clean:
-	rm -f playerandai1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o
+	rm -f playerandai1 obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o
