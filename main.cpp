@@ -338,14 +338,12 @@ beginning:
 
 	while(roundssofar <= rounds && ch != 'y')
 	{
-#ifndef INITWINDOWSNOW
 #if !defined(_MSC_VER)
 		struct player myplayer[maxplayers];
 		struct aicharacter myai[maxenemies];
 #else
 		struct player *myplayer = (struct player *) malloc(sizeof(struct player) * maxplayers);
 		struct aicharacter *myai = (struct aicharacter *) malloc(sizeof(struct aicharacter) * maxenemies);
-#endif
 #endif
 
 
