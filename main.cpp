@@ -2417,7 +2417,8 @@ beginning:
 				videoprinternorm(18, 0, "Press j to scroll down");
 				videoprinternorm(19, 0, "Press r to scroll left");
 				videoprinternorm(20, 0, "Press f to scroll right");
-				videoprinternorm(21, 0, "Press key to quit help");
+				videoprinternorm(21, 0, "Press t to steal");
+				videoprinternorm(22, 0, "Press key to quit help");
 
 				screenrefresh();
 
@@ -2709,6 +2710,28 @@ beginning:
 				}
 
 				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
+			}
+
+			if(inputcompare((void *)ch, 't') && whosturn == 0)
+			{
+				for(int cj = 0; cj < maxenemies; cj++)
+				{
+            	if((abs(myplayer[i].x - myai[cj].x) < 5) && (abs(myplayer[i].y - myai[cj].y) < 5))
+					{
+						int percentage = rand() % 100;
+
+						if(percentage >= 90)
+						{
+							int temp10 = rand() % 4;
+
+							myplayer[i].weapontype.item[temp10] = myai[cj].weapontype.item[temp10];
+							myplayer[i].weapontype.damage = myai[cj].weapontype.damage;
+							myplayer[i].weapontype.rangex = myai[cj].weapontype.rangex;
+							myplayer[i].weapontype.rangey = myai[cj].weapontype.rangey;
+							myplayer[i].weapon = myplayer[i].weapontype.item[temp10];
+						}
+					}
+				}
 			}
 
 			if(inputcompare((void *)ch, 'u'))
