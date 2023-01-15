@@ -3058,6 +3058,8 @@ beginning:
 				l++;
 				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
+				videoprinternorm(l, 0, "press r to exit with selected line\n");
+				l++;
 
 				int u = 1;
 
@@ -3067,6 +3069,11 @@ beginning:
 
 				while ((gotcharacter = (RETURNTYPEVIDEO)(size_t)inputgetter()) != 'e')
 				{
+					if (gotcharacter == 'r')
+					{
+						 break;
+					}
+
 					if (gotcharacter == 'w')
 					{
 						u--;
@@ -3184,6 +3191,7 @@ beginning:
 						l++;
 						videoprinternorm(l, 0, "press d to move to next category\n");
 						l++;
+						videoprinternorm(l, 0, "press r to exit with selected line\n");
 					}
 
 					inputmove(u, 0);
@@ -3346,6 +3354,8 @@ beginning:
 				l++;
 				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
+				videoprinternorm(l, 0, "press r to exit with selected line\n");
+				l++;
 
 				int u = 1;
 
@@ -3355,6 +3365,11 @@ beginning:
 
 				while ((gotcharacter = (RETURNTYPEVIDEO)(size_t)inputgetter()) != 'e')
 				{
+					if (gotcharacter == 'r')
+					{
+						break;
+					}
+
 					if (gotcharacter == 'w')
 					{
 						u--;
@@ -3471,6 +3486,8 @@ beginning:
 						videoprinternorm(l, 0, "press e to select\n");
 						l++;
 						videoprinternorm(l, 0, "press d to move to next category\n");
+						l++;
+						videoprinternorm(l, 0, "press r to exit with selected line\n");
 						l++;
 					}
 
