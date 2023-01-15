@@ -3058,7 +3058,7 @@ beginning:
 				l++;
 				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
-				videoprinternorm(l, 0, "press r to exit with selected line\n");
+				videoprinternorm(l, 0, "press r to exit menu without change\n");
 				l++;
 
 				int u = 1;
@@ -3071,7 +3071,7 @@ beginning:
 				{
 					if (gotcharacter == 'r')
 					{
-						 break;
+						 goto terminateb;
 					}
 
 					if (gotcharacter == 'w')
@@ -3191,7 +3191,7 @@ beginning:
 						l++;
 						videoprinternorm(l, 0, "press d to move to next category\n");
 						l++;
-						videoprinternorm(l, 0, "press r to exit with selected line\n");
+						videoprinternorm(l, 0, "press r to exit menu without change\n");
 					}
 
 					inputmove(u, 0);
@@ -3354,7 +3354,7 @@ beginning:
 				l++;
 				videoprinternorm(l, 0, "press d to move to next category\n");
 				l++;
-				videoprinternorm(l, 0, "press r to exit with selected line\n");
+				videoprinternorm(l, 0, "press r to exit menu without change\n");
 				l++;
 
 				int u = 1;
@@ -3367,7 +3367,7 @@ beginning:
 				{
 					if (gotcharacter == 'r')
 					{
-						break;
+						goto terminateb;
 					}
 
 					if (gotcharacter == 'w')
@@ -3487,7 +3487,7 @@ beginning:
 						l++;
 						videoprinternorm(l, 0, "press d to move to next category\n");
 						l++;
-						videoprinternorm(l, 0, "press r to exit with selected line\n");
+						videoprinternorm(l, 0, "press r to exit menu without change\n");
 						l++;
 					}
 
@@ -3617,6 +3617,11 @@ beginning:
 				screenrefresh();
 
 			}
+
+terminateb:
+			inputmove(myplayer[i].y, myplayer[i].x);
+			screenclear();
+			screenrefresh();
 
 			if(inputcompare((void *)ch, 'm'))
 			{
