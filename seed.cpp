@@ -1,37 +1,41 @@
 #include "seed.h"
 
 #ifdef INITOPENSSL
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#if defined(__APPLE__)
+#  define COMMON_DIGEST_FOR_OPENSSL
+#  include <CommonCrypto/CommonDigest.h>
+#  define SHA1 CC_SHA1
+#else
+#  include <openssl/md5.h>
+#endif
+
 char *str2md5(const char *str, int length) {
-	int n;
-	EVP_MD_CTX* mdctx;
-	const EVP_MD* md;
-	unsigned char digest[4];
-	char *out = (char*)malloc(33);
-	unsigned int md_len;
+    int n;
+    MD5_CTX c;
+    unsigned char digest[16];
+    char *out = (char*)malloc(33);
 
-	md = EVP_get_digestbyname("SHA256");
+    MD5_Init(&c);
 
-	mdctx = EVP_MD_CTX_new();
+    while (length > 0) {
+        if (length > 512) {
+            MD5_Update(&c, str, 512);
+        } else {
+            MD5_Update(&c, str, length);
+        }
+        length -= 512;
+        str += 512;
+    }
 
-	EVP_DigestInit_ex(mdctx, md, NULL);
+    MD5_Final(digest, &c);
 
-	while (length > 0) {
-		if (length > 512) {
-			EVP_DigestUpdate(mdctx, str, 512);
-		}
-		else {
-			EVP_DigestUpdate(mdctx, str, length);
-		}
-		length -= 512;
-		str += 512;
-	}
+    for (n = 0; n < 16; ++n) {
+        snprintf(&(out[n*2]), 16*2, "%02x", (unsigned int)digest[n]);
+    }
 
-	EVP_DigestFinal_ex(mdctx, digest, &md_len);
-
-	for (n = 0; n < 4; ++n) {
-		snprintf(&(out[n * 2]), 3, "%02d", (unsigned int)digest[n]);
-	}
-
-	return out;
+    return out;
 }
 #endif
