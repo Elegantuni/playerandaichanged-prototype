@@ -2392,7 +2392,7 @@ beginning:
 				return 0;
 			}
 
-			if(inputcompare((void *)ch, 'h'))
+			if(inputcompare((void *)ch, '?'))
 			{
 				screenclear();
 
@@ -2406,7 +2406,7 @@ beginning:
 				videoprinternorm(7, 0, "Press p to cycle through player characters backward");
 				videoprinternorm(8, 0, "Press c to see what magics, weapons, shields, and armor you have");
 				videoprinternorm(9, 0, "Press i to see what magics, weapons, shields, and armor ai have");
-				videoprinternorm(10, 0, "Press h to display this during game to see this screen");
+				videoprinternorm(10, 0, "Press ? to display this during game to see this screen");
 				videoprinternorm(11, 0, "The H is a player human and the h is a ai human");
 				videoprinternorm(12, 0, "The O is a player orc and the o is a ai orc");
 				videoprinternorm(13, 0, "The E is a player elf and the e is a ai elf");
