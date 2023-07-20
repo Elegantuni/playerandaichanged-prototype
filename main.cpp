@@ -3830,7 +3830,7 @@ terminateb:
 
 							if(j == i)
 							{
-								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && inputcompare((void *)ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff = abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 								{
 									myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
 						
