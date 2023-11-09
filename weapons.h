@@ -11,5 +11,8 @@ struct weapons
 	int randomweapon;
 	int nextrandomweapon;
 	int nextrandomweapon2;
+	int enemyweapon1;
+	int enemyweapon2;
+	int enemyweapon3;
 	int weaponcount;
 };

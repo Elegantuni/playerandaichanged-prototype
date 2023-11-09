@@ -2417,7 +2417,8 @@ beginning:
 				videoprinternorm(18, 0, "Press j to scroll down");
 				videoprinternorm(19, 0, "Press r to scroll left");
 				videoprinternorm(20, 0, "Press f to scroll right");
-				videoprinternorm(21, 0, "Press key to quit help");
+				videoprinternorm(21, 0, "Press t to have a random chance to copy one enemy weapon");
+				videoprinternorm(22, 0, "Press key to quit help");
 
 				screenrefresh();
 
@@ -3088,9 +3089,9 @@ beginning:
 					{
 						u++;
 
-						if (u > 3)
+						if (u > 4)
 						{
-							u = 3;
+							u = 4;
 						}
 
 						if (u >(myplayer[i].magic1.magiccount) && list == 0)
@@ -3254,6 +3255,14 @@ beginning:
 						myplayer[i].weapontype.rangey = rangey[myplayer[i].weapontype.nextrandomweapon2];
 						myplayer[i].weapontype.rangex = rangex[myplayer[i].weapontype.nextrandomweapon2];
 						myplayer[i].weapontype.damage = damage[myplayer[i].weapontype.nextrandomweapon2];
+					}
+
+					if (u == 4)
+					{
+						myplayer[i].weapontype.equiped = itemenemies[myplayer[i].weapontype.enemyweapon1];
+						myplayer[i].weapontype.rangey = rangeyenemies[myplayer[i].weapontype.enemyweapon1];
+						myplayer[i].weapontype.rangex = rangexenemies[myplayer[i].weapontype.enemyweapon1];
+						myplayer[i].weapontype.damage = damageenemies[myplayer[i].weapontype.enemyweapon1];
 					}
 				}
 
@@ -3622,6 +3631,49 @@ terminateb:
 			inputmove(myplayer[i].y, myplayer[i].x);
 			screenclear();
 			screenrefresh();
+
+			if(inputcompare((void *)ch, 't'))
+			{
+				int result1;
+				int currentposenemy;
+				int result2;
+
+				result2 = rand() % 100;
+
+				if(result2 >= 70)
+				{
+
+					result1 = rand() % 3;
+				
+					for(int j = 0; j < maxenemies; j++)
+					{
+						if(result1 == 0 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].weapontype.enemyweapon1 = myai[j].weapontype.randomweapon;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 1 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].weapontype.enemyweapon1 = myai[j].weapontype.nextrandomweapon;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 2 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].weapontype.enemyweapon1 = myai[j].weapontype.nextrandomweapon2;
+							currentposenemy = j;
+							break;
+						}
+					}
+
+					myplayer[i].weapontype.item[3] = itemenemies[myplayer[i].weapontype.enemyweapon1];
+
+					myplayer[i].weapontype.numberitems = myplayer[i].weapontype.numberitems++;
+
+					myplayer[i].weapontype.weaponcount = myplayer[i].weapontype.numberitems;
+				}
+			}
 
 			if(inputcompare((void *)ch, 'm'))
 			{
