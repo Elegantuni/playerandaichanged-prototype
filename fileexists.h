@@ -1,11 +1,11 @@
 #pragma once
 
 #ifdef INITWINDOWSNOW
-#include <Windows.h>
+#include <windows.h>
 #endif
 
 #ifdef INITLIBTCODNOW
-#include <Windows.h>
+#include <windows.h>
 #endif
 
 #include <tchar.h>

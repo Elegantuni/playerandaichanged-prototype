@@ -1,0 +1,78 @@
+playerandai1: main.obj fileexists.obj inputmove.obj inputcompare.obj screenclear.obj screenrefresh.obj seed.obj str2int.obj loadnumber.obj loadstring.obj writenumber.obj writestring.obj initvideo.obj ncursesinput.obj inputgetter.obj ncursesprint.obj ncursesprintarg1.obj ncursesprintarg2.obj ncursesprintstats.obj videoprinternorm.obj videoprinterarg1.obj videoprinterarg2.obj videoprinterstats.obj freebsddepends.obj
+	cl -IC:\OpenSSL-Win64\include\ -std=c++11 /Fe:playerandai1.exe main.obj fileexists.obj inputmove.obj screenclear.obj screenrefresh.obj inputcompare.obj seed.obj str2int.obj loadnumber.obj loadstring.obj writenumber.obj writestring.obj initvideo.obj ncursesinput.obj inputgetter.obj ncursesprint.obj ncursesprintarg1.obj ncursesprintarg2.obj ncursesprintstats.obj videoprinternorm.obj videoprinterarg1.obj videoprinterarg2.obj videoprinterstats.obj freebsddepends.obj C:\packages\pdcurses\PDCurses-3.9\wincon\pdcurses.lib C:\OpenSSL-Win64\lib\VC\x64\MD\libcrypto.lib C:\OpenSSL-Win64\lib\VC\x64\MD\libssl.lib -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS User32.lib Advapi32.lib
+
+main.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c main.cpp -o main.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS
+
+fileexists.obj:
+	cl -c fileexists.cpp -o fileexists.obj -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS
+
+inputmove.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c inputmove.cpp -o inputmove.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS
+
+screenclear.obj:
+	 cl -IC:\OpenSSL-Win64\include\ -c screenclear.cpp -o screenclear.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS
+
+screenrefresh.obj:
+	 cl -IC:\OpenSSL-Win64\include\ -c screenrefresh.cpp -o screenrefresh.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS
+
+inputcompare.obj: 
+	cl -IC:\OpenSSL-Win64\include\ -c inputcompare.cpp -o inputcompare.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS -fpermissive
+
+seed.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c seed.cpp -o seed.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+str2int.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c str2int.cpp -o str2int.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+loadnumber.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c loadnumber.cpp -o loadnumber.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+loadstring.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c loadstring.cpp -o loadstring.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+writenumber.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c writenumber.cpp -o writenumber.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+	
+writestring.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c writestring.cpp -o writestring.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+initvideo.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c initvideo.cpp -o initvideo.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+ncursesinput.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c ncursesinput.cpp -o ncursesinput.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+inputgetter.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c inputgetter.cpp -o inputgetter.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+ncursesprint.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c ncursesprint.cpp -o ncursesprint.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+ncursesprintarg1.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c ncursesprintarg1.cpp -o ncursesprintarg1.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+ncursesprintarg2.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c ncursesprintarg2.cpp -o ncursesprintarg2.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+ncursesprintstats.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c ncursesprintstats.cpp -o ncursesprintstats.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+videoprinternorm.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c videoprinternorm.cpp -o videoprinternorm.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+videoprinterarg1.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c videoprinterarg1.cpp -o videoprinterarg1.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+videoprinterarg2.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c videoprinterarg2.cpp -o videoprinterarg2.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+videoprinterstats.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c videoprinterstats.cpp -o videoprinterstats.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+
+freebsddepends.obj:
+	cl -IC:\OpenSSL-Win64\include\ -c freebsddepends.cpp -o freebsddepends.obj -IC:\packages\pdcurses\PDCurses-3.9\ -D_CRT_SECURE_NO_WARNINGS -DINITWINDOWSNOW -DINITNCURSESNOW -DFREEBSD -DINITWINDOWSNCURSES -DINITOPENSSL -DWINDOWSFILESEXISTS 
+	
+clean:
+	del playerandai1.exe main.obj fileexists.obj inputmove.obj screenclear.obj screenrefresh.obj inputcompare.obj seed.obj str2int.obj loadnumber.obj loadstring.obj writenumber.obj writestring.obj initvideo.obj ncursesinput.obj inputgetter.obj ncursesprint.obj ncursesprintarg1.obj ncursesprintarg2.obj ncursesprintstats.obj videoprinternorm.obj videoprinterarg1.obj videoprinterarg2.obj videoprinterstats.obj freebsddepends.obj
+
