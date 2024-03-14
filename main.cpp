@@ -334,6 +334,10 @@ int main(int argc, char *argv[])
 		srand(time(NULL));
 	}
 
+	#if defined(__OpenBSD__)
+		#define rand() arc4random()
+	#endif
+
 beginning:
 
 	while(roundssofar <= rounds && ch != 'y')
