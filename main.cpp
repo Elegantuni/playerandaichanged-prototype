@@ -3292,6 +3292,12 @@ beginning:
 						myplayer[i].shieldstype.damage = shielddamage[myplayer[i].shieldstype.nextrandomshield2];
 						myplayer[i].shieldsdamage1.item = itemdamage[myplayer[i].shieldstype.nextrandomshield2];
 					}
+					if (u == 4)
+					{
+						myplayer[i].shieldstype.equiped = itemdamageenemies[myplayer[i].shieldstype.enemyshield1];
+						myplayer[i].shieldstype.damage = shielddamageenemies[myplayer[i].shieldstype.enemyshield1];
+						myplayer[i].shieldsdamage1.item = itemdamageenemies[myplayer[i].shieldstype.enemyshield1];
+					}
 
 					myplayer[i].shield = myplayer[i].shieldstype.equiped;
 				}
@@ -3676,6 +3682,49 @@ terminateb:
 					myplayer[i].weapontype.numberitems = myplayer[i].weapontype.numberitems++;
 
 					myplayer[i].weapontype.weaponcount = myplayer[i].weapontype.numberitems;
+				}
+			}
+
+			if(inputcompare((void *)ch, 'y'))
+			{
+				int result1;
+				int currentposenemy;
+				int result2;
+
+				result2 = rand() % 100;
+
+				if(result2 >= 70)
+				{
+
+					result1 = rand() % 3;
+				
+					for(int j = 0; j < maxenemies; j++)
+					{
+						if(result1 == 0 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].shieldstype.enemyshield1 = myai[j].shieldstype.randomshield;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 1 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].shieldstype.enemyshield1 = myai[j].shieldstype.nextrandomshield;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 2 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].shieldstype.enemyshield1 = myai[j].shieldstype.nextrandomshield2;
+							currentposenemy = j;
+							break;
+						}
+					}
+
+					myplayer[i].shieldstype.item[3] = itemdamageenemies[myplayer[i].shieldstype.enemyshield1];
+
+					myplayer[i].shieldstype.numberitems = myplayer[i].shieldstype.numberitems++;
+
+					myplayer[i].shieldstype.shieldcount = myplayer[i].shieldstype.numberitems;
 				}
 			}
 

@@ -10,4 +10,5 @@ struct shields
 	int nextrandomshield;
 	int nextrandomshield2;
 	int shieldcount;
+	int enemyshield1;
 };
