@@ -12,4 +12,6 @@ struct magic
 	int nextrandommagic;
 	int nextrandommagic2;
 	int magiccount;
+	int enemymagic1;
+	int numberitems;
 };

@@ -2423,7 +2423,8 @@ beginning:
 				videoprinternorm(20, 0, "Press f to scroll right");
 				videoprinternorm(21, 0, "Press t to have a random chance to copy one enemy weapon");
 				videoprinternorm(22, 0, "Press y to have a random chance to copy one enemy shield");
-				videoprinternorm(23, 0, "Press key to quit help");
+				videoprinternorm(23, 0, "Press T to have a random chance to copy one enemy magic");
+				videoprinternorm(24, 0, "Press key to quit help");
 
 				screenrefresh();
 
@@ -3207,14 +3208,13 @@ beginning:
 
 				if (list == 0)
 				{
-					myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u-1];
-
 					if (u == 1)
 					{
 						myplayer[i].magic1.rangey = playermagicdistance[myplayer[i].magic1.randommagic];
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.randommagic];
 						myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.randommagic];
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.randommagic];
+						myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u - 1];
 					}
 
 					if (u == 2)
@@ -3223,6 +3223,7 @@ beginning:
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic];
 						myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic];
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic];
+						myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u - 1];
 					}
 
 					if (u == 3)
@@ -3231,6 +3232,16 @@ beginning:
 						myplayer[i].magic1.rangex = playermagicdistance[myplayer[i].magic1.nextrandommagic2];
 						myplayer[i].magic1.damage = playermagicdamage[myplayer[i].magic1.nextrandommagic2];
 						myplayer[i].magic1.cost = playermagiccost[myplayer[i].magic1.nextrandommagic2];
+						myplayer[i].magic1.equiped = myplayer[i].magic1.magicitems[u - 1];
+					}
+
+					if (u == 4)
+					{
+						myplayer[i].magic1.rangey = aimagicdistance[myplayer[i].magic1.enemymagic1];
+						myplayer[i].magic1.rangex = aimagicdistance[myplayer[i].magic1.enemymagic1];
+						myplayer[i].magic1.damage = aimagicdamage[myplayer[i].magic1.enemymagic1];
+						myplayer[i].magic1.cost = aimagiccost[myplayer[i].magic1.enemymagic1];
+						myplayer[i].magic1.equiped = aimagicitems[myplayer[i].magic1.enemymagic1];
 					}
 
 					myplayer[i].magicattack = myplayer[i].magic1.damage;
@@ -3642,6 +3653,49 @@ terminateb:
 			inputmove(myplayer[i].y, myplayer[i].x);
 			screenclear();
 			screenrefresh();
+
+			if(inputcompare((void *)ch, 'T'))
+			{
+				int result1;
+				int currentposenemy;
+				int result2;
+
+				result2 = rand() % 100;
+
+				if(result2 >= 70)
+				{
+
+					result1 = rand() % 3;
+				
+					for(int j = 0; j < maxenemies; j++)
+					{
+						if(result1 == 0 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].magic1.enemymagic1 = myai[j].magic1.randommagic;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 1 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].magic1.enemymagic1 = myai[j].magic1.nextrandommagic;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 2 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].magic1.enemymagic1 = myai[j].magic1.nextrandommagic2;
+							currentposenemy = j;
+							break;
+						}
+					}
+
+					myplayer[i].magic1.magicitems[3] = aimagicitems[myplayer[i].magic1.enemymagic1];
+
+					myplayer[i].magic1.numberitems = myplayer[i].magic1.numberitems++;
+
+					myplayer[i].magic1.magiccount = myplayer[i].magic1.numberitems;
+				}
+			}
 
 			if(inputcompare((void *)ch, 't'))
 			{
