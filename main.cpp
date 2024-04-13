@@ -2422,7 +2422,8 @@ beginning:
 				videoprinternorm(19, 0, "Press r to scroll left");
 				videoprinternorm(20, 0, "Press f to scroll right");
 				videoprinternorm(21, 0, "Press t to have a random chance to copy one enemy weapon");
-				videoprinternorm(22, 0, "Press key to quit help");
+				videoprinternorm(22, 0, "Press y to have a random chance to copy one enemy shield");
+				videoprinternorm(23, 0, "Press key to quit help");
 
 				screenrefresh();
 
