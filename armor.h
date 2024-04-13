@@ -12,4 +12,5 @@ struct armor
 	int nextrandomarmor;
 	int nextrandomarmor2;
 	int armorcount;
+	int enemyarmor1;
 };

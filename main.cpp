@@ -2424,7 +2424,8 @@ beginning:
 				videoprinternorm(21, 0, "Press t to have a random chance to copy one enemy weapon");
 				videoprinternorm(22, 0, "Press y to have a random chance to copy one enemy shield");
 				videoprinternorm(23, 0, "Press T to have a random chance to copy one enemy magic");
-				videoprinternorm(24, 0, "Press key to quit help");
+				videoprinternorm(24, 0, "Press Y to have a random chance to copy one enemy armor");
+				videoprinternorm(25, 0, "Press key to quit help");
 
 				screenrefresh();
 
@@ -3339,6 +3340,14 @@ beginning:
 						myplayer[i].armor1.rangey = playerarmordistancey[myplayer[i].armor1.nextrandomarmor2];
 						myplayer[i].armor1.rangex = playerarmordistancex[myplayer[i].armor1.nextrandomarmor2];
 					}
+
+					if (u == 4)
+					{
+						myplayer[i].armor1.equiped = aiarmor[myplayer[i].armor1.enemyarmor1];
+						myplayer[i].armor1.protection = aiarmorpts[myplayer[i].armor1.enemyarmor1];
+						myplayer[i].armor1.rangey = aiarmordistancey[myplayer[i].armor1.enemyarmor1];
+						myplayer[i].armor1.rangex = aiarmordistancex[myplayer[i].armor1.enemyarmor1];
+					}
 				}
 
 				l = 0;
@@ -3780,6 +3789,47 @@ terminateb:
 					myplayer[i].shieldstype.numberitems = myplayer[i].shieldstype.numberitems++;
 
 					myplayer[i].shieldstype.shieldcount = myplayer[i].shieldstype.numberitems;
+				}
+			}
+
+			if(inputcompare((void *)ch, 'Y'))
+			{
+				int result1;
+				int currentposenemy;
+				int result2;
+
+				result2 = rand() % 100;
+
+				if(result2 >= 70)
+				{
+
+					result1 = rand() % 3;
+				
+					for(int j = 0; j < maxenemies; j++)
+					{
+						if(result1 == 0 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].armor1.enemyarmor1 = myai[j].armor1.randomarmor;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 1 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].armor1.enemyarmor1 = myai[j].armor1.nextrandomarmor;
+							currentposenemy = j;
+							break;
+						}
+						else if(result1 == 2 && abs(myplayer[i].x - myai[j].x) <= 5 && abs(myplayer[i].y - myai[j].y) <= 5)
+						{
+							myplayer[i].armor1.enemyarmor1 = myai[j].armor1.nextrandomarmor2;
+							currentposenemy = j;
+							break;
+						}
+					}
+
+					myplayer[i].armor1.item[3] = aiarmor[myplayer[i].armor1.enemyarmor1];
+
+					myplayer[i].armor1.armorcount++;
 				}
 			}
 
