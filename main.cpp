@@ -3700,9 +3700,7 @@ terminateb:
 
 					myplayer[i].magic1.magicitems[3] = aimagicitems[myplayer[i].magic1.enemymagic1];
 
-					myplayer[i].magic1.numberitems = myplayer[i].magic1.numberitems++;
-
-					myplayer[i].magic1.magiccount = myplayer[i].magic1.numberitems;
+					myplayer[i].magic1.magiccount++;
 				}
 			}
 
@@ -3743,9 +3741,7 @@ terminateb:
 
 					myplayer[i].weapontype.item[3] = itemenemies[myplayer[i].weapontype.enemyweapon1];
 
-					myplayer[i].weapontype.numberitems = myplayer[i].weapontype.numberitems++;
-
-					myplayer[i].weapontype.weaponcount = myplayer[i].weapontype.numberitems;
+					myplayer[i].weapontype.weaponcount++;
 				}
 			}
 
@@ -3786,9 +3782,7 @@ terminateb:
 
 					myplayer[i].shieldstype.item[3] = itemdamageenemies[myplayer[i].shieldstype.enemyshield1];
 
-					myplayer[i].shieldstype.numberitems = myplayer[i].shieldstype.numberitems++;
-
-					myplayer[i].shieldstype.shieldcount = myplayer[i].shieldstype.numberitems;
+					myplayer[i].shieldstype.shieldcount++;
 				}
 			}
 
