@@ -6,7 +6,7 @@
 int fileExists(const wchar_t *file)
 {
 	WIN32_FIND_DATA FindFileData;
-	HANDLE handle = FindFirstFile((LPCSTR) file, &FindFileData);
+	HANDLE handle = FindFirstFile(file, &FindFileData);
 	int found = handle != INVALID_HANDLE_VALUE;
 	if (found)
 	{
