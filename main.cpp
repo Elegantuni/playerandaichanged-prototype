@@ -132,8 +132,8 @@ int main(int argc, char *argv[])
 	int maxenemies1 = 0;
 	int maxplayers1 = 0;
 
-	int hitpointsy = 24;
-	int hitpointsx = 80;
+	int hitpointsy;
+	int hitpointsx;
 
 	long theseed;
 	char *digest = (char *)malloc(sizeof(char) * 33);
@@ -182,19 +182,8 @@ int main(int argc, char *argv[])
 	getmaxyx(stdscr, row, col);
 	endwin();
 
-	if(row < hitpointsy)
-	{
-		printf("Change your terminal row to %d or greater\n", hitpointsy);
-
-	   return 1;
-	}
-
-	if(col < hitpointsx)
-	{
-		printf("Change your terminal col to %d or greater\n", hitpointsx);
-
-	   return 1;
-	}
+	hitpointsy = row;
+	hitpointsx = col;
 
 	#endif
 
