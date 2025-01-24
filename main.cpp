@@ -1949,7 +1949,7 @@ beginning:
 
 		for(int i = 0; i < maxenemies; i++)
 		{
-			if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
+			if((hitpointspos1.ay + i) >= (positiony))
 			{
 				videoprinterstats(hitpointspos1.ay + i - positiony, 0, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 			}
@@ -4338,7 +4338,7 @@ terminateb:
 
 			for(int i = 0; i < maxenemies; i++)
 			{
-				if((hitpointspos1.ay + i) >= (positiony) && (positiony > (maxenemies)))
+				if((hitpointspos1.ay + i) >= (positiony))
 				{
 					videoprinterstats(hitpointspos1.ay + i - positiony, 0, "AI %d is %s hp:%d mp:%d at:%d ma:%s %d def:%d w:%s sh:%s ar:%s md:%d", myai[i].count, myai[i].character1.character, myai[i].hitpoints, myai[i].magicpoints, myai[i].weapontype.damage + myai[i].character1.attack, myai[i].magic1.equiped, myai[i].magic1.damage, myai[i].defensepoints + myai[i].shieldstype.damage, myai[i].weapontype.equiped, myai[i].shieldstype.equiped, myai[i].armor1.equiped, myai[i].armor1.protection);
 				}
