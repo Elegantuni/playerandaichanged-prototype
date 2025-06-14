@@ -77,6 +77,8 @@ typedef SSIZE_T ssize_t;
 
 #include "ncursesprintarg2.h"
 
+#include "ncursesprintarg3.h"
+
 #include "ncursesprintstats.h"
 
 #include "videoprinternorm.h"
@@ -84,6 +86,8 @@ typedef SSIZE_T ssize_t;
 #include "videoprinterarg1.h"
 
 #include "videoprinterarg2.h"
+
+#include "videoprinterarg3.h"
 
 #include "videoprinterstats.h"
 
@@ -143,6 +147,12 @@ int main(int argc, char *argv[])
 
 	int twoplayers = 0;
 	int whosturn = 0;
+
+	int indexer1 = -1;
+	int indexer2 = 0;
+	int indexer3 = 0;
+
+	int zoptionset = 0;
 
 	if(argc >= 3 && strcmp(argv[2], "1") == 0)
 	{
@@ -2414,7 +2424,8 @@ beginning:
 				videoprinternorm(22, 0, "Press y to have a random chance to copy one enemy shield");
 				videoprinternorm(23, 0, "Press T to have a random chance to copy one enemy magic");
 				videoprinternorm(24, 0, "Press Y to have a random chance to copy one enemy armor");
-				videoprinternorm(25, 0, "Press key to quit help");
+				videoprinternorm(25, 0, "Press z to get current player position and enemies position");
+				videoprinternorm(26, 0, "Press key to quit help");
 
 				screenrefresh();
 
@@ -2706,6 +2717,23 @@ beginning:
 				}
 
 				positiony = ((myai[iai].y) / hitpointsy) * hitpointsy;
+			}
+
+			if(inputcompare((void *)ch, 'z'))
+			{
+				indexer1++;
+				indexer2 = 0;
+
+				if(indexer1 > maxenemies)
+				{
+					indexer1 = 0;
+				}
+
+				videoprinterarg3(indexer2, 0, "Enemy %d position is %d, %d", indexer1+1, myai[indexer1].x, myai[indexer1].y);
+				indexer2++;
+				videoprinterarg3(indexer2, 0, "Player %d position is %d, %d", i+1, myplayer[i].x, myplayer[i].y);
+
+				zoptionset = 1;
 			}
 
 			if(inputcompare((void *)ch, 'u'))
@@ -4355,6 +4383,15 @@ terminateb:
 				{
 					goto ended;
 				}
+			}
+
+			if(zoptionset == 1)
+			{
+				indexer3 = 0;
+
+				videoprinterarg3(indexer3, 0, "Enemy %d position is %d, %d", indexer1+1, myai[indexer1].x, myai[indexer1].y);
+				indexer3++;
+				videoprinterarg3(indexer3, 0, "Player %d position is %d, %d", i+1, myplayer[i].x, myplayer[i].y);
 			}
 
 			if(whosturn == 0)
