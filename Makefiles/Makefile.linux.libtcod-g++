@@ -1,71 +1,77 @@
-playerandaichanged1_libtcod: main.o inputmove.o inputcompare.o screenclear.o screenrefresh.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o libtcodinput.o inputgetter.o libtcodprint.o libtcodprintarg1.o libtcodprintarg2.o libtcodprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterstats.o
-	g++ -o playerandaichanged1_libtcod obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/libtcodinput.o obj/inputgetter.o obj/libtcodprint.o obj/libtcodprintarg1.o obj/libtcodprintarg2.o obj/libtcodprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o `pkg-config --cflags --libs openssl` -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+playerandaichanged1_libtcod: main.o inputmove.o inputcompare.o screenclear.o screenrefresh.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o libtcodinput.o inputgetter.o libtcodprint.o libtcodprintarg1.o libtcodprintarg2.o libtcodprintarg3.o libtcodprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterarg3.o videoprinterstats.o
+	g++ -o playerandaichanged1_libtcod obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/libtcodinput.o obj/inputgetter.o obj/libtcodprint.o obj/libtcodprintarg1.o obj/libtcodprintarg2.o obj/libtcodprintarg3.o obj/libtcodprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterarg3.o obj/videoprinterstats.o `pkg-config --cflags --libs openssl` -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 main.o:
-	g++ -c main.cpp -o obj/main.o -DLINUX -DINITLIBTCODNOW -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod` -fpermissive
+	g++ -c main.cpp -o obj/main.o -DLINUX -DINITLIBTCODNOW -DINITOPENSSL -fno-stack-protector -ltcod -fpermissive
 
 inputmove.o:
-	g++ -c inputmove.cpp -o obj/inputmove.o -DLINUX -DINITLIBTCODNOW -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c inputmove.cpp -o obj/inputmove.o -DLINUX -DINITLIBTCODNOW -DINITOPENSSL -fno-stack-protector -ltcod
 
 screenclear.o:
-	g++ -c screenclear.cpp -o obj/screenclear.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c screenclear.cpp -o obj/screenclear.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 screenrefresh.o:
-	g++ -c screenrefresh.cpp -o obj/screenrefresh.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c screenrefresh.cpp -o obj/screenrefresh.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 	
 inputcompare.o:
-	g++ -c inputcompare.cpp -o obj/inputcompare.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod` -fpermissive
+	g++ -c inputcompare.cpp -o obj/inputcompare.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod -fpermissive
 	
 seed.o:
-	g++ -c seed.cpp -o obj/seed.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c seed.cpp -o obj/seed.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 str2int.o:
-	g++ -c str2int.cpp -o obj/str2int.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c str2int.cpp -o obj/str2int.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 loadnumber.o:
-	g++ -c loadnumber.cpp -o obj/loadnumber.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c loadnumber.cpp -o obj/loadnumber.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 loadstring.o:
-	g++ -c loadstring.cpp -o obj/loadstring.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c loadstring.cpp -o obj/loadstring.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 writenumber.o:
-	g++ -c writenumber.cpp -o obj/writenumber.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c writenumber.cpp -o obj/writenumber.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 	
 writestring.o:
-	g++ -c writestring.cpp -o obj/writestring.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c writestring.cpp -o obj/writestring.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 initvideo.o:
-	g++ -c initvideo.cpp -o obj/initvideo.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c initvideo.cpp -o obj/initvideo.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 libtcodinput.o:
-	g++ -c libtcodinput.cpp -o obj/libtcodinput.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c libtcodinput.cpp -o obj/libtcodinput.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 inputgetter.o:
-	g++ -c inputgetter.cpp -o obj/inputgetter.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c inputgetter.cpp -o obj/inputgetter.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 libtcodprint.o:
-	g++ -c libtcodprint.cpp -o obj/libtcodprint.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c libtcodprint.cpp -o obj/libtcodprint.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 libtcodprintarg1.o:
-	g++ -c libtcodprintarg1.cpp -o obj/libtcodprintarg1.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c libtcodprintarg1.cpp -o obj/libtcodprintarg1.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 libtcodprintarg2.o:
-	g++ -c libtcodprintarg2.cpp -o obj/libtcodprintarg2.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c libtcodprintarg2.cpp -o obj/libtcodprintarg2.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
+libtcodprintarg3.o:
+	g++ -c libtcodprintarg3.cpp -o obj/libtcodprintarg3.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
+   
 libtcodprintstats.o:
-	g++ -c libtcodprintstats.cpp -o obj/libtcodprintstats.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c libtcodprintstats.cpp -o obj/libtcodprintstats.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 videoprinternorm.o:
-	g++ -c videoprinternorm.cpp -o obj/videoprinternorm.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c videoprinternorm.cpp -o obj/videoprinternorm.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 videoprinterarg1.o:
-	g++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c videoprinterarg1.cpp -o obj/videoprinterarg1.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 videoprinterarg2.o:
-	g++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c videoprinterarg2.cpp -o obj/videoprinterarg2.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
+videoprinterarg3.o:
+	g++ -c videoprinterarg3.cpp -o obj/videoprinterarg3.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
+   
 videoprinterstats.o:
-	g++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector `pkg-config --cflags --libs libtcod`
+	g++ -c videoprinterstats.cpp -o obj/videoprinterstats.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod
 
 clean:
-	rm -f playerandaichanged1_libtcod obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/libtcodinput.o obj/inputgetter.o obj/libtcodprint.o obj/libtcodprintarg1.o obj/libtcodprintarg2.o obj/libtcodprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o
+	rm -f playerandaichanged1_libtcod obj/main.o obj/inputmove.o obj/screenclear.o obj/screenrefresh.o obj/inputcompare.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/libtcodinput.o obj/inputgetter.o obj/libtcodprint.o obj/libtcodprintarg1.o obj/libtcodprintarg2.o obj/libtcodprintarg3.o obj/libtcodprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterarg3.o obj/videoprinterstats.o
