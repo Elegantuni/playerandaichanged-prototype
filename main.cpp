@@ -1167,6 +1167,8 @@ beginning:
 			myplayer[i].armor1.protection = playerarmorpts[myplayer[i].armor1.randomarmor];
 
 			myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
+         
+      	myplayer[0].charactersign = "@";
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -2548,6 +2550,13 @@ beginning:
 						  }
 				}
 			}
+
+			for(int i = 0; i < maxplayers; i++)
+			{
+				myplayer[i].charactersign = myplayer[i].character1.sign;
+			}
+			
+			myplayer[i].charactersign = "@";
 			
 			if(inputcompare((void *)ch, 'n') && whosturn == 0)
 			{
@@ -2582,7 +2591,7 @@ beginning:
 					{
 						positiony = ((myplayer[i].y) / hitpointsy) * hitpointsy;
 						positionx = ((myplayer[i].x) / hitpointsx) * hitpointsx;
-
+						
 						break;
 					}
 				
@@ -2646,7 +2655,14 @@ beginning:
 					}
 				}
 			}
-		
+
+			for(int i = 0; i < maxplayers; i++)
+      	{
+         	myplayer[i].charactersign = myplayer[i].character1.sign;
+      	}
+         
+      	myplayer[i].charactersign = "@";
+			
 			if(inputcompare((void *)ch, 'a') && whosturn == 0)
 			{
 				myplayer[i].x = myplayer[i].x - 1;
@@ -4034,7 +4050,8 @@ terminateb:
 					}
 				}
 
-
+				myplayer[i].character1.sign = "@";
+				
 				for(int p = 0; p < maxenemies; p++)
 				{
 					
