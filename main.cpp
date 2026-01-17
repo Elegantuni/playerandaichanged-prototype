@@ -81,6 +81,10 @@ typedef SSIZE_T ssize_t;
 
 #include "ncursesprintstats.h"
 
+#include "ncursesprintchar.h"
+
+#include "videoprinterchar.h"
+
 #include "videoprinternorm.h"
 
 #include "videoprinterarg1.h"
@@ -1939,7 +1943,7 @@ beginning:
 		{
 			if(myplayer[i].hitpoints > 0 && myplayer[i].y >= (positiony - hitpointsy) && myplayer[i].x >= (positionx - hitpointsx))
 			{
-				videoprinternorm(myplayer[i].y - positiony, myplayer[i].x - positionx, myplayer[i].charactersign);
+				videoprinterchar(myplayer[i].y - positiony, myplayer[i].x - positionx, "%s", myplayer[i].charactersign);
 			}
 		}
 	
@@ -1947,7 +1951,7 @@ beginning:
 		{
 			if(myai[i].hitpoints > 0 && myai[i].y >= (positiony - hitpointsy) && myai[i].x >= (positionx - hitpointsx))
 			{
-				   videoprinternorm(myai[i].y - positiony, myai[i].x - positionx, myai[i].charactersign);
+				   videoprinterchar(myai[i].y - positiony, myai[i].x - positionx, "%s", myai[i].charactersign);
 			}
 		}
 	
