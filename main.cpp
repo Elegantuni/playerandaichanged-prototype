@@ -1172,7 +1172,11 @@ beginning:
 
 			myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
          
-      	myplayer[0].charactersign = "@";
+#if defined(OPENBSD)
+			strlcpy(mplayer[0].charactersign, "@", sizeof(mplayer[0].charactersign));
+#else
+      		strcpy(myplayer[0].charactersign, "@");
+#endif
 		}
 
 		for(int i = 0; i < maxplayers; i++)
@@ -2557,10 +2561,18 @@ beginning:
 
 			for(int i = 0; i < maxplayers; i++)
 			{
-				myplayer[i].charactersign = myplayer[i].character1.sign;
+			#if defined(OPENBSD)
+				strlcpy(myplayer[i].charactersign, myplayer[i].character1.sign, sizeof(myplayer[i].charactersign));
+			#else
+				strcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
+			#endif
 			}
 			
-			myplayer[i].charactersign = "@";
+#if defined(OPENBSD)
+			strlcpy(myplayer[i].charactersign, "@", sizeof(myplayer[i].charactersign));
+#else
+			strcpy(myplayer[i].charactersign, "@");
+#endif
 			
 			if(inputcompare((void *)ch, 'n') && whosturn == 0)
 			{
@@ -2662,10 +2674,17 @@ beginning:
 
 			for(int i = 0; i < maxplayers; i++)
       	{
-         	myplayer[i].charactersign = myplayer[i].character1.sign;
+#if defined(OPENBSD)
+         	strlcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
+#else
+				strcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
+#endif
       	}
-         
-      	myplayer[i].charactersign = "@";
+#if defined(OPENBSD)
+      	strlcpy(myplayer[i].charactersign, "@");
+#else				
+		strcpy(myplayer[i].charactersign, "@");
+#endif
 			
 			if(inputcompare((void *)ch, 'a') && whosturn == 0)
 			{
@@ -4054,7 +4073,11 @@ terminateb:
 					}
 				}
 
-				myplayer[i].character1.sign = "@";
+#if defined(OPENBSD)
+				strlcpy(myplayer[i].character1.sign, "@");
+#else
+				strcpy(myplayer[i].character1.sign, "@");
+#endif
 				
 				for(int p = 0; p < maxenemies; p++)
 				{
