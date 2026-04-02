@@ -1173,7 +1173,7 @@ beginning:
 			myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
          
 #if defined(OPENBSD)
-			strlcpy(mplayer[0].charactersign, "@", sizeof(mplayer[0].charactersign));
+			strlcpy(myplayer[0].charactersign, "@", sizeof(myplayer[0].charactersign)/sizeof(myplayer[0].charactersign[0]));
 #else
       		strcpy(myplayer[0].charactersign, "@");
 #endif
@@ -2675,13 +2675,13 @@ beginning:
 			for(int i = 0; i < maxplayers; i++)
       	{
 #if defined(OPENBSD)
-         	strlcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
+         	strlcpy(myplayer[i].charactersign, myplayer[i].character1.sign, sizeof(myplayer[i].charactersign)/sizeof(myplayer[i].charactersign[0]));
 #else
 				strcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
 #endif
       	}
 #if defined(OPENBSD)
-      	strlcpy(myplayer[i].charactersign, "@");
+      	strlcpy(myplayer[i].charactersign, "@", sizeof(myplayer[i].charactersign)/sizeof(myplayer[i].charactersign[0]));
 #else				
 		strcpy(myplayer[i].charactersign, "@");
 #endif
@@ -4074,9 +4074,9 @@ terminateb:
 				}
 
 #if defined(OPENBSD)
-				strlcpy(myplayer[i].character1.sign, "@");
+				strlcpy(myplayer[i].character1.sign, "@", sizeof(myplayer[i].character1.sign)/sizeof(myplayer[i].character1.sign[0]));
 #else
-				strcpy(myplayer[i].character1.sign, "@");
+				strcpy(myplayer[i].character1.sign[0], "@");
 #endif
 				
 				for(int p = 0; p < maxenemies; p++)
