@@ -4076,7 +4076,7 @@ terminateb:
 #if defined(OPENBSD)
 				strlcpy(myplayer[i].character1.sign, "@", sizeof(myplayer[i].character1.sign)/sizeof(myplayer[i].character1.sign[0]));
 #else
-				strcpy(myplayer[i].character1.sign[0], "@");
+				strcpy(myplayer[i].character1.sign, "@");
 #endif
 				
 				for(int p = 0; p < maxenemies; p++)
