@@ -1,6 +1,5 @@
-playerandaichanged1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o inputcompare.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintarg3.o ncursesprintstats.o videoprinternorm.o videoprinterarg1.o videoprinterarg2.o videoprinterarg3.o videoprinterstats.o screenclear.o screenrefresh.o inputmove.o
-
-	clang++ -std=c++11 -o playerandaichanged1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/inputcompare.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintarg3.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterarg3.o obj/videoprinterstats.o obj/screenclear.o obj/screenrefresh.o obj/inputmove.o `pkg-config --cflags --libs openssl` -L/usr/pkg/lib -lncurses -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+playerandaichanged1: main.o seed.o str2int.o loadnumber.o loadstring.o writenumber.o writestring.o initvideo.o inputcompare.o ncursesinput.o inputgetter.o ncursesprint.o ncursesprintchar.o ncursesprintarg1.o ncursesprintarg2.o ncursesprintarg3.o ncursesprintstats.o videoprinternorm.o videoprinterchar.o videoprinterarg1.o videoprinterarg2.o videoprinterarg3.o videoprinterstats.o screenclear.o screenrefresh.o inputmove.o
+	clang++ -std=c++11 -o playerandaichanged1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/inputcompare.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintchar.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintarg3.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterchar.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterarg3.o obj/videoprinterstats.o obj/screenclear.o obj/screenrefresh.o obj/inputmove.o `pkg-config --cflags --libs openssl` -L/usr/pkg/lib -lncurses -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 	
 main.o:
 	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses main.cpp -o obj/main.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
@@ -35,6 +34,9 @@ inputgetter.o:
 ncursesprint.o:
 	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprint.cpp -o obj/ncursesprint.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
+ncursesprintchar.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprintchar.cpp -o obj/ncursesprintchar.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
 ncursesprintarg1.o:
 	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses ncursesprintarg1.cpp -o obj/ncursesprintarg1.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
@@ -49,6 +51,9 @@ ncursesprintstats.o:
 
 videoprinternorm.o:
 	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinternorm.cpp -o obj/videoprinternorm.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
+
+videoprinterchar.o:
+	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinterchar.cpp -o obj/videoprinterchar.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 videoprinterarg1.o:
 	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses videoprinterarg1.cpp -o obj/videoprinterarg1.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
@@ -75,5 +80,5 @@ inputmove.o:
 	clang++ -c -I/usr/pkg/include -I/usr/pkg/include/ncurses inputmove.cpp -o obj/inputmove.o -DLINUX -DINITNCURSESNOW -DINITNCURSESNOW2 -DINITOPENSSL
 
 clean:
-	rm -f playerandaichanged1 obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterstats.o obj/inputcompare.o
+	rm -f playerandaichanged1 obj/screenclear.o obj/screenrefresh.o obj/inputmove.o obj/main.o obj/seed.o obj/str2int.o obj/loadnumber.o obj/loadstring.o obj/writenumber.o obj/writestring.o obj/initvideo.o obj/ncursesinput.o obj/inputgetter.o obj/ncursesprint.o obj/ncursesprintchar.o obj/ncursesprintarg1.o obj/ncursesprintarg2.o obj/ncursesprintarg3.o obj/ncursesprintstats.o obj/videoprinternorm.o obj/videoprinterchar.o obj/videoprinterarg1.o obj/videoprinterarg2.o obj/videoprinterarg3.o obj/videoprinterstats.o obj/inputcompare.o
 
