@@ -975,7 +975,7 @@ beginning:
 			myplayer[i].defensepoints = 20;
 			myplayer[i].weapon = const_cast<char *>("Knife");
 			myplayer[i].shield = const_cast<char *>("LargeShield");
-			myplayer[i].charactersign = const_cast<char *>("@");
+			myplayer[i].charactersign = myplayer[i].character1.character;
 			myplayer[i].prevy = 10;
 			myplayer[i].prevx = 12;
 			myplayer[i].magicattack = 100;
@@ -1173,9 +1173,9 @@ beginning:
 			myplayer[i].armor1.equiped = playerarmor[myplayer[i].armor1.randomarmor];
          
 #if defined(OPENBSD)
-			strlcpy(myplayer[0].charactersign, "@", sizeof(myplayer[0].charactersign)/sizeof(myplayer[0].charactersign[0]));
+			strlcpy(myplayer[0].charactersign, myplayer[0].charactersign, sizeof(myplayer[0].charactersign)/sizeof(myplayer[0].charactersign[0]));
 #else
-      		strcpy(myplayer[0].charactersign, "@");
+      		strcpy(myplayer[0].charactersign, myplayer[0].charactersign);
 #endif
 		}
 
@@ -2569,9 +2569,9 @@ beginning:
 			}
 			
 #if defined(OPENBSD)
-			strlcpy(myplayer[i].charactersign, "@", sizeof(myplayer[i].charactersign));
+			strlcpy(myplayer[i].charactersign, myplayer[i].charactersign, sizeof(myplayer[i].charactersign));
 #else
-			strcpy(myplayer[i].charactersign, "@");
+			strcpy(myplayer[i].charactersign, myplayer[i].charactersign);
 #endif
 			
 			if(inputcompare((void *)ch, 'n') && whosturn == 0)
@@ -2681,9 +2681,9 @@ beginning:
 #endif
       	}
 #if defined(OPENBSD)
-      	strlcpy(myplayer[i].charactersign, "@", sizeof(myplayer[i].charactersign)/sizeof(myplayer[i].charactersign[0]));
+      	strlcpy(myplayer[i].charactersign, myplayer[i].charactersign, sizeof(myplayer[i].charactersign)/sizeof(myplayer[i].charactersign[0]));
 #else				
-		strcpy(myplayer[i].charactersign, "@");
+		strcpy(myplayer[i].charactersign, myplayer[i].charactersign);
 #endif
 			
 			if(inputcompare((void *)ch, 'a') && whosturn == 0)
@@ -4074,9 +4074,9 @@ terminateb:
 				}
 
 #if defined(OPENBSD)
-				strlcpy(myplayer[i].character1.sign, "@", sizeof(myplayer[i].character1.sign)/sizeof(myplayer[i].character1.sign[0]));
+				strlcpy(myplayer[i].character1.sign, myplayer[i].character1.sign, sizeof(myplayer[i].character1.sign)/sizeof(myplayer[i].character1.sign[0]));
 #else
-				strcpy(myplayer[i].character1.sign, "@");
+				strcpy(myplayer[i].character1.sign, myplayer[i].character1.sign);
 #endif
 				
 				for(int p = 0; p < maxenemies; p++)
