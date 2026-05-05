@@ -2558,21 +2558,6 @@ beginning:
 						  }
 				}
 			}
-
-			for(int i = 0; i < maxplayers; i++)
-			{
-			#if defined(OPENBSD)
-				strlcpy(myplayer[i].charactersign, myplayer[i].character1.sign, sizeof(myplayer[i].charactersign));
-			#else
-				strcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
-			#endif
-			}
-			
-#if defined(OPENBSD)
-			strlcpy(myplayer[i].charactersign, myplayer[i].charactersign, sizeof(myplayer[i].charactersign));
-#else
-			strcpy(myplayer[i].charactersign, myplayer[i].charactersign);
-#endif
 			
 			if(inputcompare((void *)ch, 'n') && whosturn == 0)
 			{
@@ -2671,20 +2656,6 @@ beginning:
 					}
 				}
 			}
-
-			for(int i = 0; i < maxplayers; i++)
-      	{
-#if defined(OPENBSD)
-         	strlcpy(myplayer[i].charactersign, myplayer[i].character1.sign, sizeof(myplayer[i].charactersign)/sizeof(myplayer[i].charactersign[0]));
-#else
-				strcpy(myplayer[i].charactersign, myplayer[i].character1.sign);
-#endif
-      	}
-#if defined(OPENBSD)
-      	strlcpy(myplayer[i].charactersign, myplayer[i].charactersign, sizeof(myplayer[i].charactersign)/sizeof(myplayer[i].charactersign[0]));
-#else				
-		strcpy(myplayer[i].charactersign, myplayer[i].charactersign);
-#endif
 			
 			if(inputcompare((void *)ch, 'a') && whosturn == 0)
 			{
