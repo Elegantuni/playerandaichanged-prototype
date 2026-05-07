@@ -1917,10 +1917,6 @@ beginning:
 	
 		int replayer = 0;
 	
-		int positionxdiff;
-	
-		int positionydiff;
-	
 		struct hitpointspos hitpointspos1 = { terminalend - (maxplayers + maxenemies), 0, terminalend - (maxenemies), terminalendx};
 	
 		initvideo(hitpointsy, hitpointsx);
@@ -3919,7 +3915,7 @@ terminateb:
 						myai[j].magic1.damage = aimagicdamage[myai[j].magic1.randommagic];
 						myai[j].magic1.cost = aimagiccost[myai[j].magic1.randommagic];
 
-						if ((positionydiff == abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff == abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
+						if ((abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
 						{
 							if (myai[j].magic1.damage > aimagicdamage2)
 							{
@@ -3935,7 +3931,7 @@ terminateb:
 						myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic];
 						myai[j].magic1.cost = aimagiccost[myai[j].magic1.nextrandommagic];
 
-						if ((positionydiff == abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff == abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
+						if ((abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
 						{
 							if (myai[j].magic1.damage > aimagicdamage2)
 							{
@@ -3951,7 +3947,7 @@ terminateb:
 						myai[j].magic1.damage = aimagicdamage[myai[j].magic1.nextrandommagic2];
 						myai[j].magic1.cost = aimagiccost[myai[j].magic1.nextrandommagic2];
 
-						if ((positionydiff == abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (positionxdiff == abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
+						if ((abs(myplayer[i].y - myai[j].y)) <= myai[j].magic1.rangey && (abs(myplayer[i].x - myai[j].x)) <= myai[j].magic1.rangex && (myai[j].magicpoints - myai[j].magic1.cost) >= 0)
 						{
 							if (myai[j].magic1.damage > aimagicdamage2)
 							{
@@ -3962,7 +3958,7 @@ terminateb:
 						}
 					}
 					
-					if ((t == -1) && (positionydiff == abs(myplayer[i].y - myai[j].y)) <= myplayer[i].magic1.rangey && (positionxdiff = abs(myplayer[i].x - myai[j].x)) <= myplayer[i].magic1.rangex)
+					if ((t == -1) && (abs(myplayer[i].y - myai[j].y)) <= myplayer[i].magic1.rangey && (abs(myplayer[i].x - myai[j].x)) <= myplayer[i].magic1.rangex)
 					{
 						t = j;
 					}
@@ -4001,7 +3997,7 @@ terminateb:
 						{
 							p = t;
 
-							if((myai[p].magicpoints >= myai[p].magic1.cost) && (positionydiff == abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (positionxdiff == abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && inputcompare((void *)ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+							if((myai[p].magicpoints >= myai[p].magic1.cost) && (abs(myplayer[j].y - myai[p].y)) <= myai[p].magic1.rangey && (abs(myplayer[j].x - myai[p].x)) <= myai[p].magic1.rangex && inputcompare((void *)ch, 'm') && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 							{
 								if(j == i)
 								{
@@ -4066,7 +4062,7 @@ terminateb:
 
 							if(j == i)
 							{
-								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (positionydiff == abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (positionxdiff == abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
+								if((myplayer[j].magicpoints >= myplayer[j].magic1.cost) && (abs(myplayer[j].y - myai[p].y)) <= myplayer[j].magic1.rangey  && (abs(myplayer[j].x - myai[p].x)) <= myplayer[j].magic1.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0)
 								{
 									myai[p].hitpoints = myai[p].hitpoints - myplayer[j].magicattack + myai[p].character1.magicresist;
 						
@@ -4146,7 +4142,7 @@ terminateb:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.randomweapon];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.randomweapon];
 
-						if ((positionydiff == abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff == abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
+						if ((abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{
 							if (myai[p].weapontype.damage > aiequipedweapon)
 							{
@@ -4160,7 +4156,7 @@ terminateb:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon];
 
-						if ((positionydiff == abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff == abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
+						if ((abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{
 							if (myai[i].weapontype.damage > aiequipedweapon)
 							{
@@ -4174,7 +4170,7 @@ terminateb:
 						myai[p].weapontype.rangex = rangexenemies[myai[p].weapontype.nextrandomweapon2];
 						myai[p].weapontype.damage = damageenemies[myai[p].weapontype.nextrandomweapon2];
 
-						if ((positionydiff == abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (positionxdiff == abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
+						if ((abs(myplayer[i].y - myai[p].y)) <= myai[p].weapontype.rangey && (abs(myplayer[i].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[i].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{
 							if (myai[i].weapontype.damage > aiequipedweapon)
 							{
@@ -4201,7 +4197,7 @@ terminateb:
 
 					if(j == i)
 					{
-						if( (positionydiff == abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
+						if( (abs(myplayer[j].y - myai[p].y)) <= myplayer[j].weapontype.rangey  && (abs(myplayer[j].x - myai[p].x)) <= myplayer[j].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{	
 							myai[p].hitpoints = myai[p].hitpoints - myplayer[j].weapontype.damage - myplayer[j].character1.attack + myai[p].shieldstype.damage + myai[p].defensepoints;
 					
@@ -4224,7 +4220,7 @@ terminateb:
 
 					if(j == i)
 					{
-						if( (positionydiff == abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (positionxdiff = abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
+						if( (abs(myplayer[j].y - myai[p].y)) <= myai[p].weapontype.rangey  && (abs(myplayer[j].x - myai[p].x)) <= myai[p].weapontype.rangex && myai[p].hitpoints > 0 && myplayer[j].hitpoints > 0 && (inputcompare((void *)ch, 'a') || inputcompare((void *)ch, 'd') || inputcompare((void *)ch, 'w') || inputcompare((void *)ch, 's')))
 						{	
 							myplayer[j].hitpoints = myplayer[j].hitpoints - myai[p].weapontype.damage - myai[p].character1.attack + myplayer[j].shieldstype.damage + myplayer[j].defensepoints;
 

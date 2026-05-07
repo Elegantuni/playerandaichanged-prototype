@@ -14,23 +14,24 @@
 
 char *str2md5(const char *str, int length) {
     int n;
-    MD5_CTX c;
+    EVP_MD_CTX* c = EVP_MD_CTX_new();;
     unsigned char digest[16];
     char *out = (char*)malloc(33);
 
-    MD5_Init(&c);
+    EVP_DigestInit_ex(c, EVP_md5(), NULL);
 
     while (length > 0) {
         if (length > 512) {
-            MD5_Update(&c, str, 512);
+            EVP_DigestUpdate(c, str, 512);
         } else {
-            MD5_Update(&c, str, length);
+            EVP_DigestUpdate(c, str, length);
         }
+
         length -= 512;
         str += 512;
     }
 
-    MD5_Final(digest, &c);
+    EVP_DigestFinal_ex(c, (unsigned char *)out[0], (unsigned int *)out[0]);
 
     for (n = 0; n < 16; ++n) {
         snprintf(&(out[n*2]), 16*2, "%02x", (unsigned int)digest[n]);
