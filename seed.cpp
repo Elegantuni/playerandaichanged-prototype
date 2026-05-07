@@ -31,7 +31,7 @@ char *str2md5(const char *str, int length) {
         str += 512;
     }
 
-    EVP_DigestFinal_ex(c, (unsigned char *)out[0], (unsigned int *)out[0]);
+    EVP_DigestFinal_ex(c, (unsigned char *)out, (unsigned int *)out);
 
     for (n = 0; n < 16; ++n) {
         snprintf(&(out[n*2]), 16*2, "%02x", (unsigned int)digest[n]);
