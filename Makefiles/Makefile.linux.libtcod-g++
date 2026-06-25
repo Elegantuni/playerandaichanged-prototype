@@ -37,9 +37,6 @@ writestring.o:
 initvideo.o:
 	g++ -c initvideo.cpp -o obj/initvideo.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod -lz
 
-inputmove.o:
-	g++ -c inputmove.cpp -o obj/inputmove.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod -lz
-
 libtcodinput.o:
 	g++ -c libtcodinput.cpp -o obj/libtcodinput.o -DLINUX -DINITLIBTCODNOW  -DINITOPENSSL -fno-stack-protector -ltcod -lz
 
