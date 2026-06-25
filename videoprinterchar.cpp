@@ -7,6 +7,6 @@ void videoprinterchar(int y, int x, const char *c, char *d)
 	#endif
 
 	#ifdef INITLIBTCODNOW
-	libtcodprint(y, x, c, d);
+	libtcodprint(y, x, d);
 	#endif
 }
